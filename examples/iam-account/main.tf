@@ -11,5 +11,5 @@ module "iam_account" {
   account_alias = "test-account-awesome-company"
 
   minimum_password_length = 6
-  require_numbers = false
+  require_numbers         = false
 }
