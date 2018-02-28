@@ -8,6 +8,7 @@ These types of resources are supported:
 * [IAM user login profile](https://www.terraform.io/docs/providers/aws/r/iam_user_login_profile.html)
 * [IAM group](https://www.terraform.io/docs/providers/aws/r/iam_group.html)
 * [IAM role](https://www.terraform.io/docs/providers/aws/r/iam_role.html)
+* [IAM access key](https://www.terraform.io/docs/providers/aws/r/iam_access_key.html)
 
 ## Usage
 
@@ -46,7 +47,16 @@ module "iam_assumable_roles" {
 
 `iam-user`:
 ```hcl
-# todo
+module "iam_user" {
+  source = "terraform-aws-modules/iam/aws//modules/iam-user"
+
+  name          = "vasya.pupkin"
+  force_destroy = true
+
+  pgp_key = "keybase:test"
+
+  password_reset_required = false
+}
 ```
 
 `iam-group-with-assumable-roles-policy`:
@@ -90,8 +100,9 @@ Terraform can't configure MFA for the user. It is only possible via [AWS Console
 ## Examples
 
 * [complete](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/complete) - Create all required resources to allow one group of users to assume privileged role, while another group of users can only assume readonly role.
-* [iam-account](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/iam-account) - Set AWS account alias and password policy
-* [iam-assumable-roles](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/iam-assumable-roles) - Create IAM roles which can be assumed from specified ARNs (AWS accounts, IAM users, etc)
+* [iam-account](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-account) - Set AWS account alias and password policy
+* [iam-assumable-roles](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-roles) - Create IAM roles which can be assumed from specified ARNs (AWS accounts, IAM users, etc)
+* [iam-user](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-user) - Add IAM user, login profile and access keys
 
 
 ## Authors
