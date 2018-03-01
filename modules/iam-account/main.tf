@@ -9,6 +9,7 @@ resource "aws_iam_account_alias" "this" {
 resource "aws_iam_account_password_policy" "this" {
   count = "${var.create_account_password_policy ? 1 : 0}"
 
+  max_password_age               = "${var.max_password_age}"
   minimum_password_length        = "${var.minimum_password_length}"
   allow_users_to_change_password = "${var.allow_users_to_change_password}"
   hard_expiry                    = "${var.hard_expiry}"

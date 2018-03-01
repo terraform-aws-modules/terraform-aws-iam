@@ -12,6 +12,11 @@ variable "create_account_password_policy" {
   default     = true
 }
 
+variable "max_password_age" {
+  description = "The number of days that an user password is valid."
+  default     = 0
+}
+
 variable "minimum_password_length" {
   description = "Minimum length to require for user passwords"
   default     = 8
