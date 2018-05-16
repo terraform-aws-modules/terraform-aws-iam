@@ -96,7 +96,6 @@ Terraform can't configure MFA for the user. It is only possible via [AWS Console
 
 [iam-assumable-roles module](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/iam-assumable-roles) can be configured to require valid MFA token when different roles are assumed (for example, admin role requires MFA, but readonly - does not).
 
-
 ## Examples
 
 * [complete](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/complete) - Create all required resources to allow one group of users to assume privileged role, while another group of users can only assume readonly role.
@@ -104,6 +103,8 @@ Terraform can't configure MFA for the user. It is only possible via [AWS Console
 * [iam-assumable-roles](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-roles) - Create IAM roles which can be assumed from specified ARNs (AWS accounts, IAM users, etc)
 * [iam-user](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-user) - Add IAM user, login profile and access keys
 
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Authors
 
