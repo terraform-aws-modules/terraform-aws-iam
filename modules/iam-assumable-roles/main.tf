@@ -40,8 +40,9 @@ data "aws_iam_policy_document" "assume_role_with_mfa" {
 resource "aws_iam_role" "admin" {
   count = "${var.create_admin_role ? 1 : 0}"
 
-  name = "${var.admin_role_name}"
-  path = "${var.admin_role_path}"
+  name                 = "${var.admin_role_name}"
+  path                 = "${var.admin_role_path}"
+  max_session_duration = "${var.max_session_duration}"
 
   assume_role_policy = "${var.admin_role_requires_mfa ? data.aws_iam_policy_document.assume_role_with_mfa.json : data.aws_iam_policy_document.assume_role.json}"
 }
@@ -64,8 +65,9 @@ resource "aws_iam_role_policy_attachment" "poweruser" {
 resource "aws_iam_role" "poweruser" {
   count = "${var.create_poweruser_role ? 1 : 0}"
 
-  name = "${var.poweruser_role_name}"
-  path = "${var.poweruser_role_path}"
+  name                 = "${var.poweruser_role_name}"
+  path                 = "${var.poweruser_role_path}"
+  max_session_duration = "${var.max_session_duration}"
 
   assume_role_policy = "${var.poweruser_role_requires_mfa ? data.aws_iam_policy_document.assume_role_with_mfa.json : data.aws_iam_policy_document.assume_role.json}"
 }
@@ -81,8 +83,9 @@ resource "aws_iam_role_policy_attachment" "readonly" {
 resource "aws_iam_role" "readonly" {
   count = "${var.create_readonly_role ? 1 : 0}"
 
-  name = "${var.readonly_role_name}"
-  path = "${var.readonly_role_path}"
+  name                 = "${var.readonly_role_name}"
+  path                 = "${var.readonly_role_path}"
+  max_session_duration = "${var.max_session_duration}"
 
   assume_role_policy = "${var.readonly_role_requires_mfa ?  data.aws_iam_policy_document.assume_role_with_mfa.json : data.aws_iam_policy_document.assume_role.json}"
 }
