@@ -85,3 +85,8 @@ variable "readonly_role_policy_arn" {
   description = "Policy ARN to use for admin role"
   default     = "arn:aws:iam::aws:policy/ReadOnlyAccess"
 }
+
+variable "max_session_duration" {
+  description = "Maximum CLI/API session duration in seconds between 3600 and 43200"
+  default     = 3600
+}
