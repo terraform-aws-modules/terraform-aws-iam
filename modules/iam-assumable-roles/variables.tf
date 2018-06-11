@@ -62,7 +62,7 @@ variable "poweruser_role_policy_arn" {
 
 # Readonly
 variable "create_readonly_role" {
-  description = "Whether to create poweruser role"
+  description = "Whether to create readonly role"
   default     = false
 }
 
@@ -72,7 +72,7 @@ variable "readonly_role_name" {
 }
 
 variable "readonly_role_path" {
-  description = "Path of poweruser IAM role"
+  description = "Path of readonly IAM role"
   default     = "/"
 }
 
@@ -82,7 +82,7 @@ variable "readonly_role_requires_mfa" {
 }
 
 variable "readonly_role_policy_arn" {
-  description = "Policy ARN to use for admin role"
+  description = "Policy ARN to use for readonly role"
   default     = "arn:aws:iam::aws:policy/ReadOnlyAccess"
 }
 
