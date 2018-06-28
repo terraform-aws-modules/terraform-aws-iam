@@ -86,3 +86,7 @@ ${element(concat(aws_iam_access_key.this.*.encrypted_secret, list("")), 0)}
 -----END PGP MESSAGE-----
 EOF
 }
+
+output "this_iam_ssh_public_key_id" {
+  value = "SSH Key ID: ${element(concat(aws_iam_user_ssh_key.this.*.ssh_public_key_id, list("")), 0)}"
+}
