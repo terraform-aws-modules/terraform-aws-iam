@@ -33,6 +33,9 @@ This module outputs commands and PGP messages which can be decrypted either usin
 | password_reset_required | Whether the user should be forced to reset the generated password on first login. | string | `true` | no |
 | path | Desired path for the IAM user | string | `/` | no |
 | pgp_key | Either a base-64 encoded PGP public key, or a keybase username in the form keybase:username. Used to encrypt password and access key. | string | `` | no |
+| ssh_key_encoding | Which encoding format the uploaded SSH key is in. `SSH` for ssh-rsa or `PEM` for pem. | string | `SSH` | no |
+| ssh_public_key | Public key that is to be attached to this IAM account | string | - | no |
+| upload_ssh_key | Whether to upload and manage users public SSH key. | string | `false` | no |
 
 ## Outputs
 
@@ -48,6 +51,7 @@ This module outputs commands and PGP messages which can be decrypted either usin
 | this_iam_access_key_key_fingerprint | The fingerprint of the PGP key used to encrypt the secret |
 | this_iam_access_key_ses_smtp_password | The secret access key converted into an SES SMTP password |
 | this_iam_access_key_status | Active or Inactive. Keys are initially active, but can be made inactive by other means. |
+| this_iam_ssh_public_key_id | The AWS ID for the public key |
 | this_iam_user_arn | The ARN assigned by AWS for this user |
 | this_iam_user_login_profile_encrypted_password | The encrypted password, base64 encoded |
 | this_iam_user_login_profile_key_fingerprint | The fingerprint of the PGP key used to encrypt the password |
