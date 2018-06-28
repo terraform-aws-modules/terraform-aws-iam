@@ -42,7 +42,10 @@ variable "password_length" {
   default     = 20
 }
 
-
+variable "upload_ssh_key" {
+  description = "Whether to upload a public ssh key to the IAM user"
+  default     = false
+}
 variable "ssh_key_encoding" {
   description = "Specifies the public key encoding format to use in the response. To retrieve the public key in ssh-rsa format, use SSH. To retrieve the public key in PEM format, use PEM"
   default = "SSH"
