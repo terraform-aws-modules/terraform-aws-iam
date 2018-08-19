@@ -21,3 +21,11 @@ resource "aws_iam_access_key" "this" {
   user    = "${aws_iam_user.this.name}"
   pgp_key = "${var.pgp_key}"
 }
+
+resource "aws_iam_user_ssh_key" "this" {
+  count = "${var.upload_ssh_key}"
+
+  username = "${aws_iam_user.this.name}"
+  encoding = "${var.ssh_key_encoding}"
+  public_key = "${var.ssh_public_key}"
+}
