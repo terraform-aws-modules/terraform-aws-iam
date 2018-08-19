@@ -23,9 +23,9 @@ resource "aws_iam_access_key" "this" {
 }
 
 resource "aws_iam_user_ssh_key" "this" {
-  count = "${var.upload_ssh_key}"
+  count = "${var.create_user && var.upload_iam_user_ssh_key ? 1 : 0}"
 
-  username = "${aws_iam_user.this.name}"
-  encoding = "${var.ssh_key_encoding}"
+  username   = "${aws_iam_user.this.name}"
+  encoding   = "${var.ssh_key_encoding}"
   public_key = "${var.ssh_public_key}"
 }

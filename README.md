@@ -9,6 +9,7 @@ These types of resources are supported:
 * [IAM group](https://www.terraform.io/docs/providers/aws/r/iam_group.html)
 * [IAM role](https://www.terraform.io/docs/providers/aws/r/iam_role.html)
 * [IAM access key](https://www.terraform.io/docs/providers/aws/r/iam_access_key.html)
+* [IAM SSH public key](https://www.terraform.io/docs/providers/aws/r/iam_user_ssh_key.html)
 
 ## Usage
 

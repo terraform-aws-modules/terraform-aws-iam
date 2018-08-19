@@ -1,6 +1,6 @@
 # IAM user example
 
-Configuration in this directory creates IAM user with a random password and a pair of IAM access/secret keys.
+Configuration in this directory creates IAM user with a random password, a pair of IAM access/secret keys and uploads IAM SSH public key.
 User password and secret key is encrypted using public key of keybase.io user named `test`.
 
 # Usage
