@@ -8,6 +8,7 @@ These types of resources are supported:
 * [IAM user login profile](https://www.terraform.io/docs/providers/aws/r/iam_user_login_profile.html)
 * [IAM group](https://www.terraform.io/docs/providers/aws/r/iam_group.html)
 * [IAM role](https://www.terraform.io/docs/providers/aws/r/iam_role.html)
+* [IAM policy](https://www.terraform.io/docs/providers/aws/r/iam_policy.html)
 * [IAM access key](https://www.terraform.io/docs/providers/aws/r/iam_access_key.html)
 * [IAM SSH public key](https://www.terraform.io/docs/providers/aws/r/iam_user_ssh_key.html)
 
@@ -60,6 +61,20 @@ module "iam_user" {
 }
 ```
 
+`iam-policy`:
+```hcl
+module "iam_policy" {
+  source = "terraform-aws-modules/iam/aws//modules/iam-policy"
+
+  name = "example"
+  path = "/"
+  description = "My example policy"
+
+  policy ="path/to/policy_file"
+  }
+}
+```
+
 `iam-group-with-assumable-roles-policy`:
 ```hcl
 # todo
@@ -97,12 +112,17 @@ Terraform can't configure MFA for the user. It is only possible via [AWS Console
 
 [iam-assumable-roles module](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/iam-assumable-roles) can be configured to require valid MFA token when different roles are assumed (for example, admin role requires MFA, but readonly - does not).
 
+### Create IAM Policies
+
+Use [iam-policy module](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/iam-policy) module to manage IAM policy.
+
 ## Examples
 
 * [complete](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/complete) - Create all required resources to allow one group of users to assume privileged role, while another group of users can only assume readonly role.
 * [iam-account](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-account) - Set AWS account alias and password policy
 * [iam-assumable-roles](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-roles) - Create IAM roles which can be assumed from specified ARNs (AWS accounts, IAM users, etc)
 * [iam-user](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-user) - Add IAM user, login profile and access keys
+* [iam-policy](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-policy) - Create IAM policy
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
