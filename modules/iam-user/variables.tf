@@ -56,3 +56,8 @@ variable "ssh_public_key" {
   description = "The SSH public key. The public key must be encoded in ssh-rsa format or PEM format"
   default     = ""
 }
+
+variable "permissions_boundary" {
+  description = "The ARN of the policy that is used to set the permissions boundary for the user."
+  default = ""
+}

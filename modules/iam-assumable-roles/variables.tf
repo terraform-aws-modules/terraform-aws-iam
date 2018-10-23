@@ -34,6 +34,11 @@ variable "admin_role_policy_arn" {
   default     = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
 
+variable "admin_role_permissions_boundary_arn" {
+  description = "Permissions boundary ARN to use for admin role"
+  default     = ""
+}
+
 # Poweruser
 variable "create_poweruser_role" {
   description = "Whether to create poweruser role"
@@ -60,6 +65,11 @@ variable "poweruser_role_policy_arn" {
   default     = "arn:aws:iam::aws:policy/PowerUserAccess"
 }
 
+variable "poweruser_role_permissions_boundary_arn" {
+  description = "Permissions boundary ARN to use for admin role"
+  default     = ""
+}
+
 # Readonly
 variable "create_readonly_role" {
   description = "Whether to create readonly role"
@@ -84,6 +94,11 @@ variable "readonly_role_requires_mfa" {
 variable "readonly_role_policy_arn" {
   description = "Policy ARN to use for readonly role"
   default     = "arn:aws:iam::aws:policy/ReadOnlyAccess"
+}
+
+variable "readonly_role_permissions_boundary_arn" {
+  description = "Permissions boundary ARN to use for admin role"
+  default     = ""
 }
 
 variable "max_session_duration" {
