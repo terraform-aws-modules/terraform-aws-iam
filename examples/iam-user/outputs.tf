@@ -38,6 +38,11 @@ output "this_iam_access_key_encrypted_secret" {
   value       = "${module.iam_user.this_iam_access_key_encrypted_secret}"
 }
 
+output "this_iam_access_key_secret" {
+  description = "The access key secret"
+  value       = "${module.iam_user.this_iam_access_key_secret}"
+}
+
 output "this_iam_access_key_ses_smtp_password" {
   description = "The secret access key converted into an SES SMTP password"
   value       = "${module.iam_user.this_iam_access_key_ses_smtp_password}"
