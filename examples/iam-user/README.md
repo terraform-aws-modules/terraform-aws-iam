@@ -16,25 +16,24 @@ $ terraform apply
 Run `terraform destroy` when you don't need these resources.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| keybase_password_decrypt_command |  |
-| keybase_password_pgp_message |  |
-| keybase_secret_key_decrypt_command |  |
-| keybase_secret_key_pgp_message |  |
-| pgp_key | PGP key used to encrypt sensitive data for this user (if empty - secrets are not encrypted) |
-| this_iam_access_key_encrypted_secret | The encrypted secret, base64 encoded |
-| this_iam_access_key_id | The access key ID |
-| this_iam_access_key_key_fingerprint | The fingerprint of the PGP key used to encrypt the secret |
-| this_iam_access_key_ses_smtp_password | The secret access key converted into an SES SMTP password |
-| this_iam_access_key_status | Active or Inactive. Keys are initially active, but can be made inactive by other means. |
-| this_iam_user_arn | The ARN assigned by AWS for this user |
-| this_iam_user_login_profile_encrypted_password | The encrypted password, base64 encoded |
-| this_iam_user_login_profile_key_fingerprint | The fingerprint of the PGP key used to encrypt the password |
-| this_iam_user_name | The user's name |
-| this_iam_user_unique_id | The unique ID assigned by AWS |
+| keybase\_password\_decrypt\_command |  |
+| keybase\_password\_pgp\_message |  |
+| keybase\_secret\_key\_decrypt\_command |  |
+| keybase\_secret\_key\_pgp\_message |  |
+| pgp\_key | PGP key used to encrypt sensitive data for this user (if empty - secrets are not encrypted) |
+| this\_iam\_access\_key\_encrypted\_secret | The encrypted secret, base64 encoded |
+| this\_iam\_access\_key\_id | The access key ID |
+| this\_iam\_access\_key\_key\_fingerprint | The fingerprint of the PGP key used to encrypt the secret |
+| this\_iam\_access\_key\_ses\_smtp\_password | The secret access key converted into an SES SMTP password |
+| this\_iam\_access\_key\_status | Active or Inactive. Keys are initially active, but can be made inactive by other means. |
+| this\_iam\_user\_arn | The ARN assigned by AWS for this user |
+| this\_iam\_user\_login\_profile\_encrypted\_password | The encrypted password, base64 encoded |
+| this\_iam\_user\_login\_profile\_key\_fingerprint | The fingerprint of the PGP key used to encrypt the password |
+| this\_iam\_user\_name | The user's name |
+| this\_iam\_user\_unique\_id | The unique ID assigned by AWS |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
