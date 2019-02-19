@@ -13,6 +13,7 @@ Trusted resources can be any [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/U
 | admin_role_name | IAM role with admin access | string | `admin` | no |
 | admin_role_path | Path of admin IAM role | string | `/` | no |
 | admin_role_policy_arn | Policy ARN to use for admin role | string | `arn:aws:iam::aws:policy/AdministratorAccess` | no |
+| admin_role_permissions_boundary_arn | Policy ARN to use for admin permission boundary | string | `` | no |
 | admin_role_requires_mfa | Whether admin role requires MFA | string | `true` | no |
 | create_admin_role | Whether to create admin role | string | `false` | no |
 | create_poweruser_role | Whether to create poweruser role | string | `false` | no |
@@ -21,11 +22,13 @@ Trusted resources can be any [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/U
 | mfa_age | Max age of valid MFA (in seconds) for roles which require MFA | string | `86400` | no |
 | poweruser_role_name | IAM role with poweruser access | string | `poweruser` | no |
 | poweruser_role_path | Path of poweruser IAM role | string | `/` | no |
-| poweruser_role_policy_arn | Policy ARN to use for admin role | string | `arn:aws:iam::aws:policy/PowerUserAccess` | no |
+| poweruser_role_policy_arn | Policy ARN to use for poweruser role | string | `arn:aws:iam::aws:policy/PowerUserAccess` | no |
+| poweruser_role_permissions_boundary_arn | Policy ARN to use for poweruser permission boundary | string | `` | no |
 | poweruser_role_requires_mfa | Whether poweruser role requires MFA | string | `true` | no |
 | readonly_role_name | IAM role with readonly access | string | `readonly` | no |
 | readonly_role_path | Path of readonly IAM role | string | `/` | no |
 | readonly_role_policy_arn | Policy ARN to use for readonly role | string | `arn:aws:iam::aws:policy/ReadOnlyAccess` | no |
+| readonly_role_permissions_boundary_arn | Policy ARN to use for readonly permission boundary | string | `` | no |
 | readonly_role_requires_mfa | Whether readonly role requires MFA | string | `true` | no |
 | trusted_role_arns | ARNs of AWS entities who can assume these roles | string | `<list>` | no |
 

@@ -32,6 +32,7 @@ This module outputs commands and PGP messages which can be decrypted either usin
 | password_length | The length of the generated password | string | `20` | no |
 | password_reset_required | Whether the user should be forced to reset the generated password on first login. | string | `true` | no |
 | path | Desired path for the IAM user | string | `/` | no |
+| permissions_boundary | The policy that is used to set the permissions boundary for the user | string | `` | no |
 | pgp_key | Either a base-64 encoded PGP public key, or a keybase username in the form keybase:username. Used to encrypt password and access key. | string | `` | no |
 | ssh_key_encoding | Specifies the public key encoding format to use in the response. To retrieve the public key in ssh-rsa format, use SSH. To retrieve the public key in PEM format, use PEM | string | `SSH` | no |
 | ssh_public_key | The SSH public key. The public key must be encoded in ssh-rsa format or PEM format | string | `` | no |
