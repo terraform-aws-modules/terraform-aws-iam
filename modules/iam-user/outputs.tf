@@ -25,7 +25,12 @@ output "this_iam_user_login_profile_encrypted_password" {
 
 output "this_iam_access_key_id" {
   description = "The access key ID"
-  value       = "${element(concat(aws_iam_access_key.this.*.id, list("")), 0)}"
+  value       = "${element(concat(aws_iam_access_key.this.*.id, aws_iam_access_key.this_no_pgp.*.id, list("")), 0)}"
+}
+
+output "this_iam_access_key_secret" {
+  description = "The access key secret"
+  value       = "${element(concat(aws_iam_access_key.this_no_pgp.*.secret, list("")), 0)}"
 }
 
 output "this_iam_access_key_key_fingerprint" {
@@ -40,12 +45,12 @@ output "this_iam_access_key_encrypted_secret" {
 
 output "this_iam_access_key_ses_smtp_password" {
   description = "The secret access key converted into an SES SMTP password"
-  value       = "${element(concat(aws_iam_access_key.this.*.ses_smtp_password, list("")), 0)}"
+  value       = "${element(concat(aws_iam_access_key.this.*.ses_smtp_password, aws_iam_access_key.this_no_pgp.*.ses_smtp_password, list("")), 0)}"
 }
 
 output "this_iam_access_key_status" {
   description = "Active or Inactive. Keys are initially active, but can be made inactive by other means."
-  value       = "${element(concat(aws_iam_access_key.this.*.status, list("")), 0)}"
+  value       = "${element(concat(aws_iam_access_key.this.*.status, aws_iam_access_key.this_no_pgp.*.status, list("")), 0)}"
 }
 
 output "pgp_key" {

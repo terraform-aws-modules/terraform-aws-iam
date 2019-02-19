@@ -21,12 +21,12 @@ Trusted resources can be any [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/U
 | mfa\_age | Max age of valid MFA (in seconds) for roles which require MFA | string | `"86400"` | no |
 | poweruser\_role\_name | IAM role with poweruser access | string | `"poweruser"` | no |
 | poweruser\_role\_path | Path of poweruser IAM role | string | `"/"` | no |
-| poweruser\_role\_permissions\_boundary\_arn | Permissions boundary ARN to use for admin role | string | `""` | no |
-| poweruser\_role\_policy\_arn | Policy ARN to use for admin role | string | `"arn:aws:iam::aws:policy/PowerUserAccess"` | no |
+| poweruser\_role\_permissions\_boundary\_arn | Permissions boundary ARN to use for poweruser role | string | `""` | no |
+| poweruser\_role\_policy\_arn | Policy ARN to use for poweruser role | string | `"arn:aws:iam::aws:policy/PowerUserAccess"` | no |
 | poweruser\_role\_requires\_mfa | Whether poweruser role requires MFA | string | `"true"` | no |
 | readonly\_role\_name | IAM role with readonly access | string | `"readonly"` | no |
 | readonly\_role\_path | Path of readonly IAM role | string | `"/"` | no |
-| readonly\_role\_permissions\_boundary\_arn | Permissions boundary ARN to use for admin role | string | `""` | no |
+| readonly\_role\_permissions\_boundary\_arn | Permissions boundary ARN to use for readonly role | string | `""` | no |
 | readonly\_role\_policy\_arn | Policy ARN to use for readonly role | string | `"arn:aws:iam::aws:policy/ReadOnlyAccess"` | no |
 | readonly\_role\_requires\_mfa | Whether readonly role requires MFA | string | `"true"` | no |
 | trusted\_role\_arns | ARNs of AWS entities who can assume these roles | list | `[]` | no |
