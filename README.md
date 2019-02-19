@@ -15,7 +15,7 @@ These types of resources are supported:
 ## Features
 
 1. **Cross-account access.** Define IAM roles using `iam_assumable_role` or `iam_assumable_roles` submodules in "resource AWS accounts (prod, staging, dev)" and IAM groups and users using `iam-group-with-assumable-roles-policy` submodule in "IAM AWS Account" to setup access controls between accounts. See [iam-group-with-assumable-roles-policy example](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-group-with-assumable-roles-policy) for more details.
-1. **Individual IAM resources (users, roles, policies).** See usage snippets and [examples section](https://github.com/terraform-aws-modules/terraform-aws-iam#examples) listed below.
+1. **Individual IAM resources (users, roles, policies).** See usage snippets and [examples](https://github.com/terraform-aws-modules/terraform-aws-iam#examples) listed below.
 
 ## Usage
 
