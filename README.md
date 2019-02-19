@@ -66,12 +66,24 @@ module "iam_user" {
 module "iam_policy" {
   source = "terraform-aws-modules/iam/aws//modules/iam-policy"
 
-  name = "example"
-  path = "/"
+  name        = "example"
+  path        = "/"
   description = "My example policy"
 
-  policy ="path/to/policy_file"
-  }
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "ec2:Describe*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}
+EOF
 }
 ```
 
@@ -123,9 +135,6 @@ Use [iam-policy module](https://github.com/terraform-aws-modules/terraform-aws-i
 * [iam-assumable-roles](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-roles) - Create IAM roles which can be assumed from specified ARNs (AWS accounts, IAM users, etc)
 * [iam-user](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-user) - Add IAM user, login profile and access keys
 * [iam-policy](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-policy) - Create IAM policy
-
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Authors
 

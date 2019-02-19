@@ -1,9 +1,9 @@
 resource "aws_iam_user" "this" {
   count = "${var.create_user}"
 
-  name          = "${var.name}"
-  path          = "${var.path}"
-  force_destroy = "${var.force_destroy}"
+  name                 = "${var.name}"
+  path                 = "${var.path}"
+  force_destroy        = "${var.force_destroy}"
   permissions_boundary = "${var.permissions_boundary}"
 }
 
