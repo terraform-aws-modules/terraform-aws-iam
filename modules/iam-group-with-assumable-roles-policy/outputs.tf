@@ -12,3 +12,8 @@ output "this_policy_arn" {
   description = "Assume role policy ARN of IAM group"
   value       = "${aws_iam_policy.this.arn}"
 }
+
+output "group_name" {
+  description = "IAM group name"
+  value       = "${aws_iam_group.this.name}"
+}

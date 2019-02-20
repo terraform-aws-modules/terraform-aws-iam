@@ -15,6 +15,7 @@ Creates IAM group with users who are allowed to assume IAM roles. This is typica
 
 | Name | Description |
 |------|-------------|
+| group\_name | IAM group name |
 | this\_assumable\_roles | List of ARNs of IAM roles which members of IAM group can assume |
 | this\_group\_users | List of IAM users in IAM group |
 | this\_policy\_arn | Assume role policy ARN of IAM group |

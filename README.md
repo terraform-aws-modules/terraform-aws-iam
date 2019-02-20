@@ -20,7 +20,6 @@ These types of resources are supported:
 ## Usage
 
 `iam-account`:
-
 ```hcl
 module "iam_account" {
   source = "terraform-aws-modules/iam/aws//modules/iam-account"
@@ -132,6 +131,33 @@ module "iam_group_with_assumable_roles_policy" {
 }
 ```
 
+`iam-group-with-policies`:
+```hcl
+module "iam_group_with_policies" {
+  source = "terraform-aws-modules/iam/aws//modules/iam-group-with-policies"
+
+  name = "superadmins"
+
+  group_users = [
+    "user1",
+    "user2"
+  ]
+
+  attach_iam_self_management_policy = true
+
+  custom_group_policy_arns = [
+    "arn:aws:iam::aws:policy/AdministratorAccess",
+  ]
+
+  custom_group_policies = [
+    {
+      name   = "AllowS3Listing"
+      policy = "${data.aws_iam_policy_document.sample.json}"
+    }
+  ]
+}
+```
+
 ## IAM Best Practices
 
 AWS published [IAM Best Practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html) and this Terraform module was created to help with some of points listed there:
@@ -147,6 +173,8 @@ Use [iam-assumable-roles module](https://github.com/terraform-aws-modules/terraf
 ### 3. Use Groups to Assign Permissions to IAM Users
 
 Use [iam-group-with-assumable-roles-policy module](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/iam-group-with-assumable-roles-policy) to manage IAM groups of users who can assume roles.
+
+Use [iam-group-with-policies module](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/iam-group-with-policies) to manage IAM groups of users where specified IAM policies are allowed.
 
 ### 4. Configure a Strong Password Policy for Your Users
 
@@ -175,6 +203,8 @@ Use [iam-policy module](https://github.com/terraform-aws-modules/terraform-aws-i
 * [iam-assumable-role](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-roles) - Create individual IAM role which can be assumed from specified ARNs (AWS accounts, IAM users, etc)
 * [iam-assumable-roles](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-roles) - Create several IAM roles which can be assumed from specified ARNs (AWS accounts, IAM users, etc)
 * [iam-group-with-assumable-roles-policy](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-group-with-assumable-roles-policy) - IAM group with users who are allowed to assume IAM roles in the same or in separate AWS account
+* [iam-group-with-policies](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-group-with-policies) - IAM group with users who are allowed specified IAM policies (eg, "manage their own IAM user")
+* [iam-group-complete](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-group-complete) - IAM group with users who are allowed to assume IAM roles in another AWS account and have access to specified IAM policies
 * [iam-user](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-user) - Add IAM user, login profile and access keys (with PGP enabled or disabled)
 * [iam-policy](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-policy) - Create IAM policy
 
