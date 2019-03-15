@@ -73,6 +73,23 @@ module "iam_assumable_roles" {
 }
 ```
 
+`iam-assumable-roles-with-saml`:
+```hcl
+module "iam_assumable_roles_with_saml" {
+  source = "terraform-aws-modules/iam/aws//modules/iam-assumable-roles-with-saml"
+
+  create_admin_role = true
+
+  create_poweruser_role = true
+  poweruser_role_name   = "developer"
+
+  create_readonly_role = true
+
+  provider_name = "${aws_iam_saml_provider.idp_saml.name}"
+  provider_id   = "${aws_iam_saml_provider.idp_saml.id}"
+}
+```
+
 `iam-user`:
 ```hcl
 module "iam_user" {
@@ -202,6 +219,7 @@ Use [iam-policy module](https://github.com/terraform-aws-modules/terraform-aws-i
 * [iam-account](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-account) - Set AWS account alias and password policy
 * [iam-assumable-role](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-roles) - Create individual IAM role which can be assumed from specified ARNs (AWS accounts, IAM users, etc)
 * [iam-assumable-roles](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-roles) - Create several IAM roles which can be assumed from specified ARNs (AWS accounts, IAM users, etc)
+* [iam-assumable-roles-with-saml](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-roles-with-saml) - Create several IAM roles which can be assumed from Users with a SAML Identity Provider
 * [iam-group-with-assumable-roles-policy](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-group-with-assumable-roles-policy) - IAM group with users who are allowed to assume IAM roles in the same or in separate AWS account
 * [iam-group-with-policies](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-group-with-policies) - IAM group with users who are allowed specified IAM policies (eg, "manage their own IAM user")
 * [iam-group-complete](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-group-complete) - IAM group with users who are allowed to assume IAM roles in another AWS account and have access to specified IAM policies
