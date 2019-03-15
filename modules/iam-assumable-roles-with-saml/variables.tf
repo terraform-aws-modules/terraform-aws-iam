@@ -1,11 +1,17 @@
 variable "provider_name" {
-  description = "Name for SAML Provider"
+  description = "Name of the SAML Provider"
   type        = "string"
 }
 
 variable "provider_id" {
-  description = "ID for SAML Provider"
+  description = "ID of the SAML Provider"
   type        = "string"
+}
+
+variable "aws_saml_endpoint" {
+  description = "AWS SAML Endpoint"
+  default     = ["https://signin.aws.amazon.com/saml"]
+  type        = "list"
 }
 
 # Admin

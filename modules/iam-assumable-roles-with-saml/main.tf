@@ -1,4 +1,4 @@
-data "aws_iam_policy_document" "assume_role" {
+data "aws_iam_policy_document" "assume_role_with_saml" {
   statement {
     effect = "Allow"
 
@@ -12,7 +12,7 @@ data "aws_iam_policy_document" "assume_role" {
     condition {
       test     = "StringEquals"
       variable = "SAML:aud"
-      values   = ["https://signin.aws.amazon.com/saml"]
+      values   = ["${var.aws_saml_endpoint}"]
     }
   }
 }
@@ -27,7 +27,7 @@ resource "aws_iam_role" "admin" {
 
   permissions_boundary = "${var.admin_role_permissions_boundary_arn}"
 
-  assume_role_policy = "${data.aws_iam_policy_document.assume_role.json}"
+  assume_role_policy = "${data.aws_iam_policy_document.assume_role_with_saml.json}"
 }
 
 resource "aws_iam_role_policy_attachment" "admin" {
@@ -54,7 +54,7 @@ resource "aws_iam_role" "poweruser" {
 
   permissions_boundary = "${var.poweruser_role_permissions_boundary_arn}"
 
-  assume_role_policy = "${data.aws_iam_policy_document.assume_role.json}"
+  assume_role_policy = "${data.aws_iam_policy_document.assume_role_with_saml.json}"
 }
 
 # Readonly
@@ -74,5 +74,5 @@ resource "aws_iam_role" "readonly" {
 
   permissions_boundary = "${var.readonly_role_permissions_boundary_arn}"
 
-  assume_role_policy = "${data.aws_iam_policy_document.assume_role.json}"
+  assume_role_policy = "${data.aws_iam_policy_document.assume_role_with_saml.json}"
 }
