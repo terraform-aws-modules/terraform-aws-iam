@@ -4,7 +4,7 @@ provider "aws" {
 
 resource "aws_iam_saml_provider" "idp_saml" {
   name                   = "idp_saml"
-  saml_metadata_document = "${file("${path.module}/saml-metadata.xml")}"
+  saml_metadata_document = "${file("saml-metadata.xml")}"
 }
 
 ###############################

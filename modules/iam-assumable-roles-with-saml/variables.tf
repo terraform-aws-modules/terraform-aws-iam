@@ -1,11 +1,9 @@
 variable "provider_name" {
   description = "Name of the SAML Provider"
-  type        = "string"
 }
 
 variable "provider_id" {
   description = "ID of the SAML Provider"
-  type        = "string"
 }
 
 variable "aws_saml_endpoint" {
