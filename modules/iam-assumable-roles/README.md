@@ -13,6 +13,7 @@ Trusted resources can be any [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/U
 | admin\_role\_path | Path of admin IAM role | string | `"/"` | no |
 | admin\_role\_permissions\_boundary\_arn | Permissions boundary ARN to use for admin role | string | `""` | no |
 | admin\_role\_policy\_arn | Policy ARN to use for admin role | string | `"arn:aws:iam::aws:policy/AdministratorAccess"` | no |
+| admin\_role\_additional\_policies\_arn | Additional Policies ARN to use for admin role | list | `[]` | no |
 | admin\_role\_requires\_mfa | Whether admin role requires MFA | string | `"true"` | no |
 | create\_admin\_role | Whether to create admin role | string | `"false"` | no |
 | create\_poweruser\_role | Whether to create poweruser role | string | `"false"` | no |
@@ -23,11 +24,13 @@ Trusted resources can be any [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/U
 | poweruser\_role\_path | Path of poweruser IAM role | string | `"/"` | no |
 | poweruser\_role\_permissions\_boundary\_arn | Permissions boundary ARN to use for poweruser role | string | `""` | no |
 | poweruser\_role\_policy\_arn | Policy ARN to use for poweruser role | string | `"arn:aws:iam::aws:policy/PowerUserAccess"` | no |
+| poweruser\_role\_additional\_policies\_arn | Additional Policies ARN to use for poweruser role | list | `[]` | no |
 | poweruser\_role\_requires\_mfa | Whether poweruser role requires MFA | string | `"true"` | no |
 | readonly\_role\_name | IAM role with readonly access | string | `"readonly"` | no |
 | readonly\_role\_path | Path of readonly IAM role | string | `"/"` | no |
 | readonly\_role\_permissions\_boundary\_arn | Permissions boundary ARN to use for readonly role | string | `""` | no |
 | readonly\_role\_policy\_arn | Policy ARN to use for readonly role | string | `"arn:aws:iam::aws:policy/ReadOnlyAccess"` | no |
+| readonly\_role\_additional\_policies\_arn | Additional Policies ARN to use for readonly role | list | `[]` | no |
 | readonly\_role\_requires\_mfa | Whether readonly role requires MFA | string | `"true"` | no |
 | trusted\_role\_arns | ARNs of AWS entities who can assume these roles | list | `[]` | no |
 
