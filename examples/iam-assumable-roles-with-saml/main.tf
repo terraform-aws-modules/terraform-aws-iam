@@ -33,10 +33,10 @@ module "iam_assumable_roles_with_saml_custom" {
 
   create_poweruser_role = true
 
-  create_poweruser_role                  = true
-  poweruser_role_name                    = "Billing-And-Support-Access"
-  poweruser_role_policy_arn              = "arn:aws:iam::aws:policy/job-function/Billing"
-  poweruser_role_additional_policies_arn = ["arn:aws:iam::aws:policy/AWSSupportAccess"]
+  create_poweruser_role                   = true
+  poweruser_role_name                     = "Billing-And-Support-Access"
+  poweruser_role_policy_arn               = "arn:aws:iam::aws:policy/job-function/Billing"
+  poweruser_role_additional_policies_arns = ["arn:aws:iam::aws:policy/AWSSupportAccess"]
 
   create_readonly_role = true
 

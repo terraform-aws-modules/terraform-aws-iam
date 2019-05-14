@@ -1,9 +1,3 @@
-locals {
-  admin_additional_policies     = "${length(var.admin_role_additional_policies_arn)}"
-  poweruser_additional_policies = "${length(var.poweruser_role_additional_policies_arn)}"
-  readonly_additional_policies  = "${length(var.readonly_role_additional_policies_arn)}"
-}
-
 data "aws_iam_policy_document" "assume_role_with_saml" {
   statement {
     effect = "Allow"
@@ -44,10 +38,10 @@ resource "aws_iam_role_policy_attachment" "admin" {
 }
 
 resource "aws_iam_role_policy_attachment" "admin_additional_policies" {
-  count = "${var.create_admin_role && local.admin_additional_policies > 0 ? 1 * local.admin_additional_policies  : 0}"
+  count = "${var.create_admin_role ? length(var.admin_role_additional_policies_arns) : 0}"
 
   role       = "${aws_iam_role.admin.name}"
-  policy_arn = "${element(var.admin_role_additional_policies_arn, count.index)}"
+  policy_arn = "${element(var.admin_role_additional_policies_arns, count.index)}"
 }
 
 # Poweruser
@@ -59,10 +53,10 @@ resource "aws_iam_role_policy_attachment" "poweruser" {
 }
 
 resource "aws_iam_role_policy_attachment" "poweruser_additional_policies" {
-  count = "${var.create_poweruser_role && local.poweruser_additional_policies > 0 ? 1 * local.poweruser_additional_policies  : 0}"
+  count = "${var.create_poweruser_role ? length(var.admin_role_additional_policies_arns) : 0}"
 
   role       = "${aws_iam_role.poweruser.name}"
-  policy_arn = "${element(var.poweruser_role_additional_policies_arn, count.index)}"
+  policy_arn = "${element(var.poweruser_role_additional_policies_arns, count.index)}"
 }
 
 resource "aws_iam_role" "poweruser" {
@@ -86,10 +80,10 @@ resource "aws_iam_role_policy_attachment" "readonly" {
 }
 
 resource "aws_iam_role_policy_attachment" "readonly_additional_policies" {
-  count = "${var.create_readonly_role && local.readonly_additional_policies > 0 ? 1 * local.readonly_additional_policies  : 0}"
+  count = "${var.create_readonly_role ? length(var.readonly_role_additional_policies_arns) : 0}"
 
   role       = "${aws_iam_role.readonly.name}"
-  policy_arn = "${element(var.readonly_role_additional_policies_arn, count.index)}"
+  policy_arn = "${element(var.readonly_role_additional_policies_arns, count.index)}"
 }
 
 resource "aws_iam_role" "readonly" {

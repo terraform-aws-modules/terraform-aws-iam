@@ -1,11 +1,9 @@
 variable "provider_name" {
   description = "Name of the SAML Provider"
-  type        = "string"
 }
 
 variable "provider_id" {
   description = "ID of the SAML Provider"
-  type        = "string"
 }
 
 variable "aws_saml_endpoint" {
@@ -35,8 +33,8 @@ variable "admin_role_policy_arn" {
   default     = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
 
-variable "admin_role_additional_policies_arn" {
-  description = "Additional Policies ARN to use for admin role"
+variable "admin_role_additional_policies_arns" {
+  description = "Additional Policies ARNs to use for admin role"
   default     = []
 }
 
@@ -66,8 +64,8 @@ variable "poweruser_role_policy_arn" {
   default     = "arn:aws:iam::aws:policy/PowerUserAccess"
 }
 
-variable "poweruser_role_additional_policies_arn" {
-  description = "Additional Policies ARN to use for poweruser role"
+variable "poweruser_role_additional_policies_arns" {
+  description = "Additional Policies ARNs to use for poweruser role"
   default     = []
 }
 
@@ -97,8 +95,8 @@ variable "readonly_role_policy_arn" {
   default     = "arn:aws:iam::aws:policy/ReadOnlyAccess"
 }
 
-variable "readonly_role_additional_policies_arn" {
-  description = "Additional Policies ARN to use for poweruser role"
+variable "readonly_role_additional_policies_arns" {
+  description = "Additional Policies ARNs to use for poweruser role"
   default     = []
 }
 
