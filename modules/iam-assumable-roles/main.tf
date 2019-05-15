@@ -50,20 +50,13 @@ resource "aws_iam_role" "admin" {
 }
 
 resource "aws_iam_role_policy_attachment" "admin" {
-  count = "${var.create_admin_role ? 1 : 0}"
+  count = "${var.create_admin_role ? length(var.admin_role_policy_arns) : 0}"
 
   role       = "${aws_iam_role.admin.name}"
-  policy_arn = "${var.admin_role_policy_arn}"
+  policy_arn = "${element(var.admin_role_policy_arns, count.index)}"
 }
 
 # Poweruser
-resource "aws_iam_role_policy_attachment" "poweruser" {
-  count = "${var.create_poweruser_role ? 1 : 0}"
-
-  role       = "${aws_iam_role.poweruser.name}"
-  policy_arn = "${var.poweruser_role_policy_arn}"
-}
-
 resource "aws_iam_role" "poweruser" {
   count = "${var.create_poweruser_role ? 1 : 0}"
 
@@ -76,14 +69,14 @@ resource "aws_iam_role" "poweruser" {
   assume_role_policy = "${var.poweruser_role_requires_mfa ? data.aws_iam_policy_document.assume_role_with_mfa.json : data.aws_iam_policy_document.assume_role.json}"
 }
 
-# Readonly
-resource "aws_iam_role_policy_attachment" "readonly" {
-  count = "${var.create_readonly_role ? 1 : 0}"
+resource "aws_iam_role_policy_attachment" "poweruser" {
+  count = "${var.create_poweruser_role ? length(var.poweruser_role_policy_arns) : 0}"
 
-  role       = "${aws_iam_role.readonly.name}"
-  policy_arn = "${var.readonly_role_policy_arn}"
+  role       = "${aws_iam_role.poweruser.name}"
+  policy_arn = "${element(var.poweruser_role_policy_arns, count.index)}"
 }
 
+# Readonly
 resource "aws_iam_role" "readonly" {
   count = "${var.create_readonly_role ? 1 : 0}"
 
@@ -94,4 +87,11 @@ resource "aws_iam_role" "readonly" {
   permissions_boundary = "${var.readonly_role_permissions_boundary_arn}"
 
   assume_role_policy = "${var.readonly_role_requires_mfa ?  data.aws_iam_policy_document.assume_role_with_mfa.json : data.aws_iam_policy_document.assume_role.json}"
+}
+
+resource "aws_iam_role_policy_attachment" "readonly" {
+  count = "${var.create_readonly_role ? length(var.readonly_role_policy_arns) : 0}"
+
+  role       = "${aws_iam_role.readonly.name}"
+  policy_arn = "${element(var.readonly_role_policy_arns, count.index)}"
 }

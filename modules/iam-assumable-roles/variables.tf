@@ -29,9 +29,10 @@ variable "admin_role_requires_mfa" {
   default     = true
 }
 
-variable "admin_role_policy_arn" {
-  description = "Policy ARN to use for admin role"
-  default     = "arn:aws:iam::aws:policy/AdministratorAccess"
+variable "admin_role_policy_arns" {
+  description = "List of policy ARNs to use for admin role"
+  type        = "list"
+  default     = ["arn:aws:iam::aws:policy/AdministratorAccess"]
 }
 
 variable "admin_role_permissions_boundary_arn" {
@@ -60,9 +61,10 @@ variable "poweruser_role_requires_mfa" {
   default     = true
 }
 
-variable "poweruser_role_policy_arn" {
-  description = "Policy ARN to use for poweruser role"
-  default     = "arn:aws:iam::aws:policy/PowerUserAccess"
+variable "poweruser_role_policy_arns" {
+  description = "List of policy ARNs to use for poweruser role"
+  type        = "list"
+  default     = ["arn:aws:iam::aws:policy/PowerUserAccess"]
 }
 
 variable "poweruser_role_permissions_boundary_arn" {
@@ -91,9 +93,10 @@ variable "readonly_role_requires_mfa" {
   default     = true
 }
 
-variable "readonly_role_policy_arn" {
-  description = "Policy ARN to use for readonly role"
-  default     = "arn:aws:iam::aws:policy/ReadOnlyAccess"
+variable "readonly_role_policy_arns" {
+  description = "List of policy ARNs to use for readonly role"
+  type        = "list"
+  default     = ["arn:aws:iam::aws:policy/ReadOnlyAccess"]
 }
 
 variable "readonly_role_permissions_boundary_arn" {
