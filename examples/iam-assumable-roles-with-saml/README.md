@@ -1,6 +1,6 @@
 # IAM assumable roles with SAML Identity Provider example
 
-Configuration in this directory creates several IAM roles which can be assumed from Users with a SAML Identity Provider
+Configuration in this directory creates several IAM roles which can be assumed by users with a SAML Identity Provider.
 
 # Usage
 

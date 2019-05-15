@@ -28,14 +28,10 @@ variable "admin_role_path" {
   default     = "/"
 }
 
-variable "admin_role_policy_arn" {
-  description = "Policy ARN to use for admin role"
-  default     = "arn:aws:iam::aws:policy/AdministratorAccess"
-}
-
-variable "admin_role_additional_policies_arns" {
-  description = "Additional Policies ARNs to use for admin role"
-  default     = []
+variable "admin_role_policy_arns" {
+  description = "List of policy ARNs to use for admin role"
+  type        = "list"
+  default     = ["arn:aws:iam::aws:policy/AdministratorAccess"]
 }
 
 variable "admin_role_permissions_boundary_arn" {
@@ -59,14 +55,10 @@ variable "poweruser_role_path" {
   default     = "/"
 }
 
-variable "poweruser_role_policy_arn" {
-  description = "Policy ARN to use for poweruser role"
-  default     = "arn:aws:iam::aws:policy/PowerUserAccess"
-}
-
-variable "poweruser_role_additional_policies_arns" {
-  description = "Additional Policies ARNs to use for poweruser role"
-  default     = []
+variable "poweruser_role_policy_arns" {
+  description = "List of policy ARNs to use for poweruser role"
+  type        = "list"
+  default     = ["arn:aws:iam::aws:policy/PowerUserAccess"]
 }
 
 variable "poweruser_role_permissions_boundary_arn" {
@@ -90,14 +82,10 @@ variable "readonly_role_path" {
   default     = "/"
 }
 
-variable "readonly_role_policy_arn" {
-  description = "Policy ARN to use for readonly role"
-  default     = "arn:aws:iam::aws:policy/ReadOnlyAccess"
-}
-
-variable "readonly_role_additional_policies_arns" {
-  description = "Additional Policies ARNs to use for poweruser role"
-  default     = []
+variable "readonly_role_policy_arns" {
+  description = "List of policy ARNs to use for readonly role"
+  type        = "list"
+  default     = ["arn:aws:iam::aws:policy/ReadOnlyAccess"]
 }
 
 variable "readonly_role_permissions_boundary_arn" {
