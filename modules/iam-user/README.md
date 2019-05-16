@@ -35,6 +35,7 @@ This module outputs commands and PGP messages which can be decrypted either usin
 | pgp\_key | Either a base-64 encoded PGP public key, or a keybase username in the form keybase:username. Used to encrypt password and access key. | string | `""` | no |
 | ssh\_key\_encoding | Specifies the public key encoding format to use in the response. To retrieve the public key in ssh-rsa format, use SSH. To retrieve the public key in PEM format, use PEM | string | `"SSH"` | no |
 | ssh\_public\_key | The SSH public key. The public key must be encoded in ssh-rsa format or PEM format | string | `""` | no |
+| tags | A map of tags to add to all resources. | map | `"{}"` | no |
 | upload\_iam\_user\_ssh\_key | Whether to upload a public ssh key to the IAM user | string | `"false"` | no |
 
 ## Outputs
