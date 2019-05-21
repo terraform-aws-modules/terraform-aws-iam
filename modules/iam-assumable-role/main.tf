@@ -46,6 +46,8 @@ resource "aws_iam_role" "this" {
   permissions_boundary = "${var.role_permissions_boundary_arn}"
 
   assume_role_policy = "${var.role_requires_mfa ? data.aws_iam_policy_document.assume_role_with_mfa.json : data.aws_iam_policy_document.assume_role.json}"
+
+  tags = "${var.tags}"
 }
 
 resource "aws_iam_role_policy_attachment" "custom" {

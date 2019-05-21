@@ -73,3 +73,9 @@ variable "attach_readonly_policy" {
   description = "Whether to attach a readonly policy to a role"
   default     = false
 }
+
+variable "tags" {
+  description = "A map of tags to add to all resources."
+  type        = "map"
+  default     = "{}"
+}
