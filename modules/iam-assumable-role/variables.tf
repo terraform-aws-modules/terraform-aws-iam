@@ -73,3 +73,4 @@ variable "attach_readonly_policy" {
   description = "Whether to attach a readonly policy to a role"
   default     = false
 }
+

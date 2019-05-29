@@ -56,3 +56,4 @@ variable "require_symbols" {
   description = "Whether to require symbols for user passwords"
   default     = true
 }
+

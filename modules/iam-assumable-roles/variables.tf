@@ -31,7 +31,7 @@ variable "admin_role_requires_mfa" {
 
 variable "admin_role_policy_arns" {
   description = "List of policy ARNs to use for admin role"
-  type        = "list"
+  type        = list(string)
   default     = ["arn:aws:iam::aws:policy/AdministratorAccess"]
 }
 
@@ -63,7 +63,7 @@ variable "poweruser_role_requires_mfa" {
 
 variable "poweruser_role_policy_arns" {
   description = "List of policy ARNs to use for poweruser role"
-  type        = "list"
+  type        = list(string)
   default     = ["arn:aws:iam::aws:policy/PowerUserAccess"]
 }
 
@@ -95,7 +95,7 @@ variable "readonly_role_requires_mfa" {
 
 variable "readonly_role_policy_arns" {
   description = "List of policy ARNs to use for readonly role"
-  type        = "list"
+  type        = list(string)
   default     = ["arn:aws:iam::aws:policy/ReadOnlyAccess"]
 }
 
@@ -108,3 +108,4 @@ variable "max_session_duration" {
   description = "Maximum CLI/API session duration in seconds between 3600 and 43200"
   default     = 3600
 }
+

@@ -37,3 +37,4 @@ variable "aws_account_id" {
   description = "AWS account id to use inside IAM policies. If empty, current AWS account ID will be used."
   default     = ""
 }
+

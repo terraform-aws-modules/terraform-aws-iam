@@ -61,3 +61,4 @@ variable "permissions_boundary" {
   description = "The ARN of the policy that is used to set the permissions boundary for the user."
   default     = ""
 }
+
