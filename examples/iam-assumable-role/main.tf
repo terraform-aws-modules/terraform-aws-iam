@@ -19,6 +19,10 @@ module "iam_assumable_role_admin" {
   role_requires_mfa = true
 
   attach_admin_policy = true
+
+  tags = {
+    Role = "Admin"
+  }
 }
 
 ##########################################

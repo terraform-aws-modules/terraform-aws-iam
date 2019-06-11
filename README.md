@@ -12,6 +12,12 @@ These types of resources are supported:
 * [IAM access key](https://www.terraform.io/docs/providers/aws/r/iam_access_key.html)
 * [IAM SSH public key](https://www.terraform.io/docs/providers/aws/r/iam_user_ssh_key.html)
 
+## Terraform versions
+
+Terraform 0.12. Pin module version to `~> v2.0`. Submit pull-requests to `master` branch.
+
+Terraform 0.11. Pin module version to `~> v1.0`. Submit pull-requests to `terraform011` branch.
+
 ## Features
 
 1. **Cross-account access.** Define IAM roles using `iam_assumable_role` or `iam_assumable_roles` submodules in "resource AWS accounts (prod, staging, dev)" and IAM groups and users using `iam-group-with-assumable-roles-policy` submodule in "IAM AWS Account" to setup access controls between accounts. See [iam-group-with-assumable-roles-policy example](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-group-with-assumable-roles-policy) for more details.

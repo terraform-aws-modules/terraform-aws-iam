@@ -43,7 +43,7 @@ variable "admin_role_permissions_boundary_arn" {
 variable "admin_role_tags" {
   description = "A map of tags to add to admin role resource."
   type        = "map"
-  default     = "{}"
+  default     = {}
 }
 
 # Poweruser
@@ -81,7 +81,7 @@ variable "poweruser_role_permissions_boundary_arn" {
 variable "poweruser_role_tags" {
   description = "A map of tags to add to power role resource."
   type        = "map"
-  default     = "{}"
+  default     = {}
 }
 
 # Readonly
@@ -119,7 +119,7 @@ variable "readonly_role_permissions_boundary_arn" {
 variable "readonly_role_tags" {
   description = "A map of tags to add to readonly role resource."
   type        = "map"
-  default     = "{}"
+  default     = {}
 }
 
 variable "max_session_duration" {

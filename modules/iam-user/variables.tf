@@ -60,7 +60,7 @@ variable "ssh_public_key" {
 variable "tags" {
   description = "A map of tags to add to all resources."
   type        = "map"
-  default     = "{}"
+  default     = {}
 }
 
 variable "permissions_boundary" {
