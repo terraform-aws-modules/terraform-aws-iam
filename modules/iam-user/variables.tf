@@ -69,12 +69,6 @@ variable "ssh_public_key" {
   default     = ""
 }
 
-variable "tags" {
-  description = "A map of tags to add to all resources."
-  type        = "map"
-  default     = {}
-}
-
 variable "permissions_boundary" {
   description = "The ARN of the policy that is used to set the permissions boundary for the user."
   type        = string
