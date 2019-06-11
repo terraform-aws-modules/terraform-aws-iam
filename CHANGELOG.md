@@ -6,8 +6,7 @@
 <a name="v2.0.0"></a>
 ## [v2.0.0] - 2019-06-11
 
-- Upgraded module to support Terraform 0.12
-- upgrade to 0.12 syntax
+- Upgraded module to support Terraform 0.12 ([#29](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/29))
 
 
 <a name="v1.0.0"></a>
