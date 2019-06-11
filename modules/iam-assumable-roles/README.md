@@ -14,6 +14,7 @@ Trusted resources can be any [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/U
 | admin\_role\_permissions\_boundary\_arn | Permissions boundary ARN to use for admin role | string | `""` | no |
 | admin\_role\_policy\_arns | List of policy ARNs to use for admin role | list | `[ "arn:aws:iam::aws:policy/AdministratorAccess" ]` | no |
 | admin\_role\_requires\_mfa | Whether admin role requires MFA | string | `"true"` | no |
+| admin\_role\_tags | A map of tags to add to admin role resource. | map | `"{}"` | no |
 | create\_admin\_role | Whether to create admin role | string | `"false"` | no |
 | create\_poweruser\_role | Whether to create poweruser role | string | `"false"` | no |
 | create\_readonly\_role | Whether to create readonly role | string | `"false"` | no |
@@ -24,11 +25,13 @@ Trusted resources can be any [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/U
 | poweruser\_role\_permissions\_boundary\_arn | Permissions boundary ARN to use for poweruser role | string | `""` | no |
 | poweruser\_role\_policy\_arns | List of policy ARNs to use for poweruser role | list | `[ "arn:aws:iam::aws:policy/PowerUserAccess" ]` | no |
 | poweruser\_role\_requires\_mfa | Whether poweruser role requires MFA | string | `"true"` | no |
+| poweruser\_role\_tags | A map of tags to add to power role resource. | map | `"{}"` | no |
 | readonly\_role\_name | IAM role with readonly access | string | `"readonly"` | no |
 | readonly\_role\_path | Path of readonly IAM role | string | `"/"` | no |
 | readonly\_role\_permissions\_boundary\_arn | Permissions boundary ARN to use for readonly role | string | `""` | no |
 | readonly\_role\_policy\_arns | List of policy ARNs to use for readonly role | list | `[ "arn:aws:iam::aws:policy/ReadOnlyAccess" ]` | no |
 | readonly\_role\_requires\_mfa | Whether readonly role requires MFA | string | `"true"` | no |
+| readonly\_role\_tags | A map of tags to add to readonly role resource. | map | `"{}"` | no |
 | trusted\_role\_arns | ARNs of AWS entities who can assume these roles | list | `[]` | no |
 
 ## Outputs

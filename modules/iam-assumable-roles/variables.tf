@@ -40,6 +40,12 @@ variable "admin_role_permissions_boundary_arn" {
   default     = ""
 }
 
+variable "admin_role_tags" {
+  description = "A map of tags to add to admin role resource."
+  type        = "map"
+  default     = "{}"
+}
+
 # Poweruser
 variable "create_poweruser_role" {
   description = "Whether to create poweruser role"
@@ -72,6 +78,12 @@ variable "poweruser_role_permissions_boundary_arn" {
   default     = ""
 }
 
+variable "poweruser_role_tags" {
+  description = "A map of tags to add to power role resource."
+  type        = "map"
+  default     = "{}"
+}
+
 # Readonly
 variable "create_readonly_role" {
   description = "Whether to create readonly role"
@@ -102,6 +114,12 @@ variable "readonly_role_policy_arns" {
 variable "readonly_role_permissions_boundary_arn" {
   description = "Permissions boundary ARN to use for readonly role"
   default     = ""
+}
+
+variable "readonly_role_tags" {
+  description = "A map of tags to add to readonly role resource."
+  type        = "map"
+  default     = "{}"
 }
 
 variable "max_session_duration" {
