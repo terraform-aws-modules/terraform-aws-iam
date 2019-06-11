@@ -30,8 +30,8 @@ module "iam_group_complete" {
   assumable_roles = ["arn:aws:iam::111111111111:role/admin"]
 
   group_users = [
-    "${module.iam_user1.this_iam_user_name}",
-    "${module.iam_user2.this_iam_user_name}",
+    module.iam_user1.this_iam_user_name,
+    module.iam_user2.this_iam_user_name,
   ]
 }
 
@@ -41,7 +41,7 @@ module "iam_group_complete" {
 module "iam_group_complete_with_custom_policy" {
   source = "../../modules/iam-group-with-policies"
 
-  name = "${module.iam_group_complete.group_name}"
+  name = module.iam_group_complete.group_name
 
   create_group = false
 

@@ -5,10 +5,7 @@ output "aws_account_id" {
 
 output "this_group_users" {
   description = "List of IAM users in IAM group"
-  value = [split(
-    ",",
-    join(",", flatten(aws_iam_group_membership.this.*.users)),
-  )]
+  value       = flatten(aws_iam_group_membership.this.*.users)
 }
 
 output "this_group_name" {

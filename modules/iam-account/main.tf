@@ -1,5 +1,5 @@
 data "aws_caller_identity" "this" {
-  count = var.get_caller_identity
+  count = var.get_caller_identity ? 1 : 0
 }
 
 resource "aws_iam_account_alias" "this" {
