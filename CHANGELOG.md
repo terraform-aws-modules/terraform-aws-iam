@@ -3,9 +3,17 @@
 
 
 
+<a name="v2.0.0"></a>
+## [v2.0.0] - 2019-06-11
+
+- Upgraded module to support Terraform 0.12
+- upgrade to 0.12 syntax
+
+
 <a name="v1.0.0"></a>
 ## [v1.0.0] - 2019-06-11
 
+- Updated CHANGELOG
 - Fixed styles after [#26](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/26)
 - iam-user,iam-assumable-role,iam-assumable-roles,iam-assumable-roles-with-saml tags support ([#26](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/26))
 
@@ -91,7 +99,8 @@
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.0.0...HEAD
+[v2.0.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v1.0.0...v2.0.0
 [v1.0.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v0.5.0...v1.0.0
 [v0.5.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v0.4.0...v0.5.0
 [v0.4.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v0.3.0...v0.4.0

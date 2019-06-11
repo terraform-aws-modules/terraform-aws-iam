@@ -92,11 +92,11 @@ module "iam_group_with_assumable_roles_policy_production_readonly" {
 
   name = "production-readonly"
 
-  assumable_roles = ["${module.iam_assumable_roles_in_prod.readonly_iam_role_arn}"]
+  assumable_roles = [module.iam_assumable_roles_in_prod.readonly_iam_role_arn]
 
   group_users = [
-    "${module.iam_user1.this_iam_user_name}",
-    "${module.iam_user2.this_iam_user_name}",
+    module.iam_user1.this_iam_user_name,
+    module.iam_user2.this_iam_user_name,
   ]
 }
 
@@ -109,10 +109,10 @@ module "iam_group_with_assumable_roles_policy_production_admin" {
 
   name = "production-admin"
 
-  assumable_roles = ["${module.iam_assumable_roles_in_prod.admin_iam_role_arn}"]
+  assumable_roles = [module.iam_assumable_roles_in_prod.admin_iam_role_arn]
 
   group_users = [
-    "${module.iam_user1.this_iam_user_name}",
+    module.iam_user1.this_iam_user_name,
   ]
 }
 
@@ -125,9 +125,9 @@ module "iam_group_with_assumable_roles_policy_production_custom" {
 
   name = "production-custom"
 
-  assumable_roles = ["${module.iam_assumable_role_custom.this_iam_role_arn}"]
+  assumable_roles = [module.iam_assumable_role_custom.this_iam_role_arn]
 
   group_users = [
-    "${module.iam_user2.this_iam_user_name}",
+    module.iam_user2.this_iam_user_name,
   ]
 }

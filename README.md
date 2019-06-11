@@ -28,7 +28,8 @@ Terraform 0.11. Pin module version to `~> v1.0`. Submit pull-requests to `terraf
 `iam-account`:
 ```hcl
 module "iam_account" {
-  source = "terraform-aws-modules/iam/aws//modules/iam-account"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-account"
+  version = "~> 2.0"
 
   account_alias = "awesome-company"
 
@@ -41,6 +42,7 @@ module "iam_account" {
 ```hcl
 module "iam_assumable_role" {
   source = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
+  version = "~> 2.0"
 
   trusted_role_arns = [
     "arn:aws:iam::307990089504:root",
@@ -62,7 +64,8 @@ module "iam_assumable_role" {
 `iam-assumable-roles`:
 ```hcl
 module "iam_assumable_roles" {
-  source = "terraform-aws-modules/iam/aws//modules/iam-assumable-roles"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-roles"
+  version = "~> 2.0"
 
   trusted_role_arns = [
     "arn:aws:iam::307990089504:root",
@@ -82,7 +85,8 @@ module "iam_assumable_roles" {
 `iam-assumable-roles-with-saml`:
 ```hcl
 module "iam_assumable_roles_with_saml" {
-  source = "terraform-aws-modules/iam/aws//modules/iam-assumable-roles-with-saml"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-roles-with-saml"
+  version = "~> 2.0"
 
   create_admin_role = true
 
@@ -99,7 +103,8 @@ module "iam_assumable_roles_with_saml" {
 `iam-user`:
 ```hcl
 module "iam_user" {
-  source = "terraform-aws-modules/iam/aws//modules/iam-user"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-user"
+  version = "~> 2.0"
 
   name          = "vasya.pupkin"
   force_destroy = true
@@ -113,7 +118,8 @@ module "iam_user" {
 `iam-policy`:
 ```hcl
 module "iam_policy" {
-  source = "terraform-aws-modules/iam/aws//modules/iam-policy"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
+  version = "~> 2.0"
 
   name        = "example"
   path        = "/"
@@ -139,7 +145,8 @@ EOF
 `iam-group-with-assumable-roles-policy`:
 ```hcl
 module "iam_group_with_assumable_roles_policy" {
-  source = "terraform-aws-modules/iam/aws//modules/iam-group-with-assumable-roles-policy"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-group-with-assumable-roles-policy"
+  version = "~> 2.0"
 
   name = "production-readonly"
 
@@ -157,7 +164,8 @@ module "iam_group_with_assumable_roles_policy" {
 `iam-group-with-policies`:
 ```hcl
 module "iam_group_with_policies" {
-  source = "terraform-aws-modules/iam/aws//modules/iam-group-with-policies"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-group-with-policies"
+  version = "~> 2.0"
 
   name = "superadmins"
 
@@ -175,7 +183,7 @@ module "iam_group_with_policies" {
   custom_group_policies = [
     {
       name   = "AllowS3Listing"
-      policy = "${data.aws_iam_policy_document.sample.json}"
+      policy = data.aws_iam_policy_document.sample.json
     }
   ]
 }

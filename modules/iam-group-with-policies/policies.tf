@@ -1,9 +1,15 @@
 data "aws_caller_identity" "current" {
-  count = "${var.aws_account_id == "" ? 1 : 0}"
+  count = var.aws_account_id == "" ? 1 : 0
 }
 
 locals {
-  aws_account_id = "${element(concat(data.aws_caller_identity.current.*.account_id, list(var.aws_account_id)), 0)}"
+  aws_account_id = element(
+    concat(
+      data.aws_caller_identity.current.*.account_id,
+      [var.aws_account_id],
+    ),
+    0,
+  )
 }
 
 data "aws_iam_policy_document" "iam_self_management" {
@@ -70,16 +76,17 @@ data "aws_iam_policy_document" "iam_self_management" {
       "arn:aws:iam::${local.aws_account_id}:mfa/$${aws:username}",
     ]
 
-    condition = {
+    condition {
       test     = "Bool"
       variable = "aws:MultiFactorAuthPresent"
       values   = ["true"]
     }
 
-    condition = {
+    condition {
       test     = "NumericLessThan"
       variable = "aws:MultiFactorAuthAge"
       values   = ["3600"]
     }
   }
 }
+
