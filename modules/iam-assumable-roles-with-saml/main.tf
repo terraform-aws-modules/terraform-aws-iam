@@ -1,37 +1,18 @@
-data "aws_iam_policy_document" "assume_role" {
+data "aws_iam_policy_document" "assume_role_with_saml" {
   statement {
     effect = "Allow"
 
-    actions = ["sts:AssumeRole"]
+    actions = ["sts:AssumeRoleWithSAML"]
 
     principals {
-      type        = "AWS"
-      identifiers = var.trusted_role_arns
-    }
-  }
-}
-
-data "aws_iam_policy_document" "assume_role_with_mfa" {
-  statement {
-    effect = "Allow"
-
-    actions = ["sts:AssumeRole"]
-
-    principals {
-      type        = "AWS"
-      identifiers = var.trusted_role_arns
+      type        = "Federated"
+      identifiers = [var.provider_id]
     }
 
     condition {
-      test     = "Bool"
-      variable = "aws:MultiFactorAuthPresent"
-      values   = ["true"]
-    }
-
-    condition {
-      test     = "NumericLessThan"
-      variable = "aws:MultiFactorAuthAge"
-      values   = [var.mfa_age]
+      test     = "StringEquals"
+      variable = "SAML:aud"
+      values   = [var.aws_saml_endpoint]
     }
   }
 }
@@ -46,7 +27,7 @@ resource "aws_iam_role" "admin" {
 
   permissions_boundary = var.admin_role_permissions_boundary_arn
 
-  assume_role_policy = var.admin_role_requires_mfa ? data.aws_iam_policy_document.assume_role_with_mfa.json : data.aws_iam_policy_document.assume_role.json
+  assume_role_policy = data.aws_iam_policy_document.assume_role_with_saml.json
 
   tags = var.admin_role_tags
 }
@@ -68,7 +49,7 @@ resource "aws_iam_role" "poweruser" {
 
   permissions_boundary = var.poweruser_role_permissions_boundary_arn
 
-  assume_role_policy = var.poweruser_role_requires_mfa ? data.aws_iam_policy_document.assume_role_with_mfa.json : data.aws_iam_policy_document.assume_role.json
+  assume_role_policy = data.aws_iam_policy_document.assume_role_with_saml.json
 
   tags = var.poweruser_role_tags
 }
@@ -90,7 +71,7 @@ resource "aws_iam_role" "readonly" {
 
   permissions_boundary = var.readonly_role_permissions_boundary_arn
 
-  assume_role_policy = var.readonly_role_requires_mfa ? data.aws_iam_policy_document.assume_role_with_mfa.json : data.aws_iam_policy_document.assume_role.json
+  assume_role_policy = data.aws_iam_policy_document.assume_role_with_saml.json
 
   tags = var.readonly_role_tags
 }
@@ -101,4 +82,3 @@ resource "aws_iam_role_policy_attachment" "readonly" {
   role       = aws_iam_role.readonly[0].name
   policy_arn = element(var.readonly_role_policy_arns, count.index)
 }
-

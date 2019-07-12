@@ -1,13 +1,17 @@
-variable "trusted_role_arns" {
-  description = "ARNs of AWS entities who can assume these roles"
-  type        = list(string)
-  default     = []
+variable "provider_name" {
+  description = "Name of the SAML Provider"
+  type        = string
 }
 
-variable "mfa_age" {
-  description = "Max age of valid MFA (in seconds) for roles which require MFA"
-  type        = number
-  default     = 86400
+variable "provider_id" {
+  description = "ID of the SAML Provider"
+  type        = string
+}
+
+variable "aws_saml_endpoint" {
+  description = "AWS SAML Endpoint"
+  default     = "https://signin.aws.amazon.com/saml"
+  type        = string
 }
 
 # Admin
@@ -27,12 +31,6 @@ variable "admin_role_path" {
   description = "Path of admin IAM role"
   type        = string
   default     = "/"
-}
-
-variable "admin_role_requires_mfa" {
-  description = "Whether admin role requires MFA"
-  type        = bool
-  default     = true
 }
 
 variable "admin_role_policy_arns" {
@@ -72,12 +70,6 @@ variable "poweruser_role_path" {
   default     = "/"
 }
 
-variable "poweruser_role_requires_mfa" {
-  description = "Whether poweruser role requires MFA"
-  type        = bool
-  default     = true
-}
-
 variable "poweruser_role_policy_arns" {
   description = "List of policy ARNs to use for poweruser role"
   type        = list(string)
@@ -115,12 +107,6 @@ variable "readonly_role_path" {
   default     = "/"
 }
 
-variable "readonly_role_requires_mfa" {
-  description = "Whether readonly role requires MFA"
-  type        = bool
-  default     = true
-}
-
 variable "readonly_role_policy_arns" {
   description = "List of policy ARNs to use for readonly role"
   type        = list(string)
@@ -144,4 +130,3 @@ variable "max_session_duration" {
   type        = number
   default     = 3600
 }
-

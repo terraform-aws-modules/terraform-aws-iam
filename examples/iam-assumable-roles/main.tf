@@ -15,8 +15,9 @@ module "iam_assumable_roles" {
 
   create_admin_role = true
 
-  create_poweruser_role = true
-  poweruser_role_name   = "developer"
+  create_poweruser_role      = true
+  poweruser_role_name        = "Billing-And-Support-Access"
+  poweruser_role_policy_arns = ["arn:aws:iam::aws:policy/job-function/Billing", "arn:aws:iam::aws:policy/AWSSupportAccess"]
 
   create_readonly_role       = true
   readonly_role_requires_mfa = false
