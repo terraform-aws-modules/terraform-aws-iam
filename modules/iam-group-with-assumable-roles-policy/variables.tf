@@ -1,6 +1,23 @@
-variable "name" {
-  description = "Name of IAM policy and IAM group"
+variable "group_name" {
+  description = "Name of IAM group"
   type        = string
+}
+
+variable "group_path" {
+  description = "Group path"
+  type        = string
+  default     = "/"
+}
+
+variable "policy_name" {
+  description = "Name of IAM policy"
+  type        = string
+}
+
+variable "policy_path" {
+  description = "Policy path"
+  type        = string
+  default     = "/"
 }
 
 variable "assumable_roles" {
