@@ -3,9 +3,16 @@
 
 
 
+<a name="v2.3.0"></a>
+## [v2.3.0] - 2019-08-21
+
+- Added description support for custom group policies using a lookup ([#33](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/33))
+
+
 <a name="v2.2.0"></a>
 ## [v2.2.0] - 2019-08-21
 
+- Updated CHANGELOG
 - Added trusted_role_services to iam-assumable-roles, autoupdated docs
 - Add Trusted Services to iam-assumable-role ([#31](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/31))
 - Fix link to iam-assumable-role example in README ([#35](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/35))
@@ -114,7 +121,8 @@
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.2.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.3.0...HEAD
+[v2.3.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.2.0...v2.3.0
 [v2.2.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.1.0...v2.2.0
 [v2.1.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.0.0...v2.1.0
 [v2.0.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v1.0.0...v2.0.0
