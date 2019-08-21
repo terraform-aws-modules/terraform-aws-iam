@@ -53,7 +53,8 @@ resource "aws_iam_policy" "iam_self_management" {
 resource "aws_iam_policy" "custom" {
   count = length(var.custom_group_policies) > 0 ? length(var.custom_group_policies) : 0
 
-  name   = var.custom_group_policies[count.index]["name"]
-  policy = var.custom_group_policies[count.index]["policy"]
+  name        = var.custom_group_policies[count.index]["name"]
+  policy      = var.custom_group_policies[count.index]["policy"]
+  description = lookup(var.custom_group_policies[count.index], "description", null)
 }
 
