@@ -27,6 +27,11 @@ data "aws_iam_policy_document" "assume_role_with_mfa" {
       identifiers = var.trusted_role_arns
     }
 
+    principals {
+      type        = "Service"
+      identifiers = var.trusted_role_services
+    }
+
     condition {
       test     = "Bool"
       variable = "aws:MultiFactorAuthPresent"

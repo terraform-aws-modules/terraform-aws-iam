@@ -13,6 +13,10 @@ module "iam_assumable_role_admin" {
     "arn:aws:iam::835367859851:user/anton",
   ]
 
+  trusted_role_services = [
+    "codedeploy.amazonaws.com"
+  ]
+
   create_role = true
 
   role_name         = "admin"
@@ -35,10 +39,14 @@ module "iam_assumable_role_custom" {
     "arn:aws:iam::307990089504:root",
   ]
 
+  trusted_role_services = [
+    "codedeploy.amazonaws.com"
+  ]
+
   create_role = true
 
   role_name         = "custom"
-  role_requires_mfa = true
+  role_requires_mfa = false
 
   custom_role_policy_arns = [
     "arn:aws:iam::aws:policy/AmazonCognitoReadOnly",
