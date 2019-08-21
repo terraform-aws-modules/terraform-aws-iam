@@ -25,6 +25,7 @@ Trusted resources can be any [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/U
 | role\_requires\_mfa | Whether role requires MFA | string | `"true"` | no |
 | tags | A map of tags to add to all resources. | map | `{}` | no |
 | trusted\_role\_arns | ARNs of AWS entities who can assume these roles | list | `[]` | no |
+| trusted\_role\_services | AWS Services that can assume these roles | list | `[]` | no |
 
 ## Outputs
 
