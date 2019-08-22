@@ -10,6 +10,60 @@ variable "trusted_role_services" {
   default     = []
 }
 
+variable "use_custom_admin_role_trust" {
+  description = "Whether to create a trust policy for the admin role with custom trusted ARNs and services"
+  type        = bool
+  default     = false
+}
+
+variable "admin_trusted_role_arns" {
+  description = "ARNs of AWS entities who can assume the admin role"
+  type        = list(string)
+  default     = []
+}
+
+variable "admin_trusted_role_services" {
+  description = "AWS Services that can assume the admin roles"
+  type        = list(string)
+  default     = []
+}
+
+variable "use_custom_poweruser_role_trust" {
+  description = "Whether to create a trust policy for the poweruser role with custom trusted ARNs and services"
+  type        = bool
+  default     = false
+}
+
+variable "poweruser_trusted_role_arns" {
+  description = "ARNs of AWS entities who can assume the poweruser role"
+  type        = list(string)
+  default     = []
+}
+
+variable "poweruser_trusted_role_services" {
+  description = "AWS Services that can assume the admin roles"
+  type        = list(string)
+  default     = []
+}
+
+variable "use_custom_readonly_role_trust" {
+  description = "Whether to create a trust policy for the readonly role with custom trusted ARNs and services"
+  type        = bool
+  default     = false
+}
+
+variable "readonly_trusted_role_arns" {
+  description = "ARNs of AWS entities who can readonly the admin role"
+  type        = list(string)
+  default     = []
+}
+
+variable "readonly_trusted_role_services" {
+  description = "AWS Services that can assume the admin roles"
+  type        = list(string)
+  default     = []
+}
+
 variable "mfa_age" {
   description = "Max age of valid MFA (in seconds) for roles which require MFA"
   type        = number

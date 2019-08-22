@@ -1,49 +1,19 @@
-data "aws_iam_policy_document" "assume_role" {
-  statement {
-    effect = "Allow"
+locals {
+  # default, fallback policy for all roles
+  default_assume_role_json          = data.aws_iam_policy_document.default_assume_role.json
+  default_assume_role_with_mfa_json = data.aws_iam_policy_document.default_assume_role_with_mfa.json
 
-    actions = ["sts:AssumeRole"]
+  # admin specific policy and default fallback
+  admin_custom_assume_role_json  = var.admin_role_requires_mfa ? data.aws_iam_policy_document.admin_assume_role_with_mfa[0].json : data.aws_iam_policy_document.admin_assume_role[0].json
+  admin_default_assume_role_json = var.admin_role_requires_mfa ? local.default_assume_role_with_mfa_json : local.default_assume_role_json
 
-    principals {
-      type        = "AWS"
-      identifiers = var.trusted_role_arns
-    }
+  # poweruser specific policy and default fallback
+  poweruser_custom_assume_role_json  = var.poweruser_role_requires_mfa ? data.aws_iam_policy_document.poweruser_assume_role_with_mfa[0].json : data.aws_iam_policy_document.poweruser_assume_role[0].json
+  poweruser_default_assume_role_json = var.poweruser_role_requires_mfa ? local.default_assume_role_with_mfa_json : local.default_assume_role_json
 
-    principals {
-      type        = "Service"
-      identifiers = var.trusted_role_services
-    }
-  }
-}
-
-data "aws_iam_policy_document" "assume_role_with_mfa" {
-  statement {
-    effect = "Allow"
-
-    actions = ["sts:AssumeRole"]
-
-    principals {
-      type        = "AWS"
-      identifiers = var.trusted_role_arns
-    }
-
-    principals {
-      type        = "Service"
-      identifiers = var.trusted_role_services
-    }
-
-    condition {
-      test     = "Bool"
-      variable = "aws:MultiFactorAuthPresent"
-      values   = ["true"]
-    }
-
-    condition {
-      test     = "NumericLessThan"
-      variable = "aws:MultiFactorAuthAge"
-      values   = [var.mfa_age]
-    }
-  }
+  # readonly specific policy and default fallback
+  readonly_custom_assume_role_json  = var.readonly_role_requires_mfa ? data.aws_iam_policy_document.readonly_assume_role_with_mfa[0].json : data.aws_iam_policy_document.readonly_assume_role[0].json
+  readonly_default_assume_role_json = var.readonly_role_requires_mfa ? local.default_assume_role_with_mfa_json : local.default_assume_role_json
 }
 
 # Admin
@@ -56,7 +26,7 @@ resource "aws_iam_role" "admin" {
 
   permissions_boundary = var.admin_role_permissions_boundary_arn
 
-  assume_role_policy = var.admin_role_requires_mfa ? data.aws_iam_policy_document.assume_role_with_mfa.json : data.aws_iam_policy_document.assume_role.json
+  assume_role_policy = var.use_custom_admin_role_trust ? local.admin_custom_assume_role_json : local.admin_default_assume_role_json
 
   tags = var.admin_role_tags
 }
@@ -78,7 +48,7 @@ resource "aws_iam_role" "poweruser" {
 
   permissions_boundary = var.poweruser_role_permissions_boundary_arn
 
-  assume_role_policy = var.poweruser_role_requires_mfa ? data.aws_iam_policy_document.assume_role_with_mfa.json : data.aws_iam_policy_document.assume_role.json
+  assume_role_policy = var.use_custom_poweruser_role_trust ? local.poweruser_custom_assume_role_json : local.poweruser_default_assume_role_json
 
   tags = var.poweruser_role_tags
 }
@@ -100,7 +70,7 @@ resource "aws_iam_role" "readonly" {
 
   permissions_boundary = var.readonly_role_permissions_boundary_arn
 
-  assume_role_policy = var.readonly_role_requires_mfa ? data.aws_iam_policy_document.assume_role_with_mfa.json : data.aws_iam_policy_document.assume_role.json
+  assume_role_policy = var.use_custom_readonly_role_trust ? local.readonly_custom_assume_role_json : local.readonly_default_assume_role_json
 
   tags = var.readonly_role_tags
 }
