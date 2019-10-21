@@ -35,7 +35,7 @@ resource "aws_iam_role_policy_attachment" "admin" {
   count = var.create_admin_role ? length(var.admin_role_policy_arns) : 0
 
   role       = aws_iam_role.admin[0].name
-  policy_arn = element(var.admin_role_policy_arns, count.index)
+  policy_arn = var.admin_role_policy_arns[count.index]
 }
 
 # Poweruser
@@ -57,7 +57,7 @@ resource "aws_iam_role_policy_attachment" "poweruser" {
   count = var.create_poweruser_role ? length(var.poweruser_role_policy_arns) : 0
 
   role       = aws_iam_role.poweruser[0].name
-  policy_arn = element(var.poweruser_role_policy_arns, count.index)
+  policy_arn = var.poweruser_role_policy_arns[count.index]
 }
 
 # Readonly
@@ -79,6 +79,6 @@ resource "aws_iam_role_policy_attachment" "readonly" {
   count = var.create_readonly_role ? length(var.readonly_role_policy_arns) : 0
 
   role       = aws_iam_role.readonly[0].name
-  policy_arn = element(var.readonly_role_policy_arns, count.index)
+  policy_arn = var.readonly_role_policy_arns[count.index]
 }
 
