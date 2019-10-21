@@ -4,15 +4,15 @@ locals {
   default_assume_role_with_mfa_json = data.aws_iam_policy_document.default_assume_role_with_mfa.json
 
   # admin specific policy and default fallback
-  admin_custom_assume_role_json  = var.admin_role_requires_mfa ? data.aws_iam_policy_document.admin_assume_role_with_mfa[0].json : data.aws_iam_policy_document.admin_assume_role[0].json
+  admin_custom_assume_role_json  = var.admin_role_requires_mfa ? join("", data.aws_iam_policy_document.admin_assume_role_with_mfa.*.json) : join("", data.aws_iam_policy_document.admin_assume_role.*.json)
   admin_default_assume_role_json = var.admin_role_requires_mfa ? local.default_assume_role_with_mfa_json : local.default_assume_role_json
 
   # poweruser specific policy and default fallback
-  poweruser_custom_assume_role_json  = var.poweruser_role_requires_mfa ? data.aws_iam_policy_document.poweruser_assume_role_with_mfa[0].json : data.aws_iam_policy_document.poweruser_assume_role[0].json
+  poweruser_custom_assume_role_json  = var.poweruser_role_requires_mfa ? join("", data.aws_iam_policy_document.poweruser_assume_role_with_mfa.*.json) : join("", data.aws_iam_policy_document.poweruser_assume_role.*.json)
   poweruser_default_assume_role_json = var.poweruser_role_requires_mfa ? local.default_assume_role_with_mfa_json : local.default_assume_role_json
 
   # readonly specific policy and default fallback
-  readonly_custom_assume_role_json  = var.readonly_role_requires_mfa ? data.aws_iam_policy_document.readonly_assume_role_with_mfa[0].json : data.aws_iam_policy_document.readonly_assume_role[0].json
+  readonly_custom_assume_role_json  = var.readonly_role_requires_mfa ? join("", data.aws_iam_policy_document.readonly_assume_role_with_mfa.*.json) : join("", data.aws_iam_policy_document.readonly_assume_role.*.json)
   readonly_default_assume_role_json = var.readonly_role_requires_mfa ? local.default_assume_role_with_mfa_json : local.default_assume_role_json
 }
 
