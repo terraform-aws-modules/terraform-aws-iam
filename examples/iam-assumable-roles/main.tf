@@ -13,6 +13,10 @@ module "iam_assumable_roles" {
     "arn:aws:iam::835367859851:user/anton",
   ]
 
+  trusted_role_services = [
+    "codedeploy.amazonaws.com"
+  ]
+
   create_admin_role = true
 
   create_poweruser_role      = true

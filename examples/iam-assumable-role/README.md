@@ -22,7 +22,6 @@ Run `terraform destroy` when you don't need these resources.
 | Name | Description |
 |------|-------------|
 | role\_requires\_mfa | Whether admin IAM role requires MFA |
-| role\_tags | Whether admin IAM role requires MFA |
 | this\_iam\_role\_arn | ARN of IAM role |
 | this\_iam\_role\_name | Name of IAM role |
 | this\_iam\_role\_path | Path of IAM role |
