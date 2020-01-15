@@ -30,7 +30,7 @@ No input.
 
 | Name | Description |
 |------|-------------|
-| iam\_account\_id | IAM AWS account id (this code is managing resources in this account) |
+| iam\_account\_id | IAM AWS account id \(this code is managing resources in this account\) |
 | production\_account\_id | Production AWS account id |
 | this\_assumable\_roles | List of ARNs of IAM roles which members of IAM group can assume |
 | this\_group\_users | List of IAM users in IAM group |

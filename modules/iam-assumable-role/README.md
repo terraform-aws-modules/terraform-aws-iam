@@ -39,6 +39,9 @@ Trusted resources can be any [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/U
 | Name | Description |
 |------|-------------|
 | role\_requires\_mfa | Whether IAM role requires MFA |
+| this\_iam\_instance\_profile\_arn | ARN of IAM instance profile |
+| this\_iam\_instance\_profile\_name | Name of IAM instance profile |
+| this\_iam\_instance\_profile\_path | Path of IAM instance profile |
 | this\_iam\_role\_arn | ARN of IAM role |
 | this\_iam\_role\_name | Name of IAM role |
 | this\_iam\_role\_path | Path of IAM role |
