@@ -101,3 +101,9 @@ variable "attach_readonly_policy" {
   default     = false
 }
 
+variable "role_description" {
+  description = "IAM Role description"
+  type        = string
+  default     = ""
+}
+
