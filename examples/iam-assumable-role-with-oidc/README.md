@@ -1,8 +1,6 @@
-# Individual IAM assumable roles example
+# Individual IAM assumable role example
 
-Configuration in this directory creates several individual IAM roles which can be assumed from a defined list of [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns).
-
-The main difference between `iam-assumable-role` and `iam-assumable-roles` examples is that the former creates just a single role.
+Configuration in this directory creates a single IAM role which can be assumed by trusted resources using OpenID Connect Federated Users.
 
 # Usage
 
