@@ -61,6 +61,28 @@ module "iam_assumable_role" {
 }
 ```
 
+`iam-assumable-role-with-oidc`:
+```hcl
+module "iam_assumable_role" {
+  source = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
+  version = "~> 2.0"
+
+  create_role = true
+
+  role_name = "role-with-oidc"
+
+  tags = {
+    Role = "role-with-oidc"
+  }
+
+  provider_url = "oidc.eks.eu-west-1.amazonaws.com/id/BA9E170D464AF7B92084EF72A69B9DC8"
+
+  role_policy_arns = [
+    "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
+  ]
+}
+```
+
 `iam-assumable-roles`:
 ```hcl
 module "iam_assumable_roles" {
@@ -231,6 +253,7 @@ Use [iam-policy module](https://github.com/terraform-aws-modules/terraform-aws-i
 
 * [iam-account](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-account) - Set AWS account alias and password policy
 * [iam-assumable-role](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-role) - Create individual IAM role which can be assumed from specified ARNs (AWS accounts, IAM users, etc)
+* [iam-assumable-role-with-oidc](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-role-with-oidc) - Create individual IAM role which can be assumed from specified subjects federated with a OIDC Identity Provider
 * [iam-assumable-roles](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-roles) - Create several IAM roles which can be assumed from specified ARNs (AWS accounts, IAM users, etc)
 * [iam-assumable-roles-with-saml](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-roles-with-saml) - Create several IAM roles which can be assumed by users with a SAML Identity Provider
 * [iam-group-with-assumable-roles-policy](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-group-with-assumable-roles-policy) - IAM group with users who are allowed to assume IAM roles in the same or in separate AWS account
