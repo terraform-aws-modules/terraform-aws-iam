@@ -16,14 +16,22 @@ $ terraform apply
 Run `terraform destroy` when you don't need these resources.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Providers
+
+No provider.
+
+## Inputs
+
+No input.
+
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| keybase\_password\_decrypt\_command |  |
-| keybase\_password\_pgp\_message |  |
-| keybase\_secret\_key\_decrypt\_command |  |
-| keybase\_secret\_key\_pgp\_message |  |
+| keybase\_password\_decrypt\_command | n/a |
+| keybase\_password\_pgp\_message | n/a |
+| keybase\_secret\_key\_decrypt\_command | n/a |
+| keybase\_secret\_key\_pgp\_message | n/a |
 | pgp\_key | PGP key used to encrypt sensitive data for this user (if empty - secrets are not encrypted) |
 | this\_iam\_access\_key\_encrypted\_secret | The encrypted secret, base64 encoded |
 | this\_iam\_access\_key\_id | The access key ID |
