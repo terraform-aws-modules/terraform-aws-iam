@@ -7,7 +7,7 @@ Creates IAM group with users who are allowed to assume IAM roles. This is typica
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| aws | ~> 2.23 |
 
 ## Inputs
 

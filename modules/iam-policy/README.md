@@ -7,7 +7,7 @@ Creates IAM policy.
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| aws | ~> 2.23 |
 
 ## Inputs
 

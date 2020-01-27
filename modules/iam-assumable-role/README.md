@@ -9,7 +9,7 @@ Trusted resources can be any [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/U
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| aws | ~> 2.23 |
 
 ## Inputs
 

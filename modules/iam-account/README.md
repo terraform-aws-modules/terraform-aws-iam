@@ -26,7 +26,7 @@ Import successful!
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| aws | ~> 2.23 |
 
 ## Inputs
 

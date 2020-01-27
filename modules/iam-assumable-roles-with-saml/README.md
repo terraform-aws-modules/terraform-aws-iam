@@ -11,7 +11,7 @@ Creates predefined IAM roles (admin, poweruser and readonly) which can be assume
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| aws | ~> 2.23 |
 
 ## Inputs
 

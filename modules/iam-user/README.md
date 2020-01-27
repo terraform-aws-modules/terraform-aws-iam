@@ -23,7 +23,7 @@ This module outputs commands and PGP messages which can be decrypted either usin
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| aws | ~> 2.23 |
 
 ## Inputs
 

@@ -7,7 +7,7 @@ Creates IAM group with specified IAM policies, and add users into a group.
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| aws | ~> 2.23 |
 
 ## Inputs
 

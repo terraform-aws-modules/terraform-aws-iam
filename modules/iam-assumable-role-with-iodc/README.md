@@ -11,7 +11,7 @@ This module supports IAM Roles for kubernetes service accounts as described in t
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| aws | ~> 2.23 |
 
 ## Inputs
 
