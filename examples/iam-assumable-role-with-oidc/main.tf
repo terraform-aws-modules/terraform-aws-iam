@@ -6,7 +6,7 @@ provider "aws" {
 # IAM assumable role for admin
 ###############################
 module "iam_assumable_role_admin" {
-  source = "../../modules/iam-assumable-role-with-iodc"
+  source = "../../modules/iam-assumable-role-with-oidc"
 
   create_role = true
 
