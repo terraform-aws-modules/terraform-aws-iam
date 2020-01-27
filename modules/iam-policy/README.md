@@ -3,14 +3,20 @@
 Creates IAM policy.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| description | The description of the policy | string | `"IAM Policy"` | no |
-| name | The name of the policy | string | `""` | no |
-| path | The path of the policy in IAM | string | `"/"` | no |
-| policy | The path of the policy in IAM (tpl file) | string | `""` | no |
+|------|-------------|------|---------|:-----:|
+| description | The description of the policy | `string` | `"IAM Policy"` | no |
+| name | The name of the policy | `string` | `""` | no |
+| path | The path of the policy in IAM | `string` | `"/"` | no |
+| policy | The path of the policy in IAM (tpl file) | `string` | `""` | no |
 
 ## Outputs
 
