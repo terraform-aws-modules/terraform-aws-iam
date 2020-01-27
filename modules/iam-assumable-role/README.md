@@ -25,6 +25,7 @@ Trusted resources can be any [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/U
 | mfa\_age | Max age of valid MFA (in seconds) for roles which require MFA | `number` | `86400` | no |
 | poweruser\_role\_policy\_arn | Policy ARN to use for poweruser role | `string` | `"arn:aws:iam::aws:policy/PowerUserAccess"` | no |
 | readonly\_role\_policy\_arn | Policy ARN to use for readonly role | `string` | `"arn:aws:iam::aws:policy/ReadOnlyAccess"` | no |
+| role\_description | IAM Role description | `string` | `""` | no |
 | role\_name | IAM role name | `string` | `""` | no |
 | role\_path | Path of IAM role | `string` | `"/"` | no |
 | role\_permissions\_boundary\_arn | Permissions boundary ARN to use for IAM role | `string` | `""` | no |
