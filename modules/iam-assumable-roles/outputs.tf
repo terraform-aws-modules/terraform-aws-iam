@@ -90,3 +90,12 @@ output "readonly_iam_role_trusted_services" {
   description = "The Services trusted to assume the readonly role"
   value       = var.use_custom_readonly_role_trust ? var.readonly_trusted_role_services : var.trusted_role_services
 }
+
+# All roles
+output "role_arns" {
+  value = {
+    admin     = element(concat(aws_iam_role.admin.*.arn, [""]), 0)
+    poweruser = element(concat(aws_iam_role.poweruser.*.arn, [""]), 0)
+    readonly  = element(concat(aws_iam_role.readonly.*.arn, [""]), 0)
+  }
+}

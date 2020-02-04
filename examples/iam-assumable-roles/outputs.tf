@@ -183,3 +183,12 @@ output "readonly_custom_iam_role_trusted_services" {
   description = "The Services trusted to assume the readonly role with custom trust"
   value       = module.iam_assumable_roles_custom_trust.readonly_iam_role_trusted_services
 }
+
+# All roles
+output "role_arns" {
+  value = module.iam_assumable_roles.role_arns
+}
+
+output "custom_role_arns" {
+  value = module.iam_assumable_roles_custom_trust.role_arns
+}
