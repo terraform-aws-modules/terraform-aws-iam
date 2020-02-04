@@ -1,17 +1,17 @@
 #Admin
 output "admin_iam_role_arn" {
   description = "ARN of admin IAM role"
-  value       = element(concat(aws_iam_role.admin.*.arn, [""]), 0)
+  value       = join("", aws_iam_role.admin.*.arn)
 }
 
 output "admin_iam_role_name" {
   description = "Name of admin IAM role"
-  value       = element(concat(aws_iam_role.admin.*.name, [""]), 0)
+  value       = join("", aws_iam_role.admin.*.name)
 }
 
 output "admin_iam_role_path" {
   description = "Path of admin IAM role"
-  value       = element(concat(aws_iam_role.admin.*.path, [""]), 0)
+  value       = join("", aws_iam_role.admin.*.path)
 }
 
 output "admin_iam_role_requires_mfa" {
@@ -32,17 +32,17 @@ output "admin_iam_role_trusted_services" {
 # Poweruser
 output "poweruser_iam_role_arn" {
   description = "ARN of poweruser IAM role"
-  value       = element(concat(aws_iam_role.poweruser.*.arn, [""]), 0)
+  value       = join("", aws_iam_role.poweruser.*.arn)
 }
 
 output "poweruser_iam_role_name" {
   description = "Name of poweruser IAM role"
-  value       = element(concat(aws_iam_role.poweruser.*.name, [""]), 0)
+  value       = join("", aws_iam_role.poweruser.*.name)
 }
 
 output "poweruser_iam_role_path" {
   description = "Path of poweruser IAM role"
-  value       = element(concat(aws_iam_role.poweruser.*.path, [""]), 0)
+  value       = join("", aws_iam_role.poweruser.*.path)
 }
 
 output "poweruser_iam_role_requires_mfa" {
@@ -63,17 +63,17 @@ output "poweruser_iam_role_trusted_services" {
 # Readonly
 output "readonly_iam_role_arn" {
   description = "ARN of readonly IAM role"
-  value       = element(concat(aws_iam_role.readonly.*.arn, [""]), 0)
+  value       = join("", aws_iam_role.readonly.*.arn)
 }
 
 output "readonly_iam_role_name" {
   description = "Name of readonly IAM role"
-  value       = element(concat(aws_iam_role.readonly.*.name, [""]), 0)
+  value       = join("", aws_iam_role.readonly.*.name)
 }
 
 output "readonly_iam_role_path" {
   description = "Path of readonly IAM role"
-  value       = element(concat(aws_iam_role.readonly.*.path, [""]), 0)
+  value       = join("", aws_iam_role.readonly.*.path)
 }
 
 output "readonly_iam_role_requires_mfa" {
@@ -94,8 +94,8 @@ output "readonly_iam_role_trusted_services" {
 # All roles
 output "role_arns" {
   value = {
-    admin     = element(concat(aws_iam_role.admin.*.arn, [""]), 0)
-    poweruser = element(concat(aws_iam_role.poweruser.*.arn, [""]), 0)
-    readonly  = element(concat(aws_iam_role.readonly.*.arn, [""]), 0)
+    admin     = join("", aws_iam_role.admin.*.arn)
+    poweruser = join("", aws_iam_role.poweruser.*.arn)
+    readonly  = join("", aws_iam_role.readonly.*.arn)
   }
 }
