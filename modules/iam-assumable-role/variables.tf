@@ -28,6 +28,12 @@ variable "create_role" {
   default     = false
 }
 
+variable "create_instance_profile" {
+  description = "Whether to create an instance profile"
+  type        = bool
+  default     = false
+}
+
 variable "role_name" {
   description = "IAM role name"
   type        = string

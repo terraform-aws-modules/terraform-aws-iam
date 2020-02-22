@@ -1,7 +1,7 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
-
+- iam-assumable-role: add possibility to create an IAM instance profile
 
 <a name="v2.6.0"></a>
 ## [v2.6.0] - 2020-01-27
