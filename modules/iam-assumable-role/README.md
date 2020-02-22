@@ -19,6 +19,7 @@ Trusted resources can be any [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/U
 | attach\_admin\_policy | Whether to attach an admin policy to a role | `bool` | `false` | no |
 | attach\_poweruser\_policy | Whether to attach a poweruser policy to a role | `bool` | `false` | no |
 | attach\_readonly\_policy | Whether to attach a readonly policy to a role | `bool` | `false` | no |
+| create\_instance\_profile | Whether to create an instance profile | `bool` | `false` | no |
 | create\_role | Whether to create a role | `bool` | `false` | no |
 | custom\_role\_policy\_arns | List of ARNs of IAM policies to attach to IAM role | `list(string)` | `[]` | no |
 | max\_session\_duration | Maximum CLI/API session duration in seconds between 3600 and 43200 | `number` | `3600` | no |
