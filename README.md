@@ -63,8 +63,8 @@ module "iam_assumable_role" {
 
 `iam-assumable-role-with-oidc`:
 ```hcl
-module "iam_assumable_role" {
-  source = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
+module "iam-assumable-role-with-oidc" {
+  source = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
   version = "~> 2.0"
 
   create_role = true
