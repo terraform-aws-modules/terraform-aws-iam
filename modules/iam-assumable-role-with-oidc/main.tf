@@ -21,20 +21,20 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
     }
 
     dynamic "condition" {
-      for_each = var.oidc_fully_qualified_subjects
+      for_each = length(var.oidc_fully_qualified_subjects) > 0 ? [var.oidc_fully_qualified_subjects] : []
       content {
         test     = "StringEquals"
         variable = "${var.provider_url}:sub"
-        values   = [condition.value]
+        values   = condition.value
       }
     }
 
     dynamic "condition" {
-      for_each = var.oidc_subjects_with_wildcards
+      for_each = length(var.oidc_subjects_with_wildcards) > 0 ? [var.oidc_subjects_with_wildcards] : []
       content {
         test     = "StringLike"
         variable = "${var.provider_url}:sub"
-        values   = [condition.value]
+        values   = condition.value
       }
     }
   }
