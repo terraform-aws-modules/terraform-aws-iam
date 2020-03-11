@@ -4,6 +4,12 @@ variable "trusted_role_arns" {
   default     = []
 }
 
+variable "trusted_role_services" {
+  description = "AWS Services that can assume these roles"
+  type        = list(string)
+  default     = []
+}
+
 variable "mfa_age" {
   description = "Max age of valid MFA (in seconds) for roles which require MFA"
   type        = number

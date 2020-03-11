@@ -19,33 +19,39 @@ This module outputs commands and PGP messages which can be decrypted either usin
 - `keybase_secret_key_pgp_message`
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | ~> 2.23 |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| create\_iam\_access\_key | Whether to create IAM access key | string | `"true"` | no |
-| create\_iam\_user\_login\_profile | Whether to create IAM user login profile | string | `"true"` | no |
-| create\_user | Whether to create the IAM user | string | `"true"` | no |
-| force\_destroy | When destroying this user, destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. Without force_destroy a user with non-Terraform-managed access keys and login profile will fail to be destroyed. | string | `"false"` | no |
-| name | Desired name for the IAM user | string | n/a | yes |
-| password\_length | The length of the generated password | string | `"20"` | no |
-| password\_reset\_required | Whether the user should be forced to reset the generated password on first login. | string | `"true"` | no |
-| path | Desired path for the IAM user | string | `"/"` | no |
-| permissions\_boundary | The ARN of the policy that is used to set the permissions boundary for the user. | string | `""` | no |
-| pgp\_key | Either a base-64 encoded PGP public key, or a keybase username in the form keybase:username. Used to encrypt password and access key. | string | `""` | no |
-| ssh\_key\_encoding | Specifies the public key encoding format to use in the response. To retrieve the public key in ssh-rsa format, use SSH. To retrieve the public key in PEM format, use PEM | string | `"SSH"` | no |
-| ssh\_public\_key | The SSH public key. The public key must be encoded in ssh-rsa format or PEM format | string | `""` | no |
-| tags | A map of tags to add to all resources. | map | `{}` | no |
-| upload\_iam\_user\_ssh\_key | Whether to upload a public ssh key to the IAM user | string | `"false"` | no |
+|------|-------------|------|---------|:-----:|
+| create\_iam\_access\_key | Whether to create IAM access key | `bool` | `true` | no |
+| create\_iam\_user\_login\_profile | Whether to create IAM user login profile | `bool` | `true` | no |
+| create\_user | Whether to create the IAM user | `bool` | `true` | no |
+| force\_destroy | When destroying this user, destroy even if it has non-Terraform-managed IAM access keys, login profile or MFA devices. Without force\_destroy a user with non-Terraform-managed access keys and login profile will fail to be destroyed. | `bool` | `false` | no |
+| name | Desired name for the IAM user | `string` | n/a | yes |
+| password\_length | The length of the generated password | `number` | `20` | no |
+| password\_reset\_required | Whether the user should be forced to reset the generated password on first login. | `bool` | `true` | no |
+| path | Desired path for the IAM user | `string` | `"/"` | no |
+| permissions\_boundary | The ARN of the policy that is used to set the permissions boundary for the user. | `string` | `""` | no |
+| pgp\_key | Either a base-64 encoded PGP public key, or a keybase username in the form keybase:username. Used to encrypt password and access key. | `string` | `""` | no |
+| ssh\_key\_encoding | Specifies the public key encoding format to use in the response. To retrieve the public key in ssh-rsa format, use SSH. To retrieve the public key in PEM format, use PEM | `string` | `"SSH"` | no |
+| ssh\_public\_key | The SSH public key. The public key must be encoded in ssh-rsa format or PEM format | `string` | `""` | no |
+| tags | A map of tags to add to all resources. | `map(string)` | `{}` | no |
+| upload\_iam\_user\_ssh\_key | Whether to upload a public ssh key to the IAM user | `bool` | `false` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| keybase\_password\_decrypt\_command |  |
-| keybase\_password\_pgp\_message |  |
-| keybase\_secret\_key\_decrypt\_command |  |
-| keybase\_secret\_key\_pgp\_message |  |
+| keybase\_password\_decrypt\_command | n/a |
+| keybase\_password\_pgp\_message | n/a |
+| keybase\_secret\_key\_decrypt\_command | n/a |
+| keybase\_secret\_key\_pgp\_message | n/a |
 | pgp\_key | PGP key used to encrypt sensitive data for this user (if empty - secrets are not encrypted) |
 | this\_iam\_access\_key\_encrypted\_secret | The encrypted secret, base64 encoded |
 | this\_iam\_access\_key\_id | The access key ID |

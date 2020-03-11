@@ -4,6 +4,12 @@ variable "trusted_role_arns" {
   default     = []
 }
 
+variable "trusted_role_services" {
+  description = "AWS Services that can assume these roles"
+  type        = list(string)
+  default     = []
+}
+
 variable "mfa_age" {
   description = "Max age of valid MFA (in seconds) for roles which require MFA"
   type        = number
@@ -18,6 +24,12 @@ variable "max_session_duration" {
 
 variable "create_role" {
   description = "Whether to create a role"
+  type        = bool
+  default     = false
+}
+
+variable "create_instance_profile" {
+  description = "Whether to create an instance profile"
   type        = bool
   default     = false
 }
@@ -93,5 +105,11 @@ variable "attach_readonly_policy" {
   description = "Whether to attach a readonly policy to a role"
   type        = bool
   default     = false
+}
+
+variable "role_description" {
+  description = "IAM Role description"
+  type        = string
+  default     = ""
 }
 

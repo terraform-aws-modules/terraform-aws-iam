@@ -18,3 +18,17 @@ output "role_requires_mfa" {
   value       = var.role_requires_mfa
 }
 
+output "this_iam_instance_profile_arn" {
+  description = "ARN of IAM instance profile"
+  value       = element(concat(aws_iam_instance_profile.this.*.arn, [""]), 0)
+}
+
+output "this_iam_instance_profile_name" {
+  description = "Name of IAM instance profile"
+  value       = element(concat(aws_iam_instance_profile.this.*.name, [""]), 0)
+}
+
+output "this_iam_instance_profile_path" {
+  description = "Path of IAM instance profile"
+  value       = element(concat(aws_iam_instance_profile.this.*.path, [""]), 0)
+}

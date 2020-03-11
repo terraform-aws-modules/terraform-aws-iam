@@ -1,6 +1,6 @@
-# IAM group with policies example
+# Individual IAM assumable role example
 
-Configuration in this directory creates IAM group with users who has specified IAM policies.
+Configuration in this directory creates a single IAM role which can be assumed by trusted resources using OpenID Connect Federated Users.
 
 # Usage
 
@@ -17,9 +17,7 @@ Run `terraform destroy` when you don't need these resources.
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Providers
 
-| Name | Version |
-|------|---------|
-| aws | n/a |
+No provider.
 
 ## Inputs
 
@@ -29,8 +27,8 @@ No input.
 
 | Name | Description |
 |------|-------------|
-| iam\_account\_id | IAM AWS account id |
-| this\_group\_name | IAM group name |
-| this\_group\_users | List of IAM users in IAM group |
+| this\_iam\_role\_arn | ARN of IAM role |
+| this\_iam\_role\_name | Name of IAM role |
+| this\_iam\_role\_path | Path of IAM role |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
