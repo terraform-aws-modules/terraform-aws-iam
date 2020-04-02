@@ -89,3 +89,9 @@ resource "aws_iam_role_policy_attachment" "readonly" {
   policy_arn = var.readonly_role_policy_arn
 }
 
+resource "aws_iam_instance_profile" "this" {
+  count = var.create_role && var.create_instance_profile ? 1 : 0
+  name  = var.role_name
+  path  = var.role_path
+  role  = aws_iam_role.this[0].name
+}
