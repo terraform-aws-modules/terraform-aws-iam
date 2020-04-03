@@ -21,11 +21,11 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
     }
 
     dynamic "condition" {
-      for_each = var.oidc_fully_qualified_subjects
+      for_each = [length(var.oidc_fully_qualified_subjects)]
       content {
         test     = "ForAnyValue:StringEquals"
         variable = "${var.provider_url}:sub"
-        values   = [condition.value]
+        values   = var.oidc_fully_qualified_subjects
       }
     }
 
