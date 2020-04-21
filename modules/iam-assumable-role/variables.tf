@@ -107,6 +107,12 @@ variable "attach_readonly_policy" {
   default     = false
 }
 
+variable "force_detach_policies" {
+  description = "Whether policies should be detached from this role when destroying"
+  type        = bool
+  default     = false
+}
+
 variable "role_description" {
   description = "IAM Role description"
   type        = string

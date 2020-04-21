@@ -130,3 +130,9 @@ variable "max_session_duration" {
   type        = number
   default     = 3600
 }
+
+variable "force_detach_policies" {
+  description = "Whether policies should be detached from this role when destroying"
+  type        = bool
+  default     = false
+}
