@@ -5,6 +5,13 @@ Creates predefined IAM roles (admin, poweruser and readonly) which can be assume
 Trusted resources can be any [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns) - typically, AWS accounts and users.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | ~> 0.12.6 |
+| aws | ~> 2.23 |
+
 ## Providers
 
 | Name | Version |
@@ -14,7 +21,7 @@ Trusted resources can be any [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/U
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | admin\_role\_name | IAM role with admin access | `string` | `"admin"` | no |
 | admin\_role\_path | Path of admin IAM role | `string` | `"/"` | no |
 | admin\_role\_permissions\_boundary\_arn | Permissions boundary ARN to use for admin role | `string` | `""` | no |
