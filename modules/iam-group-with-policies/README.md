@@ -3,6 +3,13 @@
 Creates IAM group with specified IAM policies, and add users into a group.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | ~> 0.12.6 |
+| aws | ~> 2.23 |
+
 ## Providers
 
 | Name | Version |
@@ -12,7 +19,7 @@ Creates IAM group with specified IAM policies, and add users into a group.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | attach\_iam\_self\_management\_policy | Whether to attach IAM policy which allows IAM users to manage their credentials and MFA | `bool` | `true` | no |
 | aws\_account\_id | AWS account id to use inside IAM policies. If empty, current AWS account ID will be used. | `string` | `""` | no |
 | create\_group | Whether to create IAM group | `bool` | `true` | no |

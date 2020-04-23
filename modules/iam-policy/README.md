@@ -3,6 +3,13 @@
 Creates IAM policy.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | ~> 0.12.6 |
+| aws | ~> 2.23 |
+
 ## Providers
 
 | Name | Version |
@@ -12,7 +19,7 @@ Creates IAM policy.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | description | The description of the policy | `string` | `"IAM Policy"` | no |
 | name | The name of the policy | `string` | `""` | no |
 | path | The path of the policy in IAM | `string` | `"/"` | no |
