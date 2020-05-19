@@ -44,6 +44,7 @@ resource "aws_iam_role" "this" {
   count = var.create_role ? 1 : 0
 
   name                 = var.role_name
+  name_prefix          = var.role_name_prefix
   path                 = var.role_path
   max_session_duration = var.max_session_duration
 

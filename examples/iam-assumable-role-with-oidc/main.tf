@@ -10,7 +10,7 @@ module "iam_assumable_role_admin" {
 
   create_role = true
 
-  role_name = "role-with-oidc"
+  role_name_prefix = "role-with-oidc"
 
   tags = {
     Role = "role-with-oidc"
