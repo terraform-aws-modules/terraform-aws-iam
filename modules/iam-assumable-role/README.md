@@ -39,6 +39,7 @@ Trusted resources can be any [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/U
 | role\_permissions\_boundary\_arn | Permissions boundary ARN to use for IAM role | `string` | `""` | no |
 | role\_requires\_mfa | Whether role requires MFA | `bool` | `true` | no |
 | tags | A map of tags to add to IAM role resources | `map(string)` | `{}` | no |
+| trusted\_role\_actions | Actions of STS that can be used | `list(string)` | `["sts:AssumeRole"]` | no |
 | trusted\_role\_arns | ARNs of AWS entities who can assume these roles | `list(string)` | `[]` | no |
 | trusted\_role\_services | AWS Services that can assume these roles | `list(string)` | `[]` | no |
 
