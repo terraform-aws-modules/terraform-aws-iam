@@ -7,6 +7,13 @@ Creates single IAM role which can be assumed by trusted resources using OpenID C
 This module supports IAM Roles for kubernetes service accounts as described in the [EKS documentation](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html). 
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | ~> 0.12.6 |
+| aws | ~> 2.23 |
+
 ## Providers
 
 | Name | Version |
@@ -16,7 +23,7 @@ This module supports IAM Roles for kubernetes service accounts as described in t
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | aws\_account\_id | The AWS account ID where the OIDC provider lives, leave empty to use the account fo the AWS provider | `string` | `""` | no |
 | create\_role | Whether to create a role | `bool` | `false` | no |
 | max\_session\_duration | Maximum CLI/API session duration in seconds between 3600 and 43200 | `number` | `3600` | no |

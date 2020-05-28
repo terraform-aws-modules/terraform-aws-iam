@@ -19,16 +19,23 @@ This module outputs commands and PGP messages which can be decrypted either usin
 - `keybase_secret_key_pgp_message`
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | ~> 0.12.6 |
+| aws | ~> 2.50 |
+
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | ~> 2.23 |
+| aws | ~> 2.50 |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | create\_iam\_access\_key | Whether to create IAM access key | `bool` | `true` | no |
 | create\_iam\_user\_login\_profile | Whether to create IAM user login profile | `bool` | `true` | no |
 | create\_user | Whether to create the IAM user | `bool` | `true` | no |
@@ -38,7 +45,7 @@ This module outputs commands and PGP messages which can be decrypted either usin
 | password\_reset\_required | Whether the user should be forced to reset the generated password on first login. | `bool` | `true` | no |
 | path | Desired path for the IAM user | `string` | `"/"` | no |
 | permissions\_boundary | The ARN of the policy that is used to set the permissions boundary for the user. | `string` | `""` | no |
-| pgp\_key | Either a base-64 encoded PGP public key, or a keybase username in the form keybase:username. Used to encrypt password and access key. | `string` | `""` | no |
+| pgp\_key | Either a base-64 encoded PGP public key, or a keybase username in the form `keybase:username`. Used to encrypt password and access key. `pgp_key` is required when `create_iam_user_login_profile` is set to `true` | `string` | `""` | no |
 | ssh\_key\_encoding | Specifies the public key encoding format to use in the response. To retrieve the public key in ssh-rsa format, use SSH. To retrieve the public key in PEM format, use PEM | `string` | `"SSH"` | no |
 | ssh\_public\_key | The SSH public key. The public key must be encoded in ssh-rsa format or PEM format | `string` | `""` | no |
 | tags | A map of tags to add to all resources. | `map(string)` | `{}` | no |
@@ -57,7 +64,8 @@ This module outputs commands and PGP messages which can be decrypted either usin
 | this\_iam\_access\_key\_id | The access key ID |
 | this\_iam\_access\_key\_key\_fingerprint | The fingerprint of the PGP key used to encrypt the secret |
 | this\_iam\_access\_key\_secret | The access key secret |
-| this\_iam\_access\_key\_ses\_smtp\_password | The secret access key converted into an SES SMTP password |
+| this\_iam\_access\_key\_ses\_smtp\_password | DEPRECATED: The secret access key converted into an SES SMTP password by applying AWS's SigV2 conversion algorithm |
+| this\_iam\_access\_key\_ses\_smtp\_password\_v4 | The secret access key converted into an SES SMTP password by applying AWS's Sigv4 conversion algorithm |
 | this\_iam\_access\_key\_status | Active or Inactive. Keys are initially active, but can be made inactive by other means. |
 | this\_iam\_user\_arn | The ARN assigned by AWS for this user |
 | this\_iam\_user\_login\_profile\_encrypted\_password | The encrypted password, base64 encoded |

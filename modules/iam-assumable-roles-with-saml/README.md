@@ -7,6 +7,13 @@ Creates predefined IAM roles (admin, poweruser and readonly) which can be assume
 [Enabling SAML 2.0 Federated Users to Access the AWS Management Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-saml.html) 
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | ~> 0.12.6 |
+| aws | ~> 2.23 |
+
 ## Providers
 
 | Name | Version |
@@ -16,7 +23,7 @@ Creates predefined IAM roles (admin, poweruser and readonly) which can be assume
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | admin\_role\_name | IAM role with admin access | `string` | `"admin"` | no |
 | admin\_role\_path | Path of admin IAM role | `string` | `"/"` | no |
 | admin\_role\_permissions\_boundary\_arn | Permissions boundary ARN to use for admin role | `string` | `""` | no |
