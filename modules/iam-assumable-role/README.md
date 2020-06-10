@@ -29,6 +29,7 @@ Trusted resources can be any [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/U
 | create\_instance\_profile | Whether to create an instance profile | `bool` | `false` | no |
 | create\_role | Whether to create a role | `bool` | `false` | no |
 | custom\_role\_policy\_arns | List of ARNs of IAM policies to attach to IAM role | `list(string)` | `[]` | no |
+| force\_detach\_policies | Whether policies should be detached from this role when destroying | `bool` | `false` | no |
 | max\_session\_duration | Maximum CLI/API session duration in seconds between 3600 and 43200 | `number` | `3600` | no |
 | mfa\_age | Max age of valid MFA (in seconds) for roles which require MFA | `number` | `86400` | no |
 | poweruser\_role\_policy\_arn | Policy ARN to use for poweruser role | `string` | `"arn:aws:iam::aws:policy/PowerUserAccess"` | no |

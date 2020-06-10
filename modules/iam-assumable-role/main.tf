@@ -54,7 +54,8 @@ resource "aws_iam_role" "this" {
   max_session_duration = var.max_session_duration
   description          = var.role_description
 
-  permissions_boundary = var.role_permissions_boundary_arn
+  force_detach_policies = var.force_detach_policies
+  permissions_boundary  = var.role_permissions_boundary_arn
 
   assume_role_policy = var.role_requires_mfa ? data.aws_iam_policy_document.assume_role_with_mfa.json : data.aws_iam_policy_document.assume_role.json
 

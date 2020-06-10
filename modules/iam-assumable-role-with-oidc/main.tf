@@ -47,7 +47,8 @@ resource "aws_iam_role" "this" {
   path                 = var.role_path
   max_session_duration = var.max_session_duration
 
-  permissions_boundary = var.role_permissions_boundary_arn
+  force_detach_policies = var.force_detach_policies
+  permissions_boundary  = var.role_permissions_boundary_arn
 
   assume_role_policy = join("", data.aws_iam_policy_document.assume_role_with_oidc.*.json)
 
