@@ -33,6 +33,7 @@ Creates predefined IAM roles (admin, poweruser and readonly) which can be assume
 | create\_admin\_role | Whether to create admin role | `bool` | `false` | no |
 | create\_poweruser\_role | Whether to create poweruser role | `bool` | `false` | no |
 | create\_readonly\_role | Whether to create readonly role | `bool` | `false` | no |
+| force\_detach\_policies | Whether policies should be detached from this role when destroying | `bool` | `false` | no |
 | max\_session\_duration | Maximum CLI/API session duration in seconds between 3600 and 43200 | `number` | `3600` | no |
 | poweruser\_role\_name | IAM role with poweruser access | `string` | `"poweruser"` | no |
 | poweruser\_role\_path | Path of poweruser IAM role | `string` | `"/"` | no |

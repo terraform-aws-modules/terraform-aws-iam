@@ -26,6 +26,7 @@ This module supports IAM Roles for kubernetes service accounts as described in t
 |------|-------------|------|---------|:--------:|
 | aws\_account\_id | The AWS account ID where the OIDC provider lives, leave empty to use the account fo the AWS provider | `string` | `""` | no |
 | create\_role | Whether to create a role | `bool` | `false` | no |
+| force\_detach\_policies | Whether policies should be detached from this role when destroying | `bool` | `false` | no |
 | max\_session\_duration | Maximum CLI/API session duration in seconds between 3600 and 43200 | `number` | `3600` | no |
 | oidc\_fully\_qualified\_subjects | The fully qualified OIDC subjects to be added to the role policy | `list(string)` | `[]` | no |
 | oidc\_subjects\_with\_wildcards | The OIDC subject using wildcards to be added to the role policy | `list(string)` | `[]` | no |
