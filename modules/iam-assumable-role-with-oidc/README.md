@@ -28,8 +28,8 @@ This module supports IAM Roles for kubernetes service accounts as described in t
 | create\_role | Whether to create a role | `bool` | `false` | no |
 | force\_detach\_policies | Whether policies should be detached from this role when destroying | `bool` | `false` | no |
 | max\_session\_duration | Maximum CLI/API session duration in seconds between 3600 and 43200 | `number` | `3600` | no |
-| oidc\_fully\_qualified\_subjects | The fully qualified OIDC subjects to be added to the role policy | `list(string)` | `[]` | no |
-| oidc\_subjects\_with\_wildcards | The OIDC subject using wildcards to be added to the role policy | `list(string)` | `[]` | no |
+| oidc\_fully\_qualified\_subjects | The fully qualified OIDC subjects to be added to the role policy | `set(string)` | `[]` | no |
+| oidc\_subjects\_with\_wildcards | The OIDC subject using wildcards to be added to the role policy | `set(string)` | `[]` | no |
 | provider\_url | URL of the OIDC Provider | `string` | n/a | yes |
 | role\_name | IAM role name | `string` | `""` | no |
 | role\_path | Path of IAM role | `string` | `"/"` | no |
