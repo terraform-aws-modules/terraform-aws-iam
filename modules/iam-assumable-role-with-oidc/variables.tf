@@ -76,6 +76,17 @@ variable "number_of_role_policy_arns" {
   default     = null
 }
 
+variable "inline_policy_statements" {
+  description = "List of inline policy statements to attach to IAM role as an inline policy"
+  type = list(object({
+    sid       = string
+    actions   = list(string)
+    effect    = string
+    resources = list(string)
+  }))
+  default = []
+}
+
 variable "oidc_fully_qualified_subjects" {
   description = "The fully qualified OIDC subjects to be added to the role policy"
   type        = set(string)

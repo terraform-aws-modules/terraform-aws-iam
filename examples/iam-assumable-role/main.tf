@@ -62,6 +62,50 @@ module "iam_assumable_role_custom" {
   #  number_of_custom_role_policy_arns = 3
 }
 
+##########################################
+# IAM assumable role with inline policy
+##########################################
+module "iam_assumable_role_inline_policy" {
+  source = "../../modules/iam-assumable-role"
+
+  trusted_role_arns = [
+    "arn:aws:iam::307990089504:root",
+  ]
+
+  trusted_role_services = [
+    "codedeploy.amazonaws.com"
+  ]
+
+  create_role = true
+
+  role_name_prefix  = "custom-"
+  role_requires_mfa = false
+
+  role_sts_externalid = "some-id-goes-here"
+
+  inline_policy_statements = [
+    {
+      sid = "AllowECRPushPull"
+      actions = [
+        "ecr:GetAuthorizationToken",
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:DescribeImages",
+        "ecr:DescribeRepositories",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:ListImages",
+        "ecr:PutImage",
+        "ecr:InitiateLayerUpload",
+        "ecr:UploadLayerPart",
+        "ecr:CompleteLayerUpload"
+      ]
+      effect    = "Allow"
+      resources = ["*"]
+    }
+  ]
+}
+
 ####################################################
 # IAM assumable role with multiple sts external ids
 ####################################################
