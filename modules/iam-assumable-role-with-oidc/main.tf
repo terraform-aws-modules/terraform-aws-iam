@@ -41,6 +41,20 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
   }
 }
 
+data "aws_iam_policy_document" "custom" {
+  count = var.create_role && length(var.role_policy_statements) > 0 ? 1 : 0
+
+  dynamic "statement" {
+    for_each = var.role_policy_statements
+    content {
+      sid       = statement.value.sid
+      actions   = statement.value.actions
+      effect    = statement.value.effect
+      resources = statement.value.resources
+    }
+  }
+}
+
 resource "aws_iam_role" "this" {
   count = var.create_role ? 1 : 0
 
@@ -54,6 +68,14 @@ resource "aws_iam_role" "this" {
   assume_role_policy = join("", data.aws_iam_policy_document.assume_role_with_oidc.*.json)
 
   tags = var.tags
+}
+
+resource "aws_iam_role_policy" "custom" {
+  count = var.create_role && length(var.role_policy_statements) > 0 ? 1 : 0
+
+  role        = aws_iam_role.this[0].name
+  name_prefix = "custom_"
+  policy      = data.aws_iam_policy_document.custom[0].json
 }
 
 resource "aws_iam_role_policy_attachment" "custom" {

@@ -51,6 +51,17 @@ variable "role_policy_arns" {
   default     = []
 }
 
+variable "role_policy_statements" {
+  description = "List of inline policy statements to attach to IAM role"
+  type = list(object({
+    sid       = string
+    actions   = list(string)
+    effect    = string
+    resources = list(string)
+  }))
+  default = []
+}
+
 variable "oidc_fully_qualified_subjects" {
   description = "The fully qualified OIDC subjects to be added to the role policy"
   type        = set(string)
