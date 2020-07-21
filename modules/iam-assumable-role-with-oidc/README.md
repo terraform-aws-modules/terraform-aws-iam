@@ -24,13 +24,14 @@ This module supports IAM Roles for kubernetes service accounts as described in t
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| aws\_account\_id | The AWS account ID where the OIDC provider lives, leave empty to use the account fo the AWS provider | `string` | `""` | no |
+| aws\_account\_id | The AWS account ID where the OIDC provider lives, leave empty to use the account for the AWS provider | `string` | `""` | no |
 | create\_role | Whether to create a role | `bool` | `false` | no |
 | force\_detach\_policies | Whether policies should be detached from this role when destroying | `bool` | `false` | no |
 | max\_session\_duration | Maximum CLI/API session duration in seconds between 3600 and 43200 | `number` | `3600` | no |
 | oidc\_fully\_qualified\_subjects | The fully qualified OIDC subjects to be added to the role policy | `set(string)` | `[]` | no |
 | oidc\_subjects\_with\_wildcards | The OIDC subject using wildcards to be added to the role policy | `set(string)` | `[]` | no |
-| provider\_url | URL of the OIDC Provider | `string` | n/a | yes |
+| provider\_url | URL of the OIDC Provider. Deprecated, use `provider_urls`. | `string` | "" | yes |
+| provider\_urls | List of OIDC Provider URLs | `list(string)` | [] | yes |
 | role\_name | IAM role name | `string` | `""` | no |
 | role\_path | Path of IAM role | `string` | `"/"` | no |
 | role\_permissions\_boundary\_arn | Permissions boundary ARN to use for IAM role | `string` | `""` | no |
