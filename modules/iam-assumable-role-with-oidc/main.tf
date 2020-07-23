@@ -16,7 +16,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
       type = "Federated"
 
       identifiers = [
-        "arn:${data.aws_partition.current.partition}:iam::${local.aws_account_id}:oidc-provider/${var.provider_url}" 
+        "arn:${data.aws_partition.current.partition}:iam::${local.aws_account_id}:oidc-provider/${var.provider_url}"
       ]
     }
 
