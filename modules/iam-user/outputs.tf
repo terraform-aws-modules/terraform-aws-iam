@@ -56,18 +56,6 @@ output "this_iam_access_key_encrypted_secret" {
   value       = element(concat(aws_iam_access_key.this.*.encrypted_secret, [""]), 0)
 }
 
-output "this_iam_access_key_ses_smtp_password" {
-  description = "DEPRECATED: The secret access key converted into an SES SMTP password by applying AWS's SigV2 conversion algorithm"
-  value = element(
-    concat(
-      aws_iam_access_key.this.*.ses_smtp_password,
-      aws_iam_access_key.this_no_pgp.*.ses_smtp_password,
-      [""],
-    ),
-    0,
-  )
-}
-
 output "this_iam_access_key_ses_smtp_password_v4" {
   description = "The secret access key converted into an SES SMTP password by applying AWS's Sigv4 conversion algorithm"
   value = element(

@@ -64,7 +64,6 @@ This module outputs commands and PGP messages which can be decrypted either usin
 | this\_iam\_access\_key\_id | The access key ID |
 | this\_iam\_access\_key\_key\_fingerprint | The fingerprint of the PGP key used to encrypt the secret |
 | this\_iam\_access\_key\_secret | The access key secret |
-| this\_iam\_access\_key\_ses\_smtp\_password | DEPRECATED: The secret access key converted into an SES SMTP password by applying AWS's SigV2 conversion algorithm |
 | this\_iam\_access\_key\_ses\_smtp\_password\_v4 | The secret access key converted into an SES SMTP password by applying AWS's Sigv4 conversion algorithm |
 | this\_iam\_access\_key\_status | Active or Inactive. Keys are initially active, but can be made inactive by other means. |
 | this\_iam\_user\_arn | The ARN assigned by AWS for this user |
