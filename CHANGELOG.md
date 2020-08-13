@@ -1,6 +1,43 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+
 <a name="unreleased"></a>
 ## [Unreleased]
 
+
+
+<a name="v2.12.0"></a>
+## [v2.12.0] - 2020-06-10
+
+- Updated formatting
+- fix: Fix conditions with multiple subjects in assume role with oidc policy ([#74](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/74))
+
+
+<a name="v2.11.0"></a>
+## [v2.11.0] - 2020-06-10
+
+- feat: Allow to set force_detach_policies on roles ([#68](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/68))
+
+
+<a name="v2.10.0"></a>
+## [v2.10.0] - 2020-05-26
+
+- fix: Allow customisation of trusted_role_actions in iam-assumable-role module ([#76](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/76))
+
+
+<a name="v2.9.0"></a>
+## [v2.9.0] - 2020-04-23
+
+- feat: modules/iam-user - Output SMTP password generated with SigV4 algorithm ([#70](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/70))
+
+
+<a name="v2.8.0"></a>
+## [v2.8.0] - 2020-04-22
+
+- docs: Add note about pgp_key when create_iam_login_profile is set ([#69](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/69))
+- fix: Fix module source and name in README ([#65](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/65))
+- fix typo ([#62](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/62))
 
 
 <a name="v2.7.0"></a>
@@ -13,21 +50,18 @@
 <a name="v2.6.0"></a>
 ## [v2.6.0] - 2020-01-27
 
-- Updated CHANGELOG
 - Rename module from "*-iodc" to "*-oidc" ([#48](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/48))
 
 
 <a name="v2.5.0"></a>
 ## [v2.5.0] - 2020-01-27
 
-- Updated CHANGELOG
 - New sub-module for IAM assumable role with OIDC ([#37](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/37))
 
 
 <a name="v2.4.0"></a>
 ## [v2.4.0] - 2020-01-09
 
-- Updated CHANGELOG
 - Updated pre-commit hooks
 - iam-assumable-role: add description support ([#45](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/45))
 - Removed link to missing complete example (fixed [#34](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/34))
@@ -36,14 +70,12 @@
 <a name="v2.3.0"></a>
 ## [v2.3.0] - 2019-08-21
 
-- Updated CHANGELOG
 - Added description support for custom group policies using a lookup ([#33](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/33))
 
 
 <a name="v2.2.0"></a>
 ## [v2.2.0] - 2019-08-21
 
-- Updated CHANGELOG
 - Added trusted_role_services to iam-assumable-roles, autoupdated docs
 - Add Trusted Services to iam-assumable-role ([#31](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/31))
 - Fix link to iam-assumable-role example in README ([#35](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/35))
@@ -52,21 +84,18 @@
 <a name="v2.1.0"></a>
 ## [v2.1.0] - 2019-06-11
 
-- Updated CHANGELOG
 - Removed duplicated tags from variables in iam-user ([#30](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/30))
 
 
 <a name="v2.0.0"></a>
 ## [v2.0.0] - 2019-06-11
 
-- Updated CHANGELOG
 - Upgraded module to support Terraform 0.12 ([#29](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/29))
 
 
 <a name="v1.0.0"></a>
 ## [v1.0.0] - 2019-06-11
 
-- Updated CHANGELOG
 - Fixed styles after [#26](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/26)
 - iam-user,iam-assumable-role,iam-assumable-roles,iam-assumable-roles-with-saml tags support ([#26](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/26))
 
@@ -152,7 +181,12 @@
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.7.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.12.0...HEAD
+[v2.12.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.11.0...v2.12.0
+[v2.11.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.10.0...v2.11.0
+[v2.10.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.9.0...v2.10.0
+[v2.9.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.8.0...v2.9.0
+[v2.8.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.7.0...v2.8.0
 [v2.7.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.6.0...v2.7.0
 [v2.6.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.5.0...v2.6.0
 [v2.5.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.4.0...v2.5.0

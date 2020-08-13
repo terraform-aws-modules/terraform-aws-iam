@@ -1,3 +1,9 @@
+variable "trusted_role_actions" {
+  description = "Actions of STS"
+  type        = list(string)
+  default     = ["sts:AssumeRole"]
+}
+
 variable "trusted_role_arns" {
   description = "ARNs of AWS entities who can assume these roles"
   type        = list(string)
@@ -103,6 +109,12 @@ variable "attach_poweruser_policy" {
 
 variable "attach_readonly_policy" {
   description = "Whether to attach a readonly policy to a role"
+  type        = bool
+  default     = false
+}
+
+variable "force_detach_policies" {
+  description = "Whether policies should be detached from this role when destroying"
   type        = bool
   default     = false
 }
