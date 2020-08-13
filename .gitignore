@@ -1,7 +1,3 @@
-
-# Intellij
-.idea
-
 .terraform
 terraform.tfstate
 *.tfstate*
