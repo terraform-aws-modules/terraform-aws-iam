@@ -23,14 +23,14 @@ This module outputs commands and PGP messages which can be decrypted either usin
 
 | Name | Version |
 |------|---------|
-| terraform | ~> 0.12.6 |
-| aws | ~> 2.50 |
+| terraform | >= 0.12.6, < 0.14 |
+| aws | >= 2.50, < 4.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | ~> 2.50 |
+| aws | >= 2.50, < 4.0 |
 
 ## Inputs
 

@@ -26,14 +26,14 @@ Import successful!
 
 | Name | Version |
 |------|---------|
-| terraform | ~> 0.12.6 |
-| aws | ~> 2.23 |
+| terraform | >= 0.12.6, < 0.14 |
+| aws | >= 2.23, < 4.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | ~> 2.23 |
+| aws | >= 2.23, < 4.0 |
 
 ## Inputs
 
