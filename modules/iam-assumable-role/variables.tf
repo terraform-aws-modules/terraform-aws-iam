@@ -125,3 +125,9 @@ variable "role_description" {
   default     = ""
 }
 
+variable "sts_externalid" {
+  description = "STS ExternalId condition value"
+  type        = string
+  default     = ""
+}
+
