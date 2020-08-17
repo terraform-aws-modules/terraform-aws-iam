@@ -1,5 +1,6 @@
 locals {
   aws_account_id = var.aws_account_id != "" ? var.aws_account_id : data.aws_caller_identity.current.account_id
+  provider_url   = replace(var.provider_url, "https://", "")
 }
 
 data "aws_caller_identity" "current" {}
@@ -18,7 +19,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
       type = "Federated"
 
       identifiers = [
-        "arn:${data.aws_partition.current.partition}:iam::${local.aws_account_id}:oidc-provider/${var.provider_url}"
+        "arn:${data.aws_partition.current.partition}:iam::${local.aws_account_id}:oidc-provider/${local.provider_url}"
       ]
     }
 
@@ -26,7 +27,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
       for_each = length(var.oidc_fully_qualified_subjects) > 0 ? [1] : []
       content {
         test     = "StringEquals"
-        variable = "${var.provider_url}:sub"
+        variable = "${local.provider_url}:sub"
         values   = var.oidc_fully_qualified_subjects
       }
     }
@@ -36,7 +37,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
       for_each = length(var.oidc_subjects_with_wildcards) > 0 ? [1] : []
       content {
         test     = "StringLike"
-        variable = "${var.provider_url}:sub"
+        variable = "${local.provider_url}:sub"
         values   = var.oidc_subjects_with_wildcards
       }
     }
