@@ -15,11 +15,11 @@ data "aws_iam_policy_document" "assume_role" {
     }
 
     dynamic "condition" {
-      for_each = length(var.sts_externalid) > 0 ? [1] : []
+      for_each = var.role_sts_externalid != null ? [true] : []
       content {
         test     = "StringEquals"
         variable = "sts:ExternalId"
-        values   = [var.sts_externalid]
+        values   = [var.role_sts_externalid]
       }
     }
   }

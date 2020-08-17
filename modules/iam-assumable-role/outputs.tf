@@ -34,7 +34,7 @@ output "this_iam_instance_profile_path" {
 }
 
 output "role_sts_externalid" {
-  description = "STS ExternalId condition value"
-  value       = var.sts_externalid
+  description = "STS ExternalId condition value to use with a role"
+  value       = var.role_sts_externalid
 }
 
