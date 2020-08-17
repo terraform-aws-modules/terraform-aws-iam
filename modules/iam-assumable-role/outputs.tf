@@ -32,3 +32,9 @@ output "this_iam_instance_profile_path" {
   description = "Path of IAM instance profile"
   value       = element(concat(aws_iam_instance_profile.this.*.path, [""]), 0)
 }
+
+output "role_sts_externalid" {
+  description = "STS ExternalId condition value to use with a role"
+  value       = var.role_sts_externalid
+}
+

@@ -125,3 +125,9 @@ variable "role_description" {
   default     = ""
 }
 
+variable "role_sts_externalid" {
+  description = "STS ExternalId condition value to use with a role (when MFA is not required)"
+  type        = string
+  default     = null
+}
+

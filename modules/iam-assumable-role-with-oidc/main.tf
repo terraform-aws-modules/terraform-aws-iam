@@ -5,6 +5,8 @@ locals {
 
 data "aws_caller_identity" "current" {}
 
+data "aws_partition" "current" {}
+
 data "aws_iam_policy_document" "assume_role_with_oidc" {
   count = var.create_role ? 1 : 0
 
@@ -17,7 +19,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
       type = "Federated"
 
       identifiers = [
-        "arn:aws:iam::${local.aws_account_id}:oidc-provider/${local.provider_url}"
+        "arn:${data.aws_partition.current.partition}:iam::${local.aws_account_id}:oidc-provider/${local.provider_url}"
       ]
     }
 
