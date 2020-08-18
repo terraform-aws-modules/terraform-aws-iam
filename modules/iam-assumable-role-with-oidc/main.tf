@@ -1,6 +1,14 @@
 locals {
   aws_account_id = var.aws_account_id != "" ? var.aws_account_id : data.aws_caller_identity.current.account_id
-  provider_url   = replace(var.provider_url, "https://", "")
+  # clean URLs of https:// prefix
+  urls = [
+    for url in distinct(concat(var.provider_urls, [var.provider_url])) :
+    replace(url, "https://", "")
+  ]
+  identifiers = [
+    for url in local.urls :
+    "arn:${data.aws_partition.current.partition}:iam::${local.aws_account_id}:oidc-provider/${url}"
+  ]
 }
 
 data "aws_caller_identity" "current" {}
@@ -18,26 +26,24 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
     principals {
       type = "Federated"
 
-      identifiers = [
-        "arn:${data.aws_partition.current.partition}:iam::${local.aws_account_id}:oidc-provider/${local.provider_url}"
-      ]
+      identifiers = local.identifiers
     }
 
     dynamic "condition" {
-      for_each = length(var.oidc_fully_qualified_subjects) > 0 ? [1] : []
+      for_each = length(var.oidc_fully_qualified_subjects) > 0 ? local.urls : []
       content {
         test     = "StringEquals"
-        variable = "${local.provider_url}:sub"
+        variable = "${condition.value}:sub"
         values   = var.oidc_fully_qualified_subjects
       }
     }
 
 
     dynamic "condition" {
-      for_each = length(var.oidc_subjects_with_wildcards) > 0 ? [1] : []
+      for_each = length(var.oidc_subjects_with_wildcards) > 0 ? local.urls : []
       content {
         test     = "StringLike"
-        variable = "${local.provider_url}:sub"
+        variable = "${condition.value}:sub"
         values   = var.oidc_subjects_with_wildcards
       }
     }

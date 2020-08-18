@@ -5,12 +5,19 @@ variable "create_role" {
 }
 
 variable "provider_url" {
-  description = "URL of the OIDC Provider"
+  description = "URL of the OIDC Provider. Use provider_urls to specify several URLs."
   type        = string
+  default     = ""
+}
+
+variable "provider_urls" {
+  description = "List of URLs of the OIDC Providers"
+  type        = list(string)
+  default     = []
 }
 
 variable "aws_account_id" {
-  description = "The AWS account ID where the OIDC provider lives, leave empty to use the account fo the AWS provider"
+  description = "The AWS account ID where the OIDC provider lives, leave empty to use the account for the AWS provider"
   type        = string
   default     = ""
 }
