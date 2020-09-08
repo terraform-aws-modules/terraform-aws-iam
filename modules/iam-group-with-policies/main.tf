@@ -27,14 +27,14 @@ resource "aws_iam_group_policy_attachment" "iam_self_management" {
 }
 
 resource "aws_iam_group_policy_attachment" "custom_arns" {
-  count = length(var.custom_group_policy_arns) > 0 ? length(var.custom_group_policy_arns) : 0
+  count = length(var.custom_group_policy_arns)
 
   group      = local.group_name
   policy_arn = element(var.custom_group_policy_arns, count.index)
 }
 
 resource "aws_iam_group_policy_attachment" "custom" {
-  count = length(var.custom_group_policies) > 0 ? length(var.custom_group_policies) : 0
+  count = length(var.custom_group_policies)
 
   group      = local.group_name
   policy_arn = element(aws_iam_policy.custom.*.arn, count.index)
@@ -51,7 +51,7 @@ resource "aws_iam_policy" "iam_self_management" {
 }
 
 resource "aws_iam_policy" "custom" {
-  count = length(var.custom_group_policies) > 0 ? length(var.custom_group_policies) : 0
+  count = length(var.custom_group_policies)
 
   name        = var.custom_group_policies[count.index]["name"]
   policy      = var.custom_group_policies[count.index]["policy"]
