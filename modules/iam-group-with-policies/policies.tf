@@ -2,6 +2,8 @@ data "aws_caller_identity" "current" {
   count = var.aws_account_id == "" ? 1 : 0
 }
 
+data "aws_partition" "current" {}
+
 locals {
   aws_account_id = element(
     concat(
@@ -41,9 +43,9 @@ data "aws_iam_policy_document" "iam_self_management" {
 
     # Allow for both users with "path" and without it
     resources = [
-      "arn:aws:iam::${local.aws_account_id}:user/*/$${aws:username}",
-      "arn:aws:iam::${local.aws_account_id}:user/$${aws:username}",
-      "arn:aws:iam::${local.aws_account_id}:mfa/$${aws:username}",
+      "arn:${data.aws_partition.current.partition}:iam::${local.aws_account_id}:user/*/$${aws:username}",
+      "arn:${data.aws_partition.current.partition}:iam::${local.aws_account_id}:user/$${aws:username}",
+      "arn:${data.aws_partition.current.partition}:iam::${local.aws_account_id}:mfa/$${aws:username}",
     ]
   }
 
@@ -71,9 +73,9 @@ data "aws_iam_policy_document" "iam_self_management" {
 
     # Allow for both users with "path" and without it
     resources = [
-      "arn:aws:iam::${local.aws_account_id}:user/*/$${aws:username}",
-      "arn:aws:iam::${local.aws_account_id}:user/$${aws:username}",
-      "arn:aws:iam::${local.aws_account_id}:mfa/$${aws:username}",
+      "arn:${data.aws_partition.current.partition}:iam::${local.aws_account_id}:user/*/$${aws:username}",
+      "arn:${data.aws_partition.current.partition}:iam::${local.aws_account_id}:user/$${aws:username}",
+      "arn:${data.aws_partition.current.partition}:iam::${local.aws_account_id}:mfa/$${aws:username}",
     ]
 
     condition {
