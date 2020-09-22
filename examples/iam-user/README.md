@@ -41,7 +41,7 @@ No input.
 | this\_iam\_access\_key\_id | The access key ID |
 | this\_iam\_access\_key\_key\_fingerprint | The fingerprint of the PGP key used to encrypt the secret |
 | this\_iam\_access\_key\_secret | The access key secret |
-| this\_iam\_access\_key\_ses\_smtp\_password | The secret access key converted into an SES SMTP password |
+| this\_iam\_access\_key\_ses\_smtp\_password\_v4 | The secret access key converted into an SES SMTP password |
 | this\_iam\_access\_key\_status | Active or Inactive. Keys are initially active, but can be made inactive by other means. |
 | this\_iam\_user\_arn | The ARN assigned by AWS for this user |
 | this\_iam\_user\_login\_profile\_encrypted\_password | The encrypted password, base64 encoded |

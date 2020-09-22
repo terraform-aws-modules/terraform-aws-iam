@@ -43,9 +43,9 @@ output "this_iam_access_key_secret" {
   value       = module.iam_user.this_iam_access_key_secret
 }
 
-output "this_iam_access_key_ses_smtp_password" {
+output "this_iam_access_key_ses_smtp_password_v4" {
   description = "The secret access key converted into an SES SMTP password"
-  value       = module.iam_user.this_iam_access_key_ses_smtp_password
+  value       = module.iam_user.this_iam_access_key_ses_smtp_password_v4
 }
 
 output "this_iam_access_key_status" {
