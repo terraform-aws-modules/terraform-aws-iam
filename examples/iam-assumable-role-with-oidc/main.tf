@@ -22,7 +22,7 @@ module "iam_assumable_role_admin" {
   role_policy_arns = [
     "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
   ]
-  number_role_policy_arns = 1
+  number_of_role_policy_arns = 1
 
   oidc_fully_qualified_subjects = ["system:serviceaccount:default:sa1", "system:serviceaccount:default:sa2"]
 }
