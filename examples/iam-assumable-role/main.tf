@@ -54,4 +54,5 @@ module "iam_assumable_role_custom" {
     "arn:aws:iam::aws:policy/AmazonCognitoReadOnly",
     "arn:aws:iam::aws:policy/AlexaForBusinessFullAccess",
   ]
+  number_custom_role_policy_arns = 2
 }
