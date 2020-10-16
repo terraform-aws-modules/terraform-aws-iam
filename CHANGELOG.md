@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v2.22.0"></a>
+## [v2.22.0] - 2020-10-16
+
+- feat: Add role description variable for assumable role with oidc ([#98](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/98))
+
+
 <a name="v2.21.0"></a>
 ## [v2.21.0] - 2020-09-22
 
@@ -236,7 +242,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.21.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.22.0...HEAD
+[v2.22.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.21.0...v2.22.0
 [v2.21.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.20.0...v2.21.0
 [v2.20.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.19.0...v2.20.0
 [v2.19.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.18.0...v2.19.0
