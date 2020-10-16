@@ -34,6 +34,12 @@ variable "role_name" {
   default     = ""
 }
 
+variable "role_description" {
+  description = "IAM Role description"
+  type        = string
+  default     = ""
+}
+
 variable "role_path" {
   description = "Path of IAM role"
   type        = string
