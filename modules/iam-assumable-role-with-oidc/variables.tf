@@ -34,6 +34,12 @@ variable "role_name" {
   default     = ""
 }
 
+variable "role_prefix" {
+  description = "IAM role prefix"
+  type        = string
+  default     = ""
+}
+
 variable "role_description" {
   description = "IAM Role description"
   type        = string
