@@ -7,6 +7,19 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v2.24.0"></a>
+## [v2.24.0] - 2020-10-30
+
+- feat: Add role_name_prefix option for oidc roles ([#101](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/101))
+
+
+<a name="v2.23.0"></a>
+## [v2.23.0] - 2020-10-30
+
+- feat: Updated to support Terraform 0.13 also ([#103](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/103))
+- ci: Update pre-commit-terraform ([#100](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/100))
+
+
 <a name="v2.22.0"></a>
 ## [v2.22.0] - 2020-10-16
 
@@ -242,7 +255,9 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.22.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.24.0...HEAD
+[v2.24.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.23.0...v2.24.0
+[v2.23.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.22.0...v2.23.0
 [v2.22.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.21.0...v2.22.0
 [v2.21.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.20.0...v2.21.0
 [v2.20.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.19.0...v2.20.0
