@@ -7,8 +7,14 @@ All notable changes to this project will be documented in this file.
 
 
 
-<a name="v2.26.0"></a>
-## [v2.26.0] - 2020-10-30
+<a name="v3.1.0"></a>
+## [v3.1.0] - 2020-10-30
+
+- Bump new major release v3
+
+
+<a name="v3.0.0"></a>
+## [v3.0.0] - 2020-10-30
 
 - feat: Added number_of_ variables for iam-assumable-role submodules ([#96](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/96))
 
@@ -267,8 +273,9 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.26.0...HEAD
-[v2.26.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.25.0...v2.26.0
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.1.0...HEAD
+[v3.1.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.0.0...v3.1.0
+[v3.0.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.25.0...v3.0.0
 [v2.25.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.24.0...v2.25.0
 [v2.24.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.23.0...v2.24.0
 [v2.23.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.22.0...v2.23.0
