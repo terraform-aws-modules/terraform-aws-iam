@@ -18,7 +18,10 @@ Run `terraform destroy` when you don't need these resources.
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12.6 |
+| aws | >= 2.50 |
 
 ## Providers
 
@@ -32,10 +35,10 @@ No input.
 
 | Name | Description |
 |------|-------------|
-| keybase\_password\_decrypt\_command | n/a |
-| keybase\_password\_pgp\_message | n/a |
-| keybase\_secret\_key\_decrypt\_command | n/a |
-| keybase\_secret\_key\_pgp\_message | n/a |
+| keybase\_password\_decrypt\_command | Decrypt user password command |
+| keybase\_password\_pgp\_message | Encrypted password |
+| keybase\_secret\_key\_decrypt\_command | Decrypt access secret key command |
+| keybase\_secret\_key\_pgp\_message | Encrypted access secret key |
 | pgp\_key | PGP key used to encrypt sensitive data for this user (if empty - secrets are not encrypted) |
 | this\_iam\_access\_key\_encrypted\_secret | The encrypted secret, base64 encoded |
 | this\_iam\_access\_key\_id | The access key ID |
