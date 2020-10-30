@@ -59,17 +59,21 @@ output "pgp_key" {
 }
 
 output "keybase_password_decrypt_command" {
-  value = module.iam_user.keybase_password_decrypt_command
+  description = "Decrypt user password command"
+  value       = module.iam_user.keybase_password_decrypt_command
 }
 
 output "keybase_password_pgp_message" {
-  value = module.iam_user.keybase_password_pgp_message
+  description = "Encrypted password"
+  value       = module.iam_user.keybase_password_pgp_message
 }
 
 output "keybase_secret_key_decrypt_command" {
-  value = module.iam_user.keybase_secret_key_decrypt_command
+  description = "Decrypt access secret key command"
+  value       = module.iam_user.keybase_secret_key_decrypt_command
 }
 
 output "keybase_secret_key_pgp_message" {
-  value = module.iam_user.keybase_secret_key_pgp_message
+  description = "Encrypted access secret key"
+  value       = module.iam_user.keybase_secret_key_pgp_message
 }
