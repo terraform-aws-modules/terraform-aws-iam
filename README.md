@@ -29,7 +29,7 @@ Terraform 0.11. Pin module version to `~> v1.0`. Submit pull-requests to `terraf
 ```hcl
 module "iam_account" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-account"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   account_alias = "awesome-company"
 
@@ -41,8 +41,8 @@ module "iam_account" {
 `iam-assumable-role`:
 ```hcl
 module "iam_assumable_role" {
-  source = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
-  version = "~> 2.0"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
+  version = "~> 3.0"
 
   trusted_role_arns = [
     "arn:aws:iam::307990089504:root",
@@ -58,14 +58,15 @@ module "iam_assumable_role" {
     "arn:aws:iam::aws:policy/AmazonCognitoReadOnly",
     "arn:aws:iam::aws:policy/AlexaForBusinessFullAccess",
   ]
+  number_of_custom_role_policy_arns = 2
 }
 ```
 
 `iam-assumable-role-with-oidc`:
 ```hcl
 module "iam_assumable_role_with_oidc" {
-  source = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
-  version = "~> 2.0"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
+  version = "~> 3.0"
 
   create_role = true
 
@@ -80,6 +81,7 @@ module "iam_assumable_role_with_oidc" {
   role_policy_arns = [
     "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
   ]
+  number_of_role_policy_arns = 1
 }
 ```
 
@@ -87,7 +89,7 @@ module "iam_assumable_role_with_oidc" {
 ```hcl
 module "iam_assumable_roles" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-roles"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   trusted_role_arns = [
     "arn:aws:iam::307990089504:root",
@@ -108,7 +110,7 @@ module "iam_assumable_roles" {
 ```hcl
 module "iam_assumable_roles_with_saml" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-roles-with-saml"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   create_admin_role = true
 
@@ -125,7 +127,7 @@ module "iam_assumable_roles_with_saml" {
 ```hcl
 module "iam_user" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-user"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   name          = "vasya.pupkin"
   force_destroy = true
@@ -140,7 +142,7 @@ module "iam_user" {
 ```hcl
 module "iam_policy" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   name        = "example"
   path        = "/"
@@ -167,7 +169,7 @@ EOF
 ```hcl
 module "iam_group_with_assumable_roles_policy" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-group-with-assumable-roles-policy"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   name = "production-readonly"
 
@@ -186,7 +188,7 @@ module "iam_group_with_assumable_roles_policy" {
 ```hcl
 module "iam_group_with_policies" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-group-with-policies"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   name = "superadmins"
 
