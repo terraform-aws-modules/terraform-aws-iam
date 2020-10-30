@@ -31,6 +31,18 @@ variable "tags" {
 variable "role_name" {
   description = "IAM role name"
   type        = string
+  default     = null
+}
+
+variable "role_name_prefix" {
+  description = "IAM role name prefix"
+  type        = string
+  default     = null
+}
+
+variable "role_description" {
+  description = "IAM Role description"
+  type        = string
   default     = ""
 }
 

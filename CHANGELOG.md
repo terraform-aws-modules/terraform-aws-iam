@@ -7,6 +7,31 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v2.25.0"></a>
+## [v2.25.0] - 2020-10-30
+
+- fix: remove empty string elements from local.urls in iam-assumable-role-with-oidc submodule ([#99](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/99))
+
+
+<a name="v2.24.0"></a>
+## [v2.24.0] - 2020-10-30
+
+- feat: Add role_name_prefix option for oidc roles ([#101](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/101))
+
+
+<a name="v2.23.0"></a>
+## [v2.23.0] - 2020-10-30
+
+- feat: Updated to support Terraform 0.13 also ([#103](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/103))
+- ci: Update pre-commit-terraform ([#100](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/100))
+
+
+<a name="v2.22.0"></a>
+## [v2.22.0] - 2020-10-16
+
+- feat: Add role description variable for assumable role with oidc ([#98](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/98))
+
+
 <a name="v2.21.0"></a>
 ## [v2.21.0] - 2020-09-22
 
@@ -236,7 +261,11 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.21.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.25.0...HEAD
+[v2.25.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.24.0...v2.25.0
+[v2.24.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.23.0...v2.24.0
+[v2.23.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.22.0...v2.23.0
+[v2.22.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.21.0...v2.22.0
 [v2.21.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.20.0...v2.21.0
 [v2.20.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.19.0...v2.20.0
 [v2.19.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.18.0...v2.19.0

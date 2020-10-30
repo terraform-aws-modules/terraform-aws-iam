@@ -11,14 +11,14 @@ This module supports IAM Roles for kubernetes service accounts as described in t
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.6, < 0.14 |
-| aws | >= 2.23, < 4.0 |
+| terraform | >= 0.12.6 |
+| aws | >= 2.23 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | >= 2.23, < 4.0 |
+| aws | >= 2.23 |
 
 ## Inputs
 
@@ -33,7 +33,9 @@ This module supports IAM Roles for kubernetes service accounts as described in t
 | oidc\_subjects\_with\_wildcards | The OIDC subject using wildcards to be added to the role policy | `set(string)` | `[]` | no |
 | provider\_url | URL of the OIDC Provider. Use provider\_urls to specify several URLs. | `string` | `""` | no |
 | provider\_urls | List of URLs of the OIDC Providers | `list(string)` | `[]` | no |
-| role\_name | IAM role name | `string` | `""` | no |
+| role\_description | IAM Role description | `string` | `""` | no |
+| role\_name | IAM role name | `string` | `null` | no |
+| role\_name\_prefix | IAM role name prefix | `string` | `null` | no |
 | role\_path | Path of IAM role | `string` | `"/"` | no |
 | role\_permissions\_boundary\_arn | Permissions boundary ARN to use for IAM role | `string` | `""` | no |
 | role\_policy\_arns | List of ARNs of IAM policies to attach to IAM role | `list(string)` | `[]` | no |

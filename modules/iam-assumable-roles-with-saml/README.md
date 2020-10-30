@@ -11,14 +11,14 @@ Creates predefined IAM roles (admin, poweruser and readonly) which can be assume
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.6, < 0.14 |
-| aws | >= 2.23, < 4.0 |
+| terraform | >= 0.12.6 |
+| aws | >= 2.23 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | >= 2.23, < 4.0 |
+| aws | >= 2.23 |
 
 ## Inputs
 
@@ -41,7 +41,6 @@ Creates predefined IAM roles (admin, poweruser and readonly) which can be assume
 | poweruser\_role\_policy\_arns | List of policy ARNs to use for poweruser role | `list(string)` | <pre>[<br>  "arn:aws:iam::aws:policy/PowerUserAccess"<br>]</pre> | no |
 | poweruser\_role\_tags | A map of tags to add to poweruser role resource. | `map(string)` | `{}` | no |
 | provider\_id | ID of the SAML Provider | `string` | n/a | yes |
-| provider\_name | Name of the SAML Provider | `string` | n/a | yes |
 | readonly\_role\_name | IAM role with readonly access | `string` | `"readonly"` | no |
 | readonly\_role\_path | Path of readonly IAM role | `string` | `"/"` | no |
 | readonly\_role\_permissions\_boundary\_arn | Permissions boundary ARN to use for readonly role | `string` | `""` | no |
