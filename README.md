@@ -14,7 +14,7 @@ These types of resources are supported:
 
 ## Terraform versions
 
-Terraform 0.12 or newer. Pin module version to `~> v2.0`. Submit pull-requests to `master` branch.
+Terraform 0.12 or newer. Pin module version to `~> v3.0`. Submit pull-requests to `master` branch.
 
 Terraform 0.11. Pin module version to `~> v1.0`. Submit pull-requests to `terraform011` branch.
 
