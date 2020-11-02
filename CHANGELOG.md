@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v3.3.0"></a>
+## [v3.3.0] - 2020-11-02
+
+- ci: Updated pre-commit hooks, added terraform_validate ([#106](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/106))
+
+
 <a name="v3.2.0"></a>
 ## [v3.2.0] - 2020-10-30
 
@@ -279,7 +285,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.2.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.3.0...HEAD
+[v3.3.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.2.0...v3.3.0
 [v3.2.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.1.0...v3.2.0
 [v3.1.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.0.0...v3.1.0
 [v3.0.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v2.25.0...v3.0.0
