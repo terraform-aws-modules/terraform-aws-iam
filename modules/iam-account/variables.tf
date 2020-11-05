@@ -18,7 +18,7 @@ variable "create_account_password_policy" {
 variable "max_password_age" {
   description = "The number of days that an user password is valid."
   type        = number
-  default     = 0
+  default     = 90
 }
 
 variable "minimum_password_length" {
