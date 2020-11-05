@@ -24,7 +24,7 @@ variable "max_password_age" {
 variable "minimum_password_length" {
   description = "Minimum length to require for user passwords"
   type        = number
-  default     = 8
+  default     = 14
 }
 
 variable "allow_users_to_change_password" {
