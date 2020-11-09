@@ -46,9 +46,9 @@ variable "password_reset_required" {
 }
 
 variable "password_length" {
-  description = "The length of the generated password"
+  description = "The length of the generated password. You can type any number from 6 to 128."
   type        = number
-  default     = 20
+  default     = 6
 }
 
 variable "upload_iam_user_ssh_key" {
