@@ -1,6 +1,19 @@
+variable "provider_id" {
+  description = "ID of the SAML Provider. Use provider_ids to specify several IDs."
+  type        = string
+  default     = ""
+}
+
 variable "provider_ids" {
   description = "List of SAML Provider IDs"
   type        = list(string)
+  default     = []
+}
+
+variable "aws_account_id" {
+  description = "The AWS account ID where the SAML provider lives, leave empty to use the current account for the AWS provider"
+  type        = string
+  default     = ""
 }
 
 variable "aws_saml_endpoint" {

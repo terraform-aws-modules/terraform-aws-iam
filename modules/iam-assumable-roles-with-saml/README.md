@@ -29,6 +29,7 @@ Creates predefined IAM roles (admin, poweruser and readonly) which can be assume
 | admin\_role\_permissions\_boundary\_arn | Permissions boundary ARN to use for admin role | `string` | `""` | no |
 | admin\_role\_policy\_arns | List of policy ARNs to use for admin role | `list(string)` | <pre>[<br>  "arn:aws:iam::aws:policy/AdministratorAccess"<br>]</pre> | no |
 | admin\_role\_tags | A map of tags to add to admin role resource. | `map(string)` | `{}` | no |
+| aws\_account\_id | The AWS account ID where the SAML provider lives, leave empty to use the current account for the AWS provider | `string` | `""` | no |
 | aws\_saml\_endpoint | AWS SAML Endpoint | `string` | `"https://signin.aws.amazon.com/saml"` | no |
 | create\_admin\_role | Whether to create admin role | `bool` | `false` | no |
 | create\_poweruser\_role | Whether to create poweruser role | `bool` | `false` | no |
@@ -40,7 +41,8 @@ Creates predefined IAM roles (admin, poweruser and readonly) which can be assume
 | poweruser\_role\_permissions\_boundary\_arn | Permissions boundary ARN to use for poweruser role | `string` | `""` | no |
 | poweruser\_role\_policy\_arns | List of policy ARNs to use for poweruser role | `list(string)` | <pre>[<br>  "arn:aws:iam::aws:policy/PowerUserAccess"<br>]</pre> | no |
 | poweruser\_role\_tags | A map of tags to add to poweruser role resource. | `map(string)` | `{}` | no |
-| provider\_id | ID of the SAML Provider | `string` | n/a | yes |
+| provider\_id | ID of the SAML Provider. Use provider\_ids to specify several IDs. | `string` | `""` | no |
+| provider\_ids | List of SAML Provider IDs | `list(string)` | `[]` | no |
 | readonly\_role\_name | IAM role with readonly access | `string` | `"readonly"` | no |
 | readonly\_role\_path | Path of readonly IAM role | `string` | `"/"` | no |
 | readonly\_role\_permissions\_boundary\_arn | Permissions boundary ARN to use for readonly role | `string` | `""` | no |

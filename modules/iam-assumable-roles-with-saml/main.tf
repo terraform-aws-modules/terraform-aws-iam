@@ -1,3 +1,16 @@
+locals {
+  aws_account_id = var.aws_account_id != "" ? var.aws_account_id : data.aws_caller_identity.current.account_id
+  ids            = compact(distinct(concat(var.provider_ids, [var.provider_id])))
+  identifiers = [
+    for id in local.ids :
+    "arn:${data.aws_partition.current.partition}:iam::${local.aws_account_id}:saml-provider/${id}"
+  ]
+}
+
+data "aws_caller_identity" "current" {}
+
+data "aws_partition" "current" {}
+
 data "aws_iam_policy_document" "assume_role_with_saml" {
   statement {
     effect = "Allow"
@@ -5,8 +18,9 @@ data "aws_iam_policy_document" "assume_role_with_saml" {
     actions = ["sts:AssumeRoleWithSAML"]
 
     principals {
-      type        = "Federated"
-      identifiers = var.provider_ids
+      type = "Federated"
+
+      identifiers = local.identifiers
     }
 
     condition {
