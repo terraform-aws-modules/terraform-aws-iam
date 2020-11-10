@@ -6,7 +6,7 @@ data "aws_iam_policy_document" "assume_role_with_saml" {
 
     principals {
       type        = "Federated"
-      identifiers = [var.provider_id]
+      identifiers = var.provider_ids
     }
 
     condition {

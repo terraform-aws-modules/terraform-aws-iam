@@ -21,7 +21,7 @@ module "iam_assumable_roles_with_saml" {
 
   create_readonly_role = true
 
-  provider_id = aws_iam_saml_provider.idp_saml.id
+  provider_ids = [aws_iam_saml_provider.idp_saml.id]
 }
 
 #################################################################
@@ -34,5 +34,5 @@ module "iam_assumable_roles_with_saml_custom" {
   poweruser_role_name        = "Billing-And-Support-Access"
   poweruser_role_policy_arns = ["arn:aws:iam::aws:policy/job-function/Billing", "arn:aws:iam::aws:policy/AWSSupportAccess"]
 
-  provider_id = aws_iam_saml_provider.idp_saml.id
+  provider_ids = [aws_iam_saml_provider.idp_saml.id]
 }

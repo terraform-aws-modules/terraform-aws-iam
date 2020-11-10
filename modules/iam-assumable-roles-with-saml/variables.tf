@@ -1,6 +1,6 @@
-variable "provider_id" {
-  description = "ID of the SAML Provider"
-  type        = string
+variable "provider_ids" {
+  description = "List of SAML Provider IDs"
+  type        = list(string)
 }
 
 variable "aws_saml_endpoint" {
