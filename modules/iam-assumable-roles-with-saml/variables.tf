@@ -10,12 +10,6 @@ variable "provider_ids" {
   default     = []
 }
 
-variable "aws_account_id" {
-  description = "The AWS account ID where the SAML provider lives, leave empty to use the current account for the AWS provider"
-  type        = string
-  default     = ""
-}
-
 variable "aws_saml_endpoint" {
   description = "AWS SAML Endpoint"
   default     = "https://signin.aws.amazon.com/saml"
