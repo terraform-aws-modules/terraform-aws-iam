@@ -1,3 +1,7 @@
+locals {
+  identifiers = compact(distinct(concat(var.provider_ids, [var.provider_id])))
+}
+
 data "aws_iam_policy_document" "assume_role_with_saml" {
   statement {
     effect = "Allow"
@@ -5,8 +9,9 @@ data "aws_iam_policy_document" "assume_role_with_saml" {
     actions = ["sts:AssumeRoleWithSAML"]
 
     principals {
-      type        = "Federated"
-      identifiers = [var.provider_id]
+      type = "Federated"
+
+      identifiers = local.identifiers
     }
 
     condition {
