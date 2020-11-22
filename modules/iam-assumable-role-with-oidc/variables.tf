@@ -70,13 +70,6 @@ variable "role_policy_arns" {
   default     = []
 }
 
-variable "number_of_role_policy_arns" {
-  description = "Number of IAM policies to attach to IAM role"
-  type        = number
-  default     = 0
-}
-
-
 variable "oidc_fully_qualified_subjects" {
   description = "The fully qualified OIDC subjects to be added to the role policy"
   type        = set(string)

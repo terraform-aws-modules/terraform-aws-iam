@@ -76,12 +76,6 @@ variable "custom_role_policy_arns" {
   default     = []
 }
 
-variable "number_of_custom_role_policy_arns" {
-  description = "Number of IAM policies to attach to IAM role"
-  type        = number
-  default     = 0
-}
-
 # Pre-defined policies
 variable "admin_role_policy_arn" {
   description = "Policy ARN to use for admin role"
