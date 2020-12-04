@@ -53,6 +53,33 @@ module "iam_assumable_role_custom" {
   custom_role_policy_arns = [
     "arn:aws:iam::aws:policy/AmazonCognitoReadOnly",
     "arn:aws:iam::aws:policy/AlexaForBusinessFullAccess",
+    module.iam_policy.arn
   ]
-  number_of_custom_role_policy_arns = 2
+  #  number_of_custom_role_policy_arns = 3
+}
+
+#########################################
+# IAM policy
+#########################################
+module "iam_policy" {
+  source = "../../modules/iam-policy"
+
+  name        = "example"
+  path        = "/"
+  description = "My example policy"
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "ec2:Describe*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}
+EOF
 }
