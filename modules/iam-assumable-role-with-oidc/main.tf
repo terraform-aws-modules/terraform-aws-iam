@@ -9,7 +9,7 @@ locals {
     for url in local.urls :
     "arn:${data.aws_partition.current.partition}:iam::${local.aws_account_id}:oidc-provider/${url}"
   ]
-  number_of_role_policy_arns = var.number_of_role_policy_arns == null ? length(var.role_policy_arns) : var.number_of_role_policy_arns
+  number_of_role_policy_arns = coalesce(var.number_of_role_policy_arns, length(var.role_policy_arns))
 }
 
 data "aws_caller_identity" "current" {}
