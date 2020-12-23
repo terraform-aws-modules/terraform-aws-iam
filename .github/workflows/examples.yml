@@ -1,0 +1,58 @@
+name: Examples
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  validateExamples:
+    name: Validate examples
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        directory:
+          - examples/iam-account
+          - examples/iam-assumable-role
+          - examples/iam-assumable-role-with-oidc
+          - examples/iam-assumable-roles
+          - examples/iam-assumable-roles-with-saml
+          - examples/iam-group-complete
+          - examples/iam-group-with-assumable-roles-policy
+          - examples/iam-group-with-policies
+          - examples/iam-policy
+          - examples/iam-user
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Terraform min/max versions
+        id: minMax
+        uses: clowdhaus/terraform-min-max@v1.0.1
+        with:
+          directory: ${{ matrix.directory }}
+
+      - name: Install Terraform MIN v${{ steps.minMax.outputs.minVersion }}
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: ${{ steps.minMax.outputs.minVersion }}
+
+      - name: Validate MIN v${{ steps.minMax.outputs.minVersion }}
+        run: |
+          cd ${{ matrix.directory }}
+          terraform init -backend=false
+          terraform validate
+
+      - name: Install Terraform MAX v${{ steps.minMax.outputs.maxVersion }}
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: ${{ steps.minMax.outputs.maxVersion }}
+
+      - name: Validate MAX v${{ steps.minMax.outputs.maxVersion }}
+        run: |
+          cd ${{ matrix.directory }}
+          terraform init -backend=false
+          terraform validate
