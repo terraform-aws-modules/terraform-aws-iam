@@ -5,6 +5,7 @@ locals {
     for url in compact(distinct(concat(var.provider_urls, [var.provider_url]))) :
     replace(url, "https://", "")
   ]
+  number_of_role_policy_arns = coalesce(var.number_of_role_policy_arns, length(var.role_policy_arns))
 }
 
 data "aws_caller_identity" "current" {}
@@ -66,7 +67,7 @@ resource "aws_iam_role" "this" {
 }
 
 resource "aws_iam_role_policy_attachment" "custom" {
-  count = var.create_role ? var.number_of_role_policy_arns : 0
+  count = var.create_role ? local.number_of_role_policy_arns : 0
 
   role       = join("", aws_iam_role.this.*.name)
   policy_arn = var.role_policy_arns[count.index]

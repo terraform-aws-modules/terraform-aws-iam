@@ -73,7 +73,7 @@ variable "role_policy_arns" {
 variable "number_of_role_policy_arns" {
   description = "Number of IAM policies to attach to IAM role"
   type        = number
-  default     = 0
+  default     = null
 }
 
 
