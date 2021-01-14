@@ -5,10 +5,6 @@ locals {
     for url in compact(distinct(concat(var.provider_urls, [var.provider_url]))) :
     replace(url, "https://", "")
   ]
-  identifiers = [
-    for url in local.urls :
-    "arn:${data.aws_partition.current.partition}:iam::${local.aws_account_id}:oidc-provider/${url}"
-  ]
   number_of_role_policy_arns = coalesce(var.number_of_role_policy_arns, length(var.role_policy_arns))
 }
 
@@ -19,33 +15,38 @@ data "aws_partition" "current" {}
 data "aws_iam_policy_document" "assume_role_with_oidc" {
   count = var.create_role ? 1 : 0
 
-  statement {
-    effect = "Allow"
+  dynamic "statement" {
+    for_each = local.urls
 
-    actions = ["sts:AssumeRoleWithWebIdentity"]
+    content {
+      effect = "Allow"
 
-    principals {
-      type = "Federated"
+      actions = ["sts:AssumeRoleWithWebIdentity"]
 
-      identifiers = local.identifiers
-    }
+      principals {
+        type = "Federated"
 
-    dynamic "condition" {
-      for_each = length(var.oidc_fully_qualified_subjects) > 0 ? local.urls : []
-      content {
-        test     = "StringEquals"
-        variable = "${condition.value}:sub"
-        values   = var.oidc_fully_qualified_subjects
+        identifiers = ["arn:${data.aws_partition.current.partition}:iam::${local.aws_account_id}:oidc-provider/${statement.value}"]
       }
-    }
 
+      dynamic "condition" {
+        for_each = length(var.oidc_fully_qualified_subjects) > 0 ? local.urls : []
 
-    dynamic "condition" {
-      for_each = length(var.oidc_subjects_with_wildcards) > 0 ? local.urls : []
-      content {
-        test     = "StringLike"
-        variable = "${condition.value}:sub"
-        values   = var.oidc_subjects_with_wildcards
+        content {
+          test     = "StringEquals"
+          variable = "${statement.value}:sub"
+          values   = var.oidc_fully_qualified_subjects
+        }
+      }
+
+      dynamic "condition" {
+        for_each = length(var.oidc_subjects_with_wildcards) > 0 ? local.urls : []
+
+        content {
+          test     = "StringLike"
+          variable = "${statement.value}:sub"
+          values   = var.oidc_subjects_with_wildcards
+        }
       }
     }
   }
