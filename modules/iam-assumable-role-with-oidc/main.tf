@@ -17,6 +17,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
 
   dynamic "statement" {
     for_each = local.urls
+
     content {
       effect = "Allow"
 
@@ -30,6 +31,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
 
       dynamic "condition" {
         for_each = length(var.oidc_fully_qualified_subjects) > 0 ? local.urls : []
+
         content {
           test     = "StringEquals"
           variable = "${statement.value}:sub"
@@ -39,6 +41,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
 
       dynamic "condition" {
         for_each = length(var.oidc_subjects_with_wildcards) > 0 ? local.urls : []
+
         content {
           test     = "StringLike"
           variable = "${statement.value}:sub"
