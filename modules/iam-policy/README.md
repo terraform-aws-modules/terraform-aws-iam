@@ -20,6 +20,7 @@ Creates IAM policy.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| create | Whether to create a policy | `bool` | `true` | no |
 | description | The description of the policy | `string` | `"IAM Policy"` | no |
 | name | The name of the policy | `string` | `""` | no |
 | path | The path of the policy in IAM | `string` | `"/"` | no |

@@ -1,3 +1,9 @@
+variable "create" {
+  description = "Whether to create a policy"
+  type        = bool
+  default     = true
+}
+
 variable "name" {
   description = "The name of the policy"
   type        = string
