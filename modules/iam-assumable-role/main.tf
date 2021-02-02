@@ -52,6 +52,15 @@ data "aws_iam_policy_document" "assume_role_with_mfa" {
       variable = "aws:MultiFactorAuthAge"
       values   = [var.mfa_age]
     }
+
+    dynamic "condition" {
+      for_each = var.role_sts_externalid != null ? [true] : []
+      content {
+        test     = "StringEquals"
+        variable = "sts:ExternalId"
+        values   = [var.role_sts_externalid]
+      }
+    }
   }
 }
 
