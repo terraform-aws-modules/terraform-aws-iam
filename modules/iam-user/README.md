@@ -50,6 +50,7 @@ This module outputs commands and PGP messages which can be decrypted either usin
 | ssh\_public\_key | The SSH public key. The public key must be encoded in ssh-rsa format or PEM format | `string` | `""` | no |
 | tags | A map of tags to add to all resources. | `map(string)` | `{}` | no |
 | upload\_iam\_user\_ssh\_key | Whether to upload a public ssh key to the IAM user | `bool` | `false` | no |
+| user\_groups | List of IAM groups to the IAM user should be a member of | `list(string)` | `[]` | no |
 
 ## Outputs
 
