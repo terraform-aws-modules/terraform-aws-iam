@@ -42,6 +42,7 @@ No Modules.
 
 | Name | Description |
 |------|-------------|
+| group\_arn | IAM group arn |
 | group\_name | IAM group name |
 | this\_assumable\_roles | List of ARNs of IAM roles which members of IAM group can assume |
 | this\_group\_users | List of IAM users in IAM group |

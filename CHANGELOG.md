@@ -7,6 +7,18 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v3.8.0"></a>
+## [v3.8.0] - 2021-01-29
+
+- feat: Add arn of created group(s) to outputs ([#128](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/128))
+
+
+<a name="v3.7.0"></a>
+## [v3.7.0] - 2021-01-14
+
+- fix: Multiple provider_urls not working with iam-assumable-role-with-oidc ([#115](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/115))
+
+
 <a name="v3.6.0"></a>
 ## [v3.6.0] - 2020-12-04
 
@@ -303,7 +315,9 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.6.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.8.0...HEAD
+[v3.8.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.7.0...v3.8.0
+[v3.7.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.6.0...v3.7.0
 [v3.6.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.5.0...v3.6.0
 [v3.5.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.4.0...v3.5.0
 [v3.4.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.3.0...v3.4.0
