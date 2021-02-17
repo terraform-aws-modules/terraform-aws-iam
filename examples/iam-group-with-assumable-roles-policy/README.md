@@ -29,6 +29,24 @@ Run `terraform destroy` when you don't need these resources.
 | aws | >= 2.23 |
 | aws.production | >= 2.23 |
 
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| iam_assumable_role_custom | ../../modules/iam-assumable-role |  |
+| iam_assumable_roles_in_prod | ../../modules/iam-assumable-roles |  |
+| iam_group_with_assumable_roles_policy_production_admin | ../../modules/iam-group-with-assumable-roles-policy |  |
+| iam_group_with_assumable_roles_policy_production_custom | ../../modules/iam-group-with-assumable-roles-policy |  |
+| iam_group_with_assumable_roles_policy_production_readonly | ../../modules/iam-group-with-assumable-roles-policy |  |
+| iam_user1 | ../../modules/iam-user |  |
+| iam_user2 | ../../modules/iam-user |  |
+
+## Resources
+
+| Name |
+|------|
+| [aws_caller_identity](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/data-sources/caller_identity) |
+
 ## Inputs
 
 No input.
@@ -42,5 +60,4 @@ No input.
 | this\_assumable\_roles | List of ARNs of IAM roles which members of IAM group can assume |
 | this\_group\_users | List of IAM users in IAM group |
 | this\_policy\_arn | Assume role policy ARN for IAM group |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

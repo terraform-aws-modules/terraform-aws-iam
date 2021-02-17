@@ -26,6 +26,16 @@ Run `terraform destroy` when you don't need these resources.
 
 No provider.
 
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| iam_assumable_role_admin | ../../modules/iam-assumable-role-with-oidc |  |
+
+## Resources
+
+No resources.
+
 ## Inputs
 
 No input.
@@ -37,5 +47,4 @@ No input.
 | this\_iam\_role\_arn | ARN of IAM role |
 | this\_iam\_role\_name | Name of IAM role |
 | this\_iam\_role\_path | Path of IAM role |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
