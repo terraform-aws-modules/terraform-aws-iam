@@ -16,6 +16,22 @@ Creates IAM group with specified IAM policies, and add users into a group.
 |------|---------|
 | aws | >= 2.23 |
 
+## Modules
+
+No Modules.
+
+## Resources
+
+| Name |
+|------|
+| [aws_caller_identity](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/data-sources/caller_identity) |
+| [aws_iam_group_membership](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/resources/iam_group_membership) |
+| [aws_iam_group_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/resources/iam_group_policy_attachment) |
+| [aws_iam_group](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/resources/iam_group) |
+| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/data-sources/iam_policy_document) |
+| [aws_iam_policy](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/resources/iam_policy) |
+| [aws_partition](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/data-sources/partition) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -36,5 +52,4 @@ Creates IAM group with specified IAM policies, and add users into a group.
 | aws\_account\_id | IAM AWS account id |
 | this\_group\_name | IAM group name |
 | this\_group\_users | List of IAM users in IAM group |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

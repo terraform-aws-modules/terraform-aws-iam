@@ -27,6 +27,17 @@ Run `terraform destroy` when you don't need these resources.
 
 No provider.
 
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| iam_user | ../../modules/iam-user |  |
+| iam_user2 | ../../modules/iam-user |  |
+
+## Resources
+
+No resources.
+
 ## Inputs
 
 No input.
@@ -51,5 +62,4 @@ No input.
 | this\_iam\_user\_login\_profile\_key\_fingerprint | The fingerprint of the PGP key used to encrypt the password |
 | this\_iam\_user\_name | The user's name |
 | this\_iam\_user\_unique\_id | The unique ID assigned by AWS |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

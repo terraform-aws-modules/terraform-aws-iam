@@ -16,6 +16,20 @@ Creates IAM group with users who are allowed to assume IAM roles. This is typica
 |------|---------|
 | aws | >= 2.23 |
 
+## Modules
+
+No Modules.
+
+## Resources
+
+| Name |
+|------|
+| [aws_iam_group_membership](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/resources/iam_group_membership) |
+| [aws_iam_group_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/resources/iam_group_policy_attachment) |
+| [aws_iam_group](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/resources/iam_group) |
+| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/data-sources/iam_policy_document) |
+| [aws_iam_policy](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/resources/iam_policy) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -33,5 +47,4 @@ Creates IAM group with users who are allowed to assume IAM roles. This is typica
 | this\_assumable\_roles | List of ARNs of IAM roles which members of IAM group can assume |
 | this\_group\_users | List of IAM users in IAM group |
 | this\_policy\_arn | Assume role policy ARN of IAM group |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

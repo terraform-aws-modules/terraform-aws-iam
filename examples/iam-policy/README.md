@@ -28,6 +28,19 @@ Run `terraform destroy` when you don't need these resources.
 |------|---------|
 | aws | >= 2.23 |
 
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| iam_policy | ../../modules/iam-policy |  |
+| iam_policy_from_data_source | ../../modules/iam-policy |  |
+
+## Resources
+
+| Name |
+|------|
+| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/data-sources/iam_policy_document) |
+
 ## Inputs
 
 No input.
@@ -42,5 +55,4 @@ No input.
 | name | The name of the policy |
 | path | The path of the policy in IAM |
 | policy | The policy document |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

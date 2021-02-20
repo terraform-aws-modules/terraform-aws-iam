@@ -26,6 +26,16 @@ Run `terraform destroy` when you don't need these resources.
 
 No provider.
 
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| iam_assumable_roles | ../../modules/iam-assumable-roles |  |
+
+## Resources
+
+No resources.
+
 ## Inputs
 
 No input.
@@ -46,5 +56,4 @@ No input.
 | readonly\_iam\_role\_name | Name of readonly IAM role |
 | readonly\_iam\_role\_path | Path of readonly IAM role |
 | readonly\_iam\_role\_requires\_mfa | Whether readonly IAM role requires MFA |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
