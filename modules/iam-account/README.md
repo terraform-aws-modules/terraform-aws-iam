@@ -43,9 +43,9 @@ No Modules.
 
 | Name |
 |------|
-| [aws_caller_identity](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/data-sources/caller_identity) |
-| [aws_iam_account_alias](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/resources/iam_account_alias) |
-| [aws_iam_account_password_policy](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/resources/iam_account_password_policy) |
+| [aws_caller_identity](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) |
+| [aws_iam_account_alias](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_account_alias) |
+| [aws_iam_account_password_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_account_password_policy) |
 
 ## Inputs
 

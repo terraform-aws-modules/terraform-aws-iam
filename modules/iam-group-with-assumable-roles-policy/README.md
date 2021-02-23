@@ -24,11 +24,11 @@ No Modules.
 
 | Name |
 |------|
-| [aws_iam_group_membership](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/resources/iam_group_membership) |
-| [aws_iam_group_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/resources/iam_group_policy_attachment) |
-| [aws_iam_group](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/resources/iam_group) |
-| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/data-sources/iam_policy_document) |
-| [aws_iam_policy](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/resources/iam_policy) |
+| [aws_iam_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group) |
+| [aws_iam_group_membership](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_membership) |
+| [aws_iam_group_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_policy_attachment) |
+| [aws_iam_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) |
+| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) |
 
 ## Inputs
 

@@ -40,10 +40,10 @@ No Modules.
 
 | Name |
 |------|
-| [aws_iam_access_key](https://registry.terraform.io/providers/hashicorp/aws/2.50/docs/resources/iam_access_key) |
-| [aws_iam_user_login_profile](https://registry.terraform.io/providers/hashicorp/aws/2.50/docs/resources/iam_user_login_profile) |
-| [aws_iam_user_ssh_key](https://registry.terraform.io/providers/hashicorp/aws/2.50/docs/resources/iam_user_ssh_key) |
-| [aws_iam_user](https://registry.terraform.io/providers/hashicorp/aws/2.50/docs/resources/iam_user) |
+| [aws_iam_access_key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key) |
+| [aws_iam_user](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user) |
+| [aws_iam_user_login_profile](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_login_profile) |
+| [aws_iam_user_ssh_key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_ssh_key) |
 
 ## Inputs
 

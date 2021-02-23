@@ -40,7 +40,7 @@ Run `terraform destroy` when you don't need these resources.
 
 | Name |
 |------|
-| [aws_iam_saml_provider](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/resources/iam_saml_provider) |
+| [aws_iam_saml_provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_saml_provider) |
 
 ## Inputs
 
