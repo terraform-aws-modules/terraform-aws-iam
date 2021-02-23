@@ -24,7 +24,7 @@ No Modules.
 
 | Name |
 |------|
-| [aws_iam_policy](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/resources/iam_policy) |
+| [aws_iam_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) |
 
 ## Inputs
 

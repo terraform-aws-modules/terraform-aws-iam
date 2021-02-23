@@ -45,7 +45,7 @@ Run `terraform destroy` when you don't need these resources.
 
 | Name |
 |------|
-| [aws_caller_identity](https://registry.terraform.io/providers/hashicorp/aws/2.23/docs/data-sources/caller_identity) |
+| [aws_caller_identity](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) |
 
 ## Inputs
 
