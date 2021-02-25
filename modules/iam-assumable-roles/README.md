@@ -18,6 +18,18 @@ Trusted resources can be any [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/U
 |------|---------|
 | aws | >= 2.23 |
 
+## Modules
+
+No Modules.
+
+## Resources
+
+| Name |
+|------|
+| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) |
+| [aws_iam_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) |
+| [aws_iam_role_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -65,5 +77,4 @@ Trusted resources can be any [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/U
 | readonly\_iam\_role\_name | Name of readonly IAM role |
 | readonly\_iam\_role\_path | Path of readonly IAM role |
 | readonly\_iam\_role\_requires\_mfa | Whether readonly IAM role requires MFA |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
