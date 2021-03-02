@@ -53,6 +53,7 @@ No Modules.
 | role\_path | Path of IAM role | `string` | `"/"` | no |
 | role\_permissions\_boundary\_arn | Permissions boundary ARN to use for IAM role | `string` | `""` | no |
 | role\_requires\_mfa | Whether role requires MFA | `bool` | `true` | no |
+| role\_sts\_external\_ids | STS ExternalId condition value to use with a role (when MFA is not required) | `list(string)` | `[]` | no |
 | role\_sts\_externalid | STS ExternalId condition value to use with a role (when MFA is not required) | `string` | `null` | no |
 | tags | A map of tags to add to IAM role resources | `map(string)` | `{}` | no |
 | trusted\_role\_actions | Actions of STS | `list(string)` | <pre>[<br>  "sts:AssumeRole"<br>]</pre> | no |
@@ -71,4 +72,5 @@ No Modules.
 | this\_iam\_role\_arn | ARN of IAM role |
 | this\_iam\_role\_name | Name of IAM role |
 | this\_iam\_role\_path | Path of IAM role |
+
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
