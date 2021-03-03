@@ -52,4 +52,5 @@ No input.
 | this\_iam\_role\_arn | ARN of IAM role |
 | this\_iam\_role\_name | Name of IAM role |
 | this\_iam\_role\_path | Path of IAM role |
+
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
