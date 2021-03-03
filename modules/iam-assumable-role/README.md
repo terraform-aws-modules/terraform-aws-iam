@@ -53,7 +53,7 @@ No Modules.
 | role\_path | Path of IAM role | `string` | `"/"` | no |
 | role\_permissions\_boundary\_arn | Permissions boundary ARN to use for IAM role | `string` | `""` | no |
 | role\_requires\_mfa | Whether role requires MFA | `bool` | `true` | no |
-| role\_sts\_external\_ids | STS External ID condition values to use with a role (when MFA is not required) | `list(string)` | `[]` | no |
+| role\_sts\_externalid | STS ExternalId condition values to use with a role (when MFA is not required) | `any` | `[]` | no |
 | tags | A map of tags to add to IAM role resources | `map(string)` | `{}` | no |
 | trusted\_role\_actions | Actions of STS | `list(string)` | <pre>[<br>  "sts:AssumeRole"<br>]</pre> | no |
 | trusted\_role\_arns | ARNs of AWS entities who can assume these roles | `list(string)` | `[]` | no |
@@ -64,6 +64,7 @@ No Modules.
 | Name | Description |
 |------|-------------|
 | role\_requires\_mfa | Whether IAM role requires MFA |
+| role\_sts\_externalid | STS ExternalId condition value to use with a role |
 | this\_iam\_instance\_profile\_arn | ARN of IAM instance profile |
 | this\_iam\_instance\_profile\_name | Name of IAM instance profile |
 | this\_iam\_instance\_profile\_path | Path of IAM instance profile |

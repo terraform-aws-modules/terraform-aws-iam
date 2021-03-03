@@ -48,7 +48,36 @@ module "iam_assumable_role_custom" {
   role_name         = "custom"
   role_requires_mfa = false
 
-  role_sts_external_ids = [
+  role_sts_externalid = "some-id-goes-here"
+
+  custom_role_policy_arns = [
+    "arn:aws:iam::aws:policy/AmazonCognitoReadOnly",
+    "arn:aws:iam::aws:policy/AlexaForBusinessFullAccess",
+    module.iam_policy.arn
+  ]
+  #  number_of_custom_role_policy_arns = 3
+}
+
+####################################################
+# IAM assumable role with multiple sts external ids
+####################################################
+module "iam_assumable_role_sts" {
+  source = "../../modules/iam-assumable-role"
+
+  trusted_role_arns = [
+    "arn:aws:iam::307990089504:root",
+  ]
+
+  trusted_role_services = [
+    "codedeploy.amazonaws.com"
+  ]
+
+  create_role = true
+
+  role_name         = "custom_sts"
+  role_requires_mfa = false
+
+  role_sts_externalid = [
     "some-id-goes-here",
     "another-id-goes-here",
   ]
