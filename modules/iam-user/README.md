@@ -32,6 +32,19 @@ This module outputs commands and PGP messages which can be decrypted either usin
 |------|---------|
 | aws | >= 2.50 |
 
+## Modules
+
+No Modules.
+
+## Resources
+
+| Name |
+|------|
+| [aws_iam_access_key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key) |
+| [aws_iam_user](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user) |
+| [aws_iam_user_login_profile](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_login_profile) |
+| [aws_iam_user_ssh_key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_ssh_key) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -73,5 +86,4 @@ This module outputs commands and PGP messages which can be decrypted either usin
 | this\_iam\_user\_ssh\_key\_fingerprint | The MD5 message digest of the SSH public key |
 | this\_iam\_user\_ssh\_key\_ssh\_public\_key\_id | The unique identifier for the SSH public key |
 | this\_iam\_user\_unique\_id | The unique ID assigned by AWS |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

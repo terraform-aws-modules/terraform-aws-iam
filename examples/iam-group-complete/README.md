@@ -28,6 +28,19 @@ Run `terraform destroy` when you don't need these resources.
 
 No provider.
 
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| iam_group_complete | ../../modules/iam-group-with-assumable-roles-policy |  |
+| iam_group_complete_with_custom_policy | ../../modules/iam-group-with-policies |  |
+| iam_user1 | ../../modules/iam-user |  |
+| iam_user2 | ../../modules/iam-user |  |
+
+## Resources
+
+No resources.
+
 ## Inputs
 
 No input.
@@ -39,5 +52,4 @@ No input.
 | this\_assumable\_roles | List of ARNs of IAM roles which members of IAM group can assume |
 | this\_group\_users | List of IAM users in IAM group |
 | this\_policy\_arn | Assume role policy ARN for IAM group |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

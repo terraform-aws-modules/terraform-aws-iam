@@ -28,6 +28,21 @@ Run `terraform destroy` when you don't need these resources.
 |------|---------|
 | aws | >= 2.23 |
 
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| iam_group_superadmins | ../../modules/iam-group-with-policies |  |
+| iam_group_with_custom_policies | ../../modules/iam-group-with-policies |  |
+| iam_user1 | ../../modules/iam-user |  |
+| iam_user2 | ../../modules/iam-user |  |
+
+## Resources
+
+| Name |
+|------|
+| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) |
+
 ## Inputs
 
 No input.
@@ -39,5 +54,4 @@ No input.
 | iam\_account\_id | IAM AWS account id |
 | this\_group\_name | IAM group name |
 | this\_group\_users | List of IAM users in IAM group |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

@@ -18,6 +18,19 @@ Trusted resources can be any [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/U
 |------|---------|
 | aws | >= 2.23 |
 
+## Modules
+
+No Modules.
+
+## Resources
+
+| Name |
+|------|
+| [aws_iam_instance_profile](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_instance_profile) |
+| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) |
+| [aws_iam_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) |
+| [aws_iam_role_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -58,5 +71,4 @@ Trusted resources can be any [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/U
 | this\_iam\_role\_arn | ARN of IAM role |
 | this\_iam\_role\_name | Name of IAM role |
 | this\_iam\_role\_path | Path of IAM role |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

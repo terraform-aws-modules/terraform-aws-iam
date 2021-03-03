@@ -16,6 +16,16 @@ Creates IAM policy.
 |------|---------|
 | aws | >= 2.23 |
 
+## Modules
+
+No Modules.
+
+## Resources
+
+| Name |
+|------|
+| [aws_iam_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -35,5 +45,4 @@ Creates IAM policy.
 | name | The name of the policy |
 | path | The path of the policy in IAM |
 | policy | The policy document |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
