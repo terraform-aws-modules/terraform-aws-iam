@@ -48,7 +48,6 @@ module "iam_assumable_role_custom" {
   role_name         = "custom"
   role_requires_mfa = false
 
-  role_sts_externalid = "some-id-goes-here" # This will be added to the role_sts_external_ids list
   role_sts_external_ids = [
     "another-id-goes-here",
     "yet-another-id-goes-here",

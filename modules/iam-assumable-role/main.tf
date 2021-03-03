@@ -1,7 +1,3 @@
-locals {
-  role_sts_external_ids = compact(concat(var.role_sts_external_ids, [var.role_sts_externalid]))
-}
-
 data "aws_iam_policy_document" "assume_role" {
   statement {
     effect = "Allow"
@@ -19,11 +15,11 @@ data "aws_iam_policy_document" "assume_role" {
     }
 
     dynamic "condition" {
-      for_each = length(local.role_sts_external_ids) != 0 ? [true] : []
+      for_each = length(var.role_sts_external_ids) != 0 ? [true] : []
       content {
         test     = "StringEquals"
         variable = "sts:ExternalId"
-        values   = local.role_sts_external_ids
+        values   = var.role_sts_external_ids
       }
     }
   }
