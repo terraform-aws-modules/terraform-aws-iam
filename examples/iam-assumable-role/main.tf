@@ -49,8 +49,8 @@ module "iam_assumable_role_custom" {
   role_requires_mfa = false
 
   role_sts_external_ids = [
+    "some-id-goes-here",
     "another-id-goes-here",
-    "yet-another-id-goes-here",
   ]
 
   custom_role_policy_arns = [
