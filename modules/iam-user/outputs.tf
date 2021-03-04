@@ -86,7 +86,7 @@ output "pgp_key" {
 
 output "keybase_password_decrypt_command" {
   description = "Decrypt user password command"
-  value = !has_encrypted_password ? null : <<EOF
+  value = !local.has_encrypted_password ? null : <<EOF
 echo "${element(concat(aws_iam_user_login_profile.this.*.encrypted_password, [""]), 0)}" | base64 --decode | keybase pgp decrypt
 EOF
 
@@ -94,7 +94,7 @@ EOF
 
 output "keybase_password_pgp_message" {
   description = "Encrypted password"
-  value = !has_encrypted_password ? null : <<EOF
+  value = !local.has_encrypted_password ? null : <<EOF
 -----BEGIN PGP MESSAGE-----
 Version: Keybase OpenPGP v2.0.76
 Comment: https://keybase.io/crypto
@@ -107,7 +107,7 @@ EOF
 
 output "keybase_secret_key_decrypt_command" {
   description = "Decrypt access secret key command"
-  value       = !has_encrypted_secret ? null : <<EOF
+  value       = !local.has_encrypted_secret ? null : <<EOF
 echo "${element(concat(aws_iam_access_key.this.*.encrypted_secret, [""]), 0)}" | base64 --decode | keybase pgp decrypt
 EOF
 
@@ -115,7 +115,7 @@ EOF
 
 output "keybase_secret_key_pgp_message" {
   description = "Encrypted access secret key"
-  value       = !has_encrypted_secret ? null : <<EOF
+  value       = !local.has_encrypted_secret ? null : <<EOF
 -----BEGIN PGP MESSAGE-----
 Version: Keybase OpenPGP v2.0.76
 Comment: https://keybase.io/crypto
