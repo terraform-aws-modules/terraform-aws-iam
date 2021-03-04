@@ -37,6 +37,10 @@ No Modules.
 | assumable\_roles | List of IAM roles ARNs which can be assumed by the group | `list(string)` | `[]` | no |
 | group\_users | List of IAM users to have in an IAM group which can assume the role | `list(string)` | `[]` | no |
 | name | Name of IAM policy and IAM group | `string` | n/a | yes |
+| group\_name | Name of IAM group | string | n/a | yes |
+| group\_path | Path of IAM group | string | n/a | no |
+| policy\_name | Name of IAM policy | string | n/a | yes |
+| policy\_path | Path of IAM policy | string | n/a | no |
 
 ## Outputs
 
