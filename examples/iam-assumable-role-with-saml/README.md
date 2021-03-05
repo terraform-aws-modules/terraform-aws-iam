@@ -28,6 +28,18 @@ Run `terraform destroy` when you don't need these resources.
 |------|---------|
 | aws | >= 2.23 |
 
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| iam_assumable_role_admin | ../../modules/iam-assumable-role-with-saml |  |
+
+## Resources
+
+| Name |
+|------|
+| [aws_iam_saml_provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_saml_provider) |
+
 ## Inputs
 
 No input.
@@ -39,5 +51,4 @@ No input.
 | this\_iam\_role\_arn | ARN of IAM role |
 | this\_iam\_role\_name | Name of IAM role |
 | this\_iam\_role\_path | Path of IAM role |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

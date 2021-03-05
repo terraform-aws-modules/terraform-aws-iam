@@ -19,6 +19,18 @@ Creates single IAM role which can be assumed by trusted resources using SAML Fed
 |------|---------|
 | aws | >= 2.23 |
 
+## Modules
+
+No Modules.
+
+## Resources
+
+| Name |
+|------|
+| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) |
+| [aws_iam_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) |
+| [aws_iam_role_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -27,6 +39,7 @@ Creates single IAM role which can be assumed by trusted resources using SAML Fed
 | create\_role | Whether to create a role | `bool` | `false` | no |
 | force\_detach\_policies | Whether policies should be detached from this role when destroying | `bool` | `false` | no |
 | max\_session\_duration | Maximum CLI/API session duration in seconds between 3600 and 43200 | `number` | `3600` | no |
+| number\_of\_role\_policy\_arns | Number of IAM policies to attach to IAM role | `number` | `null` | no |
 | provider\_id | ID of the SAML Provider. Use provider\_ids to specify several IDs. | `string` | `""` | no |
 | provider\_ids | List of SAML Provider IDs | `list(string)` | `[]` | no |
 | role\_description | IAM Role description | `string` | `""` | no |
@@ -44,5 +57,4 @@ Creates single IAM role which can be assumed by trusted resources using SAML Fed
 | this\_iam\_role\_arn | ARN of IAM role |
 | this\_iam\_role\_name | Name of IAM role |
 | this\_iam\_role\_path | Path of IAM role |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
