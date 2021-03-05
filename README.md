@@ -85,6 +85,29 @@ module "iam_assumable_role_with_oidc" {
 }
 ```
 
+`iam-assumable-role-with-saml`:
+```hcl
+module "iam_assumable_role_with_saml" {
+  source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-saml"
+  version = "~> 3.0"
+
+  create_role = true
+
+  role_name = "role-with-saml"
+
+  tags = {
+    Role = "role-with-saml"
+  }
+
+  provider_id = "arn:aws:iam::235367859851:saml-provider/idp_saml"
+
+  role_policy_arns = [
+    "arn:aws:iam::aws:policy/ReadOnlyAccess"
+  ]
+  number_of_role_policy_arns = 1
+}
+```
+
 `iam-assumable-roles`:
 ```hcl
 module "iam_assumable_roles" {
@@ -255,6 +278,7 @@ Use [iam-policy module](https://github.com/terraform-aws-modules/terraform-aws-i
 * [iam-account](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-account) - Set AWS account alias and password policy
 * [iam-assumable-role](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-role) - Create individual IAM role which can be assumed from specified ARNs (AWS accounts, IAM users, etc)
 * [iam-assumable-role-with-oidc](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-role-with-oidc) - Create individual IAM role which can be assumed from specified subjects federated with a OIDC Identity Provider
+* [iam-assumable-role-with-saml](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-role-with-saml) - Create individual IAM role which can be assumed by users with a SAML Identity Provider
 * [iam-assumable-roles](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-roles) - Create several IAM roles which can be assumed from specified ARNs (AWS accounts, IAM users, etc)
 * [iam-assumable-roles-with-saml](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-roles-with-saml) - Create several IAM roles which can be assumed by users with a SAML Identity Provider
 * [iam-group-with-assumable-roles-policy](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-group-with-assumable-roles-policy) - IAM group with users who are allowed to assume IAM roles in the same or in separate AWS account

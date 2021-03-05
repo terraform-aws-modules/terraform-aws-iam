@@ -7,6 +7,19 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v3.12.0"></a>
+## [v3.12.0] - 2021-03-05
+
+- feat: Add iam-assumable-role-with-saml module ([#127](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/127))
+
+
+<a name="v3.11.0"></a>
+## [v3.11.0] - 2021-03-04
+
+- fix: handle unencrypted secrets ([#139](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/139))
+- chore: update ci-cd workflow to allow for pulling min version from each directory ([#137](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/137))
+
+
 <a name="v3.10.0"></a>
 ## [v3.10.0] - 2021-03-01
 
@@ -329,7 +342,9 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.10.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.12.0...HEAD
+[v3.12.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.11.0...v3.12.0
+[v3.11.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.10.0...v3.11.0
 [v3.10.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.9.0...v3.10.0
 [v3.9.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.8.0...v3.9.0
 [v3.8.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.7.0...v3.8.0
