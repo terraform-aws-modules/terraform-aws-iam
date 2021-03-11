@@ -1,3 +1,7 @@
+locals {
+  role_sts_externalid = flatten(list(var.role_sts_externalid))
+}
+
 data "aws_iam_policy_document" "assume_role" {
   statement {
     effect = "Allow"
@@ -15,11 +19,11 @@ data "aws_iam_policy_document" "assume_role" {
     }
 
     dynamic "condition" {
-      for_each = var.role_sts_externalid != null ? [true] : []
+      for_each = length(local.role_sts_externalid) != 0 ? [true] : []
       content {
         test     = "StringEquals"
         variable = "sts:ExternalId"
-        values   = [var.role_sts_externalid]
+        values   = local.role_sts_externalid
       }
     }
   }

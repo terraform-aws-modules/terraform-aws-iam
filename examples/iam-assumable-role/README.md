@@ -34,6 +34,7 @@ No provider.
 |------|--------|---------|
 | iam_assumable_role_admin | ../../modules/iam-assumable-role |  |
 | iam_assumable_role_custom | ../../modules/iam-assumable-role |  |
+| iam_assumable_role_sts | ../../modules/iam-assumable-role |  |
 | iam_policy | ../../modules/iam-policy |  |
 
 ## Resources

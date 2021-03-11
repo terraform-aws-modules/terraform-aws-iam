@@ -37,4 +37,3 @@ output "role_sts_externalid" {
   description = "STS ExternalId condition value to use with a role"
   value       = var.role_sts_externalid
 }
-
