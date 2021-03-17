@@ -38,3 +38,9 @@ resource "aws_iam_user_ssh_key" "this" {
   public_key = var.ssh_public_key
 }
 
+resource "aws_iam_user_group_membership" "this" {
+  count = length(var.user_groups) > 0 ? 1 : 0
+
+  user   = aws_iam_user.this[0].name
+  groups = var.user_groups
+}

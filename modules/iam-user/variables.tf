@@ -80,3 +80,10 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "user_groups" {
+  description = "List of IAM groups a IAM user should be a memeber of."
+  type        = list(string)
+  default     = []
+}
+
