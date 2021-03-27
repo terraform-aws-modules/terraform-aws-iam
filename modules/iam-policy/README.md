@@ -7,42 +7,42 @@ Creates IAM policy.
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.6 |
-| aws | >= 2.23 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.6 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 2.23 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | >= 2.23 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 2.23 |
 
 ## Modules
 
-No Modules.
+No modules.
 
 ## Resources
 
-| Name |
-|------|
-| [aws_iam_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) |
+| Name | Type |
+|------|------|
+| [aws_iam_policy.policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| description | The description of the policy | `string` | `"IAM Policy"` | no |
-| name | The name of the policy | `string` | `""` | no |
-| path | The path of the policy in IAM | `string` | `"/"` | no |
-| policy | The path of the policy in IAM (tpl file) | `string` | `""` | no |
+| <a name="input_description"></a> [description](#input\_description) | The description of the policy | `string` | `"IAM Policy"` | no |
+| <a name="input_name"></a> [name](#input\_name) | The name of the policy | `string` | `""` | no |
+| <a name="input_path"></a> [path](#input\_path) | The path of the policy in IAM | `string` | `"/"` | no |
+| <a name="input_policy"></a> [policy](#input\_policy) | The path of the policy in IAM (tpl file) | `string` | `""` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| arn | The ARN assigned by AWS to this policy |
-| description | The description of the policy |
-| id | The policy's ID |
-| name | The name of the policy |
-| path | The path of the policy in IAM |
-| policy | The policy document |
+| <a name="output_arn"></a> [arn](#output\_arn) | The ARN assigned by AWS to this policy |
+| <a name="output_description"></a> [description](#output\_description) | The description of the policy |
+| <a name="output_id"></a> [id](#output\_id) | The policy's ID |
+| <a name="output_name"></a> [name](#output\_name) | The name of the policy |
+| <a name="output_path"></a> [path](#output\_path) | The path of the policy in IAM |
+| <a name="output_policy"></a> [policy](#output\_policy) | The policy document |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

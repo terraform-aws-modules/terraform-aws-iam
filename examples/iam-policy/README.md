@@ -19,40 +19,40 @@ Run `terraform destroy` when you don't need these resources.
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.6 |
-| aws | >= 2.23 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.6 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 2.23 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | >= 2.23 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 2.23 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| iam_policy | ../../modules/iam-policy |  |
-| iam_policy_from_data_source | ../../modules/iam-policy |  |
+| <a name="module_iam_policy"></a> [iam\_policy](#module\_iam\_policy) | ../../modules/iam-policy |  |
+| <a name="module_iam_policy_from_data_source"></a> [iam\_policy\_from\_data\_source](#module\_iam\_policy\_from\_data\_source) | ../../modules/iam-policy |  |
 
 ## Resources
 
-| Name |
-|------|
-| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) |
+| Name | Type |
+|------|------|
+| [aws_iam_policy_document.bucket_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
 
-No input.
+No inputs.
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| arn | The ARN assigned by AWS to this policy |
-| description | The description of the policy |
-| id | The policy ID |
-| name | The name of the policy |
-| path | The path of the policy in IAM |
-| policy | The policy document |
+| <a name="output_arn"></a> [arn](#output\_arn) | The ARN assigned by AWS to this policy |
+| <a name="output_description"></a> [description](#output\_description) | The description of the policy |
+| <a name="output_id"></a> [id](#output\_id) | The policy ID |
+| <a name="output_name"></a> [name](#output\_name) | The name of the policy |
+| <a name="output_path"></a> [path](#output\_path) | The path of the policy in IAM |
+| <a name="output_policy"></a> [policy](#output\_policy) | The policy document |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

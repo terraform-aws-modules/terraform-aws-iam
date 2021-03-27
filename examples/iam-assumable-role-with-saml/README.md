@@ -19,36 +19,37 @@ Run `terraform destroy` when you don't need these resources.
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.6 |
-| aws | >= 2.23 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.6 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 2.23 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | >= 2.23 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 2.23 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| iam_assumable_role_admin | ../../modules/iam-assumable-role-with-saml |  |
+| <a name="module_iam_assumable_role_admin"></a> [iam\_assumable\_role\_admin](#module\_iam\_assumable\_role\_admin) | ../../modules/iam-assumable-role-with-saml |  |
 
 ## Resources
 
-| Name |
-|------|
-| [aws_iam_saml_provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_saml_provider) |
+| Name | Type |
+|------|------|
+| [aws_iam_saml_provider.idp_saml](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_saml_provider) | resource |
+| [aws_iam_saml_provider.second_idp_saml](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_saml_provider) | resource |
 
 ## Inputs
 
-No input.
+No inputs.
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| this\_iam\_role\_arn | ARN of IAM role |
-| this\_iam\_role\_name | Name of IAM role |
-| this\_iam\_role\_path | Path of IAM role |
+| <a name="output_this_iam_role_arn"></a> [this\_iam\_role\_arn](#output\_this\_iam\_role\_arn) | ARN of IAM role |
+| <a name="output_this_iam_role_name"></a> [this\_iam\_role\_name](#output\_this\_iam\_role\_name) | Name of IAM role |
+| <a name="output_this_iam_role_path"></a> [this\_iam\_role\_path](#output\_this\_iam\_role\_path) | Path of IAM role |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

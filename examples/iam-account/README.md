@@ -19,18 +19,18 @@ Run `terraform destroy` when you don't need these resources.
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.6 |
-| aws | >= 2.23 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.6 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 2.23 |
 
 ## Providers
 
-No provider.
+No providers.
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| iam_account | ../../modules/iam-account |  |
+| <a name="module_iam_account"></a> [iam\_account](#module\_iam\_account) | ../../modules/iam-account |  |
 
 ## Resources
 
@@ -38,12 +38,12 @@ No resources.
 
 ## Inputs
 
-No input.
+No inputs.
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| this\_caller\_identity\_account\_id | The ID of the AWS account |
-| this\_iam\_account\_password\_policy\_expire\_passwords | Indicates whether passwords in the account expire. Returns true if max\_password\_age contains a value greater than 0. Returns false if it is 0 or not present. |
+| <a name="output_this_caller_identity_account_id"></a> [this\_caller\_identity\_account\_id](#output\_this\_caller\_identity\_account\_id) | The ID of the AWS account |
+| <a name="output_this_iam_account_password_policy_expire_passwords"></a> [this\_iam\_account\_password\_policy\_expire\_passwords](#output\_this\_iam\_account\_password\_policy\_expire\_passwords) | Indicates whether passwords in the account expire. Returns true if max\_password\_age contains a value greater than 0. Returns false if it is 0 or not present. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

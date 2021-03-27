@@ -7,44 +7,44 @@ Creates IAM group with users who are allowed to assume IAM roles. This is typica
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.6 |
-| aws | >= 2.23 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.6 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 2.23 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | >= 2.23 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 2.23 |
 
 ## Modules
 
-No Modules.
+No modules.
 
 ## Resources
 
-| Name |
-|------|
-| [aws_iam_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group) |
-| [aws_iam_group_membership](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_membership) |
-| [aws_iam_group_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_policy_attachment) |
-| [aws_iam_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) |
-| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) |
+| Name | Type |
+|------|------|
+| [aws_iam_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group) | resource |
+| [aws_iam_group_membership.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_membership) | resource |
+| [aws_iam_group_policy_attachment.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_policy_attachment) | resource |
+| [aws_iam_policy.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
+| [aws_iam_policy_document.assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| assumable\_roles | List of IAM roles ARNs which can be assumed by the group | `list(string)` | `[]` | no |
-| group\_users | List of IAM users to have in an IAM group which can assume the role | `list(string)` | `[]` | no |
-| name | Name of IAM policy and IAM group | `string` | n/a | yes |
+| <a name="input_assumable_roles"></a> [assumable\_roles](#input\_assumable\_roles) | List of IAM roles ARNs which can be assumed by the group | `list(string)` | `[]` | no |
+| <a name="input_group_users"></a> [group\_users](#input\_group\_users) | List of IAM users to have in an IAM group which can assume the role | `list(string)` | `[]` | no |
+| <a name="input_name"></a> [name](#input\_name) | Name of IAM policy and IAM group | `string` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| group\_arn | IAM group arn |
-| group\_name | IAM group name |
-| this\_assumable\_roles | List of ARNs of IAM roles which members of IAM group can assume |
-| this\_group\_users | List of IAM users in IAM group |
-| this\_policy\_arn | Assume role policy ARN of IAM group |
+| <a name="output_group_arn"></a> [group\_arn](#output\_group\_arn) | IAM group arn |
+| <a name="output_group_name"></a> [group\_name](#output\_group\_name) | IAM group name |
+| <a name="output_this_assumable_roles"></a> [this\_assumable\_roles](#output\_this\_assumable\_roles) | List of ARNs of IAM roles which members of IAM group can assume |
+| <a name="output_this_group_users"></a> [this\_group\_users](#output\_this\_group\_users) | List of IAM users in IAM group |
+| <a name="output_this_policy_arn"></a> [this\_policy\_arn](#output\_this\_policy\_arn) | Assume role policy ARN of IAM group |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
