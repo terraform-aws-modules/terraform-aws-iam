@@ -19,18 +19,18 @@ Run `terraform destroy` when you don't need these resources.
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.6 |
-| aws | >= 2.23 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.6 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 2.23 |
 
 ## Providers
 
-No provider.
+No providers.
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| iam_assumable_roles | ../../modules/iam-assumable-roles |  |
+| <a name="module_iam_assumable_roles"></a> [iam\_assumable\_roles](#module\_iam\_assumable\_roles) | ../../modules/iam-assumable-roles |  |
 
 ## Resources
 
@@ -38,22 +38,22 @@ No resources.
 
 ## Inputs
 
-No input.
+No inputs.
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| admin\_iam\_role\_arn | ARN of admin IAM role |
-| admin\_iam\_role\_name | Name of admin IAM role |
-| admin\_iam\_role\_path | Path of admin IAM role |
-| admin\_iam\_role\_requires\_mfa | Whether admin IAM role requires MFA |
-| poweruser\_iam\_role\_arn | ARN of poweruser IAM role |
-| poweruser\_iam\_role\_name | Name of poweruser IAM role |
-| poweruser\_iam\_role\_path | Path of poweruser IAM role |
-| poweruser\_iam\_role\_requires\_mfa | Whether poweruser IAM role requires MFA |
-| readonly\_iam\_role\_arn | ARN of readonly IAM role |
-| readonly\_iam\_role\_name | Name of readonly IAM role |
-| readonly\_iam\_role\_path | Path of readonly IAM role |
-| readonly\_iam\_role\_requires\_mfa | Whether readonly IAM role requires MFA |
+| <a name="output_admin_iam_role_arn"></a> [admin\_iam\_role\_arn](#output\_admin\_iam\_role\_arn) | ARN of admin IAM role |
+| <a name="output_admin_iam_role_name"></a> [admin\_iam\_role\_name](#output\_admin\_iam\_role\_name) | Name of admin IAM role |
+| <a name="output_admin_iam_role_path"></a> [admin\_iam\_role\_path](#output\_admin\_iam\_role\_path) | Path of admin IAM role |
+| <a name="output_admin_iam_role_requires_mfa"></a> [admin\_iam\_role\_requires\_mfa](#output\_admin\_iam\_role\_requires\_mfa) | Whether admin IAM role requires MFA |
+| <a name="output_poweruser_iam_role_arn"></a> [poweruser\_iam\_role\_arn](#output\_poweruser\_iam\_role\_arn) | ARN of poweruser IAM role |
+| <a name="output_poweruser_iam_role_name"></a> [poweruser\_iam\_role\_name](#output\_poweruser\_iam\_role\_name) | Name of poweruser IAM role |
+| <a name="output_poweruser_iam_role_path"></a> [poweruser\_iam\_role\_path](#output\_poweruser\_iam\_role\_path) | Path of poweruser IAM role |
+| <a name="output_poweruser_iam_role_requires_mfa"></a> [poweruser\_iam\_role\_requires\_mfa](#output\_poweruser\_iam\_role\_requires\_mfa) | Whether poweruser IAM role requires MFA |
+| <a name="output_readonly_iam_role_arn"></a> [readonly\_iam\_role\_arn](#output\_readonly\_iam\_role\_arn) | ARN of readonly IAM role |
+| <a name="output_readonly_iam_role_name"></a> [readonly\_iam\_role\_name](#output\_readonly\_iam\_role\_name) | Name of readonly IAM role |
+| <a name="output_readonly_iam_role_path"></a> [readonly\_iam\_role\_path](#output\_readonly\_iam\_role\_path) | Path of readonly IAM role |
+| <a name="output_readonly_iam_role_requires_mfa"></a> [readonly\_iam\_role\_requires\_mfa](#output\_readonly\_iam\_role\_requires\_mfa) | Whether readonly IAM role requires MFA |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

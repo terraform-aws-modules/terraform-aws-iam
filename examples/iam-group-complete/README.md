@@ -21,21 +21,21 @@ Run `terraform destroy` when you don't need these resources.
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.6 |
-| aws | >= 2.23 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.6 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 2.23 |
 
 ## Providers
 
-No provider.
+No providers.
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| iam_group_complete | ../../modules/iam-group-with-assumable-roles-policy |  |
-| iam_group_complete_with_custom_policy | ../../modules/iam-group-with-policies |  |
-| iam_user1 | ../../modules/iam-user |  |
-| iam_user2 | ../../modules/iam-user |  |
+| <a name="module_iam_group_complete"></a> [iam\_group\_complete](#module\_iam\_group\_complete) | ../../modules/iam-group-with-assumable-roles-policy |  |
+| <a name="module_iam_group_complete_with_custom_policy"></a> [iam\_group\_complete\_with\_custom\_policy](#module\_iam\_group\_complete\_with\_custom\_policy) | ../../modules/iam-group-with-policies |  |
+| <a name="module_iam_user1"></a> [iam\_user1](#module\_iam\_user1) | ../../modules/iam-user |  |
+| <a name="module_iam_user2"></a> [iam\_user2](#module\_iam\_user2) | ../../modules/iam-user |  |
 
 ## Resources
 
@@ -43,13 +43,13 @@ No resources.
 
 ## Inputs
 
-No input.
+No inputs.
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| this\_assumable\_roles | List of ARNs of IAM roles which members of IAM group can assume |
-| this\_group\_users | List of IAM users in IAM group |
-| this\_policy\_arn | Assume role policy ARN for IAM group |
+| <a name="output_this_assumable_roles"></a> [this\_assumable\_roles](#output\_this\_assumable\_roles) | List of ARNs of IAM roles which members of IAM group can assume |
+| <a name="output_this_group_users"></a> [this\_group\_users](#output\_this\_group\_users) | List of IAM users in IAM group |
+| <a name="output_this_policy_arn"></a> [this\_policy\_arn](#output\_this\_policy\_arn) | Assume role policy ARN for IAM group |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
