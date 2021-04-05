@@ -13,6 +13,11 @@ output "this_iam_role_path" {
   value       = element(concat(aws_iam_role.this.*.path, [""]), 0)
 }
 
+output "this_iam_role_unique_id" {
+  description = "Unique ID of IAM role"
+  value       = element(concat(aws_iam_role.this.*.unique_id, [""]), 0)
+}
+
 output "role_requires_mfa" {
   description = "Whether IAM role requires MFA"
   value       = var.role_requires_mfa
