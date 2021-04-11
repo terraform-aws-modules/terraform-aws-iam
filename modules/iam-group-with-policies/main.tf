@@ -48,6 +48,8 @@ resource "aws_iam_policy" "iam_self_management" {
 
   name_prefix = var.iam_self_management_policy_name_prefix
   policy      = data.aws_iam_policy_document.iam_self_management.json
+
+  tags = var.tags
 }
 
 resource "aws_iam_policy" "custom" {
@@ -56,5 +58,7 @@ resource "aws_iam_policy" "custom" {
   name        = var.custom_group_policies[count.index]["name"]
   policy      = var.custom_group_policies[count.index]["policy"]
   description = lookup(var.custom_group_policies[count.index], "description", null)
+
+  tags = var.tags
 }
 
