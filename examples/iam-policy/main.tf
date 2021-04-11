@@ -34,6 +34,10 @@ module "iam_policy" {
   ]
 }
 EOF
+
+  tags = {
+    PolicyDescription = "Policy created using heredoc policy"
+  }
 }
 
 module "iam_policy_from_data_source" {
@@ -44,4 +48,8 @@ module "iam_policy_from_data_source" {
   description = "My example policy"
 
   policy = data.aws_iam_policy_document.bucket_policy.json
+
+  tags = {
+    PolicyDescription = "Policy created using example from data source"
+  }
 }
