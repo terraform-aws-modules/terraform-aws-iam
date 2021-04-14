@@ -1,5 +1,5 @@
 locals {
-  role_sts_externalid = flatten(list(var.role_sts_externalid))
+  role_sts_externalid = flatten(tolist(var.role_sts_externalid))
 }
 
 data "aws_iam_policy_document" "assume_role" {
