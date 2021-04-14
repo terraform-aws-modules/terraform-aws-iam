@@ -22,3 +22,8 @@ variable "policy" {
   default     = ""
 }
 
+variable "tags" {
+  description = "A map of tags to add to IAM policy resources"
+  type        = map(string)
+  default     = {}
+}
