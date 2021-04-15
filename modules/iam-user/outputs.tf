@@ -43,6 +43,7 @@ output "this_iam_access_key_id" {
 output "this_iam_access_key_secret" {
   description = "The access key secret"
   value       = element(concat(aws_iam_access_key.this_no_pgp.*.secret, [""]), 0)
+  sensitive   = true
 }
 
 output "this_iam_access_key_key_fingerprint" {
@@ -65,6 +66,7 @@ output "this_iam_access_key_ses_smtp_password_v4" {
     ),
     0
   )
+  sensitive = true
 }
 
 output "this_iam_access_key_status" {

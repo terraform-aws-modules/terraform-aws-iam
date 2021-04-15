@@ -41,11 +41,13 @@ output "this_iam_access_key_encrypted_secret" {
 output "this_iam_access_key_secret" {
   description = "The access key secret"
   value       = module.iam_user.this_iam_access_key_secret
+  sensitive   = true
 }
 
 output "this_iam_access_key_ses_smtp_password_v4" {
   description = "The secret access key converted into an SES SMTP password"
   value       = module.iam_user.this_iam_access_key_ses_smtp_password_v4
+  sensitive   = true
 }
 
 output "this_iam_access_key_status" {
