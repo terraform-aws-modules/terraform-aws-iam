@@ -21,7 +21,7 @@ output "admin_iam_role_path" {
 
 output "admin_iam_role_unique_id" {
   description = "Unique ID of IAM role"
-  value       = module.iam_assumable_role_admin.admin_iam_role_unique_id
+  value       = module.iam_assumable_roles.admin_iam_role_unique_id
 }
 
 # Poweruser
