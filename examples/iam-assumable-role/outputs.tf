@@ -13,6 +13,11 @@ output "this_iam_role_path" {
   value       = module.iam_assumable_role_admin.this_iam_role_path
 }
 
+output "this_iam_role_unique_id" {
+  description = "Unique ID of IAM role"
+  value       = module.iam_assumable_role_admin.this_iam_role_unique_id
+}
+
 output "role_requires_mfa" {
   description = "Whether admin IAM role requires MFA"
   value       = module.iam_assumable_role_admin.role_requires_mfa
