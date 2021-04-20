@@ -14,6 +14,11 @@ output "admin_iam_role_path" {
   value       = module.iam_assumable_roles_with_saml.admin_iam_role_path
 }
 
+output "admin_iam_role_unique_id" {
+  description = "Unique ID of IAM role"
+  value       = module.iam_assumable_roles_with_saml.admin_iam_role_unique_id
+}
+
 # Poweruser
 output "poweruser_iam_role_arn" {
   description = "ARN of poweruser IAM role"
@@ -30,6 +35,11 @@ output "poweruser_iam_role_path" {
   value       = module.iam_assumable_roles_with_saml.poweruser_iam_role_path
 }
 
+output "poweruser_iam_role_unique_id" {
+  description = "Unique ID of IAM role"
+  value       = module.iam_assumable_roles_with_saml.poweruser_iam_role_unique_id
+}
+
 # Readonly
 output "readonly_iam_role_arn" {
   description = "ARN of readonly IAM role"
@@ -44,4 +54,9 @@ output "readonly_iam_role_name" {
 output "readonly_iam_role_path" {
   description = "Path of readonly IAM role"
   value       = module.iam_assumable_roles_with_saml.readonly_iam_role_path
+}
+
+output "readonly_iam_role_unique_id" {
+  description = "Unique ID of IAM role"
+  value       = module.iam_assumable_roles_with_saml.readonly_iam_role_unique_id
 }

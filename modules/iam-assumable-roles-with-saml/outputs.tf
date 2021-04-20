@@ -14,6 +14,11 @@ output "admin_iam_role_path" {
   value       = element(concat(aws_iam_role.admin.*.path, [""]), 0)
 }
 
+output "admin_iam_role_unique_id" {
+  description = "Unique ID of IAM role"
+  value       = element(concat(aws_iam_role.admin.*.unique_id, [""]), 0)
+}
+
 output "poweruser_iam_role_arn" {
   description = "ARN of poweruser IAM role"
   value       = element(concat(aws_iam_role.poweruser.*.arn, [""]), 0)
@@ -27,6 +32,11 @@ output "poweruser_iam_role_name" {
 output "poweruser_iam_role_path" {
   description = "Path of poweruser IAM role"
   value       = element(concat(aws_iam_role.poweruser.*.path, [""]), 0)
+}
+
+output "poweruser_iam_role_unique_id" {
+  description = "Unique ID of IAM role"
+  value       = element(concat(aws_iam_role.poweruser.*.unique_id, [""]), 0)
 }
 
 # Readonly
@@ -43,4 +53,9 @@ output "readonly_iam_role_name" {
 output "readonly_iam_role_path" {
   description = "Path of readonly IAM role"
   value       = element(concat(aws_iam_role.readonly.*.path, [""]), 0)
+}
+
+output "readonly_iam_role_unique_id" {
+  description = "Unique ID of IAM role"
+  value       = element(concat(aws_iam_role.readonly.*.unique_id, [""]), 0)
 }

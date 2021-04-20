@@ -14,6 +14,11 @@ output "admin_iam_role_path" {
   value       = element(concat(aws_iam_role.admin.*.path, [""]), 0)
 }
 
+output "admin_iam_role_unique_id" {
+  description = "Unique ID of IAM role"
+  value       = element(concat(aws_iam_role.admin.*.unique_id, [""]), 0)
+}
+
 output "admin_iam_role_requires_mfa" {
   description = "Whether admin IAM role requires MFA"
   value       = var.admin_role_requires_mfa
@@ -35,6 +40,11 @@ output "poweruser_iam_role_path" {
   value       = element(concat(aws_iam_role.poweruser.*.path, [""]), 0)
 }
 
+output "poweruser_iam_role_unique_id" {
+  description = "Unique ID of IAM role"
+  value       = element(concat(aws_iam_role.poweruser.*.unique_id, [""]), 0)
+}
+
 output "poweruser_iam_role_requires_mfa" {
   description = "Whether poweruser IAM role requires MFA"
   value       = var.poweruser_role_requires_mfa
@@ -54,6 +64,11 @@ output "readonly_iam_role_name" {
 output "readonly_iam_role_path" {
   description = "Path of readonly IAM role"
   value       = element(concat(aws_iam_role.readonly.*.path, [""]), 0)
+}
+
+output "readonly_iam_role_unique_id" {
+  description = "Unique ID of IAM role"
+  value       = element(concat(aws_iam_role.readonly.*.unique_id, [""]), 0)
 }
 
 output "readonly_iam_role_requires_mfa" {

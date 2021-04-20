@@ -74,12 +74,15 @@ No modules.
 | <a name="output_admin_iam_role_name"></a> [admin\_iam\_role\_name](#output\_admin\_iam\_role\_name) | Name of admin IAM role |
 | <a name="output_admin_iam_role_path"></a> [admin\_iam\_role\_path](#output\_admin\_iam\_role\_path) | Path of admin IAM role |
 | <a name="output_admin_iam_role_requires_mfa"></a> [admin\_iam\_role\_requires\_mfa](#output\_admin\_iam\_role\_requires\_mfa) | Whether admin IAM role requires MFA |
+| <a name="output_admin_iam_role_unique_id"></a> [admin\_iam\_role\_unique\_id](#output\_admin\_iam\_role\_unique\_id) | Unique ID of IAM role |
 | <a name="output_poweruser_iam_role_arn"></a> [poweruser\_iam\_role\_arn](#output\_poweruser\_iam\_role\_arn) | ARN of poweruser IAM role |
 | <a name="output_poweruser_iam_role_name"></a> [poweruser\_iam\_role\_name](#output\_poweruser\_iam\_role\_name) | Name of poweruser IAM role |
 | <a name="output_poweruser_iam_role_path"></a> [poweruser\_iam\_role\_path](#output\_poweruser\_iam\_role\_path) | Path of poweruser IAM role |
 | <a name="output_poweruser_iam_role_requires_mfa"></a> [poweruser\_iam\_role\_requires\_mfa](#output\_poweruser\_iam\_role\_requires\_mfa) | Whether poweruser IAM role requires MFA |
+| <a name="output_poweruser_iam_role_unique_id"></a> [poweruser\_iam\_role\_unique\_id](#output\_poweruser\_iam\_role\_unique\_id) | Unique ID of IAM role |
 | <a name="output_readonly_iam_role_arn"></a> [readonly\_iam\_role\_arn](#output\_readonly\_iam\_role\_arn) | ARN of readonly IAM role |
 | <a name="output_readonly_iam_role_name"></a> [readonly\_iam\_role\_name](#output\_readonly\_iam\_role\_name) | Name of readonly IAM role |
 | <a name="output_readonly_iam_role_path"></a> [readonly\_iam\_role\_path](#output\_readonly\_iam\_role\_path) | Path of readonly IAM role |
 | <a name="output_readonly_iam_role_requires_mfa"></a> [readonly\_iam\_role\_requires\_mfa](#output\_readonly\_iam\_role\_requires\_mfa) | Whether readonly IAM role requires MFA |
+| <a name="output_readonly_iam_role_unique_id"></a> [readonly\_iam\_role\_unique\_id](#output\_readonly\_iam\_role\_unique\_id) | Unique ID of IAM role |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

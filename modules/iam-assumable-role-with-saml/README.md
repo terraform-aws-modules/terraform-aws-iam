@@ -57,4 +57,5 @@ No modules.
 | <a name="output_this_iam_role_arn"></a> [this\_iam\_role\_arn](#output\_this\_iam\_role\_arn) | ARN of IAM role |
 | <a name="output_this_iam_role_name"></a> [this\_iam\_role\_name](#output\_this\_iam\_role\_name) | Name of IAM role |
 | <a name="output_this_iam_role_path"></a> [this\_iam\_role\_path](#output\_this\_iam\_role\_path) | Path of IAM role |
+| <a name="output_this_iam_role_unique_id"></a> [this\_iam\_role\_unique\_id](#output\_this\_iam\_role\_unique\_id) | Unique ID of IAM role |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
