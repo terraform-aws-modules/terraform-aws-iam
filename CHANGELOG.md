@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v3.16.0"></a>
+## [v3.16.0] - 2021-04-20
+
+- feat: Add iam role unique_id to outputs ([#149](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/149))
+
+
 <a name="v3.15.0"></a>
 ## [v3.15.0] - 2021-04-15
 
@@ -373,7 +379,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.15.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.16.0...HEAD
+[v3.16.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.15.0...v3.16.0
 [v3.15.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.14.0...v3.15.0
 [v3.14.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.13.0...v3.14.0
 [v3.13.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.12.0...v3.13.0
