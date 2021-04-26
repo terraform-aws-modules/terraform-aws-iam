@@ -30,8 +30,8 @@ module "iam_group_complete" {
   assumable_roles = ["arn:aws:iam::111111111111:role/admin"]
 
   group_users = [
-    module.iam_user1.this_iam_user_name,
-    module.iam_user2.this_iam_user_name,
+    module.iam_user1.iam_user_name,
+    module.iam_user2.iam_user_name,
   ]
 }
 

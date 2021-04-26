@@ -56,9 +56,9 @@ No inputs.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_assumable_roles"></a> [assumable\_roles](#output\_assumable\_roles) | List of ARNs of IAM roles which members of IAM group can assume |
+| <a name="output_group_users"></a> [group\_users](#output\_group\_users) | List of IAM users in IAM group |
 | <a name="output_iam_account_id"></a> [iam\_account\_id](#output\_iam\_account\_id) | IAM AWS account id (this code is managing resources in this account) |
+| <a name="output_policy_arn"></a> [policy\_arn](#output\_policy\_arn) | Assume role policy ARN for IAM group |
 | <a name="output_production_account_id"></a> [production\_account\_id](#output\_production\_account\_id) | Production AWS account id |
-| <a name="output_this_assumable_roles"></a> [this\_assumable\_roles](#output\_this\_assumable\_roles) | List of ARNs of IAM roles which members of IAM group can assume |
-| <a name="output_this_group_users"></a> [this\_group\_users](#output\_this\_group\_users) | List of IAM users in IAM group |
-| <a name="output_this_policy_arn"></a> [this\_policy\_arn](#output\_this\_policy\_arn) | Assume role policy ARN for IAM group |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

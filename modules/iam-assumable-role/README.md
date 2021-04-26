@@ -67,13 +67,13 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_iam_instance_profile_arn"></a> [iam\_instance\_profile\_arn](#output\_iam\_instance\_profile\_arn) | ARN of IAM instance profile |
+| <a name="output_iam_instance_profile_name"></a> [iam\_instance\_profile\_name](#output\_iam\_instance\_profile\_name) | Name of IAM instance profile |
+| <a name="output_iam_instance_profile_path"></a> [iam\_instance\_profile\_path](#output\_iam\_instance\_profile\_path) | Path of IAM instance profile |
+| <a name="output_iam_role_arn"></a> [iam\_role\_arn](#output\_iam\_role\_arn) | ARN of IAM role |
+| <a name="output_iam_role_name"></a> [iam\_role\_name](#output\_iam\_role\_name) | Name of IAM role |
+| <a name="output_iam_role_path"></a> [iam\_role\_path](#output\_iam\_role\_path) | Path of IAM role |
+| <a name="output_iam_role_unique_id"></a> [iam\_role\_unique\_id](#output\_iam\_role\_unique\_id) | Unique ID of IAM role |
 | <a name="output_role_requires_mfa"></a> [role\_requires\_mfa](#output\_role\_requires\_mfa) | Whether IAM role requires MFA |
 | <a name="output_role_sts_externalid"></a> [role\_sts\_externalid](#output\_role\_sts\_externalid) | STS ExternalId condition value to use with a role |
-| <a name="output_this_iam_instance_profile_arn"></a> [this\_iam\_instance\_profile\_arn](#output\_this\_iam\_instance\_profile\_arn) | ARN of IAM instance profile |
-| <a name="output_this_iam_instance_profile_name"></a> [this\_iam\_instance\_profile\_name](#output\_this\_iam\_instance\_profile\_name) | Name of IAM instance profile |
-| <a name="output_this_iam_instance_profile_path"></a> [this\_iam\_instance\_profile\_path](#output\_this\_iam\_instance\_profile\_path) | Path of IAM instance profile |
-| <a name="output_this_iam_role_arn"></a> [this\_iam\_role\_arn](#output\_this\_iam\_role\_arn) | ARN of IAM role |
-| <a name="output_this_iam_role_name"></a> [this\_iam\_role\_name](#output\_this\_iam\_role\_name) | Name of IAM role |
-| <a name="output_this_iam_role_path"></a> [this\_iam\_role\_path](#output\_this\_iam\_role\_path) | Path of IAM role |
-| <a name="output_this_iam_role_unique_id"></a> [this\_iam\_role\_unique\_id](#output\_this\_iam\_role\_unique\_id) | Unique ID of IAM role |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

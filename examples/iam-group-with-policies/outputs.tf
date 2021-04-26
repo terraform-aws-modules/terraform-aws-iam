@@ -3,12 +3,12 @@ output "iam_account_id" {
   value       = module.iam_group_superadmins.aws_account_id
 }
 
-output "this_group_users" {
+output "group_users" {
   description = "List of IAM users in IAM group"
-  value       = module.iam_group_superadmins.this_group_users
+  value       = module.iam_group_superadmins.group_users
 }
 
-output "this_group_name" {
+output "group_name" {
   description = "IAM group name"
-  value       = module.iam_group_superadmins.this_group_name
+  value       = module.iam_group_superadmins.group_name
 }
