@@ -28,8 +28,8 @@ module "iam_group_superadmins" {
   name = "superadmins"
 
   group_users = [
-    module.iam_user1.this_iam_user_name,
-    module.iam_user2.this_iam_user_name,
+    module.iam_user1.iam_user_name,
+    module.iam_user2.iam_user_name,
   ]
 
   custom_group_policy_arns = [
@@ -46,8 +46,8 @@ module "iam_group_with_custom_policies" {
   name = "custom"
 
   group_users = [
-    module.iam_user1.this_iam_user_name,
-    module.iam_user2.this_iam_user_name,
+    module.iam_user1.iam_user_name,
+    module.iam_user2.iam_user_name,
   ]
 
   custom_group_policy_arns = [

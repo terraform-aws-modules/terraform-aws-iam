@@ -3,32 +3,32 @@ locals {
   has_encrypted_secret   = length(compact(aws_iam_access_key.this.*.encrypted_secret)) > 0
 }
 
-output "this_iam_user_name" {
+output "iam_user_name" {
   description = "The user's name"
   value       = element(concat(aws_iam_user.this.*.name, [""]), 0)
 }
 
-output "this_iam_user_arn" {
+output "iam_user_arn" {
   description = "The ARN assigned by AWS for this user"
   value       = element(concat(aws_iam_user.this.*.arn, [""]), 0)
 }
 
-output "this_iam_user_unique_id" {
+output "iam_user_unique_id" {
   description = "The unique ID assigned by AWS"
   value       = element(concat(aws_iam_user.this.*.unique_id, [""]), 0)
 }
 
-output "this_iam_user_login_profile_key_fingerprint" {
+output "iam_user_login_profile_key_fingerprint" {
   description = "The fingerprint of the PGP key used to encrypt the password"
   value       = element(concat(aws_iam_user_login_profile.this.*.key_fingerprint, [""]), 0)
 }
 
-output "this_iam_user_login_profile_encrypted_password" {
+output "iam_user_login_profile_encrypted_password" {
   description = "The encrypted password, base64 encoded"
   value       = element(concat(aws_iam_user_login_profile.this.*.encrypted_password, [""]), 0)
 }
 
-output "this_iam_access_key_id" {
+output "iam_access_key_id" {
   description = "The access key ID"
   value = element(
     concat(
@@ -40,23 +40,23 @@ output "this_iam_access_key_id" {
   )
 }
 
-output "this_iam_access_key_secret" {
+output "iam_access_key_secret" {
   description = "The access key secret"
   value       = element(concat(aws_iam_access_key.this_no_pgp.*.secret, [""]), 0)
   sensitive   = true
 }
 
-output "this_iam_access_key_key_fingerprint" {
+output "iam_access_key_key_fingerprint" {
   description = "The fingerprint of the PGP key used to encrypt the secret"
   value       = element(concat(aws_iam_access_key.this.*.key_fingerprint, [""]), 0)
 }
 
-output "this_iam_access_key_encrypted_secret" {
+output "iam_access_key_encrypted_secret" {
   description = "The encrypted secret, base64 encoded"
   value       = element(concat(aws_iam_access_key.this.*.encrypted_secret, [""]), 0)
 }
 
-output "this_iam_access_key_ses_smtp_password_v4" {
+output "iam_access_key_ses_smtp_password_v4" {
   description = "The secret access key converted into an SES SMTP password by applying AWS's Sigv4 conversion algorithm"
   value = element(
     concat(
@@ -69,7 +69,7 @@ output "this_iam_access_key_ses_smtp_password_v4" {
   sensitive = true
 }
 
-output "this_iam_access_key_status" {
+output "iam_access_key_status" {
   description = "Active or Inactive. Keys are initially active, but can be made inactive by other means."
   value = element(
     concat(
@@ -128,12 +128,12 @@ EOF
 
 }
 
-output "this_iam_user_ssh_key_ssh_public_key_id" {
+output "iam_user_ssh_key_ssh_public_key_id" {
   description = "The unique identifier for the SSH public key"
   value       = element(concat(aws_iam_user_ssh_key.this.*.ssh_public_key_id, [""]), 0)
 }
 
-output "this_iam_user_ssh_key_fingerprint" {
+output "iam_user_ssh_key_fingerprint" {
   description = "The MD5 message digest of the SSH public key"
   value       = element(concat(aws_iam_user_ssh_key.this.*.fingerprint, [""]), 0)
 }

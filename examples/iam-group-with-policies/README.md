@@ -51,7 +51,7 @@ No inputs.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_group_name"></a> [group\_name](#output\_group\_name) | IAM group name |
+| <a name="output_group_users"></a> [group\_users](#output\_group\_users) | List of IAM users in IAM group |
 | <a name="output_iam_account_id"></a> [iam\_account\_id](#output\_iam\_account\_id) | IAM AWS account id |
-| <a name="output_this_group_name"></a> [this\_group\_name](#output\_this\_group\_name) | IAM group name |
-| <a name="output_this_group_users"></a> [this\_group\_users](#output\_this\_group\_users) | List of IAM users in IAM group |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
