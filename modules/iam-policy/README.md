@@ -8,13 +8,13 @@ Creates IAM policy.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.6 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 2.23 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.35 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 2.23 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.35 |
 
 ## Modules
 
@@ -34,6 +34,7 @@ No modules.
 | <a name="input_name"></a> [name](#input\_name) | The name of the policy | `string` | `""` | no |
 | <a name="input_path"></a> [path](#input\_path) | The path of the policy in IAM | `string` | `"/"` | no |
 | <a name="input_policy"></a> [policy](#input\_policy) | The path of the policy in IAM (tpl file) | `string` | `""` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to all resources. | `map(string)` | `{}` | no |
 
 ## Outputs
 

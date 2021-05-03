@@ -4,5 +4,7 @@ resource "aws_iam_policy" "policy" {
   description = var.description
 
   policy = var.policy
+
+  tags = var.tags
 }
 
