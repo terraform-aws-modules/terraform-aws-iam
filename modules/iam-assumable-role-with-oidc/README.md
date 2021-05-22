@@ -45,6 +45,8 @@ No modules.
 | <a name="input_number_of_role_policy_arns"></a> [number\_of\_role\_policy\_arns](#input\_number\_of\_role\_policy\_arns) | Number of IAM policies to attach to IAM role | `number` | `null` | no |
 | <a name="input_oidc_fully_qualified_subjects"></a> [oidc\_fully\_qualified\_subjects](#input\_oidc\_fully\_qualified\_subjects) | The fully qualified OIDC subjects to be added to the role policy | `set(string)` | `[]` | no |
 | <a name="input_oidc_subjects_with_wildcards"></a> [oidc\_subjects\_with\_wildcards](#input\_oidc\_subjects\_with\_wildcards) | The OIDC subject using wildcards to be added to the role policy | `set(string)` | `[]` | no |
+| <a name="input_oidc_fully_qualified_audiences"></a> [oidc\_fully\_qualified\_audiences](#input\_oidc\_fully\_qualified\_audiences) | The fully qualified OIDC audiences to be added to the role policy | `set(string)` | `[]` | no |
+| <a name="input_oidc_audiences_with_wildcards"></a> [oidc\_audiences\_with\_wildcards](#input\_oidc\_audiences\_with\_wildcards) | The OIDC audience using wildcards to be added to the role policy | `set(string)` | `[]` | no |
 | <a name="input_provider_url"></a> [provider\_url](#input\_provider\_url) | URL of the OIDC Provider. Use provider\_urls to specify several URLs. | `string` | `""` | no |
 | <a name="input_provider_urls"></a> [provider\_urls](#input\_provider\_urls) | List of URLs of the OIDC Providers | `list(string)` | `[]` | no |
 | <a name="input_role_description"></a> [role\_description](#input\_role\_description) | IAM Role description | `string` | `""` | no |
