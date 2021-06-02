@@ -83,6 +83,7 @@ output "iam_access_key_status" {
 
 output "pgp_key" {
   description = "PGP key used to encrypt sensitive data for this user (if empty - secrets are not encrypted)"
+  sensitive   = true
   value       = var.pgp_key
 }
 
