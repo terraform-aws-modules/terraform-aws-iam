@@ -76,7 +76,6 @@ variable "number_of_role_policy_arns" {
   default     = null
 }
 
-
 variable "oidc_fully_qualified_subjects" {
   description = "The fully qualified OIDC subjects to be added to the role policy"
   type        = set(string)
@@ -85,6 +84,12 @@ variable "oidc_fully_qualified_subjects" {
 
 variable "oidc_subjects_with_wildcards" {
   description = "The OIDC subject using wildcards to be added to the role policy"
+  type        = set(string)
+  default     = []
+}
+
+variable "oidc_fully_qualified_audience" {
+  description = "The audience to be added to the role policy. Set to sts.amazonaws.com for cross-account assumable role. Leave empty otherwise."
   type        = set(string)
   default     = []
 }
