@@ -76,6 +76,7 @@ variable "number_of_role_policy_arns" {
   default     = null
 }
 
+
 variable "oidc_fully_qualified_subjects" {
   description = "The fully qualified OIDC subjects to be added to the role policy"
   type        = set(string)
