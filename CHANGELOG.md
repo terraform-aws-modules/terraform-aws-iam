@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v4.2.0"></a>
+## [v4.2.0] - 2021-06-29
+
+- feat: Support External ID with MFA in iam-assumable-role ([#159](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/159))
+
+
 <a name="v4.1.0"></a>
 ## [v4.1.0] - 2021-05-03
 
@@ -237,18 +243,6 @@ All notable changes to this project will be documented in this file.
 - docs: Add note about pgp_key when create_iam_login_profile is set ([#69](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/69))
 - fix: Fix module source and name in README ([#65](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/65))
 - fix typo ([#62](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/62))
-- Merge pull request [#61](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/61) from terraform-aws-modules/terraform-provider-githubfile-1584635232614990000
-- [ci skip] Create ".chglog/CHANGELOG.tpl.md".
-- Merge pull request [#59](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/59) from terraform-aws-modules/terraform-provider-githubfile-1584536774758217000
-- Merge pull request [#60](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/60) from terraform-aws-modules/terraform-provider-githubfile-1584536774758205000
-- [ci skip] Create ".editorconfig".
-- [ci skip] Create ".pre-commit-config.yaml".
-- Merge pull request [#58](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/58) from terraform-aws-modules/terraform-provider-githubfile-1584536743364504000
-- Merge pull request [#56](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/56) from terraform-aws-modules/terraform-provider-githubfile-1584536743364136000
-- Merge pull request [#54](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/54) from terraform-aws-modules/terraform-provider-githubfile-1584536743364143000
-- [ci skip] Create ".gitignore".
-- [ci skip] Create "Makefile".
-- [ci skip] Create "LICENSE".
 
 
 <a name="v2.7.0"></a>
@@ -392,7 +386,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.1.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.2.0...HEAD
+[v4.2.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.1.0...v4.2.0
 [v4.1.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.0.0...v4.1.0
 [v4.0.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.16.0...v4.0.0
 [v3.16.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v3.15.0...v3.16.0

@@ -1,5 +1,5 @@
 locals {
-  role_sts_externalid = flatten(tolist(var.role_sts_externalid))
+  role_sts_externalid = flatten([var.role_sts_externalid])
 }
 
 data "aws_iam_policy_document" "assume_role" {
@@ -55,6 +55,15 @@ data "aws_iam_policy_document" "assume_role_with_mfa" {
       test     = "NumericLessThan"
       variable = "aws:MultiFactorAuthAge"
       values   = [var.mfa_age]
+    }
+
+    dynamic "condition" {
+      for_each = length(local.role_sts_externalid) != 0 ? [true] : []
+      content {
+        test     = "StringEquals"
+        variable = "sts:ExternalId"
+        values   = local.role_sts_externalid
+      }
     }
   }
 }
