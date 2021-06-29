@@ -75,7 +75,7 @@ module "iam_assumable_role_sts" {
   create_role = true
 
   role_name         = "custom_sts"
-  role_requires_mfa = false
+  role_requires_mfa = true
 
   role_sts_externalid = [
     "some-id-goes-here",
