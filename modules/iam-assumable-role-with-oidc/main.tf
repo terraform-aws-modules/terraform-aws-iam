@@ -48,6 +48,16 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
           values   = var.oidc_subjects_with_wildcards
         }
       }
+
+      dynamic "condition" {
+        for_each = length(var.oidc_fully_qualified_audiences) > 0 ? local.urls : []
+
+        content {
+          test     = "StringLike"
+          variable = "${statement.value}:aud"
+          values   = var.oidc_fully_qualified_audiences
+        }
+      }
     }
   }
 }
