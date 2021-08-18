@@ -50,12 +50,12 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
       }
 
       dynamic "condition" {
-        for_each = length(var.oidc_fully_qualified_audience) > 0 ? local.urls : []
+        for_each = length(var.oidc_fully_qualified_audiences) > 0 ? local.urls : []
 
         content {
           test     = "StringLike"
           variable = "${statement.value}:aud"
-          values   = var.oidc_fully_qualified_audience
+          values   = var.oidc_fully_qualified_audiences
         }
       }
     }
