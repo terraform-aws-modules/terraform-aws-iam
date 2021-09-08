@@ -12,7 +12,7 @@
 ```hcl
 module "iam_account" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-account"
-  version = "~> 3.0"
+  version = "~> 4.3"
 
   account_alias = "awesome-company"
 
@@ -26,7 +26,7 @@ module "iam_account" {
 ```hcl
 module "iam_assumable_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
-  version = "~> 3.0"
+  version = "~> 4.3"
 
   trusted_role_arns = [
     "arn:aws:iam::307990089504:root",
@@ -51,7 +51,7 @@ module "iam_assumable_role" {
 ```hcl
 module "iam_assumable_role_with_oidc" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
-  version = "~> 3.0"
+  version = "~> 4.3"
 
   create_role = true
 
@@ -75,7 +75,7 @@ module "iam_assumable_role_with_oidc" {
 ```hcl
 module "iam_assumable_role_with_saml" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-saml"
-  version = "~> 3.0"
+  version = "~> 4.3"
 
   create_role = true
 
@@ -99,7 +99,7 @@ module "iam_assumable_role_with_saml" {
 ```hcl
 module "iam_assumable_roles" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-roles"
-  version = "~> 3.0"
+  version = "~> 4.3"
 
   trusted_role_arns = [
     "arn:aws:iam::307990089504:root",
@@ -121,7 +121,7 @@ module "iam_assumable_roles" {
 ```hcl
 module "iam_assumable_roles_with_saml" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-roles-with-saml"
-  version = "~> 3.0"
+  version = "~> 4.3"
 
   create_admin_role = true
 
@@ -139,7 +139,7 @@ module "iam_assumable_roles_with_saml" {
 ```hcl
 module "iam_user" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-user"
-  version = "~> 3.0"
+  version = "~> 4.3"
 
   name          = "vasya.pupkin"
   force_destroy = true
@@ -155,7 +155,7 @@ module "iam_user" {
 ```hcl
 module "iam_policy" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
-  version = "~> 3.0"
+  version = "~> 4.3"
 
   name        = "example"
   path        = "/"
@@ -183,7 +183,7 @@ EOF
 ```hcl
 module "iam_group_with_assumable_roles_policy" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-group-with-assumable-roles-policy"
-  version = "~> 3.0"
+  version = "~> 4.3"
 
   name = "production-readonly"
 
@@ -203,7 +203,7 @@ module "iam_group_with_assumable_roles_policy" {
 ```hcl
 module "iam_group_with_policies" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-group-with-policies"
-  version = "~> 3.0"
+  version = "~> 4.3"
 
   name = "superadmins"
 
@@ -285,4 +285,4 @@ Module is maintained by [Anton Babenko](https://github.com/antonbabenko) with he
 
 ## License
 
-Apache 2 Licensed. See [LICENSE](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/LICENSE) for full details.
+Apache 2 Licensed. See [LICENSE](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/LICENSE) for full details. 
