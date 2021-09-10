@@ -53,3 +53,9 @@ module "iam_policy_from_data_source" {
     PolicyDescription = "Policy created using example from data source"
   }
 }
+
+module "iam_policy_optional" {
+  source = "../../modules/iam-policy"
+
+  create_policy = false
+}

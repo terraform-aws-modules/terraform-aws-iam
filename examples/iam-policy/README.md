@@ -34,6 +34,7 @@ Run `terraform destroy` when you don't need these resources.
 |------|--------|---------|
 | <a name="module_iam_policy"></a> [iam\_policy](#module\_iam\_policy) | ../../modules/iam-policy |  |
 | <a name="module_iam_policy_from_data_source"></a> [iam\_policy\_from\_data\_source](#module\_iam\_policy\_from\_data\_source) | ../../modules/iam-policy |  |
+| <a name="module_iam_policy_optional"></a> [iam\_policy\_optional](#module\_iam\_policy\_optional) | ../../modules/iam-policy |  |
 
 ## Resources
 
