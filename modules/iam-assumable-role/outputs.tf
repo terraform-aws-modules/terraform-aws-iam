@@ -33,6 +33,11 @@ output "iam_instance_profile_name" {
   value       = element(concat(aws_iam_instance_profile.this.*.name, [""]), 0)
 }
 
+output "iam_instance_profile_id" {
+  description = "IAM Instance profile's ID."
+  value       = element(concat(aws_iam_instance_profile.this.*.id, [""]), 0)
+}
+
 output "iam_instance_profile_path" {
   description = "Path of IAM instance profile"
   value       = element(concat(aws_iam_instance_profile.this.*.path, [""]), 0)
