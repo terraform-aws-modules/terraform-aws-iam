@@ -22,3 +22,8 @@ output "role_requires_mfa" {
   description = "Whether admin IAM role requires MFA"
   value       = module.iam_assumable_role_admin.role_requires_mfa
 }
+
+output "iam_instance_profile_id" {
+  description = "IAM Instance profile's ID."
+  value       = module.iam_assumable_role_admin.iam_instance_profile_id
+}
