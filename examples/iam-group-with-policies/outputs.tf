@@ -3,6 +3,11 @@ output "iam_account_id" {
   value       = module.iam_group_superadmins.aws_account_id
 }
 
+output "group_arn" {
+  description = "IAM group arn"
+  value       = module.iam_group_superadmins.group_arn
+}
+
 output "group_users" {
   description = "List of IAM users in IAM group"
   value       = module.iam_group_superadmins.group_users
