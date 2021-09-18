@@ -17,7 +17,8 @@ module "iam_assumable_role_admin" {
     "codedeploy.amazonaws.com"
   ]
 
-  create_role = true
+  create_role             = true
+  create_instance_profile = true
 
   role_name         = "admin"
   role_requires_mfa = true
