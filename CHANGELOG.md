@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v4.6.0"></a>
+## [v4.6.0] - 2021-09-20
+
+- feat: Added output group_arn to iam-group-with-policies ([#165](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/165))
+
+
 <a name="v4.5.0"></a>
 ## [v4.5.0] - 2021-09-16
 
@@ -405,7 +411,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.5.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.6.0...HEAD
+[v4.6.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.5.0...v4.6.0
 [v4.5.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.4.0...v4.5.0
 [v4.4.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.3.0...v4.4.0
 [v4.3.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.2.0...v4.3.0
