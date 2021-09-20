@@ -5,7 +5,7 @@ output "aws_account_id" {
 
 output "group_arn" {
   description = "IAM group arn"
-  value       = element(aws_iam_group.this.*.arn, 0)
+  value       = element(concat(aws_iam_group.this.*.arn, [""]), 0)
 }
 
 output "group_users" {
