@@ -3,6 +3,11 @@ output "aws_account_id" {
   value       = local.aws_account_id
 }
 
+output "group_arn" {
+  description = "IAM group arn"
+  value       = element(concat(aws_iam_group.this.*.arn, [""]), 0)
+}
+
 output "group_users" {
   description = "List of IAM users in IAM group"
   value       = flatten(aws_iam_group_membership.this.*.users)
