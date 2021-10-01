@@ -3,6 +3,7 @@ locals {
 }
 
 data "aws_iam_policy_document" "assume_role" {
+  override_json = var.assume_role_policy
   statement {
     effect = "Allow"
 
@@ -30,10 +31,11 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 data "aws_iam_policy_document" "assume_role_with_mfa" {
+  override_json = var.assume_role_policy
   statement {
     effect = "Allow"
 
-    actions = ["sts:AssumeRole"]
+    actions = var.trusted_role_actions
 
     principals {
       type        = "AWS"

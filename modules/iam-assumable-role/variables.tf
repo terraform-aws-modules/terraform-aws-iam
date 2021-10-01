@@ -16,6 +16,12 @@ variable "trusted_role_services" {
   default     = []
 }
 
+variable "assume_role_policy" {
+  description = "Custom assume role policy for the roles"
+  type        = string
+  default     = ""
+}
+
 variable "mfa_age" {
   description = "Max age of valid MFA (in seconds) for roles which require MFA"
   type        = number

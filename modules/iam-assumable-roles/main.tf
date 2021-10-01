@@ -1,8 +1,13 @@
+locals {
+  role_sts_externalid = flatten([var.role_sts_externalid])
+}
+
 data "aws_iam_policy_document" "assume_role" {
+  override_json = var.assume_role_policy
   statement {
     effect = "Allow"
 
-    actions = ["sts:AssumeRole"]
+    actions = var.trusted_role_actions
 
     principals {
       type        = "AWS"
@@ -13,14 +18,24 @@ data "aws_iam_policy_document" "assume_role" {
       type        = "Service"
       identifiers = var.trusted_role_services
     }
+
+    dynamic "condition" {
+      for_each = length(local.role_sts_externalid) != 0 ? [true] : []
+      content {
+        test     = "StringEquals"
+        variable = "sts:ExternalId"
+        values   = local.role_sts_externalid
+      }
+    }
   }
 }
 
 data "aws_iam_policy_document" "assume_role_with_mfa" {
+  override_json = var.assume_role_policy
   statement {
     effect = "Allow"
 
-    actions = ["sts:AssumeRole"]
+    actions = var.trusted_role_actions
 
     principals {
       type        = "AWS"
@@ -42,6 +57,15 @@ data "aws_iam_policy_document" "assume_role_with_mfa" {
       test     = "NumericLessThan"
       variable = "aws:MultiFactorAuthAge"
       values   = [var.mfa_age]
+    }
+
+    dynamic "condition" {
+      for_each = length(local.role_sts_externalid) != 0 ? [true] : []
+      content {
+        test     = "StringEquals"
+        variable = "sts:ExternalId"
+        values   = local.role_sts_externalid
+      }
     }
   }
 }
