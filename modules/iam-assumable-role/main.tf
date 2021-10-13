@@ -3,6 +3,24 @@ locals {
 }
 
 data "aws_iam_policy_document" "assume_role" {
+
+  dynamic "statement" {
+    for_each = var.role_allows_session_tag == true ? [1] : []
+    content {
+        effect = "Allow"
+        principals {
+          type        = "AWS"
+          identifiers = var.trusted_role_arns
+        }
+
+        principals {
+          type        = "Service"
+          identifiers = var.trusted_role_services
+        }
+        actions = [ "sts:TagSession" ]
+      }
+  }
+  
   statement {
     effect = "Allow"
 
