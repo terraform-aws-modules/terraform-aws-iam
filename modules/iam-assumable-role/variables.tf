@@ -58,6 +58,12 @@ variable "role_requires_mfa" {
   default     = true
 }
 
+variable "role_allows_session_tag" {
+  description = "Whether role trust allows creation of sts:SessionTags"
+  type        = bool
+  default     = false
+}
+
 variable "role_permissions_boundary_arn" {
   description = "Permissions boundary ARN to use for IAM role"
   type        = string
