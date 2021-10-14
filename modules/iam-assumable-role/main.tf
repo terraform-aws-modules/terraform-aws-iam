@@ -33,7 +33,7 @@ data "aws_iam_policy_document" "assume_role_with_mfa" {
   statement {
     effect = "Allow"
 
-    actions = ["sts:AssumeRole"]
+    actions = var.trusted_role_actions
 
     principals {
       type        = "AWS"
