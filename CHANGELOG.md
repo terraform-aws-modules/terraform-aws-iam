@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v4.7.0"></a>
+## [v4.7.0] - 2021-10-14
+
+- feat: Added support for trusted_role_actions for MFA in iam-assumable-role ([#171](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/171))
+
+
 <a name="v4.6.0"></a>
 ## [v4.6.0] - 2021-09-20
 
@@ -411,7 +417,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.6.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.7.0...HEAD
+[v4.7.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.6.0...v4.7.0
 [v4.6.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.5.0...v4.6.0
 [v4.5.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.4.0...v4.5.0
 [v4.4.0]: https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.3.0...v4.4.0
