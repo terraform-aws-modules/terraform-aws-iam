@@ -32,7 +32,7 @@ Run `terraform destroy` when you don't need these resources.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_iam_assumable_role_admin"></a> [iam\_assumable\_role\_admin](#module\_iam\_assumable\_role\_admin) | ../../modules/iam-assumable-role-with-saml |  |
+| <a name="module_iam_assumable_role_admin"></a> [iam\_assumable\_role\_admin](#module\_iam\_assumable\_role\_admin) | ../../modules/iam-assumable-role-with-saml | n/a |
 
 ## Resources
 

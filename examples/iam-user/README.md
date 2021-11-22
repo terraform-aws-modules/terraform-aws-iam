@@ -31,8 +31,8 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_iam_user"></a> [iam\_user](#module\_iam\_user) | ../../modules/iam-user |  |
-| <a name="module_iam_user2"></a> [iam\_user2](#module\_iam\_user2) | ../../modules/iam-user |  |
+| <a name="module_iam_user"></a> [iam\_user](#module\_iam\_user) | ../../modules/iam-user | n/a |
+| <a name="module_iam_user2"></a> [iam\_user2](#module\_iam\_user2) | ../../modules/iam-user | n/a |
 
 ## Resources
 
