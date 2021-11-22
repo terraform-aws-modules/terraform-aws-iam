@@ -33,13 +33,13 @@ Run `terraform destroy` when you don't need these resources.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_iam_assumable_role_custom"></a> [iam\_assumable\_role\_custom](#module\_iam\_assumable\_role\_custom) | ../../modules/iam-assumable-role |  |
-| <a name="module_iam_assumable_roles_in_prod"></a> [iam\_assumable\_roles\_in\_prod](#module\_iam\_assumable\_roles\_in\_prod) | ../../modules/iam-assumable-roles |  |
-| <a name="module_iam_group_with_assumable_roles_policy_production_admin"></a> [iam\_group\_with\_assumable\_roles\_policy\_production\_admin](#module\_iam\_group\_with\_assumable\_roles\_policy\_production\_admin) | ../../modules/iam-group-with-assumable-roles-policy |  |
-| <a name="module_iam_group_with_assumable_roles_policy_production_custom"></a> [iam\_group\_with\_assumable\_roles\_policy\_production\_custom](#module\_iam\_group\_with\_assumable\_roles\_policy\_production\_custom) | ../../modules/iam-group-with-assumable-roles-policy |  |
-| <a name="module_iam_group_with_assumable_roles_policy_production_readonly"></a> [iam\_group\_with\_assumable\_roles\_policy\_production\_readonly](#module\_iam\_group\_with\_assumable\_roles\_policy\_production\_readonly) | ../../modules/iam-group-with-assumable-roles-policy |  |
-| <a name="module_iam_user1"></a> [iam\_user1](#module\_iam\_user1) | ../../modules/iam-user |  |
-| <a name="module_iam_user2"></a> [iam\_user2](#module\_iam\_user2) | ../../modules/iam-user |  |
+| <a name="module_iam_assumable_role_custom"></a> [iam\_assumable\_role\_custom](#module\_iam\_assumable\_role\_custom) | ../../modules/iam-assumable-role | n/a |
+| <a name="module_iam_assumable_roles_in_prod"></a> [iam\_assumable\_roles\_in\_prod](#module\_iam\_assumable\_roles\_in\_prod) | ../../modules/iam-assumable-roles | n/a |
+| <a name="module_iam_group_with_assumable_roles_policy_production_admin"></a> [iam\_group\_with\_assumable\_roles\_policy\_production\_admin](#module\_iam\_group\_with\_assumable\_roles\_policy\_production\_admin) | ../../modules/iam-group-with-assumable-roles-policy | n/a |
+| <a name="module_iam_group_with_assumable_roles_policy_production_custom"></a> [iam\_group\_with\_assumable\_roles\_policy\_production\_custom](#module\_iam\_group\_with\_assumable\_roles\_policy\_production\_custom) | ../../modules/iam-group-with-assumable-roles-policy | n/a |
+| <a name="module_iam_group_with_assumable_roles_policy_production_readonly"></a> [iam\_group\_with\_assumable\_roles\_policy\_production\_readonly](#module\_iam\_group\_with\_assumable\_roles\_policy\_production\_readonly) | ../../modules/iam-group-with-assumable-roles-policy | n/a |
+| <a name="module_iam_user1"></a> [iam\_user1](#module\_iam\_user1) | ../../modules/iam-user | n/a |
+| <a name="module_iam_user2"></a> [iam\_user2](#module\_iam\_user2) | ../../modules/iam-user | n/a |
 
 ## Resources
 
