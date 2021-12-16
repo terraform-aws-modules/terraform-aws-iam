@@ -92,6 +92,54 @@ module "iam_assumable_role_sts" {
 }
 
 #########################################
+# IAM assumable role with custom trust policy
+#########################################
+module "iam_assumable_role_custom_trust_policy" {
+  source = "../../modules/iam-assumable-role"
+
+  create_role = true
+
+  role_name = "iam_assumable_role_custom_trust_policy"
+
+  custom_role_trust_policy = data.aws_iam_policy_document.custom_trust_policy.json
+  custom_role_policy_arns  = ["arn:aws:iam::aws:policy/AmazonCognitoReadOnly"]
+}
+
+data "aws_iam_policy_document" "custom_trust_policy" {
+  statement {
+    effect  = "Allow"
+    actions = ["sts:AssumeRole"]
+
+    condition {
+      test     = "StringEquals"
+      variable = "sts:ExternalId"
+      values   = ["some-ext-id"]
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "aws:PrincipalOrgID"
+      values   = ["o-someorgid"]
+    }
+
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+  }
+
+  statement {
+    effect  = "Deny"
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::111111111111:root"]
+    }
+  }
+}
+
+#########################################
 # IAM policy
 #########################################
 module "iam_policy" {
