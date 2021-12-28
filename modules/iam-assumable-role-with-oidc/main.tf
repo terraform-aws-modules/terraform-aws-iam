@@ -60,6 +60,26 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
       }
     }
   }
+
+  dynamic "statement" {
+    for_each = length(var.trusted_role_arns) + length(var.trusted_role_services) != 0 ? [true] : []
+
+    content {
+      effect = "Allow"
+
+      actions = ["sts:AssumeRole"]
+
+      principals {
+        type        = "AWS"
+        identifiers = var.trusted_role_arns
+      }
+
+      principals {
+        type        = "Service"
+        identifiers = var.trusted_role_services
+      }
+    }
+  }
 }
 
 resource "aws_iam_role" "this" {
