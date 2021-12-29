@@ -27,7 +27,7 @@ variable "allowed_services" {
   type        = list(string)
 }
 
-variable "additional_policy" {
+variable "additional_policy_json" {
   description = "JSON policy document if you want to add custom actions"
   type        = string
   default     = "{}"
