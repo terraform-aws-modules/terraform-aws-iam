@@ -1,4 +1,4 @@
-# IAM user example
+# IAM read-only policy example
 
 Configuration in this directory creates read only IAM policy.
 
