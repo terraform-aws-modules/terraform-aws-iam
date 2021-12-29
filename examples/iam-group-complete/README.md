@@ -32,10 +32,10 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_iam_group_complete"></a> [iam\_group\_complete](#module\_iam\_group\_complete) | ../../modules/iam-group-with-assumable-roles-policy |  |
-| <a name="module_iam_group_complete_with_custom_policy"></a> [iam\_group\_complete\_with\_custom\_policy](#module\_iam\_group\_complete\_with\_custom\_policy) | ../../modules/iam-group-with-policies |  |
-| <a name="module_iam_user1"></a> [iam\_user1](#module\_iam\_user1) | ../../modules/iam-user |  |
-| <a name="module_iam_user2"></a> [iam\_user2](#module\_iam\_user2) | ../../modules/iam-user |  |
+| <a name="module_iam_group_complete"></a> [iam\_group\_complete](#module\_iam\_group\_complete) | ../../modules/iam-group-with-assumable-roles-policy | n/a |
+| <a name="module_iam_group_complete_with_custom_policy"></a> [iam\_group\_complete\_with\_custom\_policy](#module\_iam\_group\_complete\_with\_custom\_policy) | ../../modules/iam-group-with-policies | n/a |
+| <a name="module_iam_user1"></a> [iam\_user1](#module\_iam\_user1) | ../../modules/iam-user | n/a |
+| <a name="module_iam_user2"></a> [iam\_user2](#module\_iam\_user2) | ../../modules/iam-user | n/a |
 
 ## Resources
 

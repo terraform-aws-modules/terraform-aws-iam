@@ -30,7 +30,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_iam_account"></a> [iam\_account](#module\_iam\_account) | ../../modules/iam-account |  |
+| <a name="module_iam_account"></a> [iam\_account](#module\_iam\_account) | ../../modules/iam-account | n/a |
 
 ## Resources
 
