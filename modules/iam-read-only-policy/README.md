@@ -1,4 +1,4 @@
-# iam-policy
+# iam-read-only-policy
 
 Creates IAM read-only policy for specified services. Default AWS read-only policies (arn:aws:iam::aws:policy/job-function/ViewOnlyAccess, arn:aws:iam::aws:policy/ReadOnlyAccess), being a one-size-fits-all type of policies, have a lot of things missing as well as something that you might not need. Also, AWS default policies are known for having [security issues](https://securityboulevard.com/2020/12/the-aws-managed-policies-trap/)
 Thus this module is an attempt to build a better base for a customizable usable read-only policy.
