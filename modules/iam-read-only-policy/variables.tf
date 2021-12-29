@@ -56,3 +56,9 @@ variable "allow_web_console_services" {
   type        = bool
   default     = true
 }
+
+variable "web_console_services" {
+  description = "List of web console services to allow"
+  type        = list(string)
+  default     = ["resource-groups", "tag", "health"]
+}
