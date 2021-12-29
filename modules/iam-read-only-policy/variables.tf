@@ -52,7 +52,7 @@ variable "allow_predefined_sts_actions" {
 }
 
 variable "allow_web_console_services" {
-  description = "Allows read actions for resource-groups, tag, health services that needed when browing AWS console"
+  description = "Allows List/Get/Describe/View actions for services used when browsing AWS console (e.g. resource-groups, tag, health services)"
   type        = bool
   default     = true
 }
