@@ -24,17 +24,23 @@ Run `terraform destroy` when you don't need these resources.
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.65.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_iam_policy"></a> [iam\_policy](#module\_iam\_policy) | ../../modules/iam-read-only-policy | n/a |
+| <a name="module_read_only_iam_policy"></a> [read\_only\_iam\_policy](#module\_read\_only\_iam\_policy) | ../../modules/iam-read-only-policy | n/a |
+| <a name="module_read_only_iam_policy_doc"></a> [read\_only\_iam\_policy\_doc](#module\_read\_only\_iam\_policy\_doc) | ../../modules/iam-read-only-policy | n/a |
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [aws_ssoadmin_permission_set.example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssoadmin_permission_set) | resource |
+| [aws_ssoadmin_permission_set_inline_policy.example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssoadmin_permission_set_inline_policy) | resource |
 
 ## Inputs
 

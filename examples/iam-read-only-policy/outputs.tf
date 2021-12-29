@@ -1,29 +1,29 @@
 output "id" {
   description = "The policy ID"
-  value       = module.iam_policy.policy_object.id
+  value       = module.read_only_iam_policy.id
 }
 
 output "arn" {
   description = "The ARN assigned by AWS to this policy"
-  value       = module.iam_policy.policy_object.arn
+  value       = module.read_only_iam_policy.arn
 }
 
 output "description" {
   description = "The description of the policy"
-  value       = module.iam_policy.policy_object.description
+  value       = module.read_only_iam_policy.description
 }
 
 output "name" {
   description = "The name of the policy"
-  value       = module.iam_policy.policy_object.name
+  value       = module.read_only_iam_policy.name
 }
 
 output "path" {
   description = "The path of the policy in IAM"
-  value       = module.iam_policy.policy_object.path
+  value       = module.read_only_iam_policy.path
 }
 
 output "policy" {
   description = "The policy document"
-  value       = module.iam_policy.policy_object.policy
+  value       = module.read_only_iam_policy.policy
 }

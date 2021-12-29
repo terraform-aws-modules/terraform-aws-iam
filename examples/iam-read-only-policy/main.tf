@@ -24,7 +24,7 @@ locals {
   )
 }
 
-module "iam_policy" {
+module "read_only_iam_policy" {
   source = "../../modules/iam-read-only-policy"
 
   name        = "example"
@@ -34,6 +34,33 @@ module "iam_policy" {
   allowed_services = local.allowed_services
 
   tags = {
-    PolicyDescription = "Policy created using heredoc policy"
+    PolicyDescription = "My read only example policy"
   }
+}
+
+module "read_only_iam_policy_doc" {
+  source = "../../modules/iam-read-only-policy"
+
+  name        = "only-doc-example"
+  path        = "/"
+  description = "My read only example policy"
+
+  create_policy = false
+
+  allowed_services = local.allowed_services
+
+  tags = {
+    PolicyDescription = "My read only example policy"
+  }
+}
+
+resource "aws_ssoadmin_permission_set" "example" {
+  name         = "Example"
+  instance_arn = "arn:aws:sso:::instance/example"
+}
+
+resource "aws_ssoadmin_permission_set_inline_policy" "example" {
+  inline_policy      = module.read_only_iam_policy_doc.policy_json
+  instance_arn       = aws_ssoadmin_permission_set.example.instance_arn
+  permission_set_arn = aws_ssoadmin_permission_set.example.arn
 }
