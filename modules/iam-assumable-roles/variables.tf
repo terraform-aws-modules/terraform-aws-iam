@@ -156,4 +156,3 @@ variable "force_detach_policies" {
   type        = bool
   default     = false
 }
-

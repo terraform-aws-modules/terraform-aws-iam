@@ -17,4 +17,3 @@ output "group_name" {
   description = "IAM group name"
   value       = element(concat(aws_iam_group.this.*.name, [var.name]), 0)
 }
-
