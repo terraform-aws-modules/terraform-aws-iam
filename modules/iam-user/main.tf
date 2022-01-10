@@ -38,4 +38,3 @@ resource "aws_iam_user_ssh_key" "this" {
   encoding   = var.ssh_key_encoding
   public_key = var.ssh_public_key
 }
-

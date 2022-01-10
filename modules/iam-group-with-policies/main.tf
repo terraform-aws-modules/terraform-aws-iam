@@ -61,4 +61,3 @@ resource "aws_iam_policy" "custom" {
 
   tags = var.tags
 }
-
