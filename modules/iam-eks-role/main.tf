@@ -1,3 +1,12 @@
+data "aws_caller_identity" "current" {}
+
+data "aws_partition" "current" {}
+
+data "aws_eks_cluster" "main" {
+  for_each = var.cluster_service_accounts
+  name     = each.key
+}
+
 data "aws_iam_policy_document" "assume_role_with_oidc" {
   dynamic "statement" {
     for_each = var.cluster_service_accounts
