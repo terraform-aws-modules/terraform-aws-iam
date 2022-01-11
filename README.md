@@ -248,6 +248,7 @@ module "iam_group_with_policies" {
 module "iam_eks_role" {
   source      = "terraform-aws-modules/iam/aws//modules/iam-eks-role"
   version     = "~> 4"
+
   role_name   = "my-app"
 
   cluster_service_accounts = {
