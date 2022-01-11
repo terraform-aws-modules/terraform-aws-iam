@@ -4,6 +4,7 @@ data "aws_partition" "current" {}
 
 data "aws_eks_cluster" "main" {
   for_each = var.cluster_service_accounts
+
   name     = each.key
 }
 
@@ -59,6 +60,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
 
 resource "aws_iam_role" "this" {
   count                 = var.create_role ? 1 : 0
+
   assume_role_policy    = data.aws_iam_policy_document.assume_role_with_oidc.json
   description           = var.role_description
   force_detach_policies = var.force_detach_policies
