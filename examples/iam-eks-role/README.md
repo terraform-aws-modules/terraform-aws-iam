@@ -30,7 +30,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_iam_eks_role"></a> [iam\_eks\_role](#module\_iam\_eks\_role) | terraform-aws-modules/iam/aws//modules/iam-eks-role | ~> 4 |
+| <a name="module_iam_eks_role"></a> [iam\_eks\_role](#module\_iam\_eks\_role) | ../../modules/iam-eks-role | n/a |
 
 ## Resources
 
