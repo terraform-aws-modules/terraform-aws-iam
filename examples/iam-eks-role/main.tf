@@ -3,8 +3,7 @@ provider "aws" {
 }
 
 module "iam_eks_role" {
-  source    = "terraform-aws-modules/iam/aws//modules/iam-eks-role"
-  version   = "~> 4"
+  source    = "../../modules/iam-eks-role"
   role_name = "my-app"
 
   cluster_service_accounts = {
