@@ -27,6 +27,6 @@ module "iam_eks_role" {
   }
 
   role_policy_arns = [
-    "arn:aws:iam::aws:policy/",
+    "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
   ]
 }
