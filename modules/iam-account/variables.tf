@@ -68,4 +68,3 @@ variable "require_symbols" {
   type        = bool
   default     = true
 }
-

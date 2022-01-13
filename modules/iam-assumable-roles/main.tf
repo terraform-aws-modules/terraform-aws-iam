@@ -114,4 +114,3 @@ resource "aws_iam_role_policy_attachment" "readonly" {
   role       = aws_iam_role.readonly[0].name
   policy_arn = element(var.readonly_role_policy_arns, count.index)
 }
-

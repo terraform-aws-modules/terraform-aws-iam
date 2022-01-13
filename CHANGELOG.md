@@ -1,3 +1,19 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+# [4.8.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.7.0...v4.8.0) (2022-01-03)
+
+
+### Bug Fixes
+
+* update CI/CD process to enable auto-release workflow ([#175](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/175)) ([9278e6f](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/9278e6f02d64ad8f5e569637bc1323b04c032e92))
+
+
+### Features
+
+* Added iam-read-only-policy module ([#174](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/174)) ([392756f](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/392756f05974b48807572dccfe1ad0614d579556))
+
 <a name="v4.7.0"></a>
 ## [v4.7.0] - 2021-10-14
 

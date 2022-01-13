@@ -12,7 +12,7 @@
 ```hcl
 module "iam_account" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-account"
-  version = "~> 4.3"
+  version = "~> 4"
 
   account_alias = "awesome-company"
 
@@ -26,7 +26,7 @@ module "iam_account" {
 ```hcl
 module "iam_assumable_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
-  version = "~> 4.3"
+  version = "~> 4"
 
   trusted_role_arns = [
     "arn:aws:iam::307990089504:root",
@@ -51,7 +51,7 @@ module "iam_assumable_role" {
 ```hcl
 module "iam_assumable_role_with_oidc" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
-  version = "~> 4.3"
+  version = "~> 4"
 
   create_role = true
 
@@ -75,7 +75,7 @@ module "iam_assumable_role_with_oidc" {
 ```hcl
 module "iam_assumable_role_with_saml" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-saml"
-  version = "~> 4.3"
+  version = "~> 4"
 
   create_role = true
 
@@ -99,7 +99,7 @@ module "iam_assumable_role_with_saml" {
 ```hcl
 module "iam_assumable_roles" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-roles"
-  version = "~> 4.3"
+  version = "~> 4"
 
   trusted_role_arns = [
     "arn:aws:iam::307990089504:root",
@@ -121,7 +121,7 @@ module "iam_assumable_roles" {
 ```hcl
 module "iam_assumable_roles_with_saml" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-roles-with-saml"
-  version = "~> 4.3"
+  version = "~> 4"
 
   create_admin_role = true
 
@@ -139,7 +139,7 @@ module "iam_assumable_roles_with_saml" {
 ```hcl
 module "iam_user" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-user"
-  version = "~> 4.3"
+  version = "~> 4"
 
   name          = "vasya.pupkin"
   force_destroy = true
@@ -155,7 +155,7 @@ module "iam_user" {
 ```hcl
 module "iam_policy" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
-  version = "~> 4.3"
+  version = "~> 4"
 
   name        = "example"
   path        = "/"
@@ -178,12 +178,27 @@ EOF
 }
 ```
 
+`iam-read-only-policy`:
+
+```hcl
+module "iam_read_only_policy" {
+  source  = "terraform-aws-modules/iam/aws//modules/iam-read-only-policy"
+  version = "~> 4"
+
+  name        = "example"
+  path        = "/"
+  description = "My example read-only policy"
+
+  allowed_services = ["rds", "dynamo", "health"]
+}
+```
+
 `iam-group-with-assumable-roles-policy`:
 
 ```hcl
 module "iam_group_with_assumable_roles_policy" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-group-with-assumable-roles-policy"
-  version = "~> 4.3"
+  version = "~> 4"
 
   name = "production-readonly"
 
@@ -203,7 +218,7 @@ module "iam_group_with_assumable_roles_policy" {
 ```hcl
 module "iam_group_with_policies" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-group-with-policies"
-  version = "~> 4.3"
+  version = "~> 4"
 
   name = "superadmins"
 
@@ -265,6 +280,8 @@ Terraform can't configure MFA for the user. It is only possible via [AWS Console
 
 Use [iam-policy module](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/iam-policy) module to manage IAM policy.
 
+Use [iam-read-only-policy module](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/iam-read-only-policy) module to manage IAM read-only policies.
+
 ## Examples
 
 - [iam-account](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-account) - Set AWS account alias and password policy
@@ -278,6 +295,7 @@ Use [iam-policy module](https://github.com/terraform-aws-modules/terraform-aws-i
 - [iam-group-complete](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-group-complete) - IAM group with users who are allowed to assume IAM roles in another AWS account and have access to specified IAM policies
 - [iam-user](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-user) - Add IAM user, login profile and access keys (with PGP enabled or disabled)
 - [iam-policy](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-policy) - Create IAM policy
+- [iam-read-only-policy](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-read-only-policy) - Create IAM read-only policy
 
 ## Authors
 

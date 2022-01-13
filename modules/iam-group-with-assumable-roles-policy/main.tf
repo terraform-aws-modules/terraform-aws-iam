@@ -30,4 +30,3 @@ resource "aws_iam_group_membership" "this" {
   name  = var.name
   users = var.group_users
 }
-

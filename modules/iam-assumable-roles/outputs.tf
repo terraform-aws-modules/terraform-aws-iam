@@ -75,4 +75,3 @@ output "readonly_iam_role_requires_mfa" {
   description = "Whether readonly IAM role requires MFA"
   value       = var.readonly_role_requires_mfa
 }
-
