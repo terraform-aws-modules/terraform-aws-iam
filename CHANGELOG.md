@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.9.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.8.0...v4.9.0) (2022-01-14)
+
+
+### Features
+
+* Add new IAM module iam-eks-role ([#179](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/179)) ([61cf542](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/61cf5428fedd898de7f8287af2031a449d644723))
+
 # [4.8.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.7.0...v4.8.0) (2022-01-03)
 
 
