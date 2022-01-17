@@ -23,6 +23,7 @@ module "iam_eks_role" {
       "<namespace>:<another ServiceAccount name>"
     ]
   }
+}
 ```
 
 For example, to create an IAM role named `my-app` that can be assumed from the `ServiceAccount` named `my-app-staging` in the namespace `default` and `canary` in EKS cluster named `cluster-main-1`; and also the `ServiceAccount` name `my-app-staging` in the namespace `default` in EKS cluster named `cluster-backup-1`, the configuration would be:
@@ -36,11 +37,12 @@ module "iam_eks_role" {
     "cluster-main-1" = [
       "default:my-app-staging",
       "canary:my-app-staging"
-    ]
+    ],
     "cluster-backup-1" = [
       "default:my-app-staging",
     ]
   }
+}
 ```
 
 Note: the EKS clusters must in the current AWS region and account as they use the default AWS provider.
