@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.10.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.9.0...v4.10.0) (2022-01-19)
+
+
+### Features
+
+* Allow setting custom trust policy in iam-assumable-role ([#176](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/176)) ([095cb29](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/095cb29b2eabed1b7fe0c231a5294c6f0eaa8d5c))
+
 ## [4.9.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.8.0...v4.9.0) (2022-01-14)
 
 
