@@ -76,6 +76,12 @@ variable "custom_role_policy_arns" {
   default     = []
 }
 
+variable "custom_role_trust_policy" {
+  description = "A custorm role trust policy"
+  type        = string
+  default     = ""
+}
+
 variable "number_of_custom_role_policy_arns" {
   description = "Number of IAM policies to attach to IAM role"
   type        = number

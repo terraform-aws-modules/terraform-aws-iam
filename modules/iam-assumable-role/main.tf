@@ -3,6 +3,8 @@ locals {
 }
 
 data "aws_iam_policy_document" "assume_role" {
+  count = var.custom_role_trust_policy == "" && var.role_requires_mfa ? 0 : 1
+
   statement {
     effect = "Allow"
 
@@ -30,6 +32,8 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 data "aws_iam_policy_document" "assume_role_with_mfa" {
+  count = var.custom_role_trust_policy == "" && var.role_requires_mfa ? 1 : 0
+
   statement {
     effect = "Allow"
 
@@ -79,7 +83,12 @@ resource "aws_iam_role" "this" {
   force_detach_policies = var.force_detach_policies
   permissions_boundary  = var.role_permissions_boundary_arn
 
-  assume_role_policy = var.role_requires_mfa ? data.aws_iam_policy_document.assume_role_with_mfa.json : data.aws_iam_policy_document.assume_role.json
+  assume_role_policy = coalesce(
+    var.custom_role_trust_policy,
+    try(data.aws_iam_policy_document.assume_role_with_mfa[0].json,
+      data.aws_iam_policy_document.assume_role[0].json
+    )
+  )
 
   tags = var.tags
 }
