@@ -7,11 +7,7 @@ module "iam_eks_role" {
   role_name = "my-app"
 
   cluster_service_accounts = {
-    "cluster1" = ["default:my-app"]
-    "cluster2" = [
-      "default:my-app",
-      "canary:my-app",
-    ]
+    (random_pet.this.id) = ["default:my-app", "canary:my-app"]
   }
 
   provider_url_sa_pairs = {
@@ -29,4 +25,34 @@ module "iam_eks_role" {
   role_policy_arns = [
     "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
   ]
+}
+
+##################
+# Extra resources
+##################
+
+resource "random_pet" "this" {
+  length = 2
+}
+
+module "eks" {
+  source  = "terraform-aws-modules/eks/aws"
+  version = "~> 18.0"
+
+  cluster_name    = random_pet.this.id
+  cluster_version = "1.21"
+
+  vpc_id     = data.aws_vpc.default.id
+  subnet_ids = data.aws_subnet_ids.all.ids
+}
+
+##################################################################
+# Data sources to get VPC, subnet, security group and AMI details
+##################################################################
+data "aws_vpc" "default" {
+  default = true
+}
+
+data "aws_subnet_ids" "all" {
+  vpc_id = data.aws_vpc.default.id
 }
