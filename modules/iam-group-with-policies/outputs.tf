@@ -5,15 +5,15 @@ output "aws_account_id" {
 
 output "group_arn" {
   description = "IAM group arn"
-  value       = element(concat(aws_iam_group.this.*.arn, [""]), 0)
+  value       = try(aws_iam_group.this[0].arn, "")
 }
 
 output "group_users" {
   description = "List of IAM users in IAM group"
-  value       = flatten(aws_iam_group_membership.this.*.users)
+  value       = flatten(aws_iam_group_membership.this[*].users)
 }
 
 output "group_name" {
   description = "IAM group name"
-  value       = element(concat(aws_iam_group.this.*.name, [var.name]), 0)
+  value       = try(aws_iam_group.this[0].name, var.name)
 }
