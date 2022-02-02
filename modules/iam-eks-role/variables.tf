@@ -69,3 +69,40 @@ variable "max_session_duration" {
   type        = number
   default     = 43200
 }
+
+################################################################################
+# Policies
+################################################################################
+
+# Cluster autoscaler
+variable "attach_cluster_autoscaler_policy" {
+  description = "Whether to attach the Cluster Autoscaler IAM policy to the role"
+  type        = bool
+  default     = false
+}
+
+# External DNS
+variable "attach_external_dns_policy" {
+  description = "Whether to attach the External DNS IAM policy to the role"
+  type        = bool
+  default     = false
+}
+
+variable "external_dns_hosted_zones" {
+  description = "Route53 hosted zone IDs to allow external DNS to manage records"
+  type        = list(string)
+  default     = ["*"]
+}
+
+# EBS CSI
+variable "attach_ebs_csi_policy" {
+  description = "Whether to attach the EBS CSI IAM policy to the role"
+  type        = bool
+  default     = false
+}
+
+variable "ebs_csi_kms_cmk_ids" {
+  description = "KMS CMK IDs to allow EBS CSI to manage encrypted volumes"
+  type        = list(string)
+  default     = []
+}

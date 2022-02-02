@@ -13,8 +13,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
     for_each = var.cluster_service_accounts
 
     content {
-      effect = "Allow"
-
+      effect  = "Allow"
       actions = ["sts:AssumeRoleWithWebIdentity"]
 
       principals {
@@ -37,8 +36,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
     for_each = var.provider_url_sa_pairs
 
     content {
-      effect = "Allow"
-
+      effect  = "Allow"
       actions = ["sts:AssumeRoleWithWebIdentity"]
 
       principals {

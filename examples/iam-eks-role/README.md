@@ -9,6 +9,7 @@ To run this example you need to execute:
 ```bash
 $ terraform init
 $ terraform plan
+$ terraform apply -target module.vpc -target module.eks
 $ terraform apply
 ```
 
@@ -27,23 +28,24 @@ Run `terraform destroy` when you don't need these resources.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 2.23 |
 | <a name="provider_random"></a> [random](#provider\_random) | >= 2 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
+| <a name="module_cluster_autoscaler_irsa_role"></a> [cluster\_autoscaler\_irsa\_role](#module\_cluster\_autoscaler\_irsa\_role) | ../../modules/iam-eks-role | n/a |
+| <a name="module_ebs_csi_irsa_role"></a> [ebs\_csi\_irsa\_role](#module\_ebs\_csi\_irsa\_role) | ../../modules/iam-eks-role | n/a |
 | <a name="module_eks"></a> [eks](#module\_eks) | terraform-aws-modules/eks/aws | ~> 18.0 |
+| <a name="module_external_dns_irsa_role"></a> [external\_dns\_irsa\_role](#module\_external\_dns\_irsa\_role) | ../../modules/iam-eks-role | n/a |
 | <a name="module_iam_eks_role"></a> [iam\_eks\_role](#module\_iam\_eks\_role) | ../../modules/iam-eks-role | n/a |
+| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 3.0 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
 | [random_pet.this](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/pet) | resource |
-| [aws_subnet_ids.all](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnet_ids) | data source |
-| [aws_vpc.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) | data source |
 
 ## Inputs
 
