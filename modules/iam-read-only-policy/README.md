@@ -46,7 +46,7 @@ No modules.
 | <a name="input_name"></a> [name](#input\_name) | The name of the policy | `string` | `""` | no |
 | <a name="input_path"></a> [path](#input\_path) | The path of the policy in IAM | `string` | `"/"` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to all resources. | `map(string)` | `{}` | no |
-| <a name="input_web_console_services"></a> [web\_console\_services](#input\_web\_console\_services) | List of web console services to allow | `list(string)` | <pre>[<br>  "resource-groups",<br>  "tag",<br>  "health"<br>]</pre> | no |
+| <a name="input_web_console_services"></a> [web\_console\_services](#input\_web\_console\_services) | List of web console services to allow | `list(string)` | <pre>[<br>  "resource-groups",<br>  "tag",<br>  "health",<br>  "ce"<br>]</pre> | no |
 
 ## Outputs
 
