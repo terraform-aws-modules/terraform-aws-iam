@@ -22,13 +22,10 @@ Run `terraform destroy` when you don't need these resources.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.6 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 2.23 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | >= 2 |
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| <a name="provider_random"></a> [random](#provider\_random) | >= 2 |
+No providers.
 
 ## Modules
 
@@ -43,9 +40,7 @@ Run `terraform destroy` when you don't need these resources.
 
 ## Resources
 
-| Name | Type |
-|------|------|
-| [random_pet.this](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/pet) | resource |
+No resources.
 
 ## Inputs
 

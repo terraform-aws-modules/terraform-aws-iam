@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 locals {
-  name            = random_pet.this.id
+  name            = "ex-iam-eks-role"
   cluster_version = "1.21"
   region          = "eu-west-1"
 
@@ -24,7 +24,7 @@ module "iam_eks_role" {
   role_name = local.name
 
   cluster_service_accounts = {
-    (random_pet.this.id) = ["default:my-app", "canary:my-app"]
+    (module.eks.cluster_id) = ["default:my-app", "canary:my-app"]
   }
 
   provider_url_sa_pairs = {
@@ -49,7 +49,7 @@ module "cluster_autoscaler_irsa_role" {
   attach_cluster_autoscaler_policy = true
 
   cluster_service_accounts = {
-    (random_pet.this.id) = ["default:my-app", "canary:my-app"]
+    (module.eks.cluster_id) = ["default:my-app", "canary:my-app"]
   }
 
   tags = local.tags
@@ -63,7 +63,7 @@ module "external_dns_irsa_role" {
   external_dns_hosted_zones  = ["IClearlyMadeThisUp"]
 
   cluster_service_accounts = {
-    (random_pet.this.id) = ["default:my-app", "canary:my-app"]
+    (module.eks.cluster_id) = ["default:my-app", "canary:my-app"]
   }
 
   tags = local.tags
@@ -76,7 +76,7 @@ module "ebs_csi_irsa_role" {
   attach_ebs_csi_policy = true
 
   cluster_service_accounts = {
-    (random_pet.this.id) = ["default:my-app", "canary:my-app"]
+    (module.eks.cluster_id) = ["default:my-app", "canary:my-app"]
   }
 
   tags = local.tags
@@ -85,10 +85,6 @@ module "ebs_csi_irsa_role" {
 ################################################################################
 # Supporting Resources
 ################################################################################
-
-resource "random_pet" "this" {
-  length = 2
-}
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
@@ -126,7 +122,7 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 18.0"
 
-  cluster_name    = random_pet.this.id
+  cluster_name    = local.name
   cluster_version = local.cluster_version
 
   vpc_id     = module.vpc.vpc_id
