@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.11.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.10.1...v4.11.0) (2022-02-02)
+
+
+### Features
+
+* Include cost explorer to default console services in `iam-read-only-policy` module ([#186](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/186)) ([e701139](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/e701139d00abfbadf0695b8186001b9786163863))
+
 ### [4.10.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.10.0...v4.10.1) (2022-01-21)
 
 
