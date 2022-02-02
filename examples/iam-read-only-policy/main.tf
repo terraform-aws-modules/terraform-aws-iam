@@ -32,6 +32,7 @@ module "read_only_iam_policy" {
   description = "My read only example policy"
 
   allowed_services = local.allowed_services
+  denied_actions   = ["s3:GetObject", "dynamodb:GetRecords"]
 
   tags = {
     PolicyDescription = "My read only example policy"

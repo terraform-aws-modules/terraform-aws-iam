@@ -27,6 +27,12 @@ variable "allowed_services" {
   type        = list(string)
 }
 
+variable "denied_actions" {
+  description = "List of actions to deny by default"
+  type        = list(string)
+  default     = ["s3:GetObject"]
+}
+
 variable "additional_policy_json" {
   description = "JSON policy document if you want to add custom actions"
   type        = string

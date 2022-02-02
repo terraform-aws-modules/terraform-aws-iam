@@ -79,12 +79,24 @@ data "aws_iam_policy_document" "logs_query" {
   }
 }
 
+data "aws_iam_policy_document" "deny" {
+  count = length(var.denied_actions) > 0 ? 1 : 0
+
+  statement {
+    effect    = "Deny"
+    sid       = "Deny"
+    actions   = var.denied_actions
+    resources = ["*"]
+  }
+}
+
 data "aws_iam_policy_document" "combined" {
   source_policy_documents = concat(
     [data.aws_iam_policy_document.allowed_services.json],
     data.aws_iam_policy_document.console_services.*.json,
     data.aws_iam_policy_document.sts.*.json,
     data.aws_iam_policy_document.logs_query.*.json,
+    data.aws_iam_policy_document.deny.*.json,
     [var.additional_policy_json]
   )
 }
