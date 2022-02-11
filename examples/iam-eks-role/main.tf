@@ -26,12 +26,12 @@ module "iam_eks_role" {
   oidc_providers = {
     one = {
       provider         = module.eks.oidc_provider
-      provider_arns    = [module.eks.oidc_provider_arn]
+      provider_arn     = module.eks.oidc_provider_arn
       service_accounts = ["default:my-app", "canary:my-app"]
     }
     two = {
       provider         = module.eks.oidc_provider
-      provider_arns    = [module.eks.oidc_provider_arn]
+      provider_arn     = module.eks.oidc_provider_arn
       service_accounts = ["default:blue", "canary:blue"]
     }
   }
@@ -52,7 +52,7 @@ module "cluster_autoscaler_irsa_role" {
   oidc_providers = {
     ex = {
       provider         = module.eks.oidc_provider
-      provider_arns    = [module.eks.oidc_provider_arn]
+      provider_arn     = module.eks.oidc_provider_arn
       service_accounts = ["default:my-app", "canary:my-app"]
     }
   }
@@ -70,7 +70,7 @@ module "external_dns_irsa_role" {
   oidc_providers = {
     ex = {
       provider         = module.eks.oidc_provider
-      provider_arns    = [module.eks.oidc_provider_arn]
+      provider_arn     = module.eks.oidc_provider_arn
       service_accounts = ["default:my-app", "canary:my-app"]
     }
   }
@@ -87,7 +87,7 @@ module "ebs_csi_irsa_role" {
   oidc_providers = {
     ex = {
       provider         = module.eks.oidc_provider
-      provider_arns    = [module.eks.oidc_provider_arn]
+      provider_arn     = module.eks.oidc_provider_arn
       service_accounts = ["default:my-app", "canary:my-app"]
     }
   }
@@ -105,7 +105,7 @@ module "vpc_cni_ipv4_irsa_role" {
   oidc_providers = {
     ex = {
       provider         = module.eks.oidc_provider
-      provider_arns    = [module.eks.oidc_provider_arn]
+      provider_arn     = module.eks.oidc_provider_arn
       service_accounts = ["default:my-app", "canary:my-app"]
     }
   }
@@ -123,7 +123,7 @@ module "vpc_cni_ipv6_irsa_role" {
   oidc_providers = {
     ex = {
       provider         = module.eks.oidc_provider
-      provider_arns    = [module.eks.oidc_provider_arn]
+      provider_arn     = module.eks.oidc_provider_arn
       service_accounts = ["default:my-app", "canary:my-app"]
     }
   }

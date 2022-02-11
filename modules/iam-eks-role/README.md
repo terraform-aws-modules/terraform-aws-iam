@@ -1,27 +1,32 @@
 # iam-eks-role
 
-Creates single IAM role which can be assumed by one or more EKS `ServiceAccount` and optionally also OpenID Connect Federated Users.
+Creates an IAM role which can be assumed by AWS EKS `ServiceAccount`s.
 
-This module is for use with AWS EKS. For details of how a `ServiceAccount` in EKS can assume an IAM role, see the [EKS documentation](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html).
+This module is intended to be used with AWS EKS. For details of how a `ServiceAccount` in EKS can assume an IAM role, see the [EKS documentation](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html).
 
-This module supports multiple `ServiceAccount` in multiple clusters and/or namespaces. This allows for a single IAM role to be used when an application may span multiple clusters (e.g. for DR) or multiple namespaces (e.g. for canary deployments). The variables `cluster_service_accounts` and `provider_url_sa_pairs` are used for this as follows:
+This module supports multiple `ServiceAccount` in multiple clusters and/or namespaces. This allows for a single IAM role to be used when an application may span multiple clusters (e.g. for DR) or multiple namespaces (e.g. for canary deployments):
 
 ```hcl
 module "iam_eks_role" {
   source = "terraform-aws-modules/iam/aws//modules/iam-eks-role"
 
-  cluster_service_accounts = {
-    "<EKS cluster name>" = [
-      "<namespace>:<ServiceAccount name>",
-      "<namespace>:<another ServiceAccount name>"
-    ]
-  }
-
-  provider_url_sa_pairs = {
-    "<OIDC provider without protocol prefix>" = [
-      "<namespace>:<ServiceAccount name>",
-      "<namespace>:<another ServiceAccount name>"
-    ]
+  oidc_providers = {
+    one = {
+      provider         = "<OIDC provider without protocol prefix>"
+      provider_arn     = "<OIDC provider ARN>"
+      service_accounts = [
+        "<namespace>:<ServiceAccount name>",
+        "<namespace>:<another ServiceAccount name>"
+      ]
+    }
+    two = {
+      provider         = "<OIDC provider without protocol prefix>"
+      provider_arn     = "<OIDC provider ARN>"
+      service_accounts = [
+        "<namespace>:<ServiceAccount name>",
+        "<namespace>:<another ServiceAccount name>"
+      ]
+    }
   }
 }
 ```
@@ -33,19 +38,54 @@ module "iam_eks_role" {
   source    = "terraform-aws-modules/iam/aws//modules/iam-eks-role"
   role_name = "my-app"
 
-  cluster_service_accounts = {
-    "cluster-main-1" = [
-      "default:my-app-staging",
-      "canary:my-app-staging"
-    ],
-    "cluster-backup-1" = [
-      "default:my-app-staging",
-    ]
+  oidc_providers = {
+    one = {
+      provider         = "oidc.eks.us-east-1.amazonaws.com/id/5C54DDF35ER19312844C7333374CC09D"
+      provider_arn     = "arn:aws:iam::012345678901:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/5C54DDF35ER19312844C7333374CC09D"
+      service_accounts = ["default:my-app-staging", "canary:my-app-staging"]
+    }
+    two = {
+      provider         = "oidc.eks.ap-southeast-1.amazonaws.com/id/5C54DDF35ER54476848E7333374FF09G"
+      provider_arn     = "arn:aws:iam::012345678901:oidc-provider/oidc.eks.ap-southeast-1.amazonaws.com/id/5C54DDF35ER54476848E7333374FF09G"
+      service_accounts = ["default:my-app-staging"]
+    }
   }
 }
 ```
 
-Note: the EKS clusters must in the current AWS region and account as they use the default AWS provider.
+This module has been design in conjunction with the [`terraform-aws-eks`](https://github.com/terraform-aws-modules/terraform-aws-eks) module and easily integrates with it:
+
+```hcl
+module "iam_eks_role" {
+  source    = "terraform-aws-modules/iam/aws//modules/iam-eks-role"
+
+  role_name = "my-app"
+
+  oidc_providers = {
+    one = {
+      provider         = module.eks.oidc_provider
+      provider_arn     = module.eks.oidc_provider_arn
+      service_accounts = ["default:my-app", "canary:my-app"]
+    }
+    two = {
+      provider         = module.eks.oidc_provider
+      provider_arn     = module.eks.oidc_provider_arn
+      service_accounts = ["default:blue", "canary:blue"]
+    }
+  }
+}
+
+module "eks" {
+  source  = "terraform-aws-modules/eks/aws"
+  version = "~> 18.6"
+
+  cluster_name    = "my-cluster"
+  cluster_version = "1.21"
+
+  vpc_id     = module.vpc.vpc_id
+  subnet_ids = module.vpc.private_subnets
+}
+```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements

@@ -10,7 +10,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
 
       principals {
         type        = "Federated"
-        identifiers = statement.value.provider_arns
+        identifiers = [statement.value.provider_arn]
       }
 
       condition {
