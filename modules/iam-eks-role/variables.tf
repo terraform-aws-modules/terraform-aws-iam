@@ -13,19 +13,19 @@ variable "role_name" {
 variable "role_path" {
   description = "Path of IAM role"
   type        = string
-  default     = "/"
+  default     = null
 }
 
 variable "role_permissions_boundary_arn" {
   description = "Permissions boundary ARN to use for IAM role"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "role_description" {
   description = "IAM Role description"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "role_name_prefix" {
@@ -40,15 +40,9 @@ variable "role_policy_arns" {
   default     = []
 }
 
-variable "cluster_service_accounts" {
-  description = "EKS cluster and k8s ServiceAccount pairs. Each EKS cluster can have multiple k8s ServiceAccount. See README for details"
-  type        = map(list(string))
-  default     = {}
-}
-
-variable "provider_url_sa_pairs" {
-  description = "OIDC provider URL and k8s ServiceAccount pairs. If the assume role policy requires a mix of EKS clusters and other OIDC providers then this can be used"
-  type        = map(list(string))
+variable "oidc_providers" {
+  description = "Map of OIDC providers where each provdier map should contain the `provider`, `provider_arns`, and `service_accounts`"
+  type        = any
   default     = {}
 }
 
@@ -61,13 +55,13 @@ variable "tags" {
 variable "force_detach_policies" {
   description = "Whether policies should be detached from this role when destroying"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "max_session_duration" {
   description = "Maximum CLI/API session duration in seconds between 3600 and 43200"
   type        = number
-  default     = 43200
+  default     = null
 }
 
 ################################################################################
@@ -76,14 +70,14 @@ variable "max_session_duration" {
 
 # Cluster autoscaler
 variable "attach_cluster_autoscaler_policy" {
-  description = "Whether to attach the Cluster Autoscaler IAM policy to the role"
+  description = "Determines whether to attach the Cluster Autoscaler IAM policy to the role"
   type        = bool
   default     = false
 }
 
 # External DNS
 variable "attach_external_dns_policy" {
-  description = "Whether to attach the External DNS IAM policy to the role"
+  description = "Determines whether to attach the External DNS IAM policy to the role"
   type        = bool
   default     = false
 }
@@ -96,7 +90,7 @@ variable "external_dns_hosted_zones" {
 
 # EBS CSI
 variable "attach_ebs_csi_policy" {
-  description = "Whether to attach the EBS CSI IAM policy to the role"
+  description = "Determines whether to attach the EBS CSI IAM policy to the role"
   type        = bool
   default     = false
 }
@@ -105,4 +99,23 @@ variable "ebs_csi_kms_cmk_ids" {
   description = "KMS CMK IDs to allow EBS CSI to manage encrypted volumes"
   type        = list(string)
   default     = []
+}
+
+# VPC CNI
+variable "attach_vpc_cni_policy" {
+  description = "Determines whether to attach the VPC CNI IAM policy to the role"
+  type        = bool
+  default     = false
+}
+
+variable "vpc_cni_enable_ipv4" {
+  description = "Determines whether to enable IPv4 permissions for VPC CNI policy"
+  type        = bool
+  default     = false
+}
+
+variable "vpc_cni_enable_ipv6" {
+  description = "Determines whether to enable IPv6 permissions for VPC CNI policy"
+  type        = bool
+  default     = false
 }

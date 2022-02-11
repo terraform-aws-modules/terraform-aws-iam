@@ -1,3 +1,5 @@
+data "aws_partition" "current" {}
+
 ################################################################################
 # Cluster Autoscaler Policy
 ################################################################################
@@ -23,7 +25,7 @@ data "aws_iam_policy_document" "cluster_autoscaler" {
 resource "aws_iam_policy" "cluster_autoscaler" {
   count = var.create_role && var.attach_cluster_autoscaler_policy ? 1 : 0
 
-  name_prefix = "cluster-autoscaler-"
+  name_prefix = "AmazonEKS_Cluster_Autoscaler_Policy-"
   path        = var.role_path
   description = "Cluster autoscaler policy to allow examination and modification of EC2 Auto Scaling Groups"
   policy      = data.aws_iam_policy_document.cluster_autoscaler[0].json
@@ -67,7 +69,7 @@ data "aws_iam_policy_document" "external_dns" {
 resource "aws_iam_policy" "external_dns" {
   count = var.create_role && var.attach_external_dns_policy ? 1 : 0
 
-  name_prefix = "external-dns-"
+  name_prefix = "AmazonEKS_External_DNS_Policy-"
   path        = var.role_path
   description = "External DNS policy to allow management of Route53 hosted zone records"
   policy      = data.aws_iam_policy_document.external_dns[0].json
@@ -262,9 +264,9 @@ data "aws_iam_policy_document" "ebs_csi" {
 resource "aws_iam_policy" "ebs_csi" {
   count = var.create_role && var.attach_ebs_csi_policy ? 1 : 0
 
-  name_prefix = "ebs-csi-"
+  name_prefix = "AmazonEKS_EBS_CSI_Policy-"
   path        = var.role_path
-  description = "External DNS policy to allow management of Route53 hosted zone records"
+  description = "Provides permissions to manage EBS volumes via the container storage interface driver"
   policy      = data.aws_iam_policy_document.ebs_csi[0].json
 
   tags = var.tags
@@ -275,4 +277,74 @@ resource "aws_iam_role_policy_attachment" "ebs_csi" {
 
   role       = aws_iam_role.this[0].name
   policy_arn = aws_iam_policy.ebs_csi[0].arn
+}
+
+################################################################################
+# VPC CNI Policy
+################################################################################
+
+data "aws_iam_policy_document" "vpc_cni" {
+  count = var.create_role && var.attach_vpc_cni_policy ? 1 : 0
+
+  # arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+  dynamic "statement" {
+    for_each = var.vpc_cni_enable_ipv4 ? [1] : []
+    content {
+      sid = "IPV4"
+      actions = [
+        "ec2:AssignPrivateIpAddresses",
+        "ec2:AttachNetworkInterface",
+        "ec2:CreateNetworkInterface",
+        "ec2:DeleteNetworkInterface",
+        "ec2:DescribeInstances",
+        "ec2:DescribeTags",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeInstanceTypes",
+        "ec2:DetachNetworkInterface",
+        "ec2:ModifyNetworkInterfaceAttribute",
+        "ec2:UnassignPrivateIpAddresses"
+      ]
+      resources = ["*"]
+    }
+  }
+
+  # https://docs.aws.amazon.com/eks/latest/userguide/cni-iam-role.html#cni-iam-role-create-ipv6-policy
+  dynamic "statement" {
+    for_each = var.vpc_cni_enable_ipv6 ? [1] : []
+    content {
+      sid = "IPV6"
+      actions = [
+        "ec2:AssignIpv6Addresses",
+        "ec2:DescribeInstances",
+        "ec2:DescribeTags",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeInstanceTypes"
+      ]
+      resources = ["*"]
+    }
+  }
+
+  statement {
+    sid       = "CreateTags"
+    actions   = ["ec2:CreateTags"]
+    resources = ["arn:aws:ec2:*:*:network-interface/*"]
+  }
+}
+
+resource "aws_iam_policy" "vpc_cni" {
+  count = var.create_role && var.attach_vpc_cni_policy ? 1 : 0
+
+  name_prefix = "AmazonEKS_CNI_Policy-"
+  path        = var.role_path
+  description = "Provides the Amazon VPC CNI Plugin (amazon-vpc-cni-k8s) the permissions it requires to modify the IPv4/IPv6 address configuration on your EKS worker nodes"
+  policy      = data.aws_iam_policy_document.vpc_cni[0].json
+
+  tags = var.tags
+}
+
+resource "aws_iam_role_policy_attachment" "vpc_cni" {
+  count = var.create_role && var.attach_vpc_cni_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.vpc_cni[0].arn
 }

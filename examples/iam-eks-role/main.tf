@@ -23,16 +23,17 @@ module "iam_eks_role" {
 
   role_name = local.name
 
-  cluster_service_accounts = {
-    (module.eks.cluster_id) = ["default:my-app", "canary:my-app"]
-  }
-
-  provider_url_sa_pairs = {
-    "oidc.eks.us-east-1.amazonaws.com/id/5C54DDF35ER19312844C7333374CC09D" = ["default:my-app2"]
-    "oidc.eks.ap-southeast-1.amazonaws.com/id/5C54DDF35ER54476848E7333374FF09G" = [
-      "default:my-app2",
-      "canary:my-app2",
-    ]
+  oidc_providers = {
+    one = {
+      provider         = module.eks.oidc_provider
+      provider_arns    = [module.eks.oidc_provider_arn]
+      service_accounts = ["default:my-app", "canary:my-app"]
+    }
+    two = {
+      provider         = module.eks.oidc_provider
+      provider_arns    = [module.eks.oidc_provider_arn]
+      service_accounts = ["default:blue", "canary:blue"]
+    }
   }
 
   role_policy_arns = [
@@ -48,8 +49,12 @@ module "cluster_autoscaler_irsa_role" {
   role_name                        = "cluster-autoscaler"
   attach_cluster_autoscaler_policy = true
 
-  cluster_service_accounts = {
-    (module.eks.cluster_id) = ["default:my-app", "canary:my-app"]
+  oidc_providers = {
+    ex = {
+      provider         = module.eks.oidc_provider
+      provider_arns    = [module.eks.oidc_provider_arn]
+      service_accounts = ["default:my-app", "canary:my-app"]
+    }
   }
 
   tags = local.tags
@@ -62,8 +67,12 @@ module "external_dns_irsa_role" {
   attach_external_dns_policy = true
   external_dns_hosted_zones  = ["IClearlyMadeThisUp"]
 
-  cluster_service_accounts = {
-    (module.eks.cluster_id) = ["default:my-app", "canary:my-app"]
+  oidc_providers = {
+    ex = {
+      provider         = module.eks.oidc_provider
+      provider_arns    = [module.eks.oidc_provider_arn]
+      service_accounts = ["default:my-app", "canary:my-app"]
+    }
   }
 
   tags = local.tags
@@ -75,8 +84,48 @@ module "ebs_csi_irsa_role" {
   role_name             = "ebs_csi"
   attach_ebs_csi_policy = true
 
-  cluster_service_accounts = {
-    (module.eks.cluster_id) = ["default:my-app", "canary:my-app"]
+  oidc_providers = {
+    ex = {
+      provider         = module.eks.oidc_provider
+      provider_arns    = [module.eks.oidc_provider_arn]
+      service_accounts = ["default:my-app", "canary:my-app"]
+    }
+  }
+
+  tags = local.tags
+}
+
+module "vpc_cni_ipv4_irsa_role" {
+  source = "../../modules/iam-eks-role"
+
+  role_name             = "vpc_cni_ipv4"
+  attach_vpc_cni_policy = true
+  vpc_cni_enable_ipv4   = true
+
+  oidc_providers = {
+    ex = {
+      provider         = module.eks.oidc_provider
+      provider_arns    = [module.eks.oidc_provider_arn]
+      service_accounts = ["default:my-app", "canary:my-app"]
+    }
+  }
+
+  tags = local.tags
+}
+
+module "vpc_cni_ipv6_irsa_role" {
+  source = "../../modules/iam-eks-role"
+
+  role_name             = "vpc_cni_ipv6"
+  attach_vpc_cni_policy = true
+  vpc_cni_enable_ipv6   = true
+
+  oidc_providers = {
+    ex = {
+      provider         = module.eks.oidc_provider
+      provider_arns    = [module.eks.oidc_provider_arn]
+      service_accounts = ["default:my-app", "canary:my-app"]
+    }
   }
 
   tags = local.tags
@@ -120,7 +169,7 @@ module "vpc" {
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 18.0"
+  version = "~> 18.6"
 
   cluster_name    = local.name
   cluster_version = local.cluster_version
