@@ -119,3 +119,30 @@ variable "vpc_cni_enable_ipv6" {
   type        = bool
   default     = false
 }
+
+# Node termination handler
+variable "attach_node_termination_handler_policy" {
+  description = "Determines whether to attach the Node Termination Handler policy to the role"
+  type        = bool
+  default     = false
+}
+
+variable "node_termination_handler_sqs_queue_arns" {
+  description = "List of SQS ARNs that contain node termination events"
+  type        = list(string)
+  default     = ["*"]
+}
+
+# Karpetner controller
+variable "attach_karpenter_controller_policy" {
+  description = "Determines whether to attach the Karpenter Controller policy to the role"
+  type        = bool
+  default     = false
+}
+
+variable "karpenter_controller_ssm_parameter_arns" {
+  description = "List of SSM Parameter ARNs that contain AMI IDs launched by Karpenter"
+  type        = list(string)
+  # https://github.com/aws/karpenter/blob/ed9473a9863ca949b61b9846c8b9f33f35b86dbd/pkg/cloudprovider/aws/ami.go#L105-L123
+  default = ["arn:aws:ssm:*:*:parameter/aws/service/*"]
+}

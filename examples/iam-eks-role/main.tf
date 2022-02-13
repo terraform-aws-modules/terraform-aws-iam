@@ -131,6 +131,40 @@ module "vpc_cni_ipv6_irsa_role" {
   tags = local.tags
 }
 
+module "node_termination_handler_irsa_role" {
+  source = "../../modules/iam-eks-role"
+
+  role_name                              = "node_termination_handler"
+  attach_node_termination_handler_policy = true
+
+  oidc_providers = {
+    ex = {
+      provider         = module.eks.oidc_provider
+      provider_arn     = module.eks.oidc_provider_arn
+      service_accounts = ["default:my-app", "canary:my-app"]
+    }
+  }
+
+  tags = local.tags
+}
+
+module "karpenter_controller_irsa_role" {
+  source = "../../modules/iam-eks-role"
+
+  role_name                          = "karpenter_controller"
+  attach_karpenter_controller_policy = true
+
+  oidc_providers = {
+    ex = {
+      provider         = module.eks.oidc_provider
+      provider_arn     = module.eks.oidc_provider_arn
+      service_accounts = ["default:my-app", "canary:my-app"]
+    }
+  }
+
+  tags = local.tags
+}
+
 ################################################################################
 # Supporting Resources
 ################################################################################

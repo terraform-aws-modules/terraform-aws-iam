@@ -348,3 +348,107 @@ resource "aws_iam_role_policy_attachment" "vpc_cni" {
   role       = aws_iam_role.this[0].name
   policy_arn = aws_iam_policy.vpc_cni[0].arn
 }
+
+################################################################################
+# Node Termination Handler Policy
+################################################################################
+
+# https://github.com/aws/aws-node-termination-handler#5-create-an-iam-role-for-the-pods
+data "aws_iam_policy_document" "node_termination_handler" {
+  count = var.create_role && var.attach_node_termination_handler_policy ? 1 : 0
+
+  statement {
+    actions = [
+      "autoscaling:CompleteLifecycleAction",
+      "autoscaling:DescribeAutoScalingInstances",
+      "autoscaling:DescribeTags",
+      "ec2:DescribeInstances",
+    ]
+
+    resources = ["*"]
+  }
+
+  statement {
+    actions = [
+      "sqs:DeleteMessage",
+      "sqs:ReceiveMessage"
+    ]
+
+    resources = var.node_termination_handler_sqs_queue_arns
+  }
+}
+
+resource "aws_iam_policy" "node_termination_handler" {
+  count = var.create_role && var.attach_node_termination_handler_policy ? 1 : 0
+
+  name_prefix = "AmazonEKS_Node_Termination_Handler_Policy-"
+  path        = var.role_path
+  description = "Provides permissions to handle node termination events via the Node Termination Handler"
+  policy      = data.aws_iam_policy_document.node_termination_handler[0].json
+
+  tags = var.tags
+}
+
+resource "aws_iam_role_policy_attachment" "node_termination_handler" {
+  count = var.create_role && var.attach_node_termination_handler_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.node_termination_handler[0].arn
+}
+
+################################################################################
+# Karpenter Controller Policy
+################################################################################
+
+# curl -fsSL https://karpenter.sh/v0.6.1/getting-started/cloudformation.yaml
+data "aws_iam_policy_document" "karpenter_controller" {
+  count = var.create_role && var.attach_karpenter_controller_policy ? 1 : 0
+
+  statement {
+    actions = [
+      # Write Operations
+      "ec2:CreateLaunchTemplate",
+      "ec2:CreateFleet",
+      "ec2:RunInstances",
+      "ec2:CreateTags",
+      "iam:PassRole",
+      "ec2:TerminateInstances",
+      # Read Operations
+      "ec2:DescribeLaunchTemplates",
+      "ec2:DescribeInstances",
+      "ec2:DescribeSecurityGroups",
+      "ec2:DescribeSubnets",
+      "ec2:DescribeInstanceTypes",
+      "ec2:DescribeInstanceTypeOfferings",
+      "ec2:DescribeAvailabilityZones",
+    ]
+
+    resources = ["*"]
+  }
+
+  statement {
+    actions = [
+      "ssm:GetParameter",
+    ]
+
+    resources = var.karpenter_controller_ssm_parameter_arns
+  }
+}
+
+resource "aws_iam_policy" "karpenter_controller" {
+  count = var.create_role && var.attach_karpenter_controller_policy ? 1 : 0
+
+  name_prefix = "AmazonEKS_Karpenter_Controller_Policy-"
+  path        = var.role_path
+  description = "Provides permissions to handle node termination events via the Node Termination Handler"
+  policy      = data.aws_iam_policy_document.karpenter_controller[0].json
+
+  tags = var.tags
+}
+
+resource "aws_iam_role_policy_attachment" "karpenter_controller" {
+  count = var.create_role && var.attach_karpenter_controller_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.karpenter_controller[0].arn
+}
