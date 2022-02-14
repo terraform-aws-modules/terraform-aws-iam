@@ -16,7 +16,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
       condition {
         test     = "StringEquals"
         variable = "${statement.value.provider}:sub"
-        values   = [for sa in statement.value.service_accounts : "system:serviceaccount:${sa}"]
+        values   = [for sa in statement.value.namespace_service_accounts : "system:serviceaccount:${sa}"]
       }
     }
   }

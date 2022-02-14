@@ -41,7 +41,7 @@ variable "role_policy_arns" {
 }
 
 variable "oidc_providers" {
-  description = "Map of OIDC providers where each provdier map should contain the `provider`, `provider_arns`, and `service_accounts`"
+  description = "Map of OIDC providers where each provdier map should contain the `provider`, `provider_arns`, and `namespace_service_accounts`"
   type        = any
   default     = {}
 }
@@ -75,6 +75,12 @@ variable "attach_cluster_autoscaler_policy" {
   default     = false
 }
 
+variable "cluster_autoscaler_cluster_ids" {
+  description = "List of cluster IDs to appropriately scope permissions within the Cluster Autoscaler IAM policy"
+  type        = list(string)
+  default     = []
+}
+
 # External DNS
 variable "attach_external_dns_policy" {
   description = "Determines whether to attach the External DNS IAM policy to the role"
@@ -82,10 +88,10 @@ variable "attach_external_dns_policy" {
   default     = false
 }
 
-variable "external_dns_hosted_zones" {
-  description = "Route53 hosted zone IDs to allow external DNS to manage records"
+variable "external_dns_hosted_zone_arns" {
+  description = "Route53 hosted zone ARNs to allow external DNS to manage records"
   type        = list(string)
-  default     = ["*"]
+  default     = ["arn:aws:route53:::hostedzone/*"]
 }
 
 # EBS CSI

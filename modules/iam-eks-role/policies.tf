@@ -1,5 +1,9 @@
 data "aws_partition" "current" {}
 
+locals {
+  partition = data.aws_partition.current.partition
+}
+
 ################################################################################
 # Cluster Autoscaler Policy
 ################################################################################
@@ -13,12 +17,30 @@ data "aws_iam_policy_document" "cluster_autoscaler" {
       "autoscaling:DescribeAutoScalingGroups",
       "autoscaling:DescribeAutoScalingInstances",
       "autoscaling:DescribeLaunchConfigurations",
-      "autoscaling:SetDesiredCapacity",
-      "autoscaling:TerminateInstanceInAutoScalingGroup",
-      "ec2:DescribeInstanceTypes",
+      "autoscaling:DescribeTags",
+      "ec2:DescribeLaunchTemplateVersions",
     ]
 
     resources = ["*"]
+  }
+
+  dynamic "statement" {
+    for_each = toset(var.cluster_autoscaler_cluster_ids)
+    content {
+      actions = [
+        "autoscaling:SetDesiredCapacity",
+        "autoscaling:TerminateInstanceInAutoScalingGroup",
+        "autoscaling:UpdateAutoScalingGroup",
+      ]
+
+      resources = ["*"]
+
+      condition {
+        test     = "StringEquals"
+        variable = "autoscaling:ResourceTag/kubernetes.io/cluster/${statement.value}"
+        values   = ["owned"]
+      }
+    }
   }
 }
 
@@ -49,11 +71,8 @@ data "aws_iam_policy_document" "external_dns" {
   count = var.create_role && var.attach_external_dns_policy ? 1 : 0
 
   statement {
-    actions = ["route53:ChangeResourceRecordSets"]
-    resources = [
-      for hosted_zone in var.external_dns_hosted_zones :
-      "arn:${data.aws_partition.current.partition}:route53:::hostedzone/${hosted_zone}"
-    ]
+    actions   = ["route53:ChangeResourceRecordSets"]
+    resources = var.external_dns_hosted_zone_arns
   }
 
   statement {
@@ -113,8 +132,8 @@ data "aws_iam_policy_document" "ebs_csi" {
     actions = ["ec2:CreateTags"]
 
     resources = [
-      "arn:aws:ec2:*:*:volume/*",
-      "arn:aws:ec2:*:*:snapshot/*",
+      "arn:${local.partition}:ec2:*:*:volume/*",
+      "arn:${local.partition}:ec2:*:*:snapshot/*",
     ]
 
     condition {
@@ -131,8 +150,8 @@ data "aws_iam_policy_document" "ebs_csi" {
     actions = ["ec2:DeleteTags"]
 
     resources = [
-      "arn:aws:ec2:*:*:volume/*",
-      "arn:aws:ec2:*:*:snapshot/*",
+      "arn:${local.partition}:ec2:*:*:volume/*",
+      "arn:${local.partition}:ec2:*:*:snapshot/*",
     ]
   }
 
@@ -327,7 +346,7 @@ data "aws_iam_policy_document" "vpc_cni" {
   statement {
     sid       = "CreateTags"
     actions   = ["ec2:CreateTags"]
-    resources = ["arn:aws:ec2:*:*:network-interface/*"]
+    resources = ["arn:${local.partition}:ec2:*:*:network-interface/*"]
   }
 }
 

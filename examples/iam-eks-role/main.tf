@@ -25,14 +25,14 @@ module "iam_eks_role" {
 
   oidc_providers = {
     one = {
-      provider         = module.eks.oidc_provider
-      provider_arn     = module.eks.oidc_provider_arn
-      service_accounts = ["default:my-app", "canary:my-app"]
+      provider                   = module.eks.oidc_provider
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["default:my-app", "canary:my-app"]
     }
     two = {
-      provider         = module.eks.oidc_provider
-      provider_arn     = module.eks.oidc_provider_arn
-      service_accounts = ["default:blue", "canary:blue"]
+      provider                   = module.eks.oidc_provider
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["default:blue", "canary:blue"]
     }
   }
 
@@ -48,12 +48,13 @@ module "cluster_autoscaler_irsa_role" {
 
   role_name                        = "cluster-autoscaler"
   attach_cluster_autoscaler_policy = true
+  cluster_autoscaler_cluster_ids   = [module.eks.cluster_id]
 
   oidc_providers = {
     ex = {
-      provider         = module.eks.oidc_provider
-      provider_arn     = module.eks.oidc_provider_arn
-      service_accounts = ["default:my-app", "canary:my-app"]
+      provider                   = module.eks.oidc_provider
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["default:my-app", "canary:my-app"]
     }
   }
 
@@ -63,15 +64,15 @@ module "cluster_autoscaler_irsa_role" {
 module "external_dns_irsa_role" {
   source = "../../modules/iam-eks-role"
 
-  role_name                  = "external-dns"
-  attach_external_dns_policy = true
-  external_dns_hosted_zones  = ["IClearlyMadeThisUp"]
+  role_name                     = "external-dns"
+  attach_external_dns_policy    = true
+  external_dns_hosted_zone_arns = ["arn:aws:route53:::hostedzone/IClearlyMadeThisUp"]
 
   oidc_providers = {
     ex = {
-      provider         = module.eks.oidc_provider
-      provider_arn     = module.eks.oidc_provider_arn
-      service_accounts = ["default:my-app", "canary:my-app"]
+      provider                   = module.eks.oidc_provider
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["default:my-app", "canary:my-app"]
     }
   }
 
@@ -86,9 +87,9 @@ module "ebs_csi_irsa_role" {
 
   oidc_providers = {
     ex = {
-      provider         = module.eks.oidc_provider
-      provider_arn     = module.eks.oidc_provider_arn
-      service_accounts = ["default:my-app", "canary:my-app"]
+      provider                   = module.eks.oidc_provider
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["default:my-app", "canary:my-app"]
     }
   }
 
@@ -104,9 +105,9 @@ module "vpc_cni_ipv4_irsa_role" {
 
   oidc_providers = {
     ex = {
-      provider         = module.eks.oidc_provider
-      provider_arn     = module.eks.oidc_provider_arn
-      service_accounts = ["default:my-app", "canary:my-app"]
+      provider                   = module.eks.oidc_provider
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["default:my-app", "canary:my-app"]
     }
   }
 
@@ -122,9 +123,9 @@ module "vpc_cni_ipv6_irsa_role" {
 
   oidc_providers = {
     ex = {
-      provider         = module.eks.oidc_provider
-      provider_arn     = module.eks.oidc_provider_arn
-      service_accounts = ["default:my-app", "canary:my-app"]
+      provider                   = module.eks.oidc_provider
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["default:my-app", "canary:my-app"]
     }
   }
 
@@ -139,9 +140,9 @@ module "node_termination_handler_irsa_role" {
 
   oidc_providers = {
     ex = {
-      provider         = module.eks.oidc_provider
-      provider_arn     = module.eks.oidc_provider_arn
-      service_accounts = ["default:my-app", "canary:my-app"]
+      provider                   = module.eks.oidc_provider
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["default:my-app", "canary:my-app"]
     }
   }
 
@@ -156,9 +157,9 @@ module "karpenter_controller_irsa_role" {
 
   oidc_providers = {
     ex = {
-      provider         = module.eks.oidc_provider
-      provider_arn     = module.eks.oidc_provider_arn
-      service_accounts = ["default:my-app", "canary:my-app"]
+      provider                   = module.eks.oidc_provider
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["default:my-app", "canary:my-app"]
     }
   }
 
