@@ -155,6 +155,9 @@ module "karpenter_controller_irsa_role" {
   role_name                          = "karpenter_controller"
   attach_karpenter_controller_policy = true
 
+  karpenter_controller_cluster_ids        = [module.eks.cluster_id]
+  karpenter_controller_node_iam_role_arns = [module.eks.eks_managed_node_groups["default"].iam_role_arn]
+
   oidc_providers = {
     ex = {
       provider                   = module.eks.oidc_provider
@@ -211,4 +214,10 @@ module "eks" {
 
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
+
+  eks_managed_node_groups = {
+    default = {}
+  }
+
+  tags = local.tags
 }

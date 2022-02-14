@@ -146,9 +146,21 @@ variable "attach_karpenter_controller_policy" {
   default     = false
 }
 
+variable "karpenter_controller_cluster_ids" {
+  description = "List of cluster IDs to appropriately scope EC2 permissions within the Karpenter Controller policy"
+  type        = list(string)
+  default     = []
+}
+
 variable "karpenter_controller_ssm_parameter_arns" {
   description = "List of SSM Parameter ARNs that contain AMI IDs launched by Karpenter"
   type        = list(string)
   # https://github.com/aws/karpenter/blob/ed9473a9863ca949b61b9846c8b9f33f35b86dbd/pkg/cloudprovider/aws/ami.go#L105-L123
   default = ["arn:aws:ssm:*:*:parameter/aws/service/*"]
+}
+
+variable "karpenter_controller_node_iam_role_arns" {
+  description = "List of node IAM role ARNs Karpenter can use to launch nodes"
+  type        = list(string)
+  default     = ["*"]
 }

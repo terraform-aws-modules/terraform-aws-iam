@@ -425,14 +425,9 @@ data "aws_iam_policy_document" "karpenter_controller" {
 
   statement {
     actions = [
-      # Write Operations
       "ec2:CreateLaunchTemplate",
       "ec2:CreateFleet",
-      "ec2:RunInstances",
       "ec2:CreateTags",
-      "iam:PassRole",
-      "ec2:TerminateInstances",
-      # Read Operations
       "ec2:DescribeLaunchTemplates",
       "ec2:DescribeInstances",
       "ec2:DescribeSecurityGroups",
@@ -445,12 +440,33 @@ data "aws_iam_policy_document" "karpenter_controller" {
     resources = ["*"]
   }
 
-  statement {
-    actions = [
-      "ssm:GetParameter",
-    ]
+  dynamic "statement" {
+    for_each = toset(var.karpenter_controller_cluster_ids)
+    content {
+      actions = [
+        "ec2:RunInstances",
+        "ec2:TerminateInstances",
+        "ec2:DeleteLaunchTemplate",
+      ]
 
+      resources = ["*"]
+
+      condition {
+        test     = "StringEquals"
+        variable = "ec2:ResourceTag/karpenter.sh/discovery"
+        values   = [statement.value]
+      }
+    }
+  }
+
+  statement {
+    actions   = ["ssm:GetParameter"]
     resources = var.karpenter_controller_ssm_parameter_arns
+  }
+
+  statement {
+    actions   = ["iam:PassRole"]
+    resources = var.karpenter_controller_node_iam_role_arns
   }
 }
 
