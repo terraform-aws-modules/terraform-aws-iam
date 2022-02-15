@@ -53,7 +53,7 @@ module "iam_eks_role" {
 }
 ```
 
-This module has been design in conjunction with the [`terraform-aws-eks`](https://github.com/terraform-aws-modules/terraform-aws-eks) module and easily integrates with it:
+This module has been designed in conjunction with the [`terraform-aws-eks`](https://github.com/terraform-aws-modules/terraform-aws-eks) module to easily integrate with it:
 
 ```hcl
 module "iam_eks_role" {
