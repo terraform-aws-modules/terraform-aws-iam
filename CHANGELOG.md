@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.12.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.11.0...v4.12.0) (2022-02-16)
+
+
+### Features
+
+* Add conditional policy statement attachments for EKS IAM role module ([#184](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/184)) ([e29b94f](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/e29b94f1aaeae68e062213954c293727a8a83e24))
+
 ## [4.11.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.10.1...v4.11.0) (2022-02-02)
 
 
