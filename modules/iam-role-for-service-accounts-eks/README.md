@@ -1,51 +1,22 @@
 # IAM Role for Service Accounts in EKS
 
-Creates an IAM role which can be assumed by AWS EKS `ServiceAccount`s.
+Creates an IAM role which can be assumed by AWS EKS `ServiceAccount`s with optional policies for commonly used controllers/custom resources within EKS.
 
 This module is intended to be used with AWS EKS. For details of how a `ServiceAccount` in EKS can assume an IAM role, see the [EKS documentation](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html).
 
-This module supports multiple `ServiceAccount` in multiple clusters and/or namespaces. This allows for a single IAM role to be used when an application may span multiple clusters (e.g. for DR) or multiple namespaces (e.g. for canary deployments):
+This module supports multiple `ServiceAccount`s across multiple clusters and/or namespaces. This allows for a single IAM role to be used when an application may span multiple clusters (e.g. for DR) or multiple namespaces (e.g. for canary deployments). For example, to create an IAM role named `my-app` that can be assumed from the `ServiceAccount` named `my-app-staging` in the namespace `default` and `canary` in a cluster in `us-east-1`; and also the `ServiceAccount` name `my-app-staging` in the namespace `default` in a cluster in `ap-southeast-1`, the configuration would be:
 
 ```hcl
 module "iam_eks_role" {
-  source = "terraform-aws-modules/iam/aws//modules/iam-eks-role"
-
-  oidc_providers = {
-    one = {
-      provider         = "<OIDC provider without protocol prefix>"
-      provider_arn     = "<OIDC provider ARN>"
-      service_accounts = [
-        "<namespace>:<ServiceAccount name>",
-        "<namespace>:<another ServiceAccount name>"
-      ]
-    }
-    two = {
-      provider         = "<OIDC provider without protocol prefix>"
-      provider_arn     = "<OIDC provider ARN>"
-      service_accounts = [
-        "<namespace>:<ServiceAccount name>",
-        "<namespace>:<another ServiceAccount name>"
-      ]
-    }
-  }
-}
-```
-
-For example, to create an IAM role named `my-app` that can be assumed from the `ServiceAccount` named `my-app-staging` in the namespace `default` and `canary` in EKS cluster named `cluster-main-1`; and also the `ServiceAccount` name `my-app-staging` in the namespace `default` in EKS cluster named `cluster-backup-1`, the configuration would be:
-
-```hcl
-module "iam_eks_role" {
-  source    = "terraform-aws-modules/iam/aws//modules/iam-eks-role"
+  source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
   role_name = "my-app"
 
   oidc_providers = {
     one = {
-      provider         = "oidc.eks.us-east-1.amazonaws.com/id/5C54DDF35ER19312844C7333374CC09D"
       provider_arn     = "arn:aws:iam::012345678901:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/5C54DDF35ER19312844C7333374CC09D"
       service_accounts = ["default:my-app-staging", "canary:my-app-staging"]
     }
     two = {
-      provider         = "oidc.eks.ap-southeast-1.amazonaws.com/id/5C54DDF35ER54476848E7333374FF09G"
       provider_arn     = "arn:aws:iam::012345678901:oidc-provider/oidc.eks.ap-southeast-1.amazonaws.com/id/5C54DDF35ER54476848E7333374FF09G"
       service_accounts = ["default:my-app-staging"]
     }
@@ -56,21 +27,38 @@ module "iam_eks_role" {
 This module has been designed in conjunction with the [`terraform-aws-eks`](https://github.com/terraform-aws-modules/terraform-aws-eks) module to easily integrate with it:
 
 ```hcl
-module "iam_eks_role" {
-  source    = "terraform-aws-modules/iam/aws//modules/iam-eks-role"
+module "vpc_cni_irsa_role" {
+  source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
 
-  role_name = "my-app"
+  role_name = "vpc-cni"
+
+  attach_vpc_cni_policy = true
+  vpc_cni_enable_ipv4   = true
 
   oidc_providers = {
-    one = {
-      provider         = module.eks.oidc_provider
+    main = {
       provider_arn     = module.eks.oidc_provider_arn
       service_accounts = ["default:my-app", "canary:my-app"]
     }
-    two = {
-      provider         = module.eks.oidc_provider
+  }
+}
+
+module "karpenter_irsa_role" {
+  source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+
+  role_name                          = "karpenter_controller"
+  attach_karpenter_controller_policy = true
+
+  karpenter_controller_cluster_ids        = [module.eks.cluster_id]
+  karpenter_controller_node_iam_role_arns = [module.eks.eks_managed_node_groups["default"].iam_role_arn]
+
+  attach_vpc_cni_policy = true
+  vpc_cni_enable_ipv4   = true
+
+  oidc_providers = {
+    main = {
       provider_arn     = module.eks.oidc_provider_arn
-      service_accounts = ["default:blue", "canary:blue"]
+      service_accounts = ["default:my-app", "canary:my-app"]
     }
   }
 }
@@ -84,6 +72,10 @@ module "eks" {
 
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
+
+  eks_managed_node_groups = {
+    default = {}
+  }
 }
 ```
 

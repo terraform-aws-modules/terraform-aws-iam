@@ -31,12 +31,10 @@ module "irsa_role" {
 
   oidc_providers = {
     one = {
-      provider                   = module.eks.oidc_provider
       provider_arn               = module.eks.oidc_provider_arn
       namespace_service_accounts = ["default:my-app", "canary:my-app"]
     }
     two = {
-      provider                   = module.eks.oidc_provider
       provider_arn               = module.eks.oidc_provider_arn
       namespace_service_accounts = ["default:blue", "canary:blue"]
     }
@@ -58,7 +56,6 @@ module "cluster_autoscaler_irsa_role" {
 
   oidc_providers = {
     ex = {
-      provider                   = module.eks.oidc_provider
       provider_arn               = module.eks.oidc_provider_arn
       namespace_service_accounts = ["default:my-app", "canary:my-app"]
     }
@@ -76,7 +73,6 @@ module "external_dns_irsa_role" {
 
   oidc_providers = {
     ex = {
-      provider                   = module.eks.oidc_provider
       provider_arn               = module.eks.oidc_provider_arn
       namespace_service_accounts = ["default:my-app", "canary:my-app"]
     }
@@ -93,7 +89,6 @@ module "ebs_csi_irsa_role" {
 
   oidc_providers = {
     ex = {
-      provider                   = module.eks.oidc_provider
       provider_arn               = module.eks.oidc_provider_arn
       namespace_service_accounts = ["default:my-app", "canary:my-app"]
     }
@@ -111,7 +106,6 @@ module "vpc_cni_ipv4_irsa_role" {
 
   oidc_providers = {
     ex = {
-      provider                   = module.eks.oidc_provider
       provider_arn               = module.eks.oidc_provider_arn
       namespace_service_accounts = ["default:my-app", "canary:my-app"]
     }
@@ -129,7 +123,6 @@ module "vpc_cni_ipv6_irsa_role" {
 
   oidc_providers = {
     ex = {
-      provider                   = module.eks.oidc_provider
       provider_arn               = module.eks.oidc_provider_arn
       namespace_service_accounts = ["default:my-app", "canary:my-app"]
     }
@@ -146,7 +139,6 @@ module "node_termination_handler_irsa_role" {
 
   oidc_providers = {
     ex = {
-      provider                   = module.eks.oidc_provider
       provider_arn               = module.eks.oidc_provider_arn
       namespace_service_accounts = ["default:my-app", "canary:my-app"]
     }
@@ -166,7 +158,6 @@ module "karpenter_controller_irsa_role" {
 
   oidc_providers = {
     ex = {
-      provider                   = module.eks.oidc_provider
       provider_arn               = module.eks.oidc_provider_arn
       namespace_service_accounts = ["default:my-app", "canary:my-app"]
     }
@@ -189,6 +180,10 @@ module "vpc" {
   azs             = ["${local.region}a", "${local.region}b", "${local.region}c"]
   private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
   public_subnets  = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
+
+  enable_nat_gateway   = true
+  single_nat_gateway   = true
+  enable_dns_hostnames = true
 
   public_subnet_tags = {
     "kubernetes.io/cluster/${local.name}" = "shared"

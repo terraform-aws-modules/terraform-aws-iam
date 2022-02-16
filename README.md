@@ -266,8 +266,7 @@ module "vpc_cni_irsa" {
   vpc_cni_enable_ipv4   = true
 
   oidc_providers = {
-    ex = {
-      provider                   = "oidc.eks.us-east-1.amazonaws.com/id/5C54DDF35ER19312844C7333374CC09D"
+    main = {
       provider_arn               = "arn:aws:iam::012345678901:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/5C54DDF35ER19312844C7333374CC09D"
       namespace_service_accounts = ["default:my-app", "canary:my-app"]
     }
