@@ -1,6 +1,6 @@
 output "group_users" {
   description = "List of IAM users in IAM group"
-  value       = flatten(aws_iam_group_membership.this.*.users)
+  value       = flatten(aws_iam_group_membership.this[*].users)
 }
 
 output "assumable_roles" {
