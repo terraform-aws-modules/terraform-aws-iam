@@ -18,6 +18,12 @@ locals {
 # IRSA Roles
 ################################################################################
 
+module "disabled" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  create_role = false
+}
+
 module "irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
@@ -183,14 +189,6 @@ module "vpc" {
   azs             = ["${local.region}a", "${local.region}b", "${local.region}c"]
   private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
   public_subnets  = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
-
-  enable_nat_gateway   = true
-  single_nat_gateway   = true
-  enable_dns_hostnames = true
-
-  enable_flow_log                      = true
-  create_flow_log_cloudwatch_iam_role  = true
-  create_flow_log_cloudwatch_log_group = true
 
   public_subnet_tags = {
     "kubernetes.io/cluster/${local.name}" = "shared"
