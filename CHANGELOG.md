@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.13.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.12.0...v4.13.0) (2022-02-17)
+
+
+### Features
+
+* Add new addon policy for AWS load balancer controller to IRSA role ([#189](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/189)) ([e2ce5c9](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/e2ce5c943f2a4f4c604b0273915f80c55c6a98f3))
+
 ## [4.12.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.11.0...v4.12.0) (2022-02-16)
 
 
