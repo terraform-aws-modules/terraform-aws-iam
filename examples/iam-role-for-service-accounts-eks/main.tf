@@ -57,7 +57,7 @@ module "cluster_autoscaler_irsa_role" {
   oidc_providers = {
     ex = {
       provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["default:my-app", "canary:my-app"]
+      namespace_service_accounts = ["kube-system:cluster-autoscaler"]
     }
   }
 
@@ -90,7 +90,7 @@ module "ebs_csi_irsa_role" {
   oidc_providers = {
     ex = {
       provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["default:my-app", "canary:my-app"]
+      namespace_service_accounts = ["kube-system:aws-ebs-csi-driver"]
     }
   }
 
@@ -107,7 +107,7 @@ module "vpc_cni_ipv4_irsa_role" {
   oidc_providers = {
     ex = {
       provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["default:my-app", "canary:my-app"]
+      namespace_service_accounts = ["kube-system:aws-vpc-cni"]
     }
   }
 
@@ -124,7 +124,7 @@ module "vpc_cni_ipv6_irsa_role" {
   oidc_providers = {
     ex = {
       provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["default:my-app", "canary:my-app"]
+      namespace_service_accounts = ["kube-system:aws-vpc-cni"]
     }
   }
 
@@ -140,7 +140,7 @@ module "node_termination_handler_irsa_role" {
   oidc_providers = {
     ex = {
       provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["default:my-app", "canary:my-app"]
+      namespace_service_accounts = ["kube-system:aws-node"]
     }
   }
 
@@ -159,7 +159,23 @@ module "karpenter_controller_irsa_role" {
   oidc_providers = {
     ex = {
       provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["default:my-app", "canary:my-app"]
+      namespace_service_accounts = ["karpenter:karpenter"]
+    }
+  }
+
+  tags = local.tags
+}
+
+module "load_balancer_controller_irsa_role" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name                              = "load_balancer_controller"
+  attach_load_balancer_controller_policy = true
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["kube-system:aws-load-balancer-controller"]
     }
   }
 
