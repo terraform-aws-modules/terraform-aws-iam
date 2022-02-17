@@ -504,7 +504,7 @@ data "aws_iam_policy_document" "load_balancer_controller" {
     condition {
       test     = "StringEquals"
       variable = "iam:AWSServiceName"
-      values   = ["elasticloadbalancing.${local.partition}"]
+      values   = ["elasticloadbalancing.${local.dns_suffix}"]
     }
   }
 
