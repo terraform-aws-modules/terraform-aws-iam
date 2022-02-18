@@ -718,7 +718,7 @@ data "aws_iam_policy_document" "load_balancer_controller" {
       "elasticloadbalancing:RemoveListenerCertificates",
       "elasticloadbalancing:ModifyRule",
     ]
-    resources = ["arn:${local.partition}:elasticloadbalancing:*:*:targetgroup/*/*"]
+    resources = ["*"]
   }
 }
 
