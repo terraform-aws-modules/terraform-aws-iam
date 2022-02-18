@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [4.13.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.13.0...v4.13.1) (2022-02-18)
+
+
+### Bug Fixes
+
+* Correct permission on AWS load balancer controller ([#191](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/191)) ([a912557](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/a912557173f6844b75a2104c75de08e68f25d33d))
+
 ## [4.13.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.12.0...v4.13.0) (2022-02-17)
 
 
