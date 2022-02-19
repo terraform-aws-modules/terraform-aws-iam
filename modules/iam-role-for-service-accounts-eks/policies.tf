@@ -20,6 +20,7 @@ data "aws_iam_policy_document" "cluster_autoscaler" {
       "autoscaling:DescribeLaunchConfigurations",
       "autoscaling:DescribeTags",
       "ec2:DescribeLaunchTemplateVersions",
+      "ec2:DescribeInstanceTypes",
     ]
 
     resources = ["*"]
