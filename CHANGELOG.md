@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [4.13.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.13.1...v4.13.2) (2022-03-02)
+
+
+### Bug Fixes
+
+* Trigger release for adding `ec2:DescribeInstanceTypes` patched in [#192](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/192) ([#196](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/196)) ([0f5979f](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/0f5979f76f8290eb43314b5f880e798a22cf4bf0))
+
 ### [4.13.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.13.0...v4.13.1) (2022-02-18)
 
 
