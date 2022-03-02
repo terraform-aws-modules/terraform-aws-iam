@@ -143,7 +143,7 @@ data "aws_iam_policy_document" "ebs_csi" {
       variable = "ec2:CreateAction"
       values = [
         "CreateVolume",
-        "CreateSnapshot"
+        "CreateSnapshot",
       ]
     }
   }
@@ -253,7 +253,7 @@ data "aws_iam_policy_document" "ebs_csi" {
       actions = [
         "kms:CreateGrant",
         "kms:ListGrants",
-        "kms:RevokeGrant"
+        "kms:RevokeGrant",
       ]
 
       resources = statement.value
@@ -274,7 +274,7 @@ data "aws_iam_policy_document" "ebs_csi" {
         "kms:Decrypt",
         "kms:ReEncrypt*",
         "kms:GenerateDataKey*",
-        "kms:DescribeKey"
+        "kms:DescribeKey",
       ]
 
       resources = statement.value
@@ -323,7 +323,7 @@ data "aws_iam_policy_document" "vpc_cni" {
         "ec2:DescribeInstanceTypes",
         "ec2:DetachNetworkInterface",
         "ec2:ModifyNetworkInterfaceAttribute",
-        "ec2:UnassignPrivateIpAddresses"
+        "ec2:UnassignPrivateIpAddresses",
       ]
       resources = ["*"]
     }
@@ -339,7 +339,7 @@ data "aws_iam_policy_document" "vpc_cni" {
         "ec2:DescribeInstances",
         "ec2:DescribeTags",
         "ec2:DescribeNetworkInterfaces",
-        "ec2:DescribeInstanceTypes"
+        "ec2:DescribeInstanceTypes",
       ]
       resources = ["*"]
     }
@@ -392,7 +392,7 @@ data "aws_iam_policy_document" "node_termination_handler" {
   statement {
     actions = [
       "sqs:DeleteMessage",
-      "sqs:ReceiveMessage"
+      "sqs:ReceiveMessage",
     ]
 
     resources = var.node_termination_handler_sqs_queue_arns
@@ -565,7 +565,7 @@ data "aws_iam_policy_document" "load_balancer_controller" {
     actions = [
       "ec2:AuthorizeSecurityGroupIngress",
       "ec2:RevokeSecurityGroupIngress",
-      "ec2:CreateSecurityGroup"
+      "ec2:CreateSecurityGroup",
     ]
     resources = ["*"]
   }
