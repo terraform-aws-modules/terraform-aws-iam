@@ -182,6 +182,22 @@ module "load_balancer_controller_irsa_role" {
   tags = local.tags
 }
 
+module "load_balancer_controller_targetgroup_binding_only_irsa_role" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name                                                       = "load_balancer_controller"
+  attach_load_balancer_controller_targetgroup_binding_only_policy = true
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["kube-system:aws-load-balancer-controller"]
+    }
+  }
+
+  tags = local.tags
+}
+
 ################################################################################
 # Supporting Resources
 ################################################################################
