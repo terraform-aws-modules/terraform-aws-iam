@@ -20,12 +20,12 @@ module "iam_eks_role" {
 
   oidc_providers = {
     one = {
-      provider_arn     = "arn:aws:iam::012345678901:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/5C54DDF35ER19312844C7333374CC09D"
-      service_accounts = ["default:my-app-staging", "canary:my-app-staging"]
+      provider_arn               = "arn:aws:iam::012345678901:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/5C54DDF35ER19312844C7333374CC09D"
+      namespace_service_accounts = ["default:my-app-staging", "canary:my-app-staging"]
     }
     two = {
-      provider_arn     = "arn:aws:iam::012345678901:oidc-provider/oidc.eks.ap-southeast-1.amazonaws.com/id/5C54DDF35ER54476848E7333374FF09G"
-      service_accounts = ["default:my-app-staging"]
+      provider_arn               = "arn:aws:iam::012345678901:oidc-provider/oidc.eks.ap-southeast-1.amazonaws.com/id/5C54DDF35ER54476848E7333374FF09G"
+      namespace_service_accounts = ["default:my-app-staging"]
     }
   }
 }
@@ -44,8 +44,8 @@ module "vpc_cni_irsa_role" {
 
   oidc_providers = {
     main = {
-      provider_arn     = module.eks.oidc_provider_arn
-      service_accounts = ["default:my-app", "canary:my-app"]
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["default:my-app", "canary:my-app"]
     }
   }
 }
@@ -64,8 +64,8 @@ module "karpenter_irsa_role" {
 
   oidc_providers = {
     main = {
-      provider_arn     = module.eks.oidc_provider_arn
-      service_accounts = ["default:my-app", "canary:my-app"]
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["default:my-app", "canary:my-app"]
     }
   }
 }
@@ -138,6 +138,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_assume_role_condition_test"></a> [assume\_role\_condition\_test](#input\_assume\_role\_condition\_test) | Name of the [IAM condition operator](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html) to evaluate when assuming the role | `string` | `"StringEquals"` | no |
 | <a name="input_attach_cluster_autoscaler_policy"></a> [attach\_cluster\_autoscaler\_policy](#input\_attach\_cluster\_autoscaler\_policy) | Determines whether to attach the Cluster Autoscaler IAM policy to the role | `bool` | `false` | no |
 | <a name="input_attach_ebs_csi_policy"></a> [attach\_ebs\_csi\_policy](#input\_attach\_ebs\_csi\_policy) | Determines whether to attach the EBS CSI IAM policy to the role | `bool` | `false` | no |
 | <a name="input_attach_external_dns_policy"></a> [attach\_external\_dns\_policy](#input\_attach\_external\_dns\_policy) | Determines whether to attach the External DNS IAM policy to the role | `bool` | `false` | no |
