@@ -113,6 +113,13 @@ variable "ebs_csi_kms_cmk_ids" {
   default     = []
 }
 
+# FSx Lustre CSI
+variable "attach_fsx_lustre_csi_policy" {
+  description = "Determines whether to attach the FSx Lustre CSI IAM policy to the role"
+  type        = bool
+  default     = false
+}
+
 # VPC CNI
 variable "attach_vpc_cni_policy" {
   description = "Determines whether to attach the VPC CNI IAM policy to the role"
@@ -145,7 +152,7 @@ variable "node_termination_handler_sqs_queue_arns" {
   default     = ["*"]
 }
 
-# Karpetner controller
+# Karpenter controller
 variable "attach_karpenter_controller_policy" {
   description = "Determines whether to attach the Karpenter Controller policy to the role"
   type        = bool
