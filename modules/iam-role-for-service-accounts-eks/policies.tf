@@ -754,6 +754,7 @@ data "aws_iam_policy_document" "load_balancer_controller_targetgroup_only" {
     actions = [
       "ec2:DescribeSecurityGroups",
       "ec2:DescribeInstances",
+      "ec2:DescribeVpcs",
       "elasticloadbalancing:DescribeTargetGroups",
       "elasticloadbalancing:DescribeTargetHealth",
       "elasticloadbalancing:ModifyTargetGroup",
