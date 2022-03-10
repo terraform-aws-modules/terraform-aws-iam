@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.14.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.13.2...v4.14.0) (2022-03-09)
+
+
+### Features
+
+* Add variable to change IAM condition test operator to suite; defaults to `StringEquals` ([#201](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/201)) ([8469c03](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/8469c03a40616bad79da6f4e03a00b2ad5e30fd3))
+
 ### [4.13.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.13.1...v4.13.2) (2022-03-02)
 
 
