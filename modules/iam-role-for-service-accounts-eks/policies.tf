@@ -1,6 +1,8 @@
 data "aws_partition" "current" {}
+data "aws_caller_identity" "current" {}
 
 locals {
+  account_id = data.aws_caller_identity.current.account_id
   partition  = data.aws_partition.current.partition
   dns_suffix = data.aws_partition.current.dns_suffix
 }
@@ -446,7 +448,6 @@ data "aws_iam_policy_document" "karpenter_controller" {
     for_each = toset(var.karpenter_controller_cluster_ids)
     content {
       actions = [
-        "ec2:RunInstances",
         "ec2:TerminateInstances",
         "ec2:DeleteLaunchTemplate",
       ]
@@ -458,6 +459,43 @@ data "aws_iam_policy_document" "karpenter_controller" {
         variable = "ec2:ResourceTag/karpenter.sh/discovery"
         values   = [statement.value]
       }
+    }
+  }
+
+  statement {
+    actions = ["ec2:RunInstances"]
+
+    resources = [
+      "arn:aws:ec2:*::image/*",
+      "arn:aws:ec2:*:*:subnet/*", # We can't restrict account ID due to sharing subnets
+      "arn:aws:ec2:*:${local.account_id}:network-interface/*",
+      "arn:aws:ec2:*:${local.account_id}:security-group/*",
+      "arn:aws:ec2:*:${local.account_id}:key-pair/*"
+    ]
+  }
+
+  statement {
+    actions = ["ec2:RunInstances"]
+    resources = [
+      "arn:aws:ec2:*:${local.account_id}:volume/*",
+      "arn:aws:ec2:*:${local.account_id}:instance/*"
+    ]
+
+    condition {
+      test     = "ForAnyValue:StringEquals"
+      variable = "aws:TagKeys"
+      values   = ["karpenter.sh/discovery"]
+    }
+  }
+
+  statement {
+    actions   = ["ec2:CreateTags"]
+    resources = ["arn:aws:ec2:*:${local.account_id}:*/*"]
+
+    condition {
+      test     = "StringEquals"
+      variable = "ec2:CreateAction"
+      values   = ["RunInstances"]
     }
   }
 
