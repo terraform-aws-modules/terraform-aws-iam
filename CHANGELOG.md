@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [4.15.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.15.0...v4.15.1) (2022-03-23)
+
+
+### Bug Fixes
+
+* Permit `RunInstances` permission for Karpenter when request contains `karpenter.sh/discovery` tag key ([#209](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/209)) ([18081d1](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/18081d142a88f6552cb6a37958490cafa3368e28))
+
 ## [4.15.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.14.0...v4.15.0) (2022-03-23)
 
 
