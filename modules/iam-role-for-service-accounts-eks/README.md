@@ -124,6 +124,7 @@ No modules.
 | [aws_iam_role_policy_attachment.node_termination_handler](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.vpc_cni](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.cluster_autoscaler](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.ebs_csi](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.external_dns](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
@@ -151,7 +152,7 @@ No modules.
 | <a name="input_ebs_csi_kms_cmk_ids"></a> [ebs\_csi\_kms\_cmk\_ids](#input\_ebs\_csi\_kms\_cmk\_ids) | KMS CMK IDs to allow EBS CSI to manage encrypted volumes | `list(string)` | `[]` | no |
 | <a name="input_external_dns_hosted_zone_arns"></a> [external\_dns\_hosted\_zone\_arns](#input\_external\_dns\_hosted\_zone\_arns) | Route53 hosted zone ARNs to allow external DNS to manage records | `list(string)` | <pre>[<br>  "arn:aws:route53:::hostedzone/*"<br>]</pre> | no |
 | <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies) | Whether policies should be detached from this role when destroying | `bool` | `true` | no |
-| <a name="input_karpenter_controller_cluster_ids"></a> [karpenter\_controller\_cluster\_ids](#input\_karpenter\_controller\_cluster\_ids) | List of cluster IDs to appropriately scope EC2 permissions within the Karpenter Controller policy | `list(string)` | `[]` | no |
+| <a name="input_karpenter_controller_cluster_id"></a> [karpenter\_controller\_cluster\_id](#input\_karpenter\_controller\_cluster\_id) | Cluster ID where the Karpenter controller is provisioned/managing | `string` | `"*"` | no |
 | <a name="input_karpenter_controller_node_iam_role_arns"></a> [karpenter\_controller\_node\_iam\_role\_arns](#input\_karpenter\_controller\_node\_iam\_role\_arns) | List of node IAM role ARNs Karpenter can use to launch nodes | `list(string)` | <pre>[<br>  "*"<br>]</pre> | no |
 | <a name="input_karpenter_controller_ssm_parameter_arns"></a> [karpenter\_controller\_ssm\_parameter\_arns](#input\_karpenter\_controller\_ssm\_parameter\_arns) | List of SSM Parameter ARNs that contain AMI IDs launched by Karpenter | `list(string)` | <pre>[<br>  "arn:aws:ssm:*:*:parameter/aws/service/*"<br>]</pre> | no |
 | <a name="input_max_session_duration"></a> [max\_session\_duration](#input\_max\_session\_duration) | Maximum CLI/API session duration in seconds between 3600 and 43200 | `number` | `null` | no |
