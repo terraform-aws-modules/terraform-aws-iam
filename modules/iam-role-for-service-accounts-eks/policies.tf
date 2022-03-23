@@ -258,7 +258,7 @@ data "aws_iam_policy_document" "ebs_csi" {
         "kms:RevokeGrant",
       ]
 
-      resources = statement.value
+      resources = var.ebs_csi_kms_cmk_ids
 
       condition {
         test     = "Bool"
@@ -279,7 +279,7 @@ data "aws_iam_policy_document" "ebs_csi" {
         "kms:DescribeKey",
       ]
 
-      resources = statement.value
+      resources = var.ebs_csi_kms_cmk_ids
     }
   }
 }

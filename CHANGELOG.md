@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.15.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.14.0...v4.15.0) (2022-03-23)
+
+
+### Features
+
+* Made it clear that we stand with Ukraine ([8e2b836](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/8e2b8364752c9842f39a7a79c7ce008b15999191))
+
+
+### Bug Fixes
+
+* Policy generation when `ebs_csi_kms_cmk_ids` is set ([#203](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/203)) ([e2b4054](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/e2b405400f9259dbd3d5bd2e1fd6b6d5f9061824))
+
 ## [4.14.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.13.2...v4.14.0) (2022-03-09)
 
 
