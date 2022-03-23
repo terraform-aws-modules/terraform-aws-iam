@@ -444,59 +444,44 @@ data "aws_iam_policy_document" "karpenter_controller" {
     resources = ["*"]
   }
 
-  dynamic "statement" {
-    for_each = toset(var.karpenter_controller_cluster_ids)
-    content {
-      actions = [
-        "ec2:TerminateInstances",
-        "ec2:DeleteLaunchTemplate",
-      ]
-
-      resources = ["*"]
-
-      condition {
-        test     = "StringEquals"
-        variable = "ec2:ResourceTag/karpenter.sh/discovery"
-        values   = [statement.value]
-      }
-    }
-  }
-
   statement {
-    actions = ["ec2:RunInstances"]
-
-    resources = [
-      "arn:aws:ec2:*::image/*",
-      "arn:aws:ec2:*:*:subnet/*", # We can't restrict account ID due to sharing subnets
-      "arn:aws:ec2:*:${local.account_id}:network-interface/*",
-      "arn:aws:ec2:*:${local.account_id}:security-group/*",
-      "arn:aws:ec2:*:${local.account_id}:key-pair/*"
-    ]
-  }
-
-  statement {
-    actions = ["ec2:RunInstances"]
-    resources = [
-      "arn:aws:ec2:*:${local.account_id}:volume/*",
-      "arn:aws:ec2:*:${local.account_id}:instance/*"
+    actions = [
+      "ec2:TerminateInstances",
+      "ec2:DeleteLaunchTemplate",
     ]
 
-    condition {
-      test     = "ForAnyValue:StringEquals"
-      variable = "aws:TagKeys"
-      values   = ["karpenter.sh/discovery"]
-    }
-  }
-
-  statement {
-    actions   = ["ec2:CreateTags"]
-    resources = ["arn:aws:ec2:*:${local.account_id}:*/*"]
+    resources = ["*"]
 
     condition {
       test     = "StringEquals"
-      variable = "ec2:CreateAction"
-      values   = ["RunInstances"]
+      variable = "ec2:ResourceTag/karpenter.sh/discovery"
+      values   = [var.karpenter_controller_cluster_id]
     }
+  }
+
+  statement {
+    actions = ["ec2:RunInstances"]
+    resources = [
+      "arn:aws:ec2:*:${local.account_id}:launch-template/*",
+      "arn:aws:ec2:*:${local.account_id}:security-group/*",
+      "arn:aws:ec2:*:${local.account_id}:subnet/*",
+    ]
+
+    condition {
+      test     = "StringEquals"
+      variable = "ec2:ResourceTag/karpenter.sh/discovery"
+      values   = [var.karpenter_controller_cluster_id]
+    }
+  }
+
+  statement {
+    actions = ["ec2:RunInstances"]
+    resources = [
+      "arn:aws:ec2:*::image/*",
+      "arn:aws:ec2:*:${local.account_id}:instance/*",
+      "arn:aws:ec2:*:${local.account_id}:volume/*",
+      "arn:aws:ec2:*:${local.account_id}:network-interface/*",
+    ]
   }
 
   statement {
