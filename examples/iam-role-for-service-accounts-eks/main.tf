@@ -153,7 +153,7 @@ module "karpenter_controller_irsa_role" {
   role_name                          = "karpenter_controller"
   attach_karpenter_controller_policy = true
 
-  karpenter_controller_cluster_ids        = [module.eks.cluster_id]
+  karpenter_controller_cluster_id         = module.eks.cluster_id
   karpenter_controller_node_iam_role_arns = [module.eks.eks_managed_node_groups["default"].iam_role_arn]
 
   oidc_providers = {
@@ -171,6 +171,22 @@ module "load_balancer_controller_irsa_role" {
 
   role_name                              = "load_balancer_controller"
   attach_load_balancer_controller_policy = true
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["kube-system:aws-load-balancer-controller"]
+    }
+  }
+
+  tags = local.tags
+}
+
+module "load_balancer_controller_targetgroup_binding_only_irsa_role" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name                                                       = "load_balancer_controller_targetgroup_binding_only"
+  attach_load_balancer_controller_targetgroup_binding_only_policy = true
 
   oidc_providers = {
     ex = {

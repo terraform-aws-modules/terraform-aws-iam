@@ -152,10 +152,10 @@ variable "attach_karpenter_controller_policy" {
   default     = false
 }
 
-variable "karpenter_controller_cluster_ids" {
-  description = "List of cluster IDs to appropriately scope EC2 permissions within the Karpenter Controller policy"
-  type        = list(string)
-  default     = []
+variable "karpenter_controller_cluster_id" {
+  description = "Cluster ID where the Karpenter controller is provisioned/managing"
+  type        = string
+  default     = "*"
 }
 
 variable "karpenter_controller_ssm_parameter_arns" {
@@ -174,6 +174,14 @@ variable "karpenter_controller_node_iam_role_arns" {
 # AWS Load Balancer Controller
 variable "attach_load_balancer_controller_policy" {
   description = "Determines whether to attach the Load Balancer Controller policy to the role"
+  type        = bool
+  default     = false
+}
+
+# https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/targetgroupbinding/targetgroupbinding/#reference
+# https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/deploy/installation/#setup-iam-manually
+variable "attach_load_balancer_controller_targetgroup_binding_only_policy" {
+  description = "Determines whether to attach the Load Balancer Controller policy for the TargetGroupBinding only"
   type        = bool
   default     = false
 }
