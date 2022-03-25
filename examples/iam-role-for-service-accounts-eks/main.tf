@@ -185,7 +185,7 @@ module "load_balancer_controller_irsa_role" {
 module "load_balancer_controller_targetgroup_binding_only_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
-  role_name                                                       = "load_balancer_controller"
+  role_name                                                       = "load_balancer_controller_targetgroup_binding_only"
   attach_load_balancer_controller_targetgroup_binding_only_policy = true
 
   oidc_providers = {
