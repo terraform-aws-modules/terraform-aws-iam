@@ -152,10 +152,10 @@ variable "attach_karpenter_controller_policy" {
   default     = false
 }
 
-variable "karpenter_controller_cluster_ids" {
-  description = "List of cluster IDs to appropriately scope EC2 permissions within the Karpenter Controller policy"
-  type        = list(string)
-  default     = []
+variable "karpenter_controller_cluster_id" {
+  description = "Cluster ID where the Karpenter controller is provisioned/managing"
+  type        = string
+  default     = "*"
 }
 
 variable "karpenter_controller_ssm_parameter_arns" {
