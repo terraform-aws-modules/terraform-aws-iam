@@ -763,3 +763,47 @@ resource "aws_iam_role_policy_attachment" "load_balancer_controller" {
   role       = aws_iam_role.this[0].name
   policy_arn = aws_iam_policy.load_balancer_controller[0].arn
 }
+
+################################################################################
+# AWS Load Balancer Controller TargetGroup Binding Only Policy
+################################################################################
+
+# https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/targetgroupbinding/targetgroupbinding/#reference
+# https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/deploy/installation/#setup-iam-manually
+data "aws_iam_policy_document" "load_balancer_controller_targetgroup_only" {
+  count = var.create_role && var.attach_load_balancer_controller_targetgroup_binding_only_policy ? 1 : 0
+
+  statement {
+    actions = [
+      "ec2:DescribeSecurityGroups",
+      "ec2:DescribeInstances",
+      "ec2:DescribeVpcs",
+      "elasticloadbalancing:DescribeTargetGroups",
+      "elasticloadbalancing:DescribeTargetHealth",
+      "elasticloadbalancing:ModifyTargetGroup",
+      "elasticloadbalancing:ModifyTargetGroupAttributes",
+      "elasticloadbalancing:RegisterTargets",
+      "elasticloadbalancing:DeregisterTargets"
+    ]
+
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_policy" "load_balancer_controller_targetgroup_only" {
+  count = var.create_role && var.attach_load_balancer_controller_targetgroup_binding_only_policy ? 1 : 0
+
+  name_prefix = "AmazonEKS_AWS_Load_Balancer_Controller_TargetGroup_Only-"
+  path        = var.role_path
+  description = "Provides permissions for AWS Load Balancer Controller addon in TargetGroup binding only scenario."
+  policy      = data.aws_iam_policy_document.load_balancer_controller_targetgroup_only[0].json
+
+  tags = var.tags
+}
+
+resource "aws_iam_role_policy_attachment" "load_balancer_controller_targetgroup_only" {
+  count = var.create_role && var.attach_load_balancer_controller_targetgroup_binding_only_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.load_balancer_controller_targetgroup_only[0].arn
+}
