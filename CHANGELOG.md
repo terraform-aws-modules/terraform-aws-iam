@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.16.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.15.1...v4.16.0) (2022-03-25)
+
+
+### Features
+
+* Add load_balancer_controller targetgroup binding only role ([#199](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/199)) ([e00526e](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/e00526e5ae97ad814cf9ab92892267d6a7641a57))
+
 ### [4.15.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.15.0...v4.15.1) (2022-03-23)
 
 
