@@ -31,7 +31,7 @@ output "iam_user_login_profile_encrypted_password" {
 output "iam_user_login_profile_password" {
   description = "The user password"
   value       = try(aws_iam_user_login_profile.this[0].password, "")
-  sensitive = true
+  sensitive   = true
 }
 
 output "iam_access_key_id" {
