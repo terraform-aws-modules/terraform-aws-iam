@@ -28,6 +28,12 @@ output "iam_user_login_profile_encrypted_password" {
   value       = try(aws_iam_user_login_profile.this[0].encrypted_password, "")
 }
 
+output "iam_user_login_profile_password" {
+  description = "The user password"
+  value       = try(aws_iam_user_login_profile.this[0].password, "")
+  sensitive   = true
+}
+
 output "iam_access_key_id" {
   description = "The access key ID"
   value       = try(aws_iam_access_key.this[0].id, aws_iam_access_key.this_no_pgp[0].id, "")
