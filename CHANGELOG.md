@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.17.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.16.0...v4.17.0) (2022-03-26)
+
+
+### Features
+
+* Make PGP Key Optional in All Cases ([#205](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/205)) ([4242512](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/424251244da66e6ffb7323112d40ae48bd2e1ad5))
+
 ## [4.16.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.15.1...v4.16.0) (2022-03-25)
 
 
