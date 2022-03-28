@@ -303,7 +303,7 @@ resource "aws_iam_role_policy_attachment" "ebs_csi" {
 
 
 ################################################################################
-# FSx Lustre Policy
+# FSx for Lustre CSI Driver Policy
 ################################################################################
 
 # https://github.com/kubernetes-sigs/aws-fsx-csi-driver/blob/master/docs/README.md
