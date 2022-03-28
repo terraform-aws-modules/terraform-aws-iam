@@ -331,7 +331,7 @@ data "aws_iam_policy_document" "fsx_lustre_csi" {
     condition {
       test     = "StringLike"
       variable = "iam:AWSServiceName"
-      values   = ["fsx.amazonaws.com"]
+      values   = ["fsx.${local.dns_suffix}"]
     }
   }
 
