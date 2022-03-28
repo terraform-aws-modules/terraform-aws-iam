@@ -317,7 +317,7 @@ data "aws_iam_policy_document" "fsx_lustre_csi" {
       "iam:PutRolePolicy"
     ]
     resources = [
-      "arn:aws:iam::*:role/aws-service-role/s3.data-source.lustre.fsx.amazonaws.com/*",
+      "arn:${local.partition}:iam::*:role/aws-service-role/s3.data-source.lustre.fsx.${local.dns_suffix}/*",
     ]
   }
 
