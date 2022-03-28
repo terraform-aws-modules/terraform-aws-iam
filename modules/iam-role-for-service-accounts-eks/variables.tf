@@ -115,7 +115,7 @@ variable "ebs_csi_kms_cmk_ids" {
 
 # FSx Lustre CSI
 variable "attach_fsx_lustre_csi_policy" {
-  description = "Determines whether to attach the FSx Lustre CSI IAM policy to the role"
+  description = "Determines whether to attach the FSx for Lustre CSI Driver IAM policy to the role"
   type        = bool
   default     = false
 }
