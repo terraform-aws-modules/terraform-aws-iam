@@ -1,6 +1,8 @@
 data "aws_partition" "current" {}
+data "aws_caller_identity" "current" {}
 
 locals {
+  account_id = data.aws_caller_identity.current.account_id
   partition  = data.aws_partition.current.partition
   dns_suffix = data.aws_partition.current.dns_suffix
 }
@@ -256,7 +258,7 @@ data "aws_iam_policy_document" "ebs_csi" {
         "kms:RevokeGrant",
       ]
 
-      resources = statement.value
+      resources = var.ebs_csi_kms_cmk_ids
 
       condition {
         test     = "Bool"
@@ -277,7 +279,7 @@ data "aws_iam_policy_document" "ebs_csi" {
         "kms:DescribeKey",
       ]
 
-      resources = statement.value
+      resources = var.ebs_csi_kms_cmk_ids
     }
   }
 }
@@ -510,23 +512,44 @@ data "aws_iam_policy_document" "karpenter_controller" {
     resources = ["*"]
   }
 
-  dynamic "statement" {
-    for_each = toset(var.karpenter_controller_cluster_ids)
-    content {
-      actions = [
-        "ec2:RunInstances",
-        "ec2:TerminateInstances",
-        "ec2:DeleteLaunchTemplate",
-      ]
+  statement {
+    actions = [
+      "ec2:TerminateInstances",
+      "ec2:DeleteLaunchTemplate",
+    ]
 
-      resources = ["*"]
+    resources = ["*"]
 
-      condition {
-        test     = "StringEquals"
-        variable = "ec2:ResourceTag/karpenter.sh/discovery"
-        values   = [statement.value]
-      }
+    condition {
+      test     = "StringEquals"
+      variable = "ec2:ResourceTag/karpenter.sh/discovery"
+      values   = [var.karpenter_controller_cluster_id]
     }
+  }
+
+  statement {
+    actions = ["ec2:RunInstances"]
+    resources = [
+      "arn:aws:ec2:*:${local.account_id}:launch-template/*",
+      "arn:aws:ec2:*:${local.account_id}:security-group/*",
+      "arn:aws:ec2:*:${local.account_id}:subnet/*",
+    ]
+
+    condition {
+      test     = "StringEquals"
+      variable = "ec2:ResourceTag/karpenter.sh/discovery"
+      values   = [var.karpenter_controller_cluster_id]
+    }
+  }
+
+  statement {
+    actions = ["ec2:RunInstances"]
+    resources = [
+      "arn:aws:ec2:*::image/*",
+      "arn:aws:ec2:*:${local.account_id}:instance/*",
+      "arn:aws:ec2:*:${local.account_id}:volume/*",
+      "arn:aws:ec2:*:${local.account_id}:network-interface/*",
+    ]
   }
 
   statement {
@@ -807,4 +830,48 @@ resource "aws_iam_role_policy_attachment" "load_balancer_controller" {
 
   role       = aws_iam_role.this[0].name
   policy_arn = aws_iam_policy.load_balancer_controller[0].arn
+}
+
+################################################################################
+# AWS Load Balancer Controller TargetGroup Binding Only Policy
+################################################################################
+
+# https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/targetgroupbinding/targetgroupbinding/#reference
+# https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/deploy/installation/#setup-iam-manually
+data "aws_iam_policy_document" "load_balancer_controller_targetgroup_only" {
+  count = var.create_role && var.attach_load_balancer_controller_targetgroup_binding_only_policy ? 1 : 0
+
+  statement {
+    actions = [
+      "ec2:DescribeSecurityGroups",
+      "ec2:DescribeInstances",
+      "ec2:DescribeVpcs",
+      "elasticloadbalancing:DescribeTargetGroups",
+      "elasticloadbalancing:DescribeTargetHealth",
+      "elasticloadbalancing:ModifyTargetGroup",
+      "elasticloadbalancing:ModifyTargetGroupAttributes",
+      "elasticloadbalancing:RegisterTargets",
+      "elasticloadbalancing:DeregisterTargets"
+    ]
+
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_policy" "load_balancer_controller_targetgroup_only" {
+  count = var.create_role && var.attach_load_balancer_controller_targetgroup_binding_only_policy ? 1 : 0
+
+  name_prefix = "AmazonEKS_AWS_Load_Balancer_Controller_TargetGroup_Only-"
+  path        = var.role_path
+  description = "Provides permissions for AWS Load Balancer Controller addon in TargetGroup binding only scenario."
+  policy      = data.aws_iam_policy_document.load_balancer_controller_targetgroup_only[0].json
+
+  tags = var.tags
+}
+
+resource "aws_iam_role_policy_attachment" "load_balancer_controller_targetgroup_only" {
+  count = var.create_role && var.attach_load_balancer_controller_targetgroup_binding_only_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.load_balancer_controller_targetgroup_only[0].arn
 }
