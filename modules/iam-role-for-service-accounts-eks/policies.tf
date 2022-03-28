@@ -300,8 +300,6 @@ resource "aws_iam_role_policy_attachment" "ebs_csi" {
   policy_arn = aws_iam_policy.ebs_csi[0].arn
 }
 
-
-
 ################################################################################
 # FSx for Lustre CSI Driver Policy
 ################################################################################
@@ -324,8 +322,6 @@ data "aws_iam_policy_document" "fsx_lustre_csi" {
   statement {
     actions = [
       "iam:CreateServiceLinkedRole",
-      "iam:AttachRolePolicy",
-      "iam:PutRolePolicy"
     ]
     resources = ["*"]
     condition {
@@ -344,14 +340,14 @@ data "aws_iam_policy_document" "fsx_lustre_csi" {
 
   statement {
     actions = [
-      "s3:List*",
-      "s3:Get*",
-      "s3:PutObject",
+      "s3:ListBucket",
+      "fsx:CreateFileSystem",
+      "fsx:DeleteFileSystem",
+      "fsx:DescribeFileSystems",
+      "fsx:TagResource",
     ]
     resources = ["*"]
   }
-
-
 }
 
 resource "aws_iam_policy" "fsx_lustre_csi" {
