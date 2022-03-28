@@ -35,6 +35,7 @@ No providers.
 | <a name="module_ebs_csi_irsa_role"></a> [ebs\_csi\_irsa\_role](#module\_ebs\_csi\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
 | <a name="module_eks"></a> [eks](#module\_eks) | terraform-aws-modules/eks/aws | ~> 18.6 |
 | <a name="module_external_dns_irsa_role"></a> [external\_dns\_irsa\_role](#module\_external\_dns\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
+| <a name="module_fsx_lustre_controller_role"></a> [fsx\_lustre\_controller\_role](#module\_fsx\_lustre\_controller\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
 | <a name="module_irsa_role"></a> [irsa\_role](#module\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
 | <a name="module_karpenter_controller_irsa_role"></a> [karpenter\_controller\_irsa\_role](#module\_karpenter\_controller\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
 | <a name="module_load_balancer_controller_irsa_role"></a> [load\_balancer\_controller\_irsa\_role](#module\_load\_balancer\_controller\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |

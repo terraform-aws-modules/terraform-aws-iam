@@ -198,6 +198,21 @@ module "load_balancer_controller_targetgroup_binding_only_irsa_role" {
   tags = local.tags
 }
 
+module "fsx_lustre_controller_role" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name                    = "fsx_lustre_controller"
+  attach_fsx_lustre_csi_policy = true
+  assume_role_condition_test   = "StringLike"
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["kube-system:fsx-csi-*-sa"]
+    }
+  }
+}
+
 ################################################################################
 # Supporting Resources
 ################################################################################
