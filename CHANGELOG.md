@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [4.17.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.17.0...v4.17.1) (2022-03-29)
+
+
+### Bug Fixes
+
+* Backwards compatibility in 4.x.x series in iam-user submodule ([#212](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/212)) ([2c57668](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/2c57668891916f80336944aaad4f0653eb80dfed))
+
 ## [4.17.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.16.0...v4.17.0) (2022-03-26)
 
 
