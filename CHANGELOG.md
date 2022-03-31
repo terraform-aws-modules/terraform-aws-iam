@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [4.17.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.17.1...v4.17.2) (2022-03-31)
+
+
+### Bug Fixes
+
+* Fixed output of iam_user_login_profile_password in iam-user submodule ([#214](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/214)) ([932a7d8](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/932a7d8016e44075ad4d91545129bdd668784e05))
+
 ### [4.17.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.17.0...v4.17.1) (2022-03-29)
 
 
