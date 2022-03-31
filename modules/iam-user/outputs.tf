@@ -30,7 +30,7 @@ output "iam_user_login_profile_encrypted_password" {
 
 output "iam_user_login_profile_password" {
   description = "The user password"
-  value       = try(aws_iam_user_login_profile.this[0].password, "")
+  value       = lookup(try(aws_iam_user_login_profile.this[0], {}), "password", sensitive(""))
   sensitive   = true
 }
 

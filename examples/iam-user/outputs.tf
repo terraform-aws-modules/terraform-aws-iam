@@ -23,6 +23,12 @@ output "iam_user_login_profile_encrypted_password" {
   value       = module.iam_user.iam_user_login_profile_encrypted_password
 }
 
+output "iam_user_login_profile_password" {
+  description = "The user password"
+  value       = module.iam_user.iam_user_login_profile_password
+  sensitive   = true
+}
+
 output "iam_access_key_id" {
   description = "The access key ID"
   value       = module.iam_user.iam_access_key_id
