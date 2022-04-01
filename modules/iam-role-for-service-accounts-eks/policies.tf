@@ -795,7 +795,7 @@ resource "aws_iam_policy" "load_balancer_controller_targetgroup_only" {
 
   name_prefix = "AmazonEKS_AWS_Load_Balancer_Controller_TargetGroup_Only-"
   path        = var.role_path
-  description = "Provides permissions for AWS Load Balancer Controller addon in TargetGroup binding only scenario."
+  description = "Provides permissions for AWS Load Balancer Controller addon in TargetGroup binding only scenario"
   policy      = data.aws_iam_policy_document.load_balancer_controller_targetgroup_only[0].json
 
   tags = var.tags
@@ -806,4 +806,62 @@ resource "aws_iam_role_policy_attachment" "load_balancer_controller_targetgroup_
 
   role       = aws_iam_role.this[0].name
   policy_arn = aws_iam_policy.load_balancer_controller_targetgroup_only[0].arn
+}
+
+################################################################################
+# EFS CSI Driver Policy
+################################################################################
+
+# https://github.com/kubernetes-sigs/aws-efs-csi-driver/blob/master/docs/iam-policy-example.json
+data "aws_iam_policy_document" "efs_csi" {
+  count = var.create_role && var.attach_efs_csi_policy ? 1 : 0
+
+  statement {
+    actions = [
+      "elasticfilesystem:DescribeAccessPoints",
+      "elasticfilesystem:DescribeFileSystems",
+    ]
+
+    resources = ["*"]
+  }
+
+  statement {
+    actions   = ["elasticfilesystem:CreateAccessPoint"]
+    resources = ["*"]
+
+    condition {
+      test     = "StringLike"
+      variable = "aws:RequestTag/efs.csi.aws.com/cluster"
+      values   = ["true"]
+    }
+  }
+
+  statement {
+    actions   = ["elasticfilesystem:DeleteAccessPoint"]
+    resources = ["*"]
+
+    condition {
+      test     = "StringEquals"
+      variable = "aws:ResourceTag/efs.csi.aws.com/cluster"
+      values   = ["true"]
+    }
+  }
+}
+
+resource "aws_iam_policy" "efs_csi" {
+  count = var.create_role && var.attach_efs_csi_policy ? 1 : 0
+
+  name_prefix = "AmazonEKS_EFS_CSI_Policy-"
+  path        = var.role_path
+  description = "Provides permissions to manage EFS volumes via the container storage interface driver"
+  policy      = data.aws_iam_policy_document.efs_csi[0].json
+
+  tags = var.tags
+}
+
+resource "aws_iam_role_policy_attachment" "efs_csi" {
+  count = var.create_role && var.attach_efs_csi_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.efs_csi[0].arn
 }
