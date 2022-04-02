@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.18.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.17.2...v4.18.0) (2022-04-02)
+
+
+### Features
+
+* Add support for EFS CSI driver to `iam-role-for-service-accounts-eks` ([#215](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/215)) ([5afe63f](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/5afe63ff093968dbf898ebbb0f8f875328869a49))
+
 ### [4.17.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.17.1...v4.17.2) (2022-03-31)
 
 
