@@ -113,6 +113,13 @@ variable "ebs_csi_kms_cmk_ids" {
   default     = []
 }
 
+# EFS CSI
+variable "attach_efs_csi_policy" {
+  description = "Determines whether to attach the EFS CSI IAM policy to the role"
+  type        = bool
+  default     = false
+}
+
 # VPC CNI
 variable "attach_vpc_cni_policy" {
   description = "Determines whether to attach the VPC CNI IAM policy to the role"

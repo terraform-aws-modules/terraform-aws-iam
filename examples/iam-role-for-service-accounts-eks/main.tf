@@ -84,7 +84,7 @@ module "external_dns_irsa_role" {
 module "ebs_csi_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
-  role_name             = "ebs_csi"
+  role_name             = "ebs-csi"
   attach_ebs_csi_policy = true
 
   oidc_providers = {
@@ -97,10 +97,26 @@ module "ebs_csi_irsa_role" {
   tags = local.tags
 }
 
+module "efs_csi_irsa_role" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name             = "efs-csi"
+  attach_efs_csi_policy = true
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["kube-system:efs-csi-controller-sa"]
+    }
+  }
+
+  tags = local.tags
+}
+
 module "vpc_cni_ipv4_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
-  role_name             = "vpc_cni_ipv4"
+  role_name             = "vpc-cni-ipv4"
   attach_vpc_cni_policy = true
   vpc_cni_enable_ipv4   = true
 
@@ -117,7 +133,7 @@ module "vpc_cni_ipv4_irsa_role" {
 module "vpc_cni_ipv6_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
-  role_name             = "vpc_cni_ipv6"
+  role_name             = "vpc-cni-ipv6"
   attach_vpc_cni_policy = true
   vpc_cni_enable_ipv6   = true
 
@@ -134,7 +150,7 @@ module "vpc_cni_ipv6_irsa_role" {
 module "node_termination_handler_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
-  role_name                              = "node_termination_handler"
+  role_name                              = "node-termination-handler"
   attach_node_termination_handler_policy = true
 
   oidc_providers = {
@@ -150,7 +166,7 @@ module "node_termination_handler_irsa_role" {
 module "karpenter_controller_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
-  role_name                          = "karpenter_controller"
+  role_name                          = "karpenter-controller"
   attach_karpenter_controller_policy = true
 
   karpenter_controller_cluster_id         = module.eks.cluster_id
@@ -169,7 +185,7 @@ module "karpenter_controller_irsa_role" {
 module "load_balancer_controller_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
-  role_name                              = "load_balancer_controller"
+  role_name                              = "load-balancer-controller"
   attach_load_balancer_controller_policy = true
 
   oidc_providers = {
@@ -185,7 +201,7 @@ module "load_balancer_controller_irsa_role" {
 module "load_balancer_controller_targetgroup_binding_only_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
-  role_name                                                       = "load_balancer_controller_targetgroup_binding_only"
+  role_name                                                       = "load-balancer-controller-targetgroup-binding-only"
   attach_load_balancer_controller_targetgroup_binding_only_policy = true
 
   oidc_providers = {
