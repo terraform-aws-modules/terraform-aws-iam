@@ -198,3 +198,16 @@ variable "attach_load_balancer_controller_targetgroup_binding_only_policy" {
   type        = bool
   default     = false
 }
+
+# Amazon Managed Service for Prometheus
+variable "attach_amazon_managed_service_prometheus_policy" {
+  description = "Determines whether to attach the Amazon Managed Service for Prometheus IAM policy to the role"
+  type        = bool
+  default     = false
+}
+
+variable "amazon_managed_service_prometheus_workspace_arns" {
+  description = "List of AMP Workspace ARNs to read and write metrics"
+  type        = list(string)
+  default     = ["*"]
+}

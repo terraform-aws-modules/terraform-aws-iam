@@ -214,6 +214,22 @@ module "load_balancer_controller_targetgroup_binding_only_irsa_role" {
   tags = local.tags
 }
 
+module "amazon_managed_service_prometheus_irsa_role" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name                                       = "amazon-managed-service-prometheus"
+  attach_amazon_managed_service_prometheus_policy = true
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["prometheus:amp-ingest"]
+    }
+  }
+
+  tags = local.tags
+}
+
 ################################################################################
 # Supporting Resources
 ################################################################################
