@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.19.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.18.0...v4.19.0) (2022-04-12)
+
+
+### Features
+
+* Add variable to allow changing tag condition on Karpenter `iam-role-for-service-accounts-eks` policy ([#218](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/218)) ([3d7ea33](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/3d7ea3353ff341e9dcd1d238b4ae283c162d822f))
+
 ## [4.18.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.17.2...v4.18.0) (2022-04-02)
 
 
