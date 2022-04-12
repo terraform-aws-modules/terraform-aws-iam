@@ -77,4 +77,6 @@ resource "aws_iam_role_policy_attachment" "custom" {
 
   role       = aws_iam_role.this[0].name
   policy_arn = each.key
+
+  depends_on = [var.role_policy_arns]
 }
