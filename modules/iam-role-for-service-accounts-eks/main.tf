@@ -39,10 +39,8 @@ resource "aws_iam_role" "this" {
 }
 
 resource "aws_iam_role_policy_attachment" "this" {
-  for_each = { for arn in var.role_policy_arns : arn => arn if var.create_role }
+  count = var.create_role ? length(var.role_policy_arns) : 0
 
   role       = aws_iam_role.this[0].name
-  policy_arn = each.key
-
-  depends_on = [var.role_policy_arns]
+  policy_arn = var.role_policy_arns[count.index]
 }
