@@ -165,6 +165,12 @@ variable "karpenter_controller_cluster_id" {
   default     = "*"
 }
 
+variable "karpenter_tag_key" {
+  description = "Tag key (`{key = value}`) applied to resources launched by Karpenter through the Karpenter provisioner"
+  type        = string
+  default     = "karpenter.sh/discovery"
+}
+
 variable "karpenter_controller_ssm_parameter_arns" {
   description = "List of SSM Parameter ARNs that contain AMI IDs launched by Karpenter"
   type        = list(string)

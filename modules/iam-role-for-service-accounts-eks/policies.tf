@@ -454,7 +454,7 @@ data "aws_iam_policy_document" "karpenter_controller" {
 
     condition {
       test     = "StringEquals"
-      variable = "ec2:ResourceTag/karpenter.sh/discovery"
+      variable = "ec2:ResourceTag/${var.karpenter_tag_key}"
       values   = [var.karpenter_controller_cluster_id]
     }
   }
@@ -469,7 +469,7 @@ data "aws_iam_policy_document" "karpenter_controller" {
 
     condition {
       test     = "StringEquals"
-      variable = "ec2:ResourceTag/karpenter.sh/discovery"
+      variable = "ec2:ResourceTag/${var.karpenter_tag_key}"
       values   = [var.karpenter_controller_cluster_id]
     }
   }
