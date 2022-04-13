@@ -950,3 +950,45 @@ resource "aws_iam_role_policy_attachment" "amazon_managed_service_prometheus" {
   role       = aws_iam_role.this[0].name
   policy_arn = aws_iam_policy.amazon_managed_service_prometheus[0].arn
 }
+
+################################################################################
+# External Secrets Policy
+################################################################################
+
+# https://github.com/external-secrets/kubernetes-external-secrets#add-a-secret
+data "aws_iam_policy_document" "external_secrets" {
+  count = var.create_role && var.attach_external_secrets_policy ? 1 : 0
+
+  statement {
+    actions   = ["ssm:GetParameter"]
+    resources = var.external_secrets_ssm_parameter_arns
+  }
+
+  statement {
+    actions = [
+      "secretsmanager:GetResourcePolicy",
+      "secretsmanager:GetSecretValue",
+      "secretsmanager:DescribeSecret",
+      "secretsmanager:ListSecretVersionIds",
+    ]
+    resources = var.external_secrets_secrets_manager_arns
+  }
+}
+
+resource "aws_iam_policy" "external_secrets" {
+  count = var.create_role && var.attach_external_secrets_policy ? 1 : 0
+
+  name_prefix = "AmazonEKS_External_Secrets_Policy-"
+  path        = var.role_path
+  description = "Provides permissions to for External Secrets to retrieve secrets from AWS SSM and AWS Secrets Manager"
+  policy      = data.aws_iam_policy_document.external_secrets[0].json
+
+  tags = var.tags
+}
+
+resource "aws_iam_role_policy_attachment" "external_secrets" {
+  count = var.create_role && var.attach_external_secrets_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.external_secrets[0].arn
+}

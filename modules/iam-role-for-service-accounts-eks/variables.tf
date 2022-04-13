@@ -224,3 +224,22 @@ variable "amazon_managed_service_prometheus_workspace_arns" {
   type        = list(string)
   default     = ["*"]
 }
+
+# External Secrets
+variable "attach_external_secrets_policy" {
+  description = "Determines whether to attach the External Secrets policy to the role"
+  type        = bool
+  default     = false
+}
+
+variable "external_secrets_ssm_parameter_arns" {
+  description = "List of Systems Manager Parameter ARNs that contain secrets to mount using External Secrets"
+  type        = list(string)
+  default     = ["arn:aws:ssm:*:*:parameter/*"]
+}
+
+variable "external_secrets_secrets_manager_arns" {
+  description = "List of Secrets Manager ARNs that contain secrets to mount using External Secrets"
+  type        = list(string)
+  default     = ["arn:aws:secretsmanager:*:*:secret:*"]
+}
