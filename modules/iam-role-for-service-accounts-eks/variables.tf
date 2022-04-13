@@ -95,7 +95,20 @@ variable "attach_external_dns_policy" {
 }
 
 variable "external_dns_hosted_zone_arns" {
-  description = "Route53 hosted zone ARNs to allow external DNS to manage records"
+  description = "Route53 hosted zone ARNs to allow External DNS to manage records"
+  type        = list(string)
+  default     = ["arn:aws:route53:::hostedzone/*"]
+}
+
+# Cert Manager
+variable "attach_cert_manager_policy" {
+  description = "Determines whether to attach the Cert Manager IAM policy to the role"
+  type        = bool
+  default     = false
+}
+
+variable "cert_manager_hosted_zone_arns" {
+  description = "Route53 hosted zone ARNs to allow Cert manager to manage records"
   type        = list(string)
   default     = ["arn:aws:route53:::hostedzone/*"]
 }
