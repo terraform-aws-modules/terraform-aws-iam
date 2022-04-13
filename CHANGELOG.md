@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.20.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.19.0...v4.20.0) (2022-04-13)
+
+
+### Features
+
+* Add support for AMP, cert-manager, and external-secrets to `iam-role-for-service-accounts-eks` ([#223](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/223)) ([f53d409](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/f53d409e9e5c21fc938272e3e063b48b38b690e6))
+
 ## [4.19.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.18.0...v4.19.0) (2022-04-12)
 
 
