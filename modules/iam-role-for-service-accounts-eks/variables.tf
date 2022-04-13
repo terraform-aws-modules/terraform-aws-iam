@@ -133,6 +133,19 @@ variable "attach_efs_csi_policy" {
   default     = false
 }
 
+# FSx Lustre CSI
+variable "attach_fsx_lustre_csi_policy" {
+  description = "Determines whether to attach the FSx for Lustre CSI Driver IAM policy to the role"
+  type        = bool
+  default     = false
+}
+
+variable "fsx_lustre_csi_service_role_arns" {
+  description = "Service role ARNs to allow FSx for Lustre CSI create and manage FSX for Lustre service linked roles"
+  type        = list(string)
+  default     = ["arn:aws:iam::*:role/aws-service-role/s3.data-source.lustre.fsx.amazonaws.com/*"]
+}
+
 # VPC CNI
 variable "attach_vpc_cni_policy" {
   description = "Determines whether to attach the VPC CNI IAM policy to the role"
@@ -165,7 +178,7 @@ variable "node_termination_handler_sqs_queue_arns" {
   default     = ["*"]
 }
 
-# Karpetner controller
+# Karpenter controller
 variable "attach_karpenter_controller_policy" {
   description = "Determines whether to attach the Karpenter Controller policy to the role"
   type        = bool

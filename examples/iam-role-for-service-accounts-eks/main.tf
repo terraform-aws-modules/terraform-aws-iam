@@ -130,6 +130,20 @@ module "efs_csi_irsa_role" {
   tags = local.tags
 }
 
+module "fsx_lustre_csi_irsa_role" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name                    = "fsx-lustre-csi"
+  attach_fsx_lustre_csi_policy = true
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["kube-system:fsx-csi-controller-sa"]
+    }
+  }
+}
+
 module "vpc_cni_ipv4_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
