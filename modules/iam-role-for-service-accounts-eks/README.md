@@ -187,7 +187,7 @@ No modules.
 | <a name="input_karpenter_tag_key"></a> [karpenter\_tag\_key](#input\_karpenter\_tag\_key) | Tag key (`{key = value}`) applied to resources launched by Karpenter through the Karpenter provisioner | `string` | `"karpenter.sh/discovery"` | no |
 | <a name="input_max_session_duration"></a> [max\_session\_duration](#input\_max\_session\_duration) | Maximum CLI/API session duration in seconds between 3600 and 43200 | `number` | `null` | no |
 | <a name="input_node_termination_handler_sqs_queue_arns"></a> [node\_termination\_handler\_sqs\_queue\_arns](#input\_node\_termination\_handler\_sqs\_queue\_arns) | List of SQS ARNs that contain node termination events | `list(string)` | <pre>[<br>  "*"<br>]</pre> | no |
-| <a name="input_oidc_providers"></a> [oidc\_providers](#input\_oidc\_providers) | Map of OIDC providers where each provdier map should contain the `provider`, `provider_arns`, and `namespace_service_accounts` | `any` | `{}` | no |
+| <a name="input_oidc_providers"></a> [oidc\_providers](#input\_oidc\_providers) | Map of OIDC providers where each provider map should contain the `provider`, `provider_arn`, and `namespace_service_accounts` | `any` | `{}` | no |
 | <a name="input_role_description"></a> [role\_description](#input\_role\_description) | IAM Role description | `string` | `null` | no |
 | <a name="input_role_name"></a> [role\_name](#input\_role\_name) | Name of IAM role | `string` | `null` | no |
 | <a name="input_role_name_prefix"></a> [role\_name\_prefix](#input\_role\_name\_prefix) | IAM role name prefix | `string` | `null` | no |
