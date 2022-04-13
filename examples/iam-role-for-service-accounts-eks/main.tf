@@ -47,40 +47,6 @@ module "irsa_role" {
   tags = local.tags
 }
 
-module "cluster_autoscaler_irsa_role" {
-  source = "../../modules/iam-role-for-service-accounts-eks"
-
-  role_name                        = "cluster-autoscaler"
-  attach_cluster_autoscaler_policy = true
-  cluster_autoscaler_cluster_ids   = [module.eks.cluster_id]
-
-  oidc_providers = {
-    ex = {
-      provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["kube-system:cluster-autoscaler"]
-    }
-  }
-
-  tags = local.tags
-}
-
-module "external_dns_irsa_role" {
-  source = "../../modules/iam-role-for-service-accounts-eks"
-
-  role_name                     = "external-dns"
-  attach_external_dns_policy    = true
-  external_dns_hosted_zone_arns = ["arn:aws:route53:::hostedzone/IClearlyMadeThisUp"]
-
-  oidc_providers = {
-    ex = {
-      provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["kube-system:external-dns"]
-    }
-  }
-
-  tags = local.tags
-}
-
 module "cert_manager_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
@@ -92,6 +58,23 @@ module "cert_manager_irsa_role" {
     ex = {
       provider_arn               = module.eks.oidc_provider_arn
       namespace_service_accounts = ["kube-system:cert-manager"]
+    }
+  }
+
+  tags = local.tags
+}
+
+module "cluster_autoscaler_irsa_role" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name                        = "cluster-autoscaler"
+  attach_cluster_autoscaler_policy = true
+  cluster_autoscaler_cluster_ids   = [module.eks.cluster_id]
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["kube-system:cluster-autoscaler"]
     }
   }
 
@@ -130,6 +113,41 @@ module "efs_csi_irsa_role" {
   tags = local.tags
 }
 
+module "external_dns_irsa_role" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name                     = "external-dns"
+  attach_external_dns_policy    = true
+  external_dns_hosted_zone_arns = ["arn:aws:route53:::hostedzone/IClearlyMadeThisUp"]
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["kube-system:external-dns"]
+    }
+  }
+
+  tags = local.tags
+}
+
+module "external_secrets_irsa_role" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name                             = "external-secrets"
+  attach_external_secrets_policy        = true
+  external_secrets_ssm_parameter_arns   = ["arn:aws:ssm:*:*:parameter/foo"]
+  external_secrets_secrets_manager_arns = ["arn:aws:secretsmanager:*:*:secret:bar"]
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["default:kubernetes-external-secrets"]
+    }
+  }
+
+  tags = local.tags
+}
+
 module "fsx_lustre_csi_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
@@ -142,56 +160,6 @@ module "fsx_lustre_csi_irsa_role" {
       namespace_service_accounts = ["kube-system:fsx-csi-controller-sa"]
     }
   }
-}
-
-module "vpc_cni_ipv4_irsa_role" {
-  source = "../../modules/iam-role-for-service-accounts-eks"
-
-  role_name             = "vpc-cni-ipv4"
-  attach_vpc_cni_policy = true
-  vpc_cni_enable_ipv4   = true
-
-  oidc_providers = {
-    ex = {
-      provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["kube-system:aws-vpc-cni"]
-    }
-  }
-
-  tags = local.tags
-}
-
-module "vpc_cni_ipv6_irsa_role" {
-  source = "../../modules/iam-role-for-service-accounts-eks"
-
-  role_name             = "vpc-cni-ipv6"
-  attach_vpc_cni_policy = true
-  vpc_cni_enable_ipv6   = true
-
-  oidc_providers = {
-    ex = {
-      provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["kube-system:aws-vpc-cni"]
-    }
-  }
-
-  tags = local.tags
-}
-
-module "node_termination_handler_irsa_role" {
-  source = "../../modules/iam-role-for-service-accounts-eks"
-
-  role_name                              = "node-termination-handler"
-  attach_node_termination_handler_policy = true
-
-  oidc_providers = {
-    ex = {
-      provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["kube-system:aws-node"]
-    }
-  }
-
-  tags = local.tags
 }
 
 module "karpenter_controller_irsa_role" {
@@ -261,19 +229,50 @@ module "amazon_managed_service_prometheus_irsa_role" {
   tags = local.tags
 }
 
-
-module "external_secrets_irsa_role" {
+module "node_termination_handler_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
-  role_name                             = "external-secrets"
-  attach_external_secrets_policy        = true
-  external_secrets_ssm_parameter_arns   = ["arn:aws:ssm:*:*:parameter/foo"]
-  external_secrets_secrets_manager_arns = ["arn:aws:secretsmanager:*:*:secret:bar"]
+  role_name                              = "node-termination-handler"
+  attach_node_termination_handler_policy = true
 
   oidc_providers = {
     ex = {
       provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["default:kubernetes-external-secrets"]
+      namespace_service_accounts = ["kube-system:aws-node"]
+    }
+  }
+
+  tags = local.tags
+}
+
+module "vpc_cni_ipv4_irsa_role" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name             = "vpc-cni-ipv4"
+  attach_vpc_cni_policy = true
+  vpc_cni_enable_ipv4   = true
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["kube-system:aws-vpc-cni"]
+    }
+  }
+
+  tags = local.tags
+}
+
+module "vpc_cni_ipv6_irsa_role" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name             = "vpc-cni-ipv6"
+  attach_vpc_cni_policy = true
+  vpc_cni_enable_ipv6   = true
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["kube-system:aws-vpc-cni"]
     }
   }
 

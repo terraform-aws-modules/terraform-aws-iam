@@ -74,32 +74,6 @@ variable "assume_role_condition_test" {
 # Policies
 ################################################################################
 
-# Cluster autoscaler
-variable "attach_cluster_autoscaler_policy" {
-  description = "Determines whether to attach the Cluster Autoscaler IAM policy to the role"
-  type        = bool
-  default     = false
-}
-
-variable "cluster_autoscaler_cluster_ids" {
-  description = "List of cluster IDs to appropriately scope permissions within the Cluster Autoscaler IAM policy"
-  type        = list(string)
-  default     = []
-}
-
-# External DNS
-variable "attach_external_dns_policy" {
-  description = "Determines whether to attach the External DNS IAM policy to the role"
-  type        = bool
-  default     = false
-}
-
-variable "external_dns_hosted_zone_arns" {
-  description = "Route53 hosted zone ARNs to allow External DNS to manage records"
-  type        = list(string)
-  default     = ["arn:aws:route53:::hostedzone/*"]
-}
-
 # Cert Manager
 variable "attach_cert_manager_policy" {
   description = "Determines whether to attach the Cert Manager IAM policy to the role"
@@ -111,6 +85,19 @@ variable "cert_manager_hosted_zone_arns" {
   description = "Route53 hosted zone ARNs to allow Cert manager to manage records"
   type        = list(string)
   default     = ["arn:aws:route53:::hostedzone/*"]
+}
+
+# Cluster autoscaler
+variable "attach_cluster_autoscaler_policy" {
+  description = "Determines whether to attach the Cluster Autoscaler IAM policy to the role"
+  type        = bool
+  default     = false
+}
+
+variable "cluster_autoscaler_cluster_ids" {
+  description = "List of cluster IDs to appropriately scope permissions within the Cluster Autoscaler IAM policy"
+  type        = list(string)
+  default     = []
 }
 
 # EBS CSI
@@ -133,6 +120,38 @@ variable "attach_efs_csi_policy" {
   default     = false
 }
 
+# External DNS
+variable "attach_external_dns_policy" {
+  description = "Determines whether to attach the External DNS IAM policy to the role"
+  type        = bool
+  default     = false
+}
+
+variable "external_dns_hosted_zone_arns" {
+  description = "Route53 hosted zone ARNs to allow External DNS to manage records"
+  type        = list(string)
+  default     = ["arn:aws:route53:::hostedzone/*"]
+}
+
+# External Secrets
+variable "attach_external_secrets_policy" {
+  description = "Determines whether to attach the External Secrets policy to the role"
+  type        = bool
+  default     = false
+}
+
+variable "external_secrets_ssm_parameter_arns" {
+  description = "List of Systems Manager Parameter ARNs that contain secrets to mount using External Secrets"
+  type        = list(string)
+  default     = ["arn:aws:ssm:*:*:parameter/*"]
+}
+
+variable "external_secrets_secrets_manager_arns" {
+  description = "List of Secrets Manager ARNs that contain secrets to mount using External Secrets"
+  type        = list(string)
+  default     = ["arn:aws:secretsmanager:*:*:secret:*"]
+}
+
 # FSx Lustre CSI
 variable "attach_fsx_lustre_csi_policy" {
   description = "Determines whether to attach the FSx for Lustre CSI Driver IAM policy to the role"
@@ -144,38 +163,6 @@ variable "fsx_lustre_csi_service_role_arns" {
   description = "Service role ARNs to allow FSx for Lustre CSI create and manage FSX for Lustre service linked roles"
   type        = list(string)
   default     = ["arn:aws:iam::*:role/aws-service-role/s3.data-source.lustre.fsx.amazonaws.com/*"]
-}
-
-# VPC CNI
-variable "attach_vpc_cni_policy" {
-  description = "Determines whether to attach the VPC CNI IAM policy to the role"
-  type        = bool
-  default     = false
-}
-
-variable "vpc_cni_enable_ipv4" {
-  description = "Determines whether to enable IPv4 permissions for VPC CNI policy"
-  type        = bool
-  default     = false
-}
-
-variable "vpc_cni_enable_ipv6" {
-  description = "Determines whether to enable IPv6 permissions for VPC CNI policy"
-  type        = bool
-  default     = false
-}
-
-# Node termination handler
-variable "attach_node_termination_handler_policy" {
-  description = "Determines whether to attach the Node Termination Handler policy to the role"
-  type        = bool
-  default     = false
-}
-
-variable "node_termination_handler_sqs_queue_arns" {
-  description = "List of SQS ARNs that contain node termination events"
-  type        = list(string)
-  default     = ["*"]
 }
 
 # Karpenter controller
@@ -238,21 +225,34 @@ variable "amazon_managed_service_prometheus_workspace_arns" {
   default     = ["*"]
 }
 
-# External Secrets
-variable "attach_external_secrets_policy" {
-  description = "Determines whether to attach the External Secrets policy to the role"
+# VPC CNI
+variable "attach_vpc_cni_policy" {
+  description = "Determines whether to attach the VPC CNI IAM policy to the role"
   type        = bool
   default     = false
 }
 
-variable "external_secrets_ssm_parameter_arns" {
-  description = "List of Systems Manager Parameter ARNs that contain secrets to mount using External Secrets"
-  type        = list(string)
-  default     = ["arn:aws:ssm:*:*:parameter/*"]
+variable "vpc_cni_enable_ipv4" {
+  description = "Determines whether to enable IPv4 permissions for VPC CNI policy"
+  type        = bool
+  default     = false
 }
 
-variable "external_secrets_secrets_manager_arns" {
-  description = "List of Secrets Manager ARNs that contain secrets to mount using External Secrets"
+variable "vpc_cni_enable_ipv6" {
+  description = "Determines whether to enable IPv6 permissions for VPC CNI policy"
+  type        = bool
+  default     = false
+}
+
+# Node termination handler
+variable "attach_node_termination_handler_policy" {
+  description = "Determines whether to attach the Node Termination Handler policy to the role"
+  type        = bool
+  default     = false
+}
+
+variable "node_termination_handler_sqs_queue_arns" {
+  description = "List of SQS ARNs that contain node termination events"
   type        = list(string)
-  default     = ["arn:aws:secretsmanager:*:*:secret:*"]
+  default     = ["*"]
 }

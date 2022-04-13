@@ -8,6 +8,52 @@ locals {
 }
 
 ################################################################################
+# Cert Manager Policy
+################################################################################
+
+# https://cert-manager.io/docs/configuration/acme/dns01/route53/#set-up-an-iam-role
+data "aws_iam_policy_document" "cert_manager" {
+  count = var.create_role && var.attach_cert_manager_policy ? 1 : 0
+
+  statement {
+    actions   = ["route53:GetChange"]
+    resources = ["arn:aws:route53:::change/*"]
+  }
+
+  statement {
+    actions = [
+      "route53:ChangeResourceRecordSets",
+      "route53:ListResourceRecordSets"
+    ]
+
+    resources = var.cert_manager_hosted_zone_arns
+  }
+
+  statement {
+    actions   = ["route53:ListHostedZonesByName"]
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_policy" "cert_manager" {
+  count = var.create_role && var.attach_cert_manager_policy ? 1 : 0
+
+  name_prefix = "AmazonEKS_Cert_Manager_Policy-"
+  path        = var.role_path
+  description = "Cert Manager policy to allow management of Route53 hosted zone records"
+  policy      = data.aws_iam_policy_document.cert_manager[0].json
+
+  tags = var.tags
+}
+
+resource "aws_iam_role_policy_attachment" "cert_manager" {
+  count = var.create_role && var.attach_cert_manager_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.cert_manager[0].arn
+}
+
+################################################################################
 # Cluster Autoscaler Policy
 ################################################################################
 
@@ -64,93 +110,6 @@ resource "aws_iam_role_policy_attachment" "cluster_autoscaler" {
 
   role       = aws_iam_role.this[0].name
   policy_arn = aws_iam_policy.cluster_autoscaler[0].arn
-}
-
-################################################################################
-# External DNS Policy
-################################################################################
-
-# https://github.com/kubernetes-sigs/external-dns/blob/master/docs/tutorials/aws.md#iam-policy
-data "aws_iam_policy_document" "external_dns" {
-  count = var.create_role && var.attach_external_dns_policy ? 1 : 0
-
-  statement {
-    actions   = ["route53:ChangeResourceRecordSets"]
-    resources = var.external_dns_hosted_zone_arns
-  }
-
-  statement {
-    actions = [
-      "route53:ListHostedZones",
-      "route53:ListResourceRecordSets",
-    ]
-
-    resources = ["*"]
-  }
-}
-
-resource "aws_iam_policy" "external_dns" {
-  count = var.create_role && var.attach_external_dns_policy ? 1 : 0
-
-  name_prefix = "AmazonEKS_External_DNS_Policy-"
-  path        = var.role_path
-  description = "External DNS policy to allow management of Route53 hosted zone records"
-  policy      = data.aws_iam_policy_document.external_dns[0].json
-
-  tags = var.tags
-}
-
-resource "aws_iam_role_policy_attachment" "external_dns" {
-  count = var.create_role && var.attach_external_dns_policy ? 1 : 0
-
-  role       = aws_iam_role.this[0].name
-  policy_arn = aws_iam_policy.external_dns[0].arn
-}
-
-################################################################################
-# Cert Manager Policy
-################################################################################
-
-# https://cert-manager.io/docs/configuration/acme/dns01/route53/#set-up-an-iam-role
-data "aws_iam_policy_document" "cert_manager" {
-  count = var.create_role && var.attach_cert_manager_policy ? 1 : 0
-
-  statement {
-    actions   = ["route53:GetChange"]
-    resources = ["arn:aws:route53:::change/*"]
-  }
-
-  statement {
-    actions = [
-      "route53:ChangeResourceRecordSets",
-      "route53:ListResourceRecordSets"
-    ]
-
-    resources = var.cert_manager_hosted_zone_arns
-  }
-
-  statement {
-    actions   = ["route53:ListHostedZonesByName"]
-    resources = ["*"]
-  }
-}
-
-resource "aws_iam_policy" "cert_manager" {
-  count = var.create_role && var.attach_cert_manager_policy ? 1 : 0
-
-  name_prefix = "AmazonEKS_Cert_Manager_Policy-"
-  path        = var.role_path
-  description = "Cert Manager policy to allow management of Route53 hosted zone records"
-  policy      = data.aws_iam_policy_document.cert_manager[0].json
-
-  tags = var.tags
-}
-
-resource "aws_iam_role_policy_attachment" "cert_manager" {
-  count = var.create_role && var.attach_cert_manager_policy ? 1 : 0
-
-  role       = aws_iam_role.this[0].name
-  policy_arn = aws_iam_policy.cert_manager[0].arn
 }
 
 ################################################################################
@@ -349,6 +308,147 @@ resource "aws_iam_role_policy_attachment" "ebs_csi" {
 }
 
 ################################################################################
+# EFS CSI Driver Policy
+################################################################################
+
+# https://github.com/kubernetes-sigs/aws-efs-csi-driver/blob/master/docs/iam-policy-example.json
+data "aws_iam_policy_document" "efs_csi" {
+  count = var.create_role && var.attach_efs_csi_policy ? 1 : 0
+
+  statement {
+    actions = [
+      "elasticfilesystem:DescribeAccessPoints",
+      "elasticfilesystem:DescribeFileSystems",
+    ]
+
+    resources = ["*"]
+  }
+
+  statement {
+    actions   = ["elasticfilesystem:CreateAccessPoint"]
+    resources = ["*"]
+
+    condition {
+      test     = "StringLike"
+      variable = "aws:RequestTag/efs.csi.aws.com/cluster"
+      values   = ["true"]
+    }
+  }
+
+  statement {
+    actions   = ["elasticfilesystem:DeleteAccessPoint"]
+    resources = ["*"]
+
+    condition {
+      test     = "StringEquals"
+      variable = "aws:ResourceTag/efs.csi.aws.com/cluster"
+      values   = ["true"]
+    }
+  }
+}
+
+resource "aws_iam_policy" "efs_csi" {
+  count = var.create_role && var.attach_efs_csi_policy ? 1 : 0
+
+  name_prefix = "AmazonEKS_EFS_CSI_Policy-"
+  path        = var.role_path
+  description = "Provides permissions to manage EFS volumes via the container storage interface driver"
+  policy      = data.aws_iam_policy_document.efs_csi[0].json
+
+  tags = var.tags
+}
+
+resource "aws_iam_role_policy_attachment" "efs_csi" {
+  count = var.create_role && var.attach_efs_csi_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.efs_csi[0].arn
+}
+
+################################################################################
+# External DNS Policy
+################################################################################
+
+# https://github.com/kubernetes-sigs/external-dns/blob/master/docs/tutorials/aws.md#iam-policy
+data "aws_iam_policy_document" "external_dns" {
+  count = var.create_role && var.attach_external_dns_policy ? 1 : 0
+
+  statement {
+    actions   = ["route53:ChangeResourceRecordSets"]
+    resources = var.external_dns_hosted_zone_arns
+  }
+
+  statement {
+    actions = [
+      "route53:ListHostedZones",
+      "route53:ListResourceRecordSets",
+    ]
+
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_policy" "external_dns" {
+  count = var.create_role && var.attach_external_dns_policy ? 1 : 0
+
+  name_prefix = "AmazonEKS_External_DNS_Policy-"
+  path        = var.role_path
+  description = "External DNS policy to allow management of Route53 hosted zone records"
+  policy      = data.aws_iam_policy_document.external_dns[0].json
+
+  tags = var.tags
+}
+
+resource "aws_iam_role_policy_attachment" "external_dns" {
+  count = var.create_role && var.attach_external_dns_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.external_dns[0].arn
+}
+
+################################################################################
+# External Secrets Policy
+################################################################################
+
+# https://github.com/external-secrets/kubernetes-external-secrets#add-a-secret
+data "aws_iam_policy_document" "external_secrets" {
+  count = var.create_role && var.attach_external_secrets_policy ? 1 : 0
+
+  statement {
+    actions   = ["ssm:GetParameter"]
+    resources = var.external_secrets_ssm_parameter_arns
+  }
+
+  statement {
+    actions = [
+      "secretsmanager:GetResourcePolicy",
+      "secretsmanager:GetSecretValue",
+      "secretsmanager:DescribeSecret",
+      "secretsmanager:ListSecretVersionIds",
+    ]
+    resources = var.external_secrets_secrets_manager_arns
+  }
+}
+
+resource "aws_iam_policy" "external_secrets" {
+  count = var.create_role && var.attach_external_secrets_policy ? 1 : 0
+
+  name_prefix = "AmazonEKS_External_Secrets_Policy-"
+  path        = var.role_path
+  description = "Provides permissions to for External Secrets to retrieve secrets from AWS SSM and AWS Secrets Manager"
+  policy      = data.aws_iam_policy_document.external_secrets[0].json
+
+  tags = var.tags
+}
+
+resource "aws_iam_role_policy_attachment" "external_secrets" {
+  count = var.create_role && var.attach_external_secrets_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.external_secrets[0].arn
+}
+
+################################################################################
 # FSx for Lustre CSI Driver Policy
 ################################################################################
 
@@ -403,123 +503,6 @@ resource "aws_iam_role_policy_attachment" "fsx_lustre_csi" {
 
   role       = aws_iam_role.this[0].name
   policy_arn = aws_iam_policy.fsx_lustre_csi[0].arn
-}
-
-################################################################################
-# VPC CNI Policy
-################################################################################
-
-data "aws_iam_policy_document" "vpc_cni" {
-  count = var.create_role && var.attach_vpc_cni_policy ? 1 : 0
-
-  # arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
-  dynamic "statement" {
-    for_each = var.vpc_cni_enable_ipv4 ? [1] : []
-    content {
-      sid = "IPV4"
-      actions = [
-        "ec2:AssignPrivateIpAddresses",
-        "ec2:AttachNetworkInterface",
-        "ec2:CreateNetworkInterface",
-        "ec2:DeleteNetworkInterface",
-        "ec2:DescribeInstances",
-        "ec2:DescribeTags",
-        "ec2:DescribeNetworkInterfaces",
-        "ec2:DescribeInstanceTypes",
-        "ec2:DetachNetworkInterface",
-        "ec2:ModifyNetworkInterfaceAttribute",
-        "ec2:UnassignPrivateIpAddresses",
-      ]
-      resources = ["*"]
-    }
-  }
-
-  # https://docs.aws.amazon.com/eks/latest/userguide/cni-iam-role.html#cni-iam-role-create-ipv6-policy
-  dynamic "statement" {
-    for_each = var.vpc_cni_enable_ipv6 ? [1] : []
-    content {
-      sid = "IPV6"
-      actions = [
-        "ec2:AssignIpv6Addresses",
-        "ec2:DescribeInstances",
-        "ec2:DescribeTags",
-        "ec2:DescribeNetworkInterfaces",
-        "ec2:DescribeInstanceTypes",
-      ]
-      resources = ["*"]
-    }
-  }
-
-  statement {
-    sid       = "CreateTags"
-    actions   = ["ec2:CreateTags"]
-    resources = ["arn:${local.partition}:ec2:*:*:network-interface/*"]
-  }
-}
-
-resource "aws_iam_policy" "vpc_cni" {
-  count = var.create_role && var.attach_vpc_cni_policy ? 1 : 0
-
-  name_prefix = "AmazonEKS_CNI_Policy-"
-  path        = var.role_path
-  description = "Provides the Amazon VPC CNI Plugin (amazon-vpc-cni-k8s) the permissions it requires to modify the IPv4/IPv6 address configuration on your EKS worker nodes"
-  policy      = data.aws_iam_policy_document.vpc_cni[0].json
-
-  tags = var.tags
-}
-
-resource "aws_iam_role_policy_attachment" "vpc_cni" {
-  count = var.create_role && var.attach_vpc_cni_policy ? 1 : 0
-
-  role       = aws_iam_role.this[0].name
-  policy_arn = aws_iam_policy.vpc_cni[0].arn
-}
-
-################################################################################
-# Node Termination Handler Policy
-################################################################################
-
-# https://github.com/aws/aws-node-termination-handler#5-create-an-iam-role-for-the-pods
-data "aws_iam_policy_document" "node_termination_handler" {
-  count = var.create_role && var.attach_node_termination_handler_policy ? 1 : 0
-
-  statement {
-    actions = [
-      "autoscaling:CompleteLifecycleAction",
-      "autoscaling:DescribeAutoScalingInstances",
-      "autoscaling:DescribeTags",
-      "ec2:DescribeInstances",
-    ]
-
-    resources = ["*"]
-  }
-
-  statement {
-    actions = [
-      "sqs:DeleteMessage",
-      "sqs:ReceiveMessage",
-    ]
-
-    resources = var.node_termination_handler_sqs_queue_arns
-  }
-}
-
-resource "aws_iam_policy" "node_termination_handler" {
-  count = var.create_role && var.attach_node_termination_handler_policy ? 1 : 0
-
-  name_prefix = "AmazonEKS_Node_Termination_Handler_Policy-"
-  path        = var.role_path
-  description = "Provides permissions to handle node termination events via the Node Termination Handler"
-  policy      = data.aws_iam_policy_document.node_termination_handler[0].json
-
-  tags = var.tags
-}
-
-resource "aws_iam_role_policy_attachment" "node_termination_handler" {
-  count = var.create_role && var.attach_node_termination_handler_policy ? 1 : 0
-
-  role       = aws_iam_role.this[0].name
-  policy_arn = aws_iam_policy.node_termination_handler[0].arn
 }
 
 ################################################################################
@@ -912,64 +895,6 @@ resource "aws_iam_role_policy_attachment" "load_balancer_controller_targetgroup_
 }
 
 ################################################################################
-# EFS CSI Driver Policy
-################################################################################
-
-# https://github.com/kubernetes-sigs/aws-efs-csi-driver/blob/master/docs/iam-policy-example.json
-data "aws_iam_policy_document" "efs_csi" {
-  count = var.create_role && var.attach_efs_csi_policy ? 1 : 0
-
-  statement {
-    actions = [
-      "elasticfilesystem:DescribeAccessPoints",
-      "elasticfilesystem:DescribeFileSystems",
-    ]
-
-    resources = ["*"]
-  }
-
-  statement {
-    actions   = ["elasticfilesystem:CreateAccessPoint"]
-    resources = ["*"]
-
-    condition {
-      test     = "StringLike"
-      variable = "aws:RequestTag/efs.csi.aws.com/cluster"
-      values   = ["true"]
-    }
-  }
-
-  statement {
-    actions   = ["elasticfilesystem:DeleteAccessPoint"]
-    resources = ["*"]
-
-    condition {
-      test     = "StringEquals"
-      variable = "aws:ResourceTag/efs.csi.aws.com/cluster"
-      values   = ["true"]
-    }
-  }
-}
-
-resource "aws_iam_policy" "efs_csi" {
-  count = var.create_role && var.attach_efs_csi_policy ? 1 : 0
-
-  name_prefix = "AmazonEKS_EFS_CSI_Policy-"
-  path        = var.role_path
-  description = "Provides permissions to manage EFS volumes via the container storage interface driver"
-  policy      = data.aws_iam_policy_document.efs_csi[0].json
-
-  tags = var.tags
-}
-
-resource "aws_iam_role_policy_attachment" "efs_csi" {
-  count = var.create_role && var.attach_efs_csi_policy ? 1 : 0
-
-  role       = aws_iam_role.this[0].name
-  policy_arn = aws_iam_policy.efs_csi[0].arn
-}
-
-################################################################################
 # Amazon Managed Service for Prometheus Policy
 ################################################################################
 
@@ -1009,43 +934,118 @@ resource "aws_iam_role_policy_attachment" "amazon_managed_service_prometheus" {
 }
 
 ################################################################################
-# External Secrets Policy
+# Node Termination Handler Policy
 ################################################################################
 
-# https://github.com/external-secrets/kubernetes-external-secrets#add-a-secret
-data "aws_iam_policy_document" "external_secrets" {
-  count = var.create_role && var.attach_external_secrets_policy ? 1 : 0
+# https://github.com/aws/aws-node-termination-handler#5-create-an-iam-role-for-the-pods
+data "aws_iam_policy_document" "node_termination_handler" {
+  count = var.create_role && var.attach_node_termination_handler_policy ? 1 : 0
 
   statement {
-    actions   = ["ssm:GetParameter"]
-    resources = var.external_secrets_ssm_parameter_arns
+    actions = [
+      "autoscaling:CompleteLifecycleAction",
+      "autoscaling:DescribeAutoScalingInstances",
+      "autoscaling:DescribeTags",
+      "ec2:DescribeInstances",
+    ]
+
+    resources = ["*"]
   }
 
   statement {
     actions = [
-      "secretsmanager:GetResourcePolicy",
-      "secretsmanager:GetSecretValue",
-      "secretsmanager:DescribeSecret",
-      "secretsmanager:ListSecretVersionIds",
+      "sqs:DeleteMessage",
+      "sqs:ReceiveMessage",
     ]
-    resources = var.external_secrets_secrets_manager_arns
+
+    resources = var.node_termination_handler_sqs_queue_arns
   }
 }
 
-resource "aws_iam_policy" "external_secrets" {
-  count = var.create_role && var.attach_external_secrets_policy ? 1 : 0
+resource "aws_iam_policy" "node_termination_handler" {
+  count = var.create_role && var.attach_node_termination_handler_policy ? 1 : 0
 
-  name_prefix = "AmazonEKS_External_Secrets_Policy-"
+  name_prefix = "AmazonEKS_Node_Termination_Handler_Policy-"
   path        = var.role_path
-  description = "Provides permissions to for External Secrets to retrieve secrets from AWS SSM and AWS Secrets Manager"
-  policy      = data.aws_iam_policy_document.external_secrets[0].json
+  description = "Provides permissions to handle node termination events via the Node Termination Handler"
+  policy      = data.aws_iam_policy_document.node_termination_handler[0].json
 
   tags = var.tags
 }
 
-resource "aws_iam_role_policy_attachment" "external_secrets" {
-  count = var.create_role && var.attach_external_secrets_policy ? 1 : 0
+resource "aws_iam_role_policy_attachment" "node_termination_handler" {
+  count = var.create_role && var.attach_node_termination_handler_policy ? 1 : 0
 
   role       = aws_iam_role.this[0].name
-  policy_arn = aws_iam_policy.external_secrets[0].arn
+  policy_arn = aws_iam_policy.node_termination_handler[0].arn
+}
+
+################################################################################
+# VPC CNI Policy
+################################################################################
+
+data "aws_iam_policy_document" "vpc_cni" {
+  count = var.create_role && var.attach_vpc_cni_policy ? 1 : 0
+
+  # arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+  dynamic "statement" {
+    for_each = var.vpc_cni_enable_ipv4 ? [1] : []
+    content {
+      sid = "IPV4"
+      actions = [
+        "ec2:AssignPrivateIpAddresses",
+        "ec2:AttachNetworkInterface",
+        "ec2:CreateNetworkInterface",
+        "ec2:DeleteNetworkInterface",
+        "ec2:DescribeInstances",
+        "ec2:DescribeTags",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeInstanceTypes",
+        "ec2:DetachNetworkInterface",
+        "ec2:ModifyNetworkInterfaceAttribute",
+        "ec2:UnassignPrivateIpAddresses",
+      ]
+      resources = ["*"]
+    }
+  }
+
+  # https://docs.aws.amazon.com/eks/latest/userguide/cni-iam-role.html#cni-iam-role-create-ipv6-policy
+  dynamic "statement" {
+    for_each = var.vpc_cni_enable_ipv6 ? [1] : []
+    content {
+      sid = "IPV6"
+      actions = [
+        "ec2:AssignIpv6Addresses",
+        "ec2:DescribeInstances",
+        "ec2:DescribeTags",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeInstanceTypes",
+      ]
+      resources = ["*"]
+    }
+  }
+
+  statement {
+    sid       = "CreateTags"
+    actions   = ["ec2:CreateTags"]
+    resources = ["arn:${local.partition}:ec2:*:*:network-interface/*"]
+  }
+}
+
+resource "aws_iam_policy" "vpc_cni" {
+  count = var.create_role && var.attach_vpc_cni_policy ? 1 : 0
+
+  name_prefix = "AmazonEKS_CNI_Policy-"
+  path        = var.role_path
+  description = "Provides the Amazon VPC CNI Plugin (amazon-vpc-cni-k8s) the permissions it requires to modify the IPv4/IPv6 address configuration on your EKS worker nodes"
+  policy      = data.aws_iam_policy_document.vpc_cni[0].json
+
+  tags = var.tags
+}
+
+resource "aws_iam_role_policy_attachment" "vpc_cni" {
+  count = var.create_role && var.attach_vpc_cni_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.vpc_cni[0].arn
 }
