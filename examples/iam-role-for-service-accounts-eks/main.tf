@@ -74,7 +74,24 @@ module "external_dns_irsa_role" {
   oidc_providers = {
     ex = {
       provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["default:my-app", "canary:my-app"]
+      namespace_service_accounts = ["kube-system:external-dns"]
+    }
+  }
+
+  tags = local.tags
+}
+
+module "cert_manager_irsa_role" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name                     = "cert-manager"
+  attach_external_dns_policy    = true
+  cert_manager_hosted_zone_arns = ["arn:aws:route53:::hostedzone/IClearlyMadeThisUp"]
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["kube-system:cert-manager"]
     }
   }
 
@@ -224,6 +241,25 @@ module "amazon_managed_service_prometheus_irsa_role" {
     ex = {
       provider_arn               = module.eks.oidc_provider_arn
       namespace_service_accounts = ["prometheus:amp-ingest"]
+    }
+  }
+
+  tags = local.tags
+}
+
+
+module "external_secrets_irsa_role" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name                             = "external-secrets"
+  attach_external_secrets_policy        = true
+  external_secrets_ssm_parameter_arns   = ["arn:aws:ssm:*:*:parameter/foo"]
+  external_secrets_secrets_manager_arns = ["arn:aws:secretsmanager:*:*:secret:bar"]
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["default:kubernetes-external-secrets"]
     }
   }
 
