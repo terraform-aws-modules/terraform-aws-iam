@@ -198,3 +198,16 @@ variable "attach_load_balancer_controller_targetgroup_binding_only_policy" {
   type        = bool
   default     = false
 }
+
+# Cert-Manager
+variable "attach_cert_manager_policy" {
+  description = "Determines whether to attach the Cert-Manager IAM policy to the role"
+  type        = bool
+  default     = false
+}
+
+variable "cert_manager_hosted_zone_arns" {
+  description = "Route53 hosted zone ARNs to allow Cert-Manager DNS01 to manage records"
+  type        = list(string)
+  default     = ["arn:aws:route53:::hostedzone/*"]
+}

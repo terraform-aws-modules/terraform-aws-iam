@@ -214,6 +214,23 @@ module "load_balancer_controller_targetgroup_binding_only_irsa_role" {
   tags = local.tags
 }
 
+module "cert_manager_irsa_role" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name                     = "cert-manager"
+  attach_cert_manager_policy    = true
+  cert_manager_hosted_zone_arns = ["arn:aws:route53:::hostedzone/IClearlyMadeThisUp"]
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["cert-manager:cert-manager"]
+    }
+  }
+
+  tags = local.tags
+}
+
 ################################################################################
 # Supporting Resources
 ################################################################################
