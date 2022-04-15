@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [4.20.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.20.0...v4.20.1) (2022-04-15)
+
+
+### Bug Fixes
+
+* Fixed example where VPC CNI permissions should apply to the `aws-node` account ([#225](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/225)) ([1fb1cfc](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/1fb1cfce34866292f2e13fc86dca30adf09cf21d))
+
 ## [4.20.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.19.0...v4.20.0) (2022-04-13)
 
 
