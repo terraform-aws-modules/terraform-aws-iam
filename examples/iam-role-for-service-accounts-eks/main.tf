@@ -255,7 +255,7 @@ module "vpc_cni_ipv4_irsa_role" {
   oidc_providers = {
     ex = {
       provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["kube-system:aws-vpc-cni"]
+      namespace_service_accounts = ["kube-system:aws-node"]
     }
   }
 
@@ -272,7 +272,7 @@ module "vpc_cni_ipv6_irsa_role" {
   oidc_providers = {
     ex = {
       provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["kube-system:aws-vpc-cni"]
+      namespace_service_accounts = ["kube-system:aws-node"]
     }
   }
 
