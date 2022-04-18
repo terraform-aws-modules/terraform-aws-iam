@@ -62,7 +62,7 @@ module "karpenter_irsa_role" {
   role_name                          = "karpenter_controller"
   attach_karpenter_controller_policy = true
 
-  karpenter_controller_cluster_ids        = [module.eks.cluster_id]
+  karpenter_controller_cluster_id         = module.eks.cluster_id
   karpenter_controller_node_iam_role_arns = [module.eks.eks_managed_node_groups["default"].iam_role_arn]
 
   attach_vpc_cni_policy = true
