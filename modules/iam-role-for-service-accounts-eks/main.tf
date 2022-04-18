@@ -18,6 +18,12 @@ data "aws_iam_policy_document" "this" {
         variable = "${replace(statement.value.provider_arn, "/^(.*provider/)/", "")}:sub"
         values   = [for sa in statement.value.namespace_service_accounts : "system:serviceaccount:${sa}"]
       }
+
+      condition {
+        test     = var.assume_role_condition_test
+        variable = "${replace(statement.value.provider_arn, "/^(.*provider/)/", "")}:aud"
+        values   = ["sts.amazonaws.com"]
+      }
     }
   }
 }
