@@ -15,14 +15,14 @@ data "aws_iam_policy_document" "this" {
 
       condition {
         test     = var.assume_role_condition_test
-        variable = "${replace(statement.value.provider_arn, "/^(.*provider/)/", "")}:sub"
-        values   = [for sa in statement.value.namespace_service_accounts : "system:serviceaccount:${sa}"]
+        variable = "${replace(statement.value.provider_arn, "/^(.*provider/)/", "")}:aud"
+        values   = ["sts.amazonaws.com"]
       }
 
       condition {
         test     = var.assume_role_condition_test
-        variable = "${replace(statement.value.provider_arn, "/^(.*provider/)/", "")}:aud"
-        values   = ["sts.amazonaws.com"]
+        variable = "${replace(statement.value.provider_arn, "/^(.*provider/)/", "")}:sub"
+        values   = [for sa in statement.value.namespace_service_accounts : "system:serviceaccount:${sa}"]
       }
     }
   }
