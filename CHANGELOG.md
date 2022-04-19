@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [4.20.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.20.1...v4.20.2) (2022-04-19)
+
+
+### Bug Fixes
+
+* **efs:** add necessary permissions ([#233](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/233)) ([46da6e9](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/46da6e99f3a2d22a83dca6da874203e4dd44ece1))
+
 ### [4.20.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.20.0...v4.20.1) (2022-04-15)
 
 
