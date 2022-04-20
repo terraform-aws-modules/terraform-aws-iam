@@ -51,7 +51,7 @@ module "cert_manager_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
   role_name                     = "cert-manager"
-  attach_external_dns_policy    = true
+  attach_cert_manager_policy    = true
   cert_manager_hosted_zone_arns = ["arn:aws:route53:::hostedzone/IClearlyMadeThisUp"]
 
   oidc_providers = {
