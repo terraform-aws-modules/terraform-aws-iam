@@ -1010,6 +1010,48 @@ resource "aws_iam_role_policy_attachment" "appmesh_controller" {
 }
 
 ################################################################################
+# Appmesh envoy proxy
+################################################################################
+# https://github.com/aws/aws-app-mesh-controller-for-k8s/blob/f4a551399c4a4428d31692d0e6d944c2b78f2753/config/helm/appmesh-controller/README.md#with-irsa
+# https://raw.githubusercontent.com/aws/aws-app-mesh-controller-for-k8s/master/config/iam/envoy-iam-policy.json
+data "aws_iam_policy_document" "appmesh_envoy_proxy" {
+  count = var.create_role && var.attach_appmesh_envoy_proxy_policy ? 1 : 0
+
+  statement {
+    actions = [
+      "appmesh:StreamAggregatedResources"
+    ]
+    resources = ["*"]
+  }
+
+  statement {
+    actions = [
+      "acm:ExportCertificate",
+      "acm-pca:GetCertificateAuthorityCertificate"
+    ]
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_policy" "appmesh_envoy_proxy" {
+  count = var.create_role && var.attach_appmesh_envoy_proxy_policy ? 1 : 0
+
+  name_prefix = "AmazonEKS_Appmesh_Envoy_Proxy-"
+  path        = var.role_path
+  description = "Provides permissions to for appmesh envoy proxy"
+  policy      = data.aws_iam_policy_document.appmesh_envoy_proxy[0].json
+
+  tags = var.tags
+}
+
+resource "aws_iam_role_policy_attachment" "appmesh_envoy_proxy" {
+  count = var.create_role && var.attach_appmesh_envoy_proxy_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.appmesh_envoy_proxy[0].arn
+}
+
+################################################################################
 # Amazon Managed Service for Prometheus Policy
 ################################################################################
 
