@@ -947,13 +947,13 @@ data "aws_iam_policy_document" "appmesh_controller" {
 
   statement {
     actions = [
-      "arn:aws:iam::*:role/aws-service-role/appmesh.amazonaws.com/AWSServiceRoleForAppMesh"
+      "arn:${local.partition}:iam::*:role/aws-service-role/appmesh.${local.dns_suffix}/AWSServiceRoleForAppMesh"
     ]
     resources = ["*"]
     condition {
       test     = "StringLike"
       variable = "iam:AWSServiceName"
-      values   = ["appmesh.amazonaws.com"]
+      values   = ["appmesh.${local.dns_suffix}"]
     }
   }
 
