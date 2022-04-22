@@ -17,7 +17,7 @@ data "aws_iam_policy_document" "cert_manager" {
 
   statement {
     actions   = ["route53:GetChange"]
-    resources = ["arn:aws:route53:::change/*"]
+    resources = ["arn:${local.partition}:route53:::change/*"]
   }
 
   statement {
@@ -550,9 +550,9 @@ data "aws_iam_policy_document" "karpenter_controller" {
   statement {
     actions = ["ec2:RunInstances"]
     resources = [
-      "arn:aws:ec2:*:${local.account_id}:launch-template/*",
-      "arn:aws:ec2:*:${local.account_id}:security-group/*",
-      "arn:aws:ec2:*:${local.account_id}:subnet/*",
+      "arn:${local.partition}:ec2:*:${local.account_id}:launch-template/*",
+      "arn:${local.partition}:ec2:*:${local.account_id}:security-group/*",
+      "arn:${local.partition}:ec2:*:${local.account_id}:subnet/*",
     ]
 
     condition {
@@ -565,10 +565,10 @@ data "aws_iam_policy_document" "karpenter_controller" {
   statement {
     actions = ["ec2:RunInstances"]
     resources = [
-      "arn:aws:ec2:*::image/*",
-      "arn:aws:ec2:*:${local.account_id}:instance/*",
-      "arn:aws:ec2:*:${local.account_id}:volume/*",
-      "arn:aws:ec2:*:${local.account_id}:network-interface/*",
+      "arn:${local.partition}:ec2:*::image/*",
+      "arn:${local.partition}:ec2:*:${local.account_id}:instance/*",
+      "arn:${local.partition}:ec2:*:${local.account_id}:volume/*",
+      "arn:${local.partition}:ec2:*:${local.account_id}:network-interface/*",
     ]
   }
 
@@ -1144,7 +1144,7 @@ resource "aws_iam_role_policy_attachment" "node_termination_handler" {
 data "aws_iam_policy_document" "vpc_cni" {
   count = var.create_role && var.attach_vpc_cni_policy ? 1 : 0
 
-  # arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+  # arn:${local.partition}:iam::aws:policy/AmazonEKS_CNI_Policy
   dynamic "statement" {
     for_each = var.vpc_cni_enable_ipv4 ? [1] : []
     content {
