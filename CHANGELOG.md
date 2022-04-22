@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.21.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.20.3...v4.21.0) (2022-04-22)
+
+
+### Features
+
+* Added appmesh controller support to `iam-role-for-service-accounts-eks` ([#231](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/231)) ([0492955](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/0492955751c18f14acbd1b52444cfec14376f0c5))
+
 ### [4.20.3](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.20.2...v4.20.3) (2022-04-20)
 
 
