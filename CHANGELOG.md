@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.21.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.20.3...v4.21.0) (2022-04-22)
+
+
+### Features
+
+* Added appmesh controller support to `iam-role-for-service-accounts-eks` ([#231](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/231)) ([0492955](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/0492955751c18f14acbd1b52444cfec14376f0c5))
+
+### [4.20.3](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.20.2...v4.20.3) (2022-04-20)
+
+
+### Bug Fixes
+
+* Correct policy attachment to cert_manager in example ([#234](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/234)) ([6a28193](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/6a28193534d414c2488db2633ec3399c8bdbda92))
+
+### [4.20.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.20.1...v4.20.2) (2022-04-19)
+
+
+### Bug Fixes
+
+* **efs:** add necessary permissions ([#233](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/233)) ([46da6e9](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/46da6e99f3a2d22a83dca6da874203e4dd44ece1))
+
 ### [4.20.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.20.0...v4.20.1) (2022-04-15)
 
 

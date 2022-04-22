@@ -51,7 +51,7 @@ module "cert_manager_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
   role_name                     = "cert-manager"
-  attach_external_dns_policy    = true
+  attach_cert_manager_policy    = true
   cert_manager_hosted_zone_arns = ["arn:aws:route53:::hostedzone/IClearlyMadeThisUp"]
 
   oidc_providers = {
@@ -207,6 +207,38 @@ module "load_balancer_controller_targetgroup_binding_only_irsa_role" {
     ex = {
       provider_arn               = module.eks.oidc_provider_arn
       namespace_service_accounts = ["kube-system:aws-load-balancer-controller"]
+    }
+  }
+
+  tags = local.tags
+}
+
+module "appmesh_controller_irsa_role" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name                        = "appmesh-controller"
+  attach_appmesh_controller_policy = true
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["appmesh-system:appmesh-controller"]
+    }
+  }
+
+  tags = local.tags
+}
+
+module "appmesh_envoy_proxy_irsa_role" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name                         = "appmesh-envoy-proxy"
+  attach_appmesh_envoy_proxy_policy = true
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["appmesh-system:appmesh-envoy-proxy"]
     }
   }
 
