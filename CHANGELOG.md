@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [4.21.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.21.0...v4.21.1) (2022-04-22)
+
+
+### Bug Fixes
+
+* Correct aws arn partition for service account eks ([#235](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/235)) ([e51b6c3](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/e51b6c32230d8cde5ce098880b20a08cb8ae11a1))
+
 ## [4.21.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.20.3...v4.21.0) (2022-04-22)
 
 
