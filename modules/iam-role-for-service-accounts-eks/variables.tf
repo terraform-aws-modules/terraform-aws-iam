@@ -239,6 +239,19 @@ variable "amazon_managed_service_prometheus_workspace_arns" {
   default     = ["*"]
 }
 
+# Velero
+variable "attach_velero_policy" {
+  description = "Determines whether to attach the Velero IAM policy to the role"
+  type        = bool
+  default     = false
+}
+
+variable "velero_s3_bucket_arns" {
+  description = "List of S3 Bucket ARNs that Velero needs access to in order to backup and restore cluster resources"
+  type        = list(string)
+  default     = ["*"]
+}
+
 # VPC CNI
 variable "attach_vpc_cni_policy" {
   description = "Determines whether to attach the VPC CNI IAM policy to the role"
