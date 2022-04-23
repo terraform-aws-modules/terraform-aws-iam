@@ -197,6 +197,12 @@ variable "karpenter_controller_node_iam_role_arns" {
   default     = ["*"]
 }
 
+variable "karpenter_subnet_account_id" {
+  description = "Account ID of where the subnets Karpenter will utilize resides. Used when subnets are shared from another account"
+  type        = string
+  default     = ""
+}
+
 # AWS Load Balancer Controller
 variable "attach_load_balancer_controller_policy" {
   description = "Determines whether to attach the Load Balancer Controller policy to the role"
