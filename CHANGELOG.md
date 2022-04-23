@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.22.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.21.1...v4.22.0) (2022-04-23)
+
+
+### Features
+
+* Add support for Velero IRSA role ([#237](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/237)) ([1ec52b1](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/1ec52b1cb0817d2402a572c229efb5e993132ffe))
+
 ### [4.21.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.21.0...v4.21.1) (2022-04-22)
 
 
