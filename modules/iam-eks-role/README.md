@@ -1,51 +1,77 @@
 # iam-eks-role
 
-Creates single IAM role which can be assumed by one or more EKS `ServiceAccount` and optionally also OpenID Connect Federated Users.
+Creates an IAM role that can be assumed by one or more EKS `ServiceAccount` in one or more EKS clusters. Unlike [iam-assumable-role-with-oidc](https://github.com/terraform-aws-modules/terraform-aws-iam/blob/master/modules/iam-assumable-role-with-oidc/), this module:
+
+- Does not require any knowledge of cluster OIDC information as `data` resources are used
+- Supports assuming the role from multiple EKS clusters, for example used in DR or when a workload is spread across clusters
+- Support multiple `ServiceAccount` in the same cluster, for example when a workload runs in multiple namespaces
+- More suitable for non-cluster admins as implementation is simpler
+- More suitable for when the IAM role and cluster resources are in separate Terraform configurations
 
 This module is for use with AWS EKS. For details of how a `ServiceAccount` in EKS can assume an IAM role, see the [EKS documentation](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html).
 
-This module supports multiple `ServiceAccount` in multiple clusters and/or namespaces. This allows for a single IAM role to be used when an application may span multiple clusters (e.g. for DR) or multiple namespaces (e.g. for canary deployments). The variables `cluster_service_accounts` and `provider_url_sa_pairs` are used for this as follows:
+Implementation notes:
+
+- The EKS cluster needs to exist first, in the current AWS account and region
+- The key in the `cluster_service_accounts` is the exact name of the EKS cluster
+
+## Basic example
+
+To create an IAM role named `my-app` that can be assumed in EKS cluster `cluster1` by a `ServiceAccount` called `my-serviceaccount` in the `default` namespace:
 
 ```hcl
 module "iam_eks_role" {
   source = "terraform-aws-modules/iam/aws//modules/iam-eks-role"
 
-  cluster_service_accounts = {
-    "<EKS cluster name>" = [
-      "<namespace>:<ServiceAccount name>",
-      "<namespace>:<another ServiceAccount name>"
-    ]
-  }
+  role_name = "my-app"
 
-  provider_url_sa_pairs = {
-    "<OIDC provider without protocol prefix>" = [
-      "<namespace>:<ServiceAccount name>",
-      "<namespace>:<another ServiceAccount name>"
-    ]
+  cluster_service_accounts = {
+    "cluster1" = ["default:my-serviceaccount"]
   }
 }
 ```
 
-For example, to create an IAM role named `my-app` that can be assumed from the `ServiceAccount` named `my-app-staging` in the namespace `default` and `canary` in EKS cluster named `cluster-main-1`; and also the `ServiceAccount` name `my-app-staging` in the namespace `default` in EKS cluster named `cluster-backup-1`, the configuration would be:
+## Multi cluster example:
+
+To create an IAM role named `my-app` that can be assumed from:
+
+- EKS cluster `staging-main-1`, namespace `default`, `ServiceAccount` called `my-app-staging`
+- EKS cluster `staging-backup-1`, namespace `default`, `ServiceAccount` called `my-app-staging`
 
 ```hcl
 module "iam_eks_role" {
   source    = "terraform-aws-modules/iam/aws//modules/iam-eks-role"
+
   role_name = "my-app"
 
   cluster_service_accounts = {
-    "cluster-main-1" = [
-      "default:my-app-staging",
-      "canary:my-app-staging"
-    ],
-    "cluster-backup-1" = [
-      "default:my-app-staging",
-    ]
+    "staging-main-1" = ["default:my-app-staging"]
+    "staging-backup-1" = ["default:my-app-staging"]
   }
 }
 ```
 
-Note: the EKS clusters must in the current AWS region and account as they use the default AWS provider.
+## Multi `ServiceAccount` example
+
+To create an IAM role named `cloudwatch-exporter` that can be assumed in EKS cluster `production-main-1` from:
+
+- namespace `kube-system`, `ServiceAccount` called `cloudwatch-exporter`
+- namespace `app1`, `ServiceAccount` called `cloudwatch-exporter`
+
+```hcl
+module "iam_eks_role" {
+  source    = "terraform-aws-modules/iam/aws//modules/iam-eks-role"
+
+  role_name = "my-app"
+
+  cluster_service_accounts = {
+    "production-main-1" = [
+      "kube-system:cloudwatch-exporter",
+      "app1:cloudwatch-exporter",
+    ]
+  }
+}
+```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -84,7 +110,6 @@ No modules.
 | <a name="input_create_role"></a> [create\_role](#input\_create\_role) | Whether to create a role | `bool` | `true` | no |
 | <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies) | Whether policies should be detached from this role when destroying | `bool` | `false` | no |
 | <a name="input_max_session_duration"></a> [max\_session\_duration](#input\_max\_session\_duration) | Maximum CLI/API session duration in seconds between 3600 and 43200 | `number` | `43200` | no |
-| <a name="input_provider_url_sa_pairs"></a> [provider\_url\_sa\_pairs](#input\_provider\_url\_sa\_pairs) | OIDC provider URL and k8s ServiceAccount pairs. If the assume role policy requires a mix of EKS clusters and other OIDC providers then this can be used | `map(list(string))` | `{}` | no |
 | <a name="input_role_description"></a> [role\_description](#input\_role\_description) | IAM Role description | `string` | `""` | no |
 | <a name="input_role_name"></a> [role\_name](#input\_role\_name) | Name of IAM role | `string` | `null` | no |
 | <a name="input_role_name_prefix"></a> [role\_name\_prefix](#input\_role\_name\_prefix) | IAM role name prefix | `string` | `null` | no |

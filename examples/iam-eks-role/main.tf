@@ -7,15 +7,7 @@ module "iam_eks_role" {
   role_name = "my-app"
 
   cluster_service_accounts = {
-    (random_pet.this.id) = ["default:my-app", "canary:my-app"]
-  }
-
-  provider_url_sa_pairs = {
-    "oidc.eks.us-east-1.amazonaws.com/id/5C54DDF35ER19312844C7333374CC09D" = ["default:my-app2"]
-    "oidc.eks.ap-southeast-1.amazonaws.com/id/5C54DDF35ER54476848E7333374FF09G" = [
-      "default:my-app2",
-      "canary:my-app2",
-    ]
+    (random_pet.this.id) = ["default:my-app"]
   }
 
   tags = {

@@ -32,30 +32,6 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
       }
     }
   }
-
-  dynamic "statement" {
-    for_each = var.provider_url_sa_pairs
-
-    content {
-      effect = "Allow"
-
-      actions = ["sts:AssumeRoleWithWebIdentity"]
-
-      principals {
-        type = "Federated"
-
-        identifiers = [
-          "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${statement.key}"
-        ]
-      }
-
-      condition {
-        test     = "StringEquals"
-        variable = "${statement.key}:sub"
-        values   = [for s in statement.value : "system:serviceaccount:${s}"]
-      }
-    }
-  }
 }
 
 resource "aws_iam_role" "this" {

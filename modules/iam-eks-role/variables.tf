@@ -46,12 +46,6 @@ variable "cluster_service_accounts" {
   default     = {}
 }
 
-variable "provider_url_sa_pairs" {
-  description = "OIDC provider URL and k8s ServiceAccount pairs. If the assume role policy requires a mix of EKS clusters and other OIDC providers then this can be used"
-  type        = map(list(string))
-  default     = {}
-}
-
 variable "tags" {
   description = "A map of tags to add the the IAM role"
   type        = map(any)
