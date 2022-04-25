@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.23.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.22.1...v4.23.0) (2022-04-25)
+
+
+### Features
+
+* Improved iam-eks-role module (simplified, removed provider_url_sa_pairs, updated docs) ([#236](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/236)) ([d014730](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/d014730ada0ab95d9f97d98b3cbf5192055083bf))
+
 ### [4.22.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.22.0...v4.22.1) (2022-04-25)
 
 
