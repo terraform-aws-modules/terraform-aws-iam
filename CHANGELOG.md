@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [4.22.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.22.0...v4.22.1) (2022-04-25)
+
+
+### Bug Fixes
+
+* Correct invalid policy for app mesh controller ([#238](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/238)) ([7362f20](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/7362f20e56911d46c9982949c33905828f46656f))
+
 ## [4.22.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.21.1...v4.22.0) (2022-04-23)
 
 
