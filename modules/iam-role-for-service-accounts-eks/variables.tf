@@ -197,6 +197,12 @@ variable "karpenter_controller_node_iam_role_arns" {
   default     = ["*"]
 }
 
+variable "karpenter_subnet_account_id" {
+  description = "Account ID of where the subnets Karpenter will utilize resides. Used when subnets are shared from another account"
+  type        = string
+  default     = ""
+}
+
 # AWS Load Balancer Controller
 variable "attach_load_balancer_controller_policy" {
   description = "Determines whether to attach the Load Balancer Controller policy to the role"
@@ -212,6 +218,20 @@ variable "attach_load_balancer_controller_targetgroup_binding_only_policy" {
   default     = false
 }
 
+# AWS Appmesh Controller
+variable "attach_appmesh_controller_policy" {
+  description = "Determines whether to attach the Appmesh Controller policy to the role"
+  type        = bool
+  default     = false
+}
+
+# AWS Appmesh envoy proxy
+variable "attach_appmesh_envoy_proxy_policy" {
+  description = "Determines whether to attach the Appmesh envoy proxy policy to the role"
+  type        = bool
+  default     = false
+}
+
 # Amazon Managed Service for Prometheus
 variable "attach_amazon_managed_service_prometheus_policy" {
   description = "Determines whether to attach the Amazon Managed Service for Prometheus IAM policy to the role"
@@ -221,6 +241,19 @@ variable "attach_amazon_managed_service_prometheus_policy" {
 
 variable "amazon_managed_service_prometheus_workspace_arns" {
   description = "List of AMP Workspace ARNs to read and write metrics"
+  type        = list(string)
+  default     = ["*"]
+}
+
+# Velero
+variable "attach_velero_policy" {
+  description = "Determines whether to attach the Velero IAM policy to the role"
+  type        = bool
+  default     = false
+}
+
+variable "velero_s3_bucket_arns" {
+  description = "List of S3 Bucket ARNs that Velero needs access to in order to backup and restore cluster resources"
   type        = list(string)
   default     = ["*"]
 }

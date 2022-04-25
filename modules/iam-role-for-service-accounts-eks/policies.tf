@@ -17,7 +17,7 @@ data "aws_iam_policy_document" "cert_manager" {
 
   statement {
     actions   = ["route53:GetChange"]
-    resources = ["arn:aws:route53:::change/*"]
+    resources = ["arn:${local.partition}:route53:::change/*"]
   }
 
   statement {
@@ -550,9 +550,9 @@ data "aws_iam_policy_document" "karpenter_controller" {
   statement {
     actions = ["ec2:RunInstances"]
     resources = [
-      "arn:aws:ec2:*:${local.account_id}:launch-template/*",
-      "arn:aws:ec2:*:${local.account_id}:security-group/*",
-      "arn:aws:ec2:*:${local.account_id}:subnet/*",
+      "arn:${local.partition}:ec2:*:${local.account_id}:launch-template/*",
+      "arn:${local.partition}:ec2:*:${local.account_id}:security-group/*",
+      "arn:${local.partition}:ec2:*:${coalesce(var.karpenter_subnet_account_id, local.account_id)}:subnet/*",
     ]
 
     condition {
@@ -565,10 +565,10 @@ data "aws_iam_policy_document" "karpenter_controller" {
   statement {
     actions = ["ec2:RunInstances"]
     resources = [
-      "arn:aws:ec2:*::image/*",
-      "arn:aws:ec2:*:${local.account_id}:instance/*",
-      "arn:aws:ec2:*:${local.account_id}:volume/*",
-      "arn:aws:ec2:*:${local.account_id}:network-interface/*",
+      "arn:${local.partition}:ec2:*::image/*",
+      "arn:${local.partition}:ec2:*:${local.account_id}:instance/*",
+      "arn:${local.partition}:ec2:*:${local.account_id}:volume/*",
+      "arn:${local.partition}:ec2:*:${local.account_id}:network-interface/*",
     ]
   }
 
@@ -897,6 +897,161 @@ resource "aws_iam_role_policy_attachment" "load_balancer_controller_targetgroup_
 }
 
 ################################################################################
+# Appmesh Controller
+################################################################################
+# https://github.com/aws/eks-charts/tree/master/stable/appmesh-controller#prerequisites
+# https://raw.githubusercontent.com/aws/aws-app-mesh-controller-for-k8s/master/config/iam/controller-iam-policy.json
+data "aws_iam_policy_document" "appmesh_controller" {
+  count = var.create_role && var.attach_appmesh_controller_policy ? 1 : 0
+
+  statement {
+    actions = [
+      "appmesh:ListVirtualRouters",
+      "appmesh:ListVirtualServices",
+      "appmesh:ListRoutes",
+      "appmesh:ListGatewayRoutes",
+      "appmesh:ListMeshes",
+      "appmesh:ListVirtualNodes",
+      "appmesh:ListVirtualGateways",
+      "appmesh:DescribeMesh",
+      "appmesh:DescribeVirtualRouter",
+      "appmesh:DescribeRoute",
+      "appmesh:DescribeVirtualNode",
+      "appmesh:DescribeVirtualGateway",
+      "appmesh:DescribeGatewayRoute",
+      "appmesh:DescribeVirtualService",
+      "appmesh:CreateMesh",
+      "appmesh:CreateVirtualRouter",
+      "appmesh:CreateVirtualGateway",
+      "appmesh:CreateVirtualService",
+      "appmesh:CreateGatewayRoute",
+      "appmesh:CreateRoute",
+      "appmesh:CreateVirtualNode",
+      "appmesh:UpdateMesh",
+      "appmesh:UpdateRoute",
+      "appmesh:UpdateVirtualGateway",
+      "appmesh:UpdateVirtualRouter",
+      "appmesh:UpdateGatewayRoute",
+      "appmesh:UpdateVirtualService",
+      "appmesh:UpdateVirtualNode",
+      "appmesh:DeleteMesh",
+      "appmesh:DeleteRoute",
+      "appmesh:DeleteVirtualRouter",
+      "appmesh:DeleteGatewayRoute",
+      "appmesh:DeleteVirtualService",
+      "appmesh:DeleteVirtualNode",
+      "appmesh:DeleteVirtualGateway"
+    ]
+    resources = ["*"]
+  }
+
+  statement {
+    actions = [
+      "iam:CreateServiceLinkedRole"
+    ]
+    resources = ["arn:${local.partition}:iam::*:role/aws-service-role/appmesh.${local.dns_suffix}/AWSServiceRoleForAppMesh"]
+    condition {
+      test     = "StringLike"
+      variable = "iam:AWSServiceName"
+      values   = ["appmesh.${local.dns_suffix}"]
+    }
+  }
+
+  statement {
+    actions = [
+      "acm:ListCertificates",
+      "acm:DescribeCertificate",
+      "acm-pca:DescribeCertificateAuthority",
+      "acm-pca:ListCertificateAuthorities"
+    ]
+    resources = ["*"]
+  }
+
+  statement {
+    actions = [
+      "servicediscovery:CreateService",
+      "servicediscovery:DeleteService",
+      "servicediscovery:GetService",
+      "servicediscovery:GetInstance",
+      "servicediscovery:RegisterInstance",
+      "servicediscovery:DeregisterInstance",
+      "servicediscovery:ListInstances",
+      "servicediscovery:ListNamespaces",
+      "servicediscovery:ListServices",
+      "servicediscovery:GetInstancesHealthStatus",
+      "servicediscovery:UpdateInstanceCustomHealthStatus",
+      "servicediscovery:GetOperation",
+      "route53:GetHealthCheck",
+      "route53:CreateHealthCheck",
+      "route53:UpdateHealthCheck",
+      "route53:ChangeResourceRecordSets",
+      "route53:DeleteHealthCheck"
+    ]
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_policy" "appmesh_controller" {
+  count = var.create_role && var.attach_appmesh_controller_policy ? 1 : 0
+
+  name_prefix = "AmazonEKS_Appmesh_Controller-"
+  path        = var.role_path
+  description = "Provides permissions to for appmesh controller"
+  policy      = data.aws_iam_policy_document.appmesh_controller[0].json
+
+  tags = var.tags
+}
+
+resource "aws_iam_role_policy_attachment" "appmesh_controller" {
+  count = var.create_role && var.attach_appmesh_controller_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.appmesh_controller[0].arn
+}
+
+################################################################################
+# Appmesh envoy proxy
+################################################################################
+# https://github.com/aws/aws-app-mesh-controller-for-k8s/blob/f4a551399c4a4428d31692d0e6d944c2b78f2753/config/helm/appmesh-controller/README.md#with-irsa
+# https://raw.githubusercontent.com/aws/aws-app-mesh-controller-for-k8s/master/config/iam/envoy-iam-policy.json
+data "aws_iam_policy_document" "appmesh_envoy_proxy" {
+  count = var.create_role && var.attach_appmesh_envoy_proxy_policy ? 1 : 0
+
+  statement {
+    actions = [
+      "appmesh:StreamAggregatedResources"
+    ]
+    resources = ["*"]
+  }
+
+  statement {
+    actions = [
+      "acm:ExportCertificate",
+      "acm-pca:GetCertificateAuthorityCertificate"
+    ]
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_policy" "appmesh_envoy_proxy" {
+  count = var.create_role && var.attach_appmesh_envoy_proxy_policy ? 1 : 0
+
+  name_prefix = "AmazonEKS_Appmesh_Envoy_Proxy-"
+  path        = var.role_path
+  description = "Provides permissions to for appmesh envoy proxy"
+  policy      = data.aws_iam_policy_document.appmesh_envoy_proxy[0].json
+
+  tags = var.tags
+}
+
+resource "aws_iam_role_policy_attachment" "appmesh_envoy_proxy" {
+  count = var.create_role && var.attach_appmesh_envoy_proxy_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.appmesh_envoy_proxy[0].arn
+}
+
+################################################################################
 # Amazon Managed Service for Prometheus Policy
 ################################################################################
 
@@ -983,13 +1138,73 @@ resource "aws_iam_role_policy_attachment" "node_termination_handler" {
 }
 
 ################################################################################
+# Velero Policy
+################################################################################
+
+# https://github.com/vmware-tanzu/velero-plugin-for-aws#set-permissions-for-velero
+data "aws_iam_policy_document" "velero" {
+  count = var.create_role && var.attach_velero_policy ? 1 : 0
+
+  statement {
+    sid = "Ec2ReadWrite"
+    actions = [
+      "ec2:DescribeVolumes",
+      "ec2:DescribeSnapshots",
+      "ec2:CreateTags",
+      "ec2:CreateVolume",
+      "ec2:CreateSnapshot",
+      "ec2:DeleteSnapshot",
+    ]
+    resources = ["*"]
+  }
+
+  statement {
+    sid = "S3ReadWrite"
+    actions = [
+      "s3:GetObject",
+      "s3:DeleteObject",
+      "s3:PutObject",
+      "s3:AbortMultipartUpload",
+      "s3:ListMultipartUploadParts",
+    ]
+    resources = [for bucket in var.velero_s3_bucket_arns : "${bucket}/*"]
+  }
+
+  statement {
+    sid = "S3List"
+    actions = [
+      "s3:ListBucket",
+    ]
+    resources = var.velero_s3_bucket_arns
+  }
+}
+
+resource "aws_iam_policy" "velero" {
+  count = var.create_role && var.attach_velero_policy ? 1 : 0
+
+  name_prefix = "AmazonEKS_Velero_Policy-"
+  path        = var.role_path
+  description = "Provides Velero permissions to backup and restore cluster resources"
+  policy      = data.aws_iam_policy_document.velero[0].json
+
+  tags = var.tags
+}
+
+resource "aws_iam_role_policy_attachment" "velero" {
+  count = var.create_role && var.attach_velero_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.velero[0].arn
+}
+
+################################################################################
 # VPC CNI Policy
 ################################################################################
 
 data "aws_iam_policy_document" "vpc_cni" {
   count = var.create_role && var.attach_vpc_cni_policy ? 1 : 0
 
-  # arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+  # arn:${local.partition}:iam::aws:policy/AmazonEKS_CNI_Policy
   dynamic "statement" {
     for_each = var.vpc_cni_enable_ipv4 ? [1] : []
     content {

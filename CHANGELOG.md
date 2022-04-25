@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file.
 
+### [4.22.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.22.0...v4.22.1) (2022-04-25)
+
+
+### Bug Fixes
+
+* Correct invalid policy for app mesh controller ([#238](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/238)) ([7362f20](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/7362f20e56911d46c9982949c33905828f46656f))
+
+## [4.22.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.21.1...v4.22.0) (2022-04-23)
+
+
+### Features
+
+* Add support for Velero IRSA role ([#237](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/237)) ([1ec52b1](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/1ec52b1cb0817d2402a572c229efb5e993132ffe))
+
+### [4.21.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.21.0...v4.21.1) (2022-04-22)
+
+
+### Bug Fixes
+
+* Correct aws arn partition for service account eks ([#235](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/235)) ([e51b6c3](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/e51b6c32230d8cde5ce098880b20a08cb8ae11a1))
+
+## [4.21.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.20.3...v4.21.0) (2022-04-22)
+
+
+### Features
+
+* Added appmesh controller support to `iam-role-for-service-accounts-eks` ([#231](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/231)) ([0492955](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/0492955751c18f14acbd1b52444cfec14376f0c5))
+
 ### [4.20.3](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.20.2...v4.20.3) (2022-04-20)
 
 
