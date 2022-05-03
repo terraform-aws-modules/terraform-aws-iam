@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.24.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.23.0...v4.24.0) (2022-05-03)
+
+
+### Features
+
+* add policy_name_prefix for IRSA policies ([#243](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/243)) ([d932f65](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/d932f65dd0a347e61f542d9e03f2525d5c662d5f)), closes [#239](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/239)
+
 ## [4.23.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.22.1...v4.23.0) (2022-04-25)
 
 
