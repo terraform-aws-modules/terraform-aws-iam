@@ -34,6 +34,12 @@ variable "role_name_prefix" {
   default     = null
 }
 
+variable "policy_name_prefix" {
+  description = "IAM policy name prefix"
+  type        = string
+  default     = "AmazonEKS_"
+}
+
 variable "role_policy_arns" {
   description = "ARNs of any policies to attach to the IAM role"
   type        = list(string)
