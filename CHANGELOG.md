@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [4.24.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.24.0...v4.24.1) (2022-05-10)
+
+
+### Bug Fixes
+
+* Avoid restricting Karpenter `RunInstances` subnets by tag key ([#247](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/247)) ([bbbe0c0](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/bbbe0c01c9360b8a5d5b3ef60786d17a7920f33a))
+
 ## [4.24.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.23.0...v4.24.0) (2022-05-03)
 
 
