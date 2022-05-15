@@ -36,8 +36,8 @@ variable "role_name_prefix" {
 
 variable "role_policy_arns" {
   description = "ARNs of any policies to attach to the IAM role"
-  type        = list(string)
-  default     = []
+  type        = map(string)
+  default     = {}
 }
 
 variable "cluster_service_accounts" {
