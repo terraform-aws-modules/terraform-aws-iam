@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.0.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.24.1...v5.0.0) (2022-05-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* Replace use of `toset()` for policy attachment, bump min version of AWS provider to `4.0` and Terraform to `1.0` (#250)
+
+### Features
+
+* Replace use of `toset()` for policy attachment, bump min version of AWS provider to `4.0` and Terraform to `1.0` ([#250](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/250)) ([835135b](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/835135b80a8bbde2375f703e9d2849bac091ba2c))
+
 ### [4.24.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.24.0...v4.24.1) (2022-05-10)
 
 
