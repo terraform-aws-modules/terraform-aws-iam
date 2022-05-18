@@ -47,8 +47,8 @@ resource "aws_iam_role" "this" {
 }
 
 resource "aws_iam_role_policy_attachment" "this" {
-  for_each = toset([for arn in var.role_policy_arns : arn if var.create_role])
+  for_each = { for k, v in var.role_policy_arns : k => v if var.create_role }
 
   role       = aws_iam_role.this[0].name
-  policy_arn = each.key
+  policy_arn = each.value
 }

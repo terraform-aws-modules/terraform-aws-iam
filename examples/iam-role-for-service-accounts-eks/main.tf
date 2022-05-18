@@ -3,9 +3,8 @@ provider "aws" {
 }
 
 locals {
-  name            = "ex-iam-eks-role"
-  cluster_version = "1.21"
-  region          = "eu-west-1"
+  name   = "ex-iam-eks-role"
+  region = "eu-west-1"
 
   tags = {
     Example    = local.name
@@ -40,9 +39,10 @@ module "irsa_role" {
     }
   }
 
-  role_policy_arns = [
-    "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
-  ]
+  role_policy_arns = {
+    AmazonEKS_CNI_Policy = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+    additional           = aws_iam_policy.additional.arn
+  }
 
   tags = local.tags
 }
@@ -362,10 +362,10 @@ module "vpc" {
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 18.6"
+  version = "~> 18.21"
 
   cluster_name    = local.name
-  cluster_version = local.cluster_version
+  cluster_version = "1.22"
 
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
@@ -373,6 +373,26 @@ module "eks" {
   eks_managed_node_groups = {
     default = {}
   }
+
+  tags = local.tags
+}
+
+resource "aws_iam_policy" "additional" {
+  name        = "${local.name}-additional"
+  description = "Additional test policy"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "ec2:Describe*",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
 
   tags = local.tags
 }

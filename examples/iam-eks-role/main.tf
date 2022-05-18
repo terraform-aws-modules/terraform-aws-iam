@@ -14,9 +14,9 @@ module "iam_eks_role" {
     Name = "eks-role"
   }
 
-  role_policy_arns = [
-    "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
-  ]
+  role_policy_arns = {
+    AmazonEKS_CNI_Policy = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+  }
 }
 
 ##################
@@ -41,6 +41,7 @@ module "eks" {
 ##################################################################
 # Data sources to get VPC, subnet, security group and AMI details
 ##################################################################
+
 data "aws_vpc" "default" {
   default = true
 }
