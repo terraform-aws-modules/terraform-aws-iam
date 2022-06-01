@@ -66,9 +66,11 @@ data "aws_iam_policy_document" "cluster_autoscaler" {
       "autoscaling:DescribeAutoScalingGroups",
       "autoscaling:DescribeAutoScalingInstances",
       "autoscaling:DescribeLaunchConfigurations",
+      "autoscaling:DescribeScalingActivities",
       "autoscaling:DescribeTags",
       "ec2:DescribeLaunchTemplateVersions",
       "ec2:DescribeInstanceTypes",
+      "eks:DescribeNodegroup",
     ]
 
     resources = ["*"]

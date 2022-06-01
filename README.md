@@ -14,7 +14,6 @@
 ```hcl
 module "iam_account" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-account"
-  version = "~> 4"
 
   account_alias = "awesome-company"
 
@@ -28,7 +27,6 @@ module "iam_account" {
 ```hcl
 module "iam_assumable_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
-  version = "~> 4"
 
   trusted_role_arns = [
     "arn:aws:iam::307990089504:root",
@@ -53,7 +51,6 @@ module "iam_assumable_role" {
 ```hcl
 module "iam_assumable_role_with_oidc" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
-  version = "~> 4"
 
   create_role = true
 
@@ -77,7 +74,6 @@ module "iam_assumable_role_with_oidc" {
 ```hcl
 module "iam_assumable_role_with_saml" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-saml"
-  version = "~> 4"
 
   create_role = true
 
@@ -101,7 +97,6 @@ module "iam_assumable_role_with_saml" {
 ```hcl
 module "iam_assumable_roles" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-roles"
-  version = "~> 4"
 
   trusted_role_arns = [
     "arn:aws:iam::307990089504:root",
@@ -123,7 +118,6 @@ module "iam_assumable_roles" {
 ```hcl
 module "iam_assumable_roles_with_saml" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-roles-with-saml"
-  version = "~> 4"
 
   create_admin_role = true
 
@@ -141,7 +135,6 @@ module "iam_assumable_roles_with_saml" {
 ```hcl
 module "iam_eks_role" {
   source      = "terraform-aws-modules/iam/aws//modules/iam-eks-role"
-  version     = "~> 4"
 
   role_name   = "my-app"
 
@@ -157,9 +150,9 @@ module "iam_eks_role" {
     Name = "eks-role"
   }
 
-  role_policy_arns = [
-    "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
-  ]
+  role_policy_arns = {
+    AmazonEKS_CNI_Policy = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+  }
 }
 ```
 
@@ -168,7 +161,6 @@ module "iam_eks_role" {
 ```hcl
 module "iam_group_with_assumable_roles_policy" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-group-with-assumable-roles-policy"
-  version = "~> 4"
 
   name = "production-readonly"
 
@@ -188,7 +180,6 @@ module "iam_group_with_assumable_roles_policy" {
 ```hcl
 module "iam_group_with_policies" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-group-with-policies"
-  version = "~> 4"
 
   name = "superadmins"
 
@@ -217,7 +208,6 @@ module "iam_group_with_policies" {
 ```hcl
 module "iam_policy" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
-  version = "~> 4"
 
   name        = "example"
   path        = "/"
@@ -245,7 +235,6 @@ EOF
 ```hcl
 module "iam_read_only_policy" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-read-only-policy"
-  version = "~> 4"
 
   name        = "example"
   path        = "/"
@@ -260,7 +249,6 @@ module "iam_read_only_policy" {
 ```hcl
 module "vpc_cni_irsa" {
   source      = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version     = "~> 4"
 
   role_name   = "vpc-cni"
 
@@ -270,7 +258,7 @@ module "vpc_cni_irsa" {
   oidc_providers = {
     main = {
       provider_arn               = "arn:aws:iam::012345678901:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/5C54DDF35ER19312844C7333374CC09D"
-      namespace_service_accounts = ["default:my-app", "canary:my-app"]
+      namespace_service_accounts = ["kube-system:aws-node"]
     }
   }
 
@@ -285,7 +273,6 @@ module "vpc_cni_irsa" {
 ```hcl
 module "iam_user" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-user"
-  version = "~> 4"
 
   name          = "vasya.pupkin"
   force_destroy = true
@@ -300,50 +287,48 @@ module "iam_user" {
 
 AWS published [IAM Best Practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html) and this Terraform module was created to help with some of points listed there:
 
-### 1. Create Individual IAM Users
+1. Create Individual IAM Users
 
 Use [iam-user module](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/iam-user) module to manage IAM users.
 
-### 2. Use AWS Defined Policies to Assign Permissions Whenever Possible
+2. Use AWS Defined Policies to Assign Permissions Whenever Possible
 
 Use [iam-assumable-roles module](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/iam-assumable-roles) to create IAM roles with managed policies to support common tasks (admin, poweruser or readonly).
 
-### 3. Use Groups to Assign Permissions to IAM Users
+3. Use Groups to Assign Permissions to IAM Users
 
 Use [iam-group-with-assumable-roles-policy module](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/iam-group-with-assumable-roles-policy) to manage IAM groups of users who can assume roles.
-
 Use [iam-group-with-policies module](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/iam-group-with-policies) to manage IAM groups of users where specified IAM policies are allowed.
 
-### 4. Configure a Strong Password Policy for Your Users
+4. Configure a Strong Password Policy for Your Users
 
 Use [iam-account module](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/iam-account) to set password policy for your IAM users.
 
-### 5. Enable MFA for Privileged Users
+5. Enable MFA for Privileged Users
 
-Terraform can't configure MFA for the user. It is only possible via [AWS Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html) and [AWS CLI](https://docs.aws.amazon.com/cli/latest/reference/iam/enable-mfa-device.html).
+Use [iam-assumable-roles module](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/iam-assumable-roles) to create IAM roles that require MFA.
 
-### 6. Delegate by Using Roles Instead of by Sharing Credentials
+6. Delegate by Using Roles Instead of by Sharing Credentials
 
 [iam-assumable-role](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/iam-assumable-role), [iam-assumable-roles](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/iam-assumable-roles), [iam-assumable-roles-with-saml](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/iam-assumable-roles-with-saml) and [iam-group-with-assumable-roles-policy](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/iam-group-with-assumable-roles-policy) modules provide complete set of functionality required for this.
 
-### 7. Use Policy Conditions for Extra Security
+7. Use Policy Conditions for Extra Security
 
 [iam-assumable-roles module](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/iam-assumable-roles) can be configured to require valid MFA token when different roles are assumed (for example, admin role requires MFA, but readonly - does not).
 
-### 8. Create IAM Policies
+8. Create IAM Policies
 
 Use [iam-policy module](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/iam-policy) module to manage IAM policy.
-
 Use [iam-read-only-policy module](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/modules/iam-read-only-policy) module to manage IAM read-only policies.
 
 ## Examples
 
 - [iam-account](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-account) - Set AWS account alias and password policy
-- [iam-assumable-role](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-role) - Create individual IAM role which can be assumed from specified ARNs (AWS accounts, IAM users, etc)
 - [iam-assumable-role-with-oidc](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-role-with-oidc) - Create individual IAM role which can be assumed from specified subjects federated with a OIDC Identity Provider
 - [iam-assumable-role-with-saml](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-role-with-saml) - Create individual IAM role which can be assumed by users with a SAML Identity Provider
-- [iam-assumable-roles](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-roles) - Create several IAM roles which can be assumed from specified ARNs (AWS accounts, IAM users, etc)
+- [iam-assumable-role](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-role) - Create individual IAM role which can be assumed from specified ARNs (AWS accounts, IAM users, etc)
 - [iam-assumable-roles-with-saml](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-roles-with-saml) - Create several IAM roles which can be assumed by users with a SAML Identity Provider
+- [iam-assumable-roles](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-assumable-roles) - Create several IAM roles which can be assumed from specified ARNs (AWS accounts, IAM users, etc)
 - [iam-eks-role](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-eks-role) - Create an IAM role that can be assumed by one or more EKS `ServiceAccount`
 - [iam-group-complete](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-group-complete) - IAM group with users who are allowed to assume IAM roles in another AWS account and have access to specified IAM policies
 - [iam-group-with-assumable-roles-policy](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-group-with-assumable-roles-policy) - IAM group with users who are allowed to assume IAM roles in the same or in separate AWS account
