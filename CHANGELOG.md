@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.1.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.0.0...v5.1.0) (2022-06-01)
+
+
+### Features
+
+* Update cluster autoscaler policy for recent permission changes upstream ([#255](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/255)) ([2f1b2bf](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/2f1b2bf80501b472be620c88e6339c4f622d4800))
+
 ## [5.0.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v4.24.1...v5.0.0) (2022-05-18)
 
 
