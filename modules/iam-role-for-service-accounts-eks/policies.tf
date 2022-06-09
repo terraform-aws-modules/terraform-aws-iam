@@ -571,6 +571,7 @@ data "aws_iam_policy_document" "karpenter_controller" {
       "arn:${local.partition}:ec2:*:${local.account_id}:volume/*",
       "arn:${local.partition}:ec2:*:${local.account_id}:network-interface/*",
       "arn:${local.partition}:ec2:*:${coalesce(var.karpenter_subnet_account_id, local.account_id)}:subnet/*",
+      "arn:${local.partition}:ec2:*:${local.account_id}:key-pair/*",
     ]
   }
 
