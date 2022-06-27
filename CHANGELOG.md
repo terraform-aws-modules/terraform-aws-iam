@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.2.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.1.0...v5.2.0) (2022-06-27)
+
+
+### Features
+
+* Add additional Karpenter permissions for spot pricing improvements ([#258](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/258)) ([14cc1df](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/14cc1df7f7d21c82fbeb8e08b2950eab58ece056))
+
 ## [5.1.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.0.0...v5.1.0) (2022-06-01)
 
 
