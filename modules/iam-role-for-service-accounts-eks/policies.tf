@@ -529,6 +529,8 @@ data "aws_iam_policy_document" "karpenter_controller" {
       "ec2:DescribeInstanceTypes",
       "ec2:DescribeInstanceTypeOfferings",
       "ec2:DescribeAvailabilityZones",
+      "ec2:DescribeSpotPriceHistory",
+      "pricing:GetProducts",
     ]
 
     resources = ["*"]
