@@ -15,8 +15,10 @@ When `pgp_key` is specified as `keybase:username`, make sure that that user has 
 This module outputs commands and PGP messages which can be decrypted either using [keybase.io web-site](https://keybase.io/decrypt) or using command line to get user's password and user's secret key:
 - `keybase_password_decrypt_command`
 - `keybase_secret_key_decrypt_command`
+- `keybase_ses_smtp_password_v4_decrypt_command`
 - `keybase_password_pgp_message`
 - `keybase_secret_key_pgp_message`
+- `keybase_ses_smtp_password_v4_pgp_message`
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -70,6 +72,7 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_iam_access_key_encrypted_secret"></a> [iam\_access\_key\_encrypted\_secret](#output\_iam\_access\_key\_encrypted\_secret) | The encrypted secret, base64 encoded |
+| <a name="output_iam_access_key_encrypted_ses_smtp_password_v4"></a> [iam\_access\_key\_encrypted\_ses\_smtp\_password\_v4](#output\_iam\_access\_key\_encrypted\_ses\_smtp\_password\_v4) | The encrypted secret access key converted into an SES SMTP password by applying AWS's Sigv4 conversion algorithm |
 | <a name="output_iam_access_key_id"></a> [iam\_access\_key\_id](#output\_iam\_access\_key\_id) | The access key ID |
 | <a name="output_iam_access_key_key_fingerprint"></a> [iam\_access\_key\_key\_fingerprint](#output\_iam\_access\_key\_key\_fingerprint) | The fingerprint of the PGP key used to encrypt the secret |
 | <a name="output_iam_access_key_secret"></a> [iam\_access\_key\_secret](#output\_iam\_access\_key\_secret) | The access key secret |
@@ -87,5 +90,7 @@ No modules.
 | <a name="output_keybase_password_pgp_message"></a> [keybase\_password\_pgp\_message](#output\_keybase\_password\_pgp\_message) | Encrypted password |
 | <a name="output_keybase_secret_key_decrypt_command"></a> [keybase\_secret\_key\_decrypt\_command](#output\_keybase\_secret\_key\_decrypt\_command) | Decrypt access secret key command |
 | <a name="output_keybase_secret_key_pgp_message"></a> [keybase\_secret\_key\_pgp\_message](#output\_keybase\_secret\_key\_pgp\_message) | Encrypted access secret key |
+| <a name="output_keybase_ses_smtp_password_v4_decrypt_command"></a> [keybase\_ses\_smtp\_password\_v4\_decrypt\_command](#output\_keybase\_ses\_smtp\_password\_v4\_decrypt\_command) | Decrypt SES SMTP password command |
+| <a name="output_keybase_ses_smtp_password_v4_pgp_message"></a> [keybase\_ses\_smtp\_password\_v4\_pgp\_message](#output\_keybase\_ses\_smtp\_password\_v4\_pgp\_message) | Encrypted SES SMTP password |
 | <a name="output_pgp_key"></a> [pgp\_key](#output\_pgp\_key) | PGP key used to encrypt sensitive data for this user (if empty - secrets are not encrypted) |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

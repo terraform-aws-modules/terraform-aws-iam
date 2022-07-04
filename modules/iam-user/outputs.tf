@@ -57,8 +57,13 @@ output "iam_access_key_encrypted_secret" {
 
 output "iam_access_key_ses_smtp_password_v4" {
   description = "The secret access key converted into an SES SMTP password by applying AWS's Sigv4 conversion algorithm"
-  value       = try(aws_iam_access_key.this[0].ses_smtp_password_v4, aws_iam_access_key.this_no_pgp[0].ses_smtp_password_v4, "")
+  value       = try(aws_iam_access_key.this_no_pgp[0].ses_smtp_password_v4, "")
   sensitive   = true
+}
+
+output "iam_access_key_encrypted_ses_smtp_password_v4" {
+  description = "The encrypted secret access key converted into an SES SMTP password by applying AWS's Sigv4 conversion algorithm"
+  value       = try(aws_iam_access_key.this[0].encrypted_ses_smtp_password_v4, "")
 }
 
 output "iam_access_key_status" {
@@ -108,6 +113,27 @@ Version: Keybase OpenPGP v2.0.76
 Comment: https://keybase.io/crypto
 
 ${try(aws_iam_access_key.this[0].encrypted_secret, "")}
+-----END PGP MESSAGE-----
+EOF
+
+}
+
+output "keybase_ses_smtp_password_v4_decrypt_command" {
+  description = "Decrypt SES SMTP password command"
+  value       = !local.has_encrypted_secret ? null : <<EOF
+echo "${try(aws_iam_access_key.this[0].encrypted_ses_smtp_password_v4, "")}" | base64 --decode | keybase pgp decrypt
+EOF
+
+}
+
+output "keybase_ses_smtp_password_v4_pgp_message" {
+  description = "Encrypted SES SMTP password"
+  value       = !local.has_encrypted_secret ? null : <<EOF
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.76
+Comment: https://keybase.io/crypto
+
+${try(aws_iam_access_key.this[0].encrypted_ses_smtp_password_v4, "")}
 -----END PGP MESSAGE-----
 EOF
 
