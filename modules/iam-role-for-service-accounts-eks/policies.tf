@@ -523,6 +523,7 @@ data "aws_iam_policy_document" "karpenter_controller" {
       "ec2:CreateFleet",
       "ec2:CreateTags",
       "ec2:DescribeLaunchTemplates",
+      "ec2:DescribeImages",
       "ec2:DescribeInstances",
       "ec2:DescribeSecurityGroups",
       "ec2:DescribeSubnets",
