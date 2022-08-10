@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.3.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.2.0...v5.3.0) (2022-08-10)
+
+
+### Features
+
+* Add additional permission for `karpenter` IAM policy added in v0.14.0 release ([#264](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/264)) ([bce17b2](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/bce17b240f79121660d0a84ac0c161dd3806d3e6))
+
 ## [5.2.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.1.0...v5.2.0) (2022-06-27)
 
 
