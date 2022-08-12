@@ -172,43 +172,20 @@ data "aws_iam_policy_document" "ebs_csi" {
 
     condition {
       test     = "StringLike"
+      variable = "aws:RequestTag/CSIVolumeName"
+      values   = ["*"]
+    }
+    condition {
+      test     = "StringLike"
       variable = "aws:RequestTag/ebs.csi.aws.com/cluster"
       values = [
         true
       ]
     }
-  }
-
-  statement {
-    actions   = ["ec2:CreateVolume"]
-    resources = ["*"]
-
     condition {
       test     = "StringLike"
-      variable = "aws:RequestTag/CSIVolumeName"
-      values   = ["*"]
-    }
-  }
-
-  statement {
-    actions   = ["ec2:CreateVolume"]
-    resources = ["*"]
-
-    condition {
-      test     = "StringLike"
-      variable = "aws:RequestTag/kubernetes.io/cluster/*"
+      variable = "aws:RequestTag/kubernetes.io/cluster/${var.cluster_id}"
       values   = ["owned"]
-    }
-  }
-
-  statement {
-    actions   = ["ec2:DeleteVolume"]
-    resources = ["*"]
-
-    condition {
-      test     = "StringLike"
-      variable = "ec2:ResourceTag/ebs.csi.aws.com/cluster"
-      values   = [true]
     }
   }
 
@@ -221,15 +198,14 @@ data "aws_iam_policy_document" "ebs_csi" {
       variable = "ec2:ResourceTag/CSIVolumeName"
       values   = ["*"]
     }
-  }
-
-  statement {
-    actions   = ["ec2:DeleteVolume"]
-    resources = ["*"]
-
     condition {
       test     = "StringLike"
-      variable = "ec2:ResourceTag/kubernetes.io/cluster/*"
+      variable = "ec2:ResourceTag/ebs.csi.aws.com/cluster"
+      values   = [true]
+    }
+    condition {
+      test     = "StringLike"
+      variable = "ec2:ResourceTag/kubernetes.io/cluster/${var.cluster_id}"
       values   = ["owned"]
     }
   }
@@ -243,16 +219,15 @@ data "aws_iam_policy_document" "ebs_csi" {
       variable = "ec2:ResourceTag/CSIVolumeSnapshotName"
       values   = ["*"]
     }
-  }
-
-  statement {
-    actions   = ["ec2:DeleteSnapshot"]
-    resources = ["*"]
-
     condition {
       test     = "StringLike"
       variable = "ec2:ResourceTag/ebs.csi.aws.com/cluster"
       values   = [true]
+    }
+    condition {
+      test     = "StringLike"
+      variable = "ec2:ResourceTag/kubernetes.io/cluster/${var.cluster_id}"
+      values   = ["owned"]
     }
   }
 

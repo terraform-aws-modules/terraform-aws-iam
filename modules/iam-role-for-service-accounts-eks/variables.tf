@@ -295,3 +295,8 @@ variable "node_termination_handler_sqs_queue_arns" {
   type        = list(string)
   default     = ["*"]
 }
+
+variable "cluster_id" {
+  description = "The EKS Cluster ID"
+  type        = string
+}
