@@ -63,6 +63,7 @@ data "aws_iam_policy_document" "cluster_autoscaler" {
 
   statement {
     actions = [
+      "autoscaling:SetDesiredCapacity",
       "autoscaling:DescribeAutoScalingGroups",
       "autoscaling:DescribeAutoScalingInstances",
       "autoscaling:DescribeLaunchConfigurations",
