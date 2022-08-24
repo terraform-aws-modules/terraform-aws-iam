@@ -16,6 +16,10 @@ resource "aws_iam_user_login_profile" "this" {
   pgp_key                 = var.pgp_key
   password_length         = var.password_length
   password_reset_required = var.password_reset_required
+
+  lifecycle {
+    ignore_changes = [password_reset_required]
+  }
 }
 
 resource "aws_iam_access_key" "this" {
