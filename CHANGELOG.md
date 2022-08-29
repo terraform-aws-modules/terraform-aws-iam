@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.3.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.3.0...v5.3.1) (2022-08-25)
+
+
+### Bug Fixes
+
+* Don't force users to reset passwords in modules/iam-user ([#271](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/271)) ([358f7d4](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/358f7d438d033df9f463b518ef229333f1027bf6))
+
 ## [5.3.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.2.0...v5.3.0) (2022-08-10)
 
 
