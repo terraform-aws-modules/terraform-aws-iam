@@ -536,22 +536,18 @@ data "aws_iam_policy_document" "karpenter_controller" {
       "pricing:GetProducts",
       "ssm:GetParameter",
     ]
-
-    resources = ["*"]
   }
 
   statement {
-    actions = [
-      "ec2:TerminateInstances",
-      "ec2:DeleteLaunchTemplate",
-    ]
-
+    sid       = "ConditionalEC2Termination"
+    effect    = "Allow"
     resources = ["*"]
+    actions   = ["ec2:TerminateInstances"]
 
     condition {
-      test     = "StringEquals"
-      variable = "ec2:ResourceTag/${var.karpenter_tag_key}"
-      values   = [var.karpenter_controller_cluster_id]
+      test     = "StringLike"
+      variable = "ec2:ResourceTag/Name"
+      values   = ["*karpenter*"]
     }
   }
 
