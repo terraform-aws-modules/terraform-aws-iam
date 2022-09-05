@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.3.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.3.1...v5.3.2) (2022-09-05)
+
+
+### Bug Fixes
+
+* Correct encrypted ses_smtp_password_v4 output ([#259](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/259)) ([ff9d783](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/ff9d783fffb74e47bfc1b65fff1c5c0e64a8b006))
+
 ### [5.3.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.3.0...v5.3.1) (2022-08-25)
 
 
