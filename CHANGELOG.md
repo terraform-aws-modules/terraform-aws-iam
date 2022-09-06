@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.3.3](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.3.2...v5.3.3) (2022-09-06)
+
+
+### Bug Fixes
+
+* Fixed iam-user module when `encrypted_ses_smtp_password_v4` is `null` ([#275](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/275)) ([936d0f1](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/936d0f108606dd380691c9bb4bdce8c511df5246))
+
 ### [5.3.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.3.1...v5.3.2) (2022-09-05)
 
 
