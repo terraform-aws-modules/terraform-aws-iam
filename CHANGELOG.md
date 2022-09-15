@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.4.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.3.3...v5.4.0) (2022-09-15)
+
+
+### Features
+
+* Add support for spot request permissions with Karpenter IRSA role ([#277](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/277)) ([b3b99d9](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/b3b99d95bd31462b6fb94a1d6db9a12ef46e00f4))
+
 ### [5.3.3](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.3.2...v5.3.3) (2022-09-06)
 
 
