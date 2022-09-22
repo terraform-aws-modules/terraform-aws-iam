@@ -41,7 +41,7 @@ No modules.
 | <a name="input_aws_account_id"></a> [aws\_account\_id](#input\_aws\_account\_id) | The AWS account ID where the OIDC provider lives, leave empty to use the account for the AWS provider | `string` | `""` | no |
 | <a name="input_create_role"></a> [create\_role](#input\_create\_role) | Whether to create a role | `bool` | `false` | no |
 | <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies) | Whether policies should be detached from this role when destroying | `bool` | `false` | no |
-| <a name="explicit_permission_to_assume_self"></a> [explicit\_permission\_to\_assume\_self](#input\_explicit\_permission\_to\_assume\_self) | "Whether the role Trusted Policy should allow the role to assume itself | `bool` | `false` | no |
+| <a name="explicit_permission_to_assume_self"></a> [explicit\_permission\_to\_assume\_self](#input\_explicit\_permission\_to\_assume\_self) | Whether the role Trusted Policy should allow the role to assume itself | `bool` | `false` | no |
 | <a name="input_max_session_duration"></a> [max\_session\_duration](#input\_max\_session\_duration) | Maximum CLI/API session duration in seconds between 3600 and 43200 | `number` | `3600` | no |
 | <a name="input_number_of_role_policy_arns"></a> [number\_of\_role\_policy\_arns](#input\_number\_of\_role\_policy\_arns) | Number of IAM policies to attach to IAM role | `number` | `null` | no |
 | <a name="input_oidc_fully_qualified_audiences"></a> [oidc\_fully\_qualified\_audiences](#input\_oidc\_fully\_qualified\_audiences) | The audience to be added to the role policy. Set to sts.amazonaws.com for cross-account assumable role. Leave empty otherwise. | `set(string)` | `[]` | no |
