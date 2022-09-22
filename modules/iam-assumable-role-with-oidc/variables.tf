@@ -99,3 +99,9 @@ variable "force_detach_policies" {
   type        = bool
   default     = false
 }
+
+variable "explicit_permission_to_assume_self" {
+  description = "Whether the role Trusted Policy should allow the role to assume itself"
+  type        = bool
+  default     = false
+}

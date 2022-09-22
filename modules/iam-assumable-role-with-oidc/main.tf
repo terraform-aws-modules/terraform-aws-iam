@@ -62,6 +62,28 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
   }
 }
 
+data "aws_iam_policy_document" "assume_self" {
+  count = var.explicit_permission_to_assume_self ? 1 : 0
+
+  statement {
+    actions = [
+      "sts:AssumeRole",
+    ]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${var.role_name}"]
+    }
+  }
+}
+
+data "aws_iam_policy_document" "combined" {
+  source_policy_documents = concat(
+    join("", data.aws_iam_policy_document.assume_role_with_oidc.*.json),
+    var.explicit_permission_to_assume_self ? [data.aws_iam_policy_document.assume_self.json] : []
+  )
+}
+
 resource "aws_iam_role" "this" {
   count = var.create_role ? 1 : 0
 
@@ -74,7 +96,7 @@ resource "aws_iam_role" "this" {
   force_detach_policies = var.force_detach_policies
   permissions_boundary  = var.role_permissions_boundary_arn
 
-  assume_role_policy = join("", data.aws_iam_policy_document.assume_role_with_oidc.*.json)
+  assume_role_policy = data.aws_iam_policy_document.combined.json
 
   tags = var.tags
 }
