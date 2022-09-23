@@ -79,7 +79,7 @@ data "aws_iam_policy_document" "assume_self" {
 
 data "aws_iam_policy_document" "combined" {
   source_policy_documents = concat(
-    try([data.aws_iam_policy_document.assume_role_with_oidc[0].json, [])
+    try([data.aws_iam_policy_document.assume_role_with_oidc[0].json], []),
     try([data.aws_iam_policy_document.assume_self[0].json], [])
   )
 }
