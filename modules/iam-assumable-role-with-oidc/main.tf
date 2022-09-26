@@ -72,7 +72,7 @@ data "aws_iam_policy_document" "assume_self" {
 
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${var.role_name}"]
+      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role${var.role_path}${var.role_name}"]
     }
   }
 }
