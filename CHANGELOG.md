@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.5.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.4.0...v5.5.0) (2022-09-27)
+
+
+### Features
+
+* Add support for roles created to explicitly assume their own role if desired ([#281](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/281)) ([3d29d26](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/3d29d26018550825a79d90a87195b3023311816b))
+
 ## [5.4.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.3.3...v5.4.0) (2022-09-15)
 
 
