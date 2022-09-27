@@ -99,3 +99,9 @@ variable "force_detach_policies" {
   type        = bool
   default     = false
 }
+
+variable "allow_self_assume_role" {
+  description = "Determines whether to allow the role to be [assume itself](https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/)"
+  type        = bool
+  default     = false
+}

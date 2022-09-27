@@ -1,5 +1,4 @@
 data "aws_caller_identity" "current" {}
-
 data "aws_partition" "current" {}
 
 data "aws_eks_cluster" "main" {
@@ -10,11 +9,26 @@ data "aws_eks_cluster" "main" {
 
 data "aws_iam_policy_document" "assume_role_with_oidc" {
   dynamic "statement" {
+    # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
+    for_each = var.allow_self_assume_role ? [1] : []
+
+    content {
+      sid     = "ExplicitSelfRoleAssumption"
+      effect  = "Allow"
+      actions = ["sts:AssumeRole"]
+
+      principals {
+        type        = "AWS"
+        identifiers = ["arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:role${var.role_path}${var.role_name}"]
+      }
+    }
+  }
+
+  dynamic "statement" {
     for_each = var.cluster_service_accounts
 
     content {
-      effect = "Allow"
-
+      effect  = "Allow"
       actions = ["sts:AssumeRoleWithWebIdentity"]
 
       principals {

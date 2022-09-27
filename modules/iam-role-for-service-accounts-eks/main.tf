@@ -1,5 +1,30 @@
+data "aws_partition" "current" {}
+data "aws_caller_identity" "current" {}
+
+locals {
+  account_id = data.aws_caller_identity.current.account_id
+  partition  = data.aws_partition.current.partition
+  dns_suffix = data.aws_partition.current.dns_suffix
+}
+
 data "aws_iam_policy_document" "this" {
   count = var.create_role ? 1 : 0
+
+  dynamic "statement" {
+    # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
+    for_each = var.allow_self_assume_role ? [1] : []
+
+    content {
+      sid     = "ExplicitSelfRoleAssumption"
+      effect  = "Allow"
+      actions = ["sts:AssumeRole"]
+
+      principals {
+        type        = "AWS"
+        identifiers = ["arn:${local.partition}:iam::${local.account_id}:role${var.role_path}${var.role_name}"]
+      }
+    }
+  }
 
   dynamic "statement" {
     for_each = var.oidc_providers
