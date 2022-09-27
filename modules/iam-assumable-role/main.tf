@@ -1,3 +1,6 @@
+data "aws_caller_identity" "current" {}
+data "aws_partition" "current" {}
+
 locals {
   role_sts_externalid = flatten([var.role_sts_externalid])
 }
@@ -5,9 +8,24 @@ locals {
 data "aws_iam_policy_document" "assume_role" {
   count = var.custom_role_trust_policy == "" && var.role_requires_mfa ? 0 : 1
 
-  statement {
-    effect = "Allow"
+  dynamic "statement" {
+    # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
+    for_each = var.allow_self_assume_role ? [1] : []
 
+    content {
+      sid     = "ExplicitSelfRoleAssumption"
+      effect  = "Allow"
+      actions = ["sts:AssumeRole"]
+
+      principals {
+        type        = "AWS"
+        identifiers = ["arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:role${var.role_path}${var.role_name}"]
+      }
+    }
+  }
+
+  statement {
+    effect  = "Allow"
     actions = var.trusted_role_actions
 
     principals {
@@ -34,9 +52,24 @@ data "aws_iam_policy_document" "assume_role" {
 data "aws_iam_policy_document" "assume_role_with_mfa" {
   count = var.custom_role_trust_policy == "" && var.role_requires_mfa ? 1 : 0
 
-  statement {
-    effect = "Allow"
+  dynamic "statement" {
+    # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
+    for_each = var.allow_self_assume_role ? [1] : []
 
+    content {
+      sid     = "ExplicitSelfRoleAssumption"
+      effect  = "Allow"
+      actions = ["sts:AssumeRole"]
+
+      principals {
+        type        = "AWS"
+        identifiers = ["arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:role${var.role_path}${var.role_name}"]
+      }
+    }
+  }
+
+  statement {
+    effect  = "Allow"
     actions = var.trusted_role_actions
 
     principals {

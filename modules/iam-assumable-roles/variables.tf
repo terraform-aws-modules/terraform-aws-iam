@@ -16,6 +16,12 @@ variable "mfa_age" {
   default     = 86400
 }
 
+variable "allow_self_assume_role" {
+  description = "Determines whether to allow the role to be [assume itself](https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/)"
+  type        = bool
+  default     = false
+}
+
 # Admin
 variable "create_admin_role" {
   description = "Whether to create admin role"

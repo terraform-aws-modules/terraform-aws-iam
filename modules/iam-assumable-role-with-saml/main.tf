@@ -1,12 +1,30 @@
+data "aws_caller_identity" "current" {}
+data "aws_partition" "current" {}
+
 locals {
   identifiers                = compact(distinct(concat(var.provider_ids, [var.provider_id])))
   number_of_role_policy_arns = coalesce(var.number_of_role_policy_arns, length(var.role_policy_arns))
 }
 
 data "aws_iam_policy_document" "assume_role_with_saml" {
-  statement {
-    effect = "Allow"
+  dynamic "statement" {
+    # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
+    for_each = var.allow_self_assume_role ? [1] : []
 
+    content {
+      sid     = "ExplicitSelfRoleAssumption"
+      effect  = "Allow"
+      actions = ["sts:AssumeRole"]
+
+      principals {
+        type        = "AWS"
+        identifiers = ["arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:role${var.role_path}${var.role_name}"]
+      }
+    }
+  }
+
+  statement {
+    effect  = "Allow"
     actions = ["sts:AssumeRoleWithSAML"]
 
     principals {
