@@ -1,6 +1,10 @@
 data "aws_caller_identity" "current" {}
 data "aws_partition" "current" {}
 
+locals {
+  role_name_condition = var.role_name != null ? var.role_name : "${var.role_name_prefix}*"
+}
+
 data "aws_iam_policy_document" "assume_role" {
   dynamic "statement" {
     # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
@@ -19,7 +23,7 @@ data "aws_iam_policy_document" "assume_role" {
       condition {
         test     = "ArnLike"
         variable = "aws:PrincipalArn"
-        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.role_path}${var.role_name}"]
+        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.role_path}${var.role_name_condition}"]
       }
     }
   }
@@ -58,7 +62,7 @@ data "aws_iam_policy_document" "assume_role_with_mfa" {
       condition {
         test     = "ArnLike"
         variable = "aws:PrincipalArn"
-        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.role_path}${var.role_name}"]
+        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.role_path}${var.role_name_condition}"]
       }
     }
   }
