@@ -26,7 +26,7 @@ data "aws_iam_policy_document" "assume_role" {
       condition {
         test     = "ArnLike"
         variable = "aws:PrincipalArn"
-        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.role_path}${var.role_name_condition}"]
+        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.role_path}${local.role_name_condition}"]
       }
     }
   }
@@ -76,7 +76,7 @@ data "aws_iam_policy_document" "assume_role_with_mfa" {
       condition {
         test     = "ArnLike"
         variable = "aws:PrincipalArn"
-        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.role_path}${var.role_name_condition}"]
+        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.role_path}${local.role_name_condition}"]
       }
     }
   }
