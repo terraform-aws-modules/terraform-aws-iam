@@ -46,6 +46,12 @@ variable "role_name" {
   default     = ""
 }
 
+variable "role_name_prefix" {
+  description = "IAM role name prefix"
+  type        = string
+  default     = null
+}
+
 variable "role_path" {
   description = "Path of IAM role"
   type        = string
