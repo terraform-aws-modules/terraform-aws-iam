@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_partition" "current" {}
-
 locals {
   identifiers = compact(distinct(concat(var.provider_ids, [var.provider_id])))
 }
