@@ -39,6 +39,9 @@ data "aws_iam_policy_document" "iam_self_management" {
       "iam:UpdateUser",
       "iam:UploadSigningCertificate",
       "iam:UploadSSHPublicKey",
+      "iam:TagUser",
+      "iam:ListUserTags",
+      "iam:UntagUser",
     ]
 
     # Allow for both users with "path" and without it
