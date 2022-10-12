@@ -27,15 +27,20 @@ resource "aws_iam_role" "testAssumeRole" {
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
-  "assumeRolePolicyDocument": {
-			"Version": "2012-10-17",
-			"Statement": [
+  assumeRolePolicyDocument: {
+			Version: "2012-10-17",
+			Statement: [
 				{
-					"Sid": "Statement1",
-					"Action": "sts:AssumeRole",
-					"Effect": "Allow",
-					"Principal": {
-						"AWS": "arn:aws:iam::758313975162:user/Demo1"
+					Sid: Statement1,
+					Action: sts:AssumeRole,
+					Effect: Allow,
+          Condition: {
+						StringEquals: {
+							sts:ExternalId: a633a1be-b9e4-4898-b7dd-c7d7163a9692
+						}
+					},
+					Principal: {
+						AWS: arn:aws:iam::188619942792:root
 					}
 				}
 			]
