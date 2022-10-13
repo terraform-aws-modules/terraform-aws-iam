@@ -1,19 +1,66 @@
-data "aws_caller_identity" "current" {}
-data "aws_partition" "current" {}
-
 data "aws_iam_policy_document" "assume_role" {
   dynamic "statement" {
     # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
-    for_each = var.allow_self_assume_role ? [1] : []
+    for_each = var.allow_self_assume_role && var.create_admin_role ? [1] : []
 
     content {
-      sid     = "ExplicitSelfRoleAssumption"
+      sid     = "ExplicitSelfAdminRoleAssumption"
       effect  = "Allow"
       actions = ["sts:AssumeRole"]
 
       principals {
         type        = "AWS"
-        identifiers = ["arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:role${var.role_path}${var.role_name}"]
+        identifiers = ["*"]
+      }
+
+      condition {
+        test     = "ArnLike"
+        variable = "aws:PrincipalArn"
+        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.admin_role_path}${var.admin_role_name}"]
+      }
+    }
+  }
+
+  dynamic "statement" {
+    # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
+    for_each = var.allow_self_assume_role && var.create_poweruser_role ? [1] : []
+
+    content {
+      sid     = "ExplicitSelfPowerUserRoleAssumption"
+      effect  = "Allow"
+      actions = ["sts:AssumeRole"]
+
+      principals {
+        type        = "AWS"
+        identifiers = ["*"]
+      }
+
+      condition {
+        test     = "ArnLike"
+        variable = "aws:PrincipalArn"
+        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.poweruser_role_path}${var.poweruser_role_name}"]
+      }
+    }
+  }
+
+  dynamic "statement" {
+    # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
+    for_each = var.allow_self_assume_role && var.create_readonly_role ? [1] : []
+
+    content {
+      sid     = "ExplicitSelfReadOnlyRoleAssumption"
+      effect  = "Allow"
+      actions = ["sts:AssumeRole"]
+
+      principals {
+        type        = "AWS"
+        identifiers = ["*"]
+      }
+
+      condition {
+        test     = "ArnLike"
+        variable = "aws:PrincipalArn"
+        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.readonly_role_path}${var.readonly_role_name}"]
       }
     }
   }
@@ -37,16 +84,66 @@ data "aws_iam_policy_document" "assume_role" {
 data "aws_iam_policy_document" "assume_role_with_mfa" {
   dynamic "statement" {
     # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
-    for_each = var.allow_self_assume_role ? [1] : []
+    for_each = var.allow_self_assume_role && var.create_admin_role ? [1] : []
 
     content {
-      sid     = "ExplicitSelfRoleAssumption"
+      sid     = "ExplicitSelfAdminRoleAssumption"
       effect  = "Allow"
       actions = ["sts:AssumeRole"]
 
       principals {
         type        = "AWS"
-        identifiers = ["arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:role${var.role_path}${var.role_name}"]
+        identifiers = ["*"]
+      }
+
+      condition {
+        test     = "ArnLike"
+        variable = "aws:PrincipalArn"
+        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.admin_role_path}${var.admin_role_name}"]
+      }
+    }
+  }
+
+  dynamic "statement" {
+    # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
+    for_each = var.allow_self_assume_role && var.create_poweruser_role ? [1] : []
+
+    content {
+      sid     = "ExplicitSelfPowerUserRoleAssumption"
+      effect  = "Allow"
+      actions = ["sts:AssumeRole"]
+
+      principals {
+        type        = "AWS"
+        identifiers = ["*"]
+      }
+
+      condition {
+        test     = "ArnLike"
+        variable = "aws:PrincipalArn"
+        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.poweruser_role_path}${var.poweruser_role_name}"]
+      }
+    }
+  }
+
+  dynamic "statement" {
+    # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
+    for_each = var.allow_self_assume_role && var.create_readonly_role ? [1] : []
+
+    content {
+      sid     = "ExplicitSelfReadOnlyRoleAssumption"
+      effect  = "Allow"
+      actions = ["sts:AssumeRole"]
+
+      principals {
+        type        = "AWS"
+        identifiers = ["*"]
+      }
+
+      condition {
+        test     = "ArnLike"
+        variable = "aws:PrincipalArn"
+        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.readonly_role_path}${var.readonly_role_name}"]
       }
     }
   }

@@ -1,9 +1,7 @@
-data "aws_caller_identity" "current" {}
-data "aws_partition" "current" {}
-
 locals {
   identifiers                = compact(distinct(concat(var.provider_ids, [var.provider_id])))
   number_of_role_policy_arns = coalesce(var.number_of_role_policy_arns, length(var.role_policy_arns))
+  role_name_condition        = var.role_name != null ? var.role_name : "${var.role_name_prefix}*"
 }
 
 data "aws_iam_policy_document" "assume_role_with_saml" {
@@ -18,7 +16,13 @@ data "aws_iam_policy_document" "assume_role_with_saml" {
 
       principals {
         type        = "AWS"
-        identifiers = ["arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:role${var.role_path}${var.role_name}"]
+        identifiers = ["*"]
+      }
+
+      condition {
+        test     = "ArnLike"
+        variable = "aws:PrincipalArn"
+        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.role_path}${local.role_name_condition}"]
       }
     }
   }

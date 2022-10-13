@@ -13,7 +13,7 @@ variable "role_name" {
 variable "role_path" {
   description = "Path of IAM role"
   type        = string
-  default     = null
+  default     = "/"
 }
 
 variable "role_permissions_boundary_arn" {

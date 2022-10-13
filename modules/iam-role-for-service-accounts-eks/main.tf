@@ -2,9 +2,10 @@ data "aws_partition" "current" {}
 data "aws_caller_identity" "current" {}
 
 locals {
-  account_id = data.aws_caller_identity.current.account_id
-  partition  = data.aws_partition.current.partition
-  dns_suffix = data.aws_partition.current.dns_suffix
+  account_id          = data.aws_caller_identity.current.account_id
+  partition           = data.aws_partition.current.partition
+  dns_suffix          = data.aws_partition.current.dns_suffix
+  role_name_condition = var.role_name != null ? var.role_name : "${var.role_name_prefix}*"
 }
 
 data "aws_iam_policy_document" "this" {
@@ -21,7 +22,13 @@ data "aws_iam_policy_document" "this" {
 
       principals {
         type        = "AWS"
-        identifiers = ["arn:${local.partition}:iam::${local.account_id}:role${var.role_path}${var.role_name}"]
+        identifiers = ["*"]
+      }
+
+      condition {
+        test     = "ArnLike"
+        variable = "aws:PrincipalArn"
+        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.role_path}${local.role_name_condition}"]
       }
     }
   }
