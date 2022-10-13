@@ -57,5 +57,4 @@ No modules.
 | <a name="output_group_arn"></a> [group\_arn](#output\_group\_arn) | IAM group arn |
 | <a name="output_group_name"></a> [group\_name](#output\_group\_name) | IAM group name |
 | <a name="output_group_users"></a> [group\_users](#output\_group\_users) | List of IAM users in IAM group |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

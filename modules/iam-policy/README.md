@@ -47,5 +47,4 @@ No modules.
 | <a name="output_name"></a> [name](#output\_name) | The name of the policy |
 | <a name="output_path"></a> [path](#output\_path) | The path of the policy in IAM |
 | <a name="output_policy"></a> [policy](#output\_policy) | The policy document |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

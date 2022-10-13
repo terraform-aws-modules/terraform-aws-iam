@@ -59,5 +59,4 @@ No modules.
 | <a name="output_path"></a> [path](#output\_path) | The path of the policy in IAM |
 | <a name="output_policy"></a> [policy](#output\_policy) | The policy document |
 | <a name="output_policy_json"></a> [policy\_json](#output\_policy\_json) | Policy document as json. Useful if you need document but do not want to create IAM policy itself. For example for SSO Permission Set inline policies |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
