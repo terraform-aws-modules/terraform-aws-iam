@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.5.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.5.1...v5.5.2) (2022-10-13)
+
+
+### Bug Fixes
+
+* Explicitly assume with condition matching role arn ([#283](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/283)) ([470b6ff](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/470b6ffa8e2888dd2699c1fce6010704dda5e2b3))
+
 ### [5.5.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.5.0...v5.5.1) (2022-10-12)
 
 
