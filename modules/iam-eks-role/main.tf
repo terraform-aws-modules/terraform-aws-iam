@@ -3,10 +3,15 @@ data "aws_partition" "current" {}
 
 locals {
   role_name_condition = var.role_name != null ? var.role_name : "${var.role_name_prefix}*"
+
+  eks_cluster_names = toset(distinct(concat(
+    keys(var.cluster_service_accounts),
+    keys(var.cluster_service_accounts_with_wildcards)
+  )))
 }
 
 data "aws_eks_cluster" "main" {
-  for_each = var.cluster_service_accounts
+  for_each = local.eks_cluster_names
 
   name = each.key
 }
@@ -51,6 +56,29 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
 
       condition {
         test     = "StringEquals"
+        variable = "${replace(data.aws_eks_cluster.main[statement.key].identity[0].oidc[0].issuer, "https://", "")}:sub"
+        values   = [for s in statement.value : "system:serviceaccount:${s}"]
+      }
+    }
+  }
+
+  dynamic "statement" {
+    for_each = var.cluster_service_accounts_with_wildcards
+
+    content {
+      effect  = "Allow"
+      actions = ["sts:AssumeRoleWithWebIdentity"]
+
+      principals {
+        type = "Federated"
+
+        identifiers = [
+          "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${replace(data.aws_eks_cluster.main[statement.key].identity[0].oidc[0].issuer, "https://", "")}"
+        ]
+      }
+
+      condition {
+        test     = "StringLike"
         variable = "${replace(data.aws_eks_cluster.main[statement.key].identity[0].oidc[0].issuer, "https://", "")}:sub"
         values   = [for s in statement.value : "system:serviceaccount:${s}"]
       }

@@ -46,6 +46,12 @@ variable "cluster_service_accounts" {
   default     = {}
 }
 
+variable "cluster_service_accounts_with_wildcards" {
+  description = "EKS cluster and k8s ServiceAccount pairs. Each EKS cluster can have multiple k8s ServiceAccount. See README for details"
+  type        = map(list(string))
+  default     = {}
+}
+
 variable "tags" {
   description = "A map of tags to add the the IAM role"
   type        = map(any)
