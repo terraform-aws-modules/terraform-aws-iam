@@ -19,6 +19,27 @@ module "iam_eks_role" {
   }
 }
 
+###############################
+# IAM EKS role with self assume
+###############################
+module "iam_eks_role_with_self_assume" {
+  source    = "../../modules/iam-eks-role"
+  role_name = "my-app-self-assume"
+
+  allow_self_assume_role = true
+  cluster_service_accounts = {
+    (random_pet.this.id) = ["default:my-app"]
+  }
+
+  tags = {
+    Name = "eks-role"
+  }
+
+  role_policy_arns = {
+    AmazonEKS_CNI_Policy = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+  }
+}
+
 ##################
 # Extra resources
 ##################
