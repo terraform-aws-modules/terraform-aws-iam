@@ -1,5 +1,5 @@
 locals {
-  group_name = element(concat(aws_iam_group.this.*.id, [var.name]), 0)
+  group_name = var.create_group ? aws_iam_group.this[0].id : var.name
 }
 
 resource "aws_iam_group" "this" {
@@ -37,7 +37,7 @@ resource "aws_iam_group_policy_attachment" "custom" {
   count = length(var.custom_group_policies)
 
   group      = local.group_name
-  policy_arn = element(aws_iam_policy.custom.*.arn, count.index)
+  policy_arn = element(aws_iam_policy.custom[*].arn, count.index)
 }
 
 ###############
