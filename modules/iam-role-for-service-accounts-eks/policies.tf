@@ -547,7 +547,6 @@ data "aws_iam_policy_document" "karpenter_controller" {
     actions = ["ec2:RunInstances"]
     resources = [
       "arn:${local.partition}:ec2:*:${local.account_id}:launch-template/*",
-      "arn:${local.partition}:ec2:*:${local.account_id}:security-group/*",
     ]
 
     condition {
@@ -563,6 +562,7 @@ data "aws_iam_policy_document" "karpenter_controller" {
       "arn:${local.partition}:ec2:*::image/*",
       "arn:${local.partition}:ec2:*:${local.account_id}:instance/*",
       "arn:${local.partition}:ec2:*:${local.account_id}:spot-instances-request/*",
+      "arn:${local.partition}:ec2:*:${local.account_id}:security-group/*",
       "arn:${local.partition}:ec2:*:${local.account_id}:volume/*",
       "arn:${local.partition}:ec2:*:${local.account_id}:network-interface/*",
       "arn:${local.partition}:ec2:*:${coalesce(var.karpenter_subnet_account_id, local.account_id)}:subnet/*",

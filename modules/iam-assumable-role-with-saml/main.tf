@@ -70,6 +70,6 @@ resource "aws_iam_role" "this" {
 resource "aws_iam_role_policy_attachment" "custom" {
   count = var.create_role ? local.number_of_role_policy_arns : 0
 
-  role       = join("", aws_iam_role.this.*.name)
+  role       = aws_iam_role.this[0].name
   policy_arn = var.role_policy_arns[count.index]
 }

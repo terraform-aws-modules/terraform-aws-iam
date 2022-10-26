@@ -5,14 +5,8 @@ data "aws_caller_identity" "current" {
 data "aws_partition" "current" {}
 
 locals {
-  aws_account_id = element(
-    concat(
-      data.aws_caller_identity.current.*.account_id,
-      [var.aws_account_id],
-    ),
-    0,
-  )
-  partition = data.aws_partition.current.partition
+  aws_account_id = try(data.aws_caller_identity.current[0].account_id, var.aws_account_id)
+  partition      = data.aws_partition.current.partition
 }
 
 data "aws_iam_policy_document" "iam_self_management" {
