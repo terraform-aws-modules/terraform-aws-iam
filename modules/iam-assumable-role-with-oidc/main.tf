@@ -95,7 +95,7 @@ resource "aws_iam_role" "this" {
   force_detach_policies = var.force_detach_policies
   permissions_boundary  = var.role_permissions_boundary_arn
 
-  assume_role_policy = join("", data.aws_iam_policy_document.assume_role_with_oidc.*.json)
+  assume_role_policy = data.aws_iam_policy_document.assume_role_with_oidc[0].json
 
   tags = var.tags
 }
@@ -103,6 +103,6 @@ resource "aws_iam_role" "this" {
 resource "aws_iam_role_policy_attachment" "custom" {
   count = var.create_role ? local.number_of_role_policy_arns : 0
 
-  role       = join("", aws_iam_role.this.*.name)
+  role       = aws_iam_role.this[0].name
   policy_arn = var.role_policy_arns[count.index]
 }
