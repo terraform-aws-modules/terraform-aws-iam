@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.5.4](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.5.3...v5.5.4) (2022-10-26)
+
+
+### Bug Fixes
+
+* Insufficient permissions for karpenter policy when not using karpenter discovery tags on security group ([#294](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/294)) ([5ad496b](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/5ad496bebb49c4a0f3d07b52074a8adfa1134218))
+
 ### [5.5.3](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.5.2...v5.5.3) (2022-10-26)
 
 
