@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.5.3](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.5.2...v5.5.3) (2022-10-26)
+
+
+### Bug Fixes
+
+* Correct tflint errors for latest version of tflint ([#296](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/296)) ([b40ade4](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/b40ade467bff316f25220eccb5f641d4e1c716ba))
+
 ### [5.5.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.5.1...v5.5.2) (2022-10-13)
 
 
