@@ -46,6 +46,12 @@ variable "role_name" {
   default     = ""
 }
 
+variable "role_name_prefix" {
+  description = "IAM role name prefix"
+  type        = string
+  default     = null
+}
+
 variable "role_path" {
   description = "Path of IAM role"
   type        = string
@@ -141,4 +147,10 @@ variable "role_sts_externalid" {
   description = "STS ExternalId condition values to use with a role (when MFA is not required)"
   type        = any
   default     = []
+}
+
+variable "allow_self_assume_role" {
+  description = "Determines whether to allow the role to be [assume itself](https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/)"
+  type        = bool
+  default     = false
 }

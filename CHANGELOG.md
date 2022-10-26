@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.5.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.5.1...v5.5.2) (2022-10-13)
+
+
+### Bug Fixes
+
+* Explicitly assume with condition matching role arn ([#283](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/283)) ([470b6ff](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/470b6ffa8e2888dd2699c1fce6010704dda5e2b3))
+
+### [5.5.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.5.0...v5.5.1) (2022-10-12)
+
+
+### Bug Fixes
+
+* Allow TagUser to SelfManagement policy ([#287](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/287)) ([87624b6](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/87624b69f9494d3507f83a57d14d4e0494f08d9e))
+
+## [5.5.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.4.0...v5.5.0) (2022-09-27)
+
+
+### Features
+
+* Add support for roles created to explicitly assume their own role if desired ([#281](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/281)) ([3d29d26](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/3d29d26018550825a79d90a87195b3023311816b))
+
 ## [5.4.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.3.3...v5.4.0) (2022-09-15)
 
 

@@ -1,7 +1,72 @@
 data "aws_iam_policy_document" "assume_role" {
-  statement {
-    effect = "Allow"
+  dynamic "statement" {
+    # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
+    for_each = var.allow_self_assume_role && var.create_admin_role ? [1] : []
 
+    content {
+      sid     = "ExplicitSelfAdminRoleAssumption"
+      effect  = "Allow"
+      actions = ["sts:AssumeRole"]
+
+      principals {
+        type        = "AWS"
+        identifiers = ["*"]
+      }
+
+      condition {
+        test     = "ArnLike"
+        variable = "aws:PrincipalArn"
+        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.admin_role_path}${var.admin_role_name}"]
+      }
+    }
+  }
+
+  dynamic "statement" {
+    # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
+    for_each = var.allow_self_assume_role && var.create_poweruser_role ? [1] : []
+
+    content {
+      sid     = "ExplicitSelfPowerUserRoleAssumption"
+      effect  = "Allow"
+      actions = ["sts:AssumeRole"]
+
+      principals {
+        type        = "AWS"
+        identifiers = ["*"]
+      }
+
+      condition {
+        test     = "ArnLike"
+        variable = "aws:PrincipalArn"
+        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.poweruser_role_path}${var.poweruser_role_name}"]
+      }
+    }
+  }
+
+  dynamic "statement" {
+    # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
+    for_each = var.allow_self_assume_role && var.create_readonly_role ? [1] : []
+
+    content {
+      sid     = "ExplicitSelfReadOnlyRoleAssumption"
+      effect  = "Allow"
+      actions = ["sts:AssumeRole"]
+
+      principals {
+        type        = "AWS"
+        identifiers = ["*"]
+      }
+
+      condition {
+        test     = "ArnLike"
+        variable = "aws:PrincipalArn"
+        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.readonly_role_path}${var.readonly_role_name}"]
+      }
+    }
+  }
+
+  statement {
+    effect  = "Allow"
     actions = ["sts:AssumeRole"]
 
     principals {
@@ -17,9 +82,74 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 data "aws_iam_policy_document" "assume_role_with_mfa" {
-  statement {
-    effect = "Allow"
+  dynamic "statement" {
+    # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
+    for_each = var.allow_self_assume_role && var.create_admin_role ? [1] : []
 
+    content {
+      sid     = "ExplicitSelfAdminRoleAssumption"
+      effect  = "Allow"
+      actions = ["sts:AssumeRole"]
+
+      principals {
+        type        = "AWS"
+        identifiers = ["*"]
+      }
+
+      condition {
+        test     = "ArnLike"
+        variable = "aws:PrincipalArn"
+        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.admin_role_path}${var.admin_role_name}"]
+      }
+    }
+  }
+
+  dynamic "statement" {
+    # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
+    for_each = var.allow_self_assume_role && var.create_poweruser_role ? [1] : []
+
+    content {
+      sid     = "ExplicitSelfPowerUserRoleAssumption"
+      effect  = "Allow"
+      actions = ["sts:AssumeRole"]
+
+      principals {
+        type        = "AWS"
+        identifiers = ["*"]
+      }
+
+      condition {
+        test     = "ArnLike"
+        variable = "aws:PrincipalArn"
+        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.poweruser_role_path}${var.poweruser_role_name}"]
+      }
+    }
+  }
+
+  dynamic "statement" {
+    # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
+    for_each = var.allow_self_assume_role && var.create_readonly_role ? [1] : []
+
+    content {
+      sid     = "ExplicitSelfReadOnlyRoleAssumption"
+      effect  = "Allow"
+      actions = ["sts:AssumeRole"]
+
+      principals {
+        type        = "AWS"
+        identifiers = ["*"]
+      }
+
+      condition {
+        test     = "ArnLike"
+        variable = "aws:PrincipalArn"
+        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.readonly_role_path}${var.readonly_role_name}"]
+      }
+    }
+  }
+
+  statement {
+    effect  = "Allow"
     actions = ["sts:AssumeRole"]
 
     principals {

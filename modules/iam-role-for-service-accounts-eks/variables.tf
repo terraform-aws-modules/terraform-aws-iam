@@ -13,7 +13,7 @@ variable "role_name" {
 variable "role_path" {
   description = "Path of IAM role"
   type        = string
-  default     = null
+  default     = "/"
 }
 
 variable "role_permissions_boundary_arn" {
@@ -74,6 +74,12 @@ variable "assume_role_condition_test" {
   description = "Name of the [IAM condition operator](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html) to evaluate when assuming the role"
   type        = string
   default     = "StringEquals"
+}
+
+variable "allow_self_assume_role" {
+  description = "Determines whether to allow the role to be [assume itself](https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/)"
+  type        = bool
+  default     = false
 }
 
 ################################################################################

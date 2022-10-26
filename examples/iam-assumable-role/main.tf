@@ -8,6 +8,9 @@ provider "aws" {
 module "iam_assumable_role_admin" {
   source = "../../modules/iam-assumable-role"
 
+  # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
+  allow_self_assume_role = true
+
   trusted_role_arns = [
     "arn:aws:iam::307990089504:root",
     "arn:aws:iam::835367859851:user/anton",
@@ -125,16 +128,6 @@ data "aws_iam_policy_document" "custom_trust_policy" {
     principals {
       type        = "AWS"
       identifiers = ["*"]
-    }
-  }
-
-  statement {
-    effect  = "Deny"
-    actions = ["sts:AssumeRole"]
-
-    principals {
-      type        = "AWS"
-      identifiers = ["arn:aws:iam::111111111111:root"]
     }
   }
 }
