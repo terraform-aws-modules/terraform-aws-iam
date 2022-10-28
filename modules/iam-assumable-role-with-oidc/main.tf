@@ -7,6 +7,7 @@ locals {
   ]
   number_of_role_policy_arns = coalesce(var.number_of_role_policy_arns, length(var.role_policy_arns))
   role_name_condition        = var.role_name != null ? var.role_name : "${var.role_name_prefix}*"
+  partition                  = data.aws_partition.current
 }
 
 data "aws_caller_identity" "current" {}
@@ -32,7 +33,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
       condition {
         test     = "ArnLike"
         variable = "aws:PrincipalArn"
-        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.role_path}${local.role_name_condition}"]
+        values   = ["arn:${local.partition}:iam::${local.aws_account_id}:role${var.role_path}${local.role_name_condition}"]
       }
     }
   }
@@ -47,7 +48,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
       principals {
         type = "Federated"
 
-        identifiers = ["arn:${data.aws_partition.current.partition}:iam::${local.aws_account_id}:oidc-provider/${statement.value}"]
+        identifiers = ["arn:${local.partition}:iam::${local.aws_account_id}:oidc-provider/${statement.value}"]
       }
 
       dynamic "condition" {
