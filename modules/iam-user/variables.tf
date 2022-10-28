@@ -16,6 +16,24 @@ variable "create_iam_access_key" {
   default     = true
 }
 
+variable "create_iam_policies" {
+  description = "Whether to create IAM policies"
+  type        = bool
+  default     = false
+}
+
+variable "iam_policies" {
+  description = "Maps of IAM policies to be created. The Values are passed through to the aws_iam_policy"
+  type        = map(any)
+  default     = {}
+}
+
+variable "attach_iam_arn_policies" {
+  description = "List of existing IAM ARN policies to be attached."
+  type        = list(any)
+  default     = []
+}
+
 variable "name" {
   description = "Desired name for the IAM user"
   type        = string

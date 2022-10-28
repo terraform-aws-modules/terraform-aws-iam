@@ -43,3 +43,33 @@ resource "aws_iam_user_ssh_key" "this" {
   encoding   = var.ssh_key_encoding
   public_key = var.ssh_public_key
 }
+
+resource "aws_iam_policy" "this" {
+  for_each = {
+    for key, values in var.iam_policies : key => values
+    if var.create_iam_policies && length(var.iam_policies) > 0
+  }
+
+  name        = each.key
+  name_prefix = lookup(each.value, "name_prefix", null)
+  path        = lookup(each.value, "path", null)
+  description = lookup(each.value, "description", null)
+
+  policy = each.value.policy
+
+  tags = lookup(each.value, "tags", null)
+}
+
+resource "aws_iam_user_policy_attachment" "created_iam_policies" {
+  for_each = aws_iam_policy.this
+
+  user       = aws_iam_user.this[0].name
+  policy_arn = each.value.arn
+}
+
+resource "aws_iam_user_policy_attachment" "existing_iam_policies" {
+  for_each = toset(var.attach_iam_arn_policies)
+
+  user       = aws_iam_user.this[0].name
+  policy_arn = each.value
+}
