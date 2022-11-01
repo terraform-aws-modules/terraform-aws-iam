@@ -1,5 +1,6 @@
 locals {
   aws_account_id = var.aws_account_id != "" ? var.aws_account_id : data.aws_caller_identity.current.account_id
+  partition      = data.aws_partition.current.partition
   # clean URLs of https:// prefix
   urls = [
     for url in compact(distinct(concat(var.provider_urls, [var.provider_url]))) :
@@ -32,7 +33,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
       condition {
         test     = "ArnLike"
         variable = "aws:PrincipalArn"
-        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.role_path}${local.role_name_condition}"]
+        values   = ["arn:${local.partition}:iam::${data.aws_caller_identity.current.account_id}:role${var.role_path}${local.role_name_condition}"]
       }
     }
   }
