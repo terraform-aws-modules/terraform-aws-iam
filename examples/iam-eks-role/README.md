@@ -36,13 +36,14 @@ Run `terraform destroy` when you don't need these resources.
 |------|--------|---------|
 | <a name="module_eks"></a> [eks](#module\_eks) | terraform-aws-modules/eks/aws | ~> 18.0 |
 | <a name="module_iam_eks_role"></a> [iam\_eks\_role](#module\_iam\_eks\_role) | ../../modules/iam-eks-role | n/a |
+| <a name="module_iam_eks_role_with_self_assume"></a> [iam\_eks\_role\_with\_self\_assume](#module\_iam\_eks\_role\_with\_self\_assume) | ../../modules/iam-eks-role | n/a |
 
 ## Resources
 
 | Name | Type |
 |------|------|
 | [random_pet.this](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/pet) | resource |
-| [aws_subnet_ids.all](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnet_ids) | data source |
+| [aws_subnets.all](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnets) | data source |
 | [aws_vpc.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) | data source |
 
 ## Inputs

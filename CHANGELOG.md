@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.5.5](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.5.4...v5.5.5) (2022-11-01)
+
+
+### Bug Fixes
+
+* Add missing locals in iam-assumable-role module ([#290](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/290)) ([8af6d28](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/8af6d284ad1c22b54783828888469e2edb43b04a))
+
 ### [5.5.4](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.5.3...v5.5.4) (2022-10-26)
 
 

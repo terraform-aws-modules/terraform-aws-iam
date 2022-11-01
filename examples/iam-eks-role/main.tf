@@ -19,6 +19,27 @@ module "iam_eks_role" {
   }
 }
 
+###############################
+# IAM EKS role with self assume
+###############################
+module "iam_eks_role_with_self_assume" {
+  source    = "../../modules/iam-eks-role"
+  role_name = "my-app-self-assume"
+
+  allow_self_assume_role = true
+  cluster_service_accounts = {
+    (random_pet.this.id) = ["default:my-app"]
+  }
+
+  tags = {
+    Name = "eks-role"
+  }
+
+  role_policy_arns = {
+    AmazonEKS_CNI_Policy = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+  }
+}
+
 ##################
 # Extra resources
 ##################
@@ -35,7 +56,7 @@ module "eks" {
   cluster_version = "1.21"
 
   vpc_id     = data.aws_vpc.default.id
-  subnet_ids = data.aws_subnet_ids.all.ids
+  subnet_ids = data.aws_subnets.all.ids
 }
 
 ##################################################################
@@ -46,6 +67,9 @@ data "aws_vpc" "default" {
   default = true
 }
 
-data "aws_subnet_ids" "all" {
-  vpc_id = data.aws_vpc.default.id
+data "aws_subnets" "all" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.default.id]
+  }
 }
