@@ -7,6 +7,7 @@ Creates an IAM role that can be assumed by one or more EKS `ServiceAccount` in o
 - Support multiple `ServiceAccount` in the same cluster, for example when a workload runs in multiple namespaces
 - More suitable for non-cluster admins as implementation is simpler
 - More suitable for when the IAM role and cluster resources are in separate Terraform configurations
+- Does not support multiple regions, consider using [iam-role-for-service-accounts-eks](https://github.com/terraform-aws-modules/terraform-aws-iam/blob/master/modules/iam-role-for-service-accounts-eks/) if role needs to support clusters in multiple regions
 
 This module is for use with AWS EKS. For details of how a `ServiceAccount` in EKS can assume an IAM role, see the [EKS documentation](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html).
 
