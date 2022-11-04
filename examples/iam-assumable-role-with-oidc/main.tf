@@ -50,3 +50,22 @@ module "iam_assumable_role_self_assume" {
 
   oidc_fully_qualified_subjects = ["system:serviceaccount:default:sa1", "system:serviceaccount:default:sa2"]
 }
+
+#####################################
+# IAM assumable role with audience
+#####################################
+module "iam_assumable_role_with_oidc" {
+  source = "../../modules/iam-assumable-role-with-oidc"
+
+  create_role = true
+
+  role_name = "role-with-oidc-github-actions"
+
+  provider_url = "token.actions.githubusercontent.com"
+
+  role_policy_arns = [
+    "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
+  ]
+
+  oidc_fully_qualified_audiences = ["sts.amazonaws.com"]
+}
