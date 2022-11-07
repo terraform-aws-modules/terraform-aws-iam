@@ -33,3 +33,26 @@ module "iam_assumable_role_admin" {
     "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
   ]
 }
+
+#####################################
+# IAM assumable role with self assume
+#####################################
+module "iam_assumable_role_self_assume" {
+  source = "../../modules/iam-assumable-role-with-saml"
+
+  create_role            = true
+  allow_self_assume_role = true
+
+  role_name = "role-with-saml-self-assume"
+
+  tags = {
+    Role = "role-with-saml-self-assume"
+  }
+
+  provider_id  = aws_iam_saml_provider.idp_saml.id
+  provider_ids = [aws_iam_saml_provider.second_idp_saml.id]
+
+  role_policy_arns = [
+    "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
+  ]
+}

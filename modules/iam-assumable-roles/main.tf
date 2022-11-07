@@ -1,3 +1,11 @@
+data "aws_caller_identity" "current" {}
+data "aws_partition" "current" {}
+
+locals {
+  account_id = data.aws_caller_identity.current.account_id
+  partition  = data.aws_partition.current.partition
+}
+
 data "aws_iam_policy_document" "assume_role" {
   dynamic "statement" {
     # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/

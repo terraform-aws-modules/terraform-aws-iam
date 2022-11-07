@@ -1,5 +1,10 @@
+data "aws_caller_identity" "current" {}
+data "aws_partition" "current" {}
+
 locals {
+  account_id  = data.aws_caller_identity.current.account_id
   identifiers = compact(distinct(concat(var.provider_ids, [var.provider_id])))
+  partition   = data.aws_partition.current.partition
 }
 
 data "aws_iam_policy_document" "assume_role_with_saml" {

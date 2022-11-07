@@ -1,6 +1,11 @@
+data "aws_caller_identity" "current" {}
+data "aws_partition" "current" {}
+
 locals {
+  account_id                 = data.aws_caller_identity.current.account_id
   identifiers                = compact(distinct(concat(var.provider_ids, [var.provider_id])))
   number_of_role_policy_arns = coalesce(var.number_of_role_policy_arns, length(var.role_policy_arns))
+  partition                  = data.aws_partition.current.partition
   role_name_condition        = var.role_name != null ? var.role_name : "${var.role_name_prefix}*"
 }
 
