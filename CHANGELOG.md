@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.5.6](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.5.5...v5.5.6) (2022-11-07)
+
+
+### Bug Fixes
+
+* Update CI configuration files to use latest version ([#302](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/302)) ([4c1c958](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/4c1c95824e17a1af215f216698e796569cce536c))
+
 ### [5.5.5](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.5.4...v5.5.5) (2022-11-01)
 
 
