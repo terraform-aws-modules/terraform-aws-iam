@@ -415,6 +415,11 @@ data "aws_iam_policy_document" "external_secrets" {
   }
 
   statement {
+    actions   = ["secretsmanager:ListSecrets"]
+    resources = "*"
+  }
+
+  statement {
     actions = [
       "secretsmanager:GetResourcePolicy",
       "secretsmanager:GetSecretValue",
