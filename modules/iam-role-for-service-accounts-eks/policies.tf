@@ -504,7 +504,7 @@ resource "aws_iam_role_policy_attachment" "fsx_lustre_csi" {
 # Karpenter Controller Policy
 ################################################################################
 
-# curl -fsSL https://karpenter.sh/v0.6.1/getting-started/cloudformation.yaml
+# curl -fsSL https://karpenter.sh/v0.19.0/getting-started/cloudformation.yaml
 data "aws_iam_policy_document" "karpenter_controller" {
   count = var.create_role && var.attach_karpenter_controller_policy ? 1 : 0
 
@@ -577,6 +577,51 @@ data "aws_iam_policy_document" "karpenter_controller" {
   statement {
     actions   = ["iam:PassRole"]
     resources = var.karpenter_controller_node_iam_role_arns
+  }
+
+  statement {
+    sid       = "KarpenterEventPolicyEvents"
+    effect    = "Allow"
+    resources = ["arn:aws:events:${local.account_id}:rule/Karpenter-*"]
+
+    actions = [
+      "events:TagResource",
+      "events:DeleteRule",
+      "events:PutTargets",
+      "events:PutRule",
+      "events:ListTagsForResource",
+      "events:RemoveTargets",
+    ]
+
+    condition {
+      test     = "StringEquals"
+      variable = "aws:ResourceTag/karpenter.sh/discovery"
+      values   = [var.karpenter_controller_cluster_id]
+    }
+  }
+
+  statement {
+    sid       = "KarpenterEventPolicyListRules"
+    effect    = "Allow"
+    resources = ["*"]
+    actions   = ["events:ListRules"]
+  }
+
+  statement {
+    sid       = "KarpenterEventPolicySQS"
+    effect    = "Allow"
+    resources = ["arn:aws:sqs:${data.aws_region.current.name}:${local.account_id}:${var.karpenter_controller_cluster_id}"]
+
+    actions = [
+      "sqs:DeleteMessage",
+      "sqs:TagQueue",
+      "sqs:GetQueueUrl",
+      "sqs:ReceiveMessage",
+      "sqs:DeleteQueue",
+      "sqs:GetQueueAttributes",
+      "sqs:CreateQueue",
+      "sqs:SetQueueAttributes",
+    ]
   }
 }
 
