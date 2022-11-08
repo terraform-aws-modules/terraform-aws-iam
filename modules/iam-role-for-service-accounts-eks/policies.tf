@@ -416,7 +416,7 @@ data "aws_iam_policy_document" "external_secrets" {
 
   statement {
     actions   = ["secretsmanager:ListSecrets"]
-    resources = "*"
+    resources = ["*"]
   }
 
   statement {
