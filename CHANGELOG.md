@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.5.7](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.5.6...v5.5.7) (2022-11-09)
+
+
+### Bug Fixes
+
+* Add `secretsmanager:ListSecrets` to `external-secrets` policy ([#305](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/305)) ([d3fb017](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/d3fb017ea3439f945ff78ecf06c39690186dff52))
+
 ### [5.5.6](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.5.5...v5.5.6) (2022-11-07)
 
 
