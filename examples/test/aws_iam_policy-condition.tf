@@ -1,5 +1,5 @@
 resource "aws_iam_policy" "policy" {
-  name        = "test_policy"
+  name        = "Condition_test_policy"
   path        = "/"
   description = "My test policy"
 
