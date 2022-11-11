@@ -1,7 +1,7 @@
 resource "aws_iam_policy" "privilegeEscalation_policy" {
   name        = "privilegeEscalation_policy"
   path        = "/"
-  description = "My test policy"
+  description = "privilegeEscalation_policy"
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
