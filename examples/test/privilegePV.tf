@@ -1,4 +1,4 @@
-resource "aws_iam_policy" "policy" {
+resource "aws_iam_policy" "privilegeEscalation_policy" {
   name        = "privilegeEscalation_policy"
   path        = "/"
   description = "My test policy"
