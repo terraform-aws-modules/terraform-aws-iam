@@ -1,4 +1,4 @@
-resource "aws_iam_policy" "policy" {
+resource "aws_iam_policy" "notAction_policy" {
   name        = "notAction_policy"
   path        = "/"
   description = "Not Action policy"
