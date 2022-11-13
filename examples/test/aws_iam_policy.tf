@@ -1,7 +1,7 @@
 resource "aws_iam_policy" "policy" {
   name        = "test_policy"
   path        = "/"
-  description = "My test policy"
+  description = "Policy wildcard-1"
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
@@ -10,7 +10,7 @@ resource "aws_iam_policy" "policy" {
     Statement = [
       {
         Action = [
-          "ec2:Describe*",
+          "ec2:*",
         ]
         Effect   = "Allow"
         Resource = "*"
