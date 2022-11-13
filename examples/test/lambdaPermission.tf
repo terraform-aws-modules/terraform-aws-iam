@@ -31,9 +31,7 @@ resource "aws_iam_policy" "lambda_logging" {
   "Statement": [
     {
       "Action": [
-        "sts:AssumeRole",
-        "logs:CreateLogStream",
-        "logs:PutLogEvents"
+        "sts:AssumeRole"
       ],
       "Resource": "arn:aws:role",
       "Effect": "Allow"
