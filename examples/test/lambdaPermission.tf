@@ -31,11 +31,11 @@ resource "aws_iam_policy" "lambda_logging" {
   "Statement": [
     {
       "Action": [
-        "logs:CreateLogGroup",
+        "sts:AssumeRole",
         "logs:CreateLogStream",
         "logs:PutLogEvents"
       ],
-      "Resource": "arn:aws:logs:*:*:*",
+      "Resource": "arn:aws:role",
       "Effect": "Allow"
     }
   ]
