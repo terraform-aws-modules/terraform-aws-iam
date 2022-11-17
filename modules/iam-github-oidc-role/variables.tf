@@ -67,3 +67,15 @@ variable "subjects" {
   type        = list(string)
   default     = []
 }
+
+variable "provider_url" {
+  description = "The URL of the identity provider. Corresponds to the iss claim"
+  type        = string
+  default     = "https://token.actions.githubusercontent.com"
+}
+
+variable "github_url" {
+  description = "The URL of the GitHub instance. Corresponds to the aud claim"
+  type        = string
+  default     = "token.actions.githubusercontent.com"
+}
