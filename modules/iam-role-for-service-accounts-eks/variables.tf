@@ -215,6 +215,12 @@ variable "karpenter_subnet_account_id" {
   default     = ""
 }
 
+variable "karpenter_sqs_queue_arn" {
+  description = "(Optional) SQS ARN to be used in Karpenter NSTH"
+  type        = string
+  default     = null
+}
+
 # AWS Load Balancer Controller
 variable "attach_load_balancer_controller_policy" {
   description = "Determines whether to attach the Load Balancer Controller policy to the role"

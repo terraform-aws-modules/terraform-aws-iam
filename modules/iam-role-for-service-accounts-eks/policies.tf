@@ -509,6 +509,10 @@ resource "aws_iam_role_policy_attachment" "fsx_lustre_csi" {
 # Karpenter Controller Policy
 ################################################################################
 
+locals {
+  karpenter_sqs_queue_arn = var.karpenter_sqs_queue_arn != null ? var.karpenter_sqs_queue_arn : "arn:aws:sqs:${data.aws_region.current.name}:${local.account_id}:${var.karpenter_controller_cluster_id}"
+}
+
 # https://github.com/aws/karpenter/blob/502d275cc330fb0f2435b124935c49632146d945/website/content/en/v0.19.0/getting-started/getting-started-with-eksctl/cloudformation.yaml#L34
 data "aws_iam_policy_document" "karpenter_controller" {
   count = var.create_role && var.attach_karpenter_controller_policy ? 1 : 0
@@ -588,7 +592,7 @@ data "aws_iam_policy_document" "karpenter_controller" {
   statement {
     sid       = "KarpenterEventPolicySQS"
     effect    = "Allow"
-    resources = ["arn:aws:sqs:${data.aws_region.current.name}:${local.account_id}:${var.karpenter_controller_cluster_id}"]
+    resources = [local.karpenter_sqs_queue_arn]
 
     actions = [
       "sqs:DeleteMessage",
