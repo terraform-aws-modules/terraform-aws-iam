@@ -509,24 +509,25 @@ resource "aws_iam_role_policy_attachment" "fsx_lustre_csi" {
 # Karpenter Controller Policy
 ################################################################################
 
-# curl -fsSL https://karpenter.sh/v0.19.0/getting-started/cloudformation.yaml
+# https://github.com/aws/karpenter/blob/502d275cc330fb0f2435b124935c49632146d945/website/content/en/v0.19.0/getting-started/getting-started-with-eksctl/cloudformation.yaml#L34
 data "aws_iam_policy_document" "karpenter_controller" {
   count = var.create_role && var.attach_karpenter_controller_policy ? 1 : 0
 
   statement {
     actions = [
-      "ec2:CreateLaunchTemplate",
       "ec2:CreateFleet",
+      "ec2:CreateLaunchTemplate",
       "ec2:CreateTags",
-      "ec2:DescribeLaunchTemplates",
+      "ec2:DescribeAvailabilityZones",
+      "ec2:DescribeImages",
       "ec2:DescribeImages",
       "ec2:DescribeInstances",
-      "ec2:DescribeSecurityGroups",
-      "ec2:DescribeSubnets",
-      "ec2:DescribeInstanceTypes",
       "ec2:DescribeInstanceTypeOfferings",
-      "ec2:DescribeAvailabilityZones",
+      "ec2:DescribeInstanceTypes",
+      "ec2:DescribeLaunchTemplates",
+      "ec2:DescribeSecurityGroups",
       "ec2:DescribeSpotPriceHistory",
+      "ec2:DescribeSubnets",
       "pricing:GetProducts",
     ]
 
@@ -585,47 +586,15 @@ data "aws_iam_policy_document" "karpenter_controller" {
   }
 
   statement {
-    sid       = "KarpenterEventPolicyEvents"
-    effect    = "Allow"
-    resources = ["arn:aws:events:${local.account_id}:rule/Karpenter-*"]
-
-    actions = [
-      "events:TagResource",
-      "events:DeleteRule",
-      "events:PutTargets",
-      "events:PutRule",
-      "events:ListTagsForResource",
-      "events:RemoveTargets",
-    ]
-
-    condition {
-      test     = "StringEquals"
-      variable = "aws:ResourceTag/karpenter.sh/discovery"
-      values   = [var.karpenter_controller_cluster_id]
-    }
-  }
-
-  statement {
-    sid       = "KarpenterEventPolicyListRules"
-    effect    = "Allow"
-    resources = ["*"]
-    actions   = ["events:ListRules"]
-  }
-
-  statement {
     sid       = "KarpenterEventPolicySQS"
     effect    = "Allow"
     resources = ["arn:aws:sqs:${data.aws_region.current.name}:${local.account_id}:${var.karpenter_controller_cluster_id}"]
 
     actions = [
       "sqs:DeleteMessage",
-      "sqs:TagQueue",
+      "sqs:GetQueueAttributes",
       "sqs:GetQueueUrl",
       "sqs:ReceiveMessage",
-      "sqs:DeleteQueue",
-      "sqs:GetQueueAttributes",
-      "sqs:CreateQueue",
-      "sqs:SetQueueAttributes",
     ]
   }
 }
