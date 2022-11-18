@@ -62,6 +62,12 @@ variable "max_session_duration" {
   default     = null
 }
 
+variable "audience" {
+  description = "Audience to use for OIDC role. Defaults to `sts.amazonaws.com` for use with the [official AWS GitHub action](https://github.com/aws-actions/configure-aws-credentials)"
+  type        = string
+  default     = "sts.amazonaws.com"
+}
+
 variable "subjects" {
   description = "List of GitHub OIDC subjects that are permitted by the trust policy. You do not need to prefix with `repo:` as this is provided. Example: `['my-org/my-repo:*', 'octo-org/octo-repo:ref:refs/heads/octo-branch']`"
   type        = list(string)
@@ -70,12 +76,6 @@ variable "subjects" {
 
 variable "provider_url" {
   description = "The URL of the identity provider. Corresponds to the iss claim"
-  type        = string
-  default     = "https://token.actions.githubusercontent.com"
-}
-
-variable "github_url" {
-  description = "The URL of the GitHub instance. Corresponds to the aud claim"
   type        = string
   default     = "token.actions.githubusercontent.com"
 }

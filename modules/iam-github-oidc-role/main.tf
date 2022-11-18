@@ -2,11 +2,11 @@ data "aws_partition" "current" {}
 data "aws_caller_identity" "current" {}
 
 locals {
+  # Just extra safety incase someone passes in a url with `https://`
   provider_url = replace(var.provider_url, "https://", "")
 
   account_id = data.aws_caller_identity.current.account_id
   partition  = data.aws_partition.current.partition
-  dns_suffix = data.aws_partition.current.dns_suffix
 }
 
 ################################################################################
@@ -29,22 +29,21 @@ data "aws_iam_policy_document" "this" {
       identifiers = ["arn:${local.partition}:iam::${local.account_id}:oidc-provider/${local.provider_url}"]
     }
 
-    # Is this used for GitHub enterprise or an equivalent version for GHE?
     condition {
       test     = "ForAllValues:StringEquals"
-      variable = "${local.provider_url}:iss"
-      values   = ["sts.${local.dns_suffix}"]
+      variable = "token.actions.githubusercontent.com:iss"
+      values   = ["http://token.actions.githubusercontent.com"]
     }
 
     condition {
       test     = "ForAllValues:StringEquals"
-      variable = "${replace(var.provider_url, "https://", "")}:aud"
-      values   = [var.github_url]
+      variable = "${local.provider_url}:aud"
+      values   = [var.audience]
     }
 
     condition {
       test     = "StringLike"
-      variable = "${var.github_url}:sub"
+      variable = "${local.provider_url}:sub"
       values   = [for subject in var.subjects : "repo:${subject}"]
     }
   }
