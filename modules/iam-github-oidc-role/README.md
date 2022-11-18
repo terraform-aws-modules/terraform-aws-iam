@@ -6,6 +6,10 @@ Creates an IAM role that trust the IAM GitHub OIDC provider.
 
 ## Usage
 
+### [GitHub Free, Pro, & Team](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services)
+
+The defaults provided by the module are suitable for GitHub Free, Pro, & Team, including use with the official [AWS GitHub action](https://github.com/aws-actions/configure-aws-credentials).
+
 ```hcl
 module "iam_github_oidc_role" {
   source    = "terraform-aws-modules/iam/aws//modules/iam-github-oidc-role"
@@ -23,6 +27,29 @@ module "iam_github_oidc_role" {
 }
 ```
 
+### [GitHub Enterprise Server](https://docs.github.com/en/enterprise-server@3.7/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services)
+
+For GitHub Enterprise Server, users will need to provide value for the `audience` and `provider_url` to suit their `<GITHUB_ORG>` installation:
+
+```hcl
+module "iam_github_oidc_role" {
+  source    = "terraform-aws-modules/iam/aws//modules/iam-github-oidc-role"
+
+  audience     = "https://mygithub.com/<GITHUB_ORG>"
+  provider_url = "mygithub.com/_services/token"
+
+  # This should be updated to suit your organization, repository, references/branches, etc.
+  subjects = ["<GITHUB_ORG>/terraform-aws-iam:*"]
+
+  policies = {
+    S3ReadOnly = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
+  }
+
+  tags = {
+    Environment = "test"
+  }
+}
+```
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
