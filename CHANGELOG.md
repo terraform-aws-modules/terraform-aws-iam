@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.6.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.5.7...v5.6.0) (2022-11-19)
+
+
+### Features
+
+* Add support for creating IAM GitHub OIDC provider and role(s) ([#308](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/308)) ([cc44693](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/cc446936d2d3bfd04daa17ef81ae11fbe8c68bc7))
+
 ### [5.5.7](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.5.6...v5.5.7) (2022-11-09)
 
 
