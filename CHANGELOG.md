@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.7.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.6.0...v5.7.0) (2022-11-21)
+
+
+### Features
+
+* Ensure that GitHub OIDC subject prefixes are normalied for `repo:` ([#310](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/310)) ([b9873a0](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/b9873a0b4772a0b854b3bc4283d7c172df35ab51))
+
 ## [5.6.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.5.7...v5.6.0) (2022-11-19)
 
 
