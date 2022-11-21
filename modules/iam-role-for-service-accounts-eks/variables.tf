@@ -216,7 +216,7 @@ variable "karpenter_subnet_account_id" {
 }
 
 variable "karpenter_sqs_queue_arn" {
-  description = "(Optional) SQS ARN to be used in Karpenter NSTH"
+  description = "(Optional) ARN of SQS used by Karpenter when native node termination handling is enabled"
   type        = string
   default     = null
 }
