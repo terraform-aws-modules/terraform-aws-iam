@@ -45,7 +45,7 @@ data "aws_iam_policy_document" "this" {
       test     = "StringLike"
       variable = "${local.provider_url}:sub"
       # Strip `repo:` to normalize for cases where users may prepend it
-      values = [for subject in var.subjects : "repo:${replace(subject, "/^repo:/", "")}"]
+      values = [for subject in var.subjects : "repo:${trimprefix(subject, "repo:")}"]
     }
   }
 }
