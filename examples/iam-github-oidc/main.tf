@@ -37,8 +37,14 @@ module "iam_github_oidc_provider_disabled" {
 module "iam_github_oidc_role" {
   source = "../../modules/iam-github-oidc-role"
 
+  name = local.name
+
   # This should be updated to suit your organization, repository, references/branches, etc.
-  subjects = ["terraform-aws-modules/terraform-aws-iam:*"]
+  subjects = [
+    # You can prepend with `repo:` but it is not required
+    "repo:terraform-aws-modules/terraform-aws-iam:pull_request",
+    "terraform-aws-modules/terraform-aws-iam:ref:refs/heads/master",
+  ]
 
   policies = {
     additional = aws_iam_policy.additional.arn
