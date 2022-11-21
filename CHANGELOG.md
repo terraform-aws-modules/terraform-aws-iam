@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.8.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.7.0...v5.8.0) (2022-11-21)
+
+
+### Features
+
+* Add additional permissions to Karpenter EKS IRSA role for native node termination handling support ([#304](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/304)) ([d6865d2](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/d6865d29eafe709fb3a5682979ea5288f81bb882))
+
 ## [5.7.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.6.0...v5.7.0) (2022-11-21)
 
 
