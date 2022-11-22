@@ -43,7 +43,7 @@ data "aws_iam_policy_document" "iam_self_management" {
     resources = [
       "arn:${local.partition}:iam::${local.aws_account_id}:user/*/$${aws:username}",
       "arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}",
-      "arn:${local.partition}:iam::${local.aws_account_id}:mfa/$${aws:username}",
+      "arn:${local.partition}:iam::${local.aws_account_id}:mfa/*",
     ]
   }
 
@@ -73,7 +73,7 @@ data "aws_iam_policy_document" "iam_self_management" {
     resources = [
       "arn:${local.partition}:iam::${local.aws_account_id}:user/*/$${aws:username}",
       "arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}",
-      "arn:${local.partition}:iam::${local.aws_account_id}:mfa/$${aws:username}",
+      "arn:${local.partition}:iam::${local.aws_account_id}:mfa/*",
     ]
 
     condition {
