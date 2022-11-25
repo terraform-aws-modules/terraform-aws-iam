@@ -105,3 +105,9 @@ variable "allow_self_assume_role" {
   type        = bool
   default     = false
 }
+
+variable "assume_role_condition_test" {
+  description = "Name of the [IAM condition operator](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html) to evaluate when assuming the role"
+  type        = string
+  default     = "StringEquals"
+}

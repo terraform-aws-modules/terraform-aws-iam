@@ -67,5 +67,6 @@ module "iam_assumable_role_with_oidc" {
     "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
   ]
 
+  assume_role_condition_test     = "StringEquals"
   oidc_fully_qualified_audiences = ["sts.amazonaws.com"]
 }

@@ -75,7 +75,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
         for_each = length(var.oidc_fully_qualified_audiences) > 0 ? local.urls : []
 
         content {
-          test     = "StringEquals"
+          test     = var.assume_role_condition_test
           variable = "${statement.value}:aud"
           values   = var.oidc_fully_qualified_audiences
         }
