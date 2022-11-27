@@ -12,7 +12,8 @@ module "iam_user" {
   force_destroy = true
 
   # User "test" has uploaded his public key here - https://keybase.io/test/pgp_keys.asc
-  pgp_key = "keybase:test"
+  pgp_key               = "keybase:test"
+  iam_access_key_status = "Inactive"
 
   password_reset_required = false
 
@@ -32,4 +33,17 @@ module "iam_user2" {
 
   create_iam_user_login_profile = false
   create_iam_access_key         = true
+}
+
+###################################################################
+# IAM user with inactive IAM access key
+###################################################################
+module "iam_user3" {
+  source = "../../modules/iam-user"
+
+  name = "vasya.pupkin5"
+
+  create_iam_user_login_profile = false
+  create_iam_access_key         = true
+  iam_access_key_status         = "Inactive"
 }
