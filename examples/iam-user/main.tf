@@ -12,8 +12,7 @@ module "iam_user" {
   force_destroy = true
 
   # User "test" has uploaded his public key here - https://keybase.io/test/pgp_keys.asc
-  pgp_key               = "keybase:test"
-  iam_access_key_status = "Inactive"
+  pgp_key = "keybase:test"
 
   password_reset_required = false
 
