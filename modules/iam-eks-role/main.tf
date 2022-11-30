@@ -2,6 +2,8 @@ data "aws_caller_identity" "current" {}
 data "aws_partition" "current" {}
 
 locals {
+  account_id          = data.aws_caller_identity.current.account_id
+  partition           = data.aws_partition.current.partition
   role_name_condition = var.role_name != null ? var.role_name : "${var.role_name_prefix}*"
 }
 
@@ -45,7 +47,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
         type = "Federated"
 
         identifiers = [
-          "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${replace(data.aws_eks_cluster.main[statement.key].identity[0].oidc[0].issuer, "https://", "")}"
+          "arn:${local.partition}:iam::${local.account_id}:oidc-provider/${replace(data.aws_eks_cluster.main[statement.key].identity[0].oidc[0].issuer, "https://", "")}"
         ]
       }
 

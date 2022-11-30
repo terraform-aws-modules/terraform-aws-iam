@@ -39,7 +39,9 @@ module "iam_assumable_roles_with_saml_second_provider" {
   create_admin_role = true
 
   create_poweruser_role = true
-  poweruser_role_name   = "developer"
+  admin_role_name       = "Admin-Role-Name"
+  poweruser_role_name   = "Poweruser-Role-Name"
+  readonly_role_name    = "Readonly-Role-Name"
 
   create_readonly_role = true
 
@@ -55,6 +57,23 @@ module "iam_assumable_roles_with_saml_custom" {
   create_poweruser_role      = true
   poweruser_role_name        = "Billing-And-Support-Access"
   poweruser_role_policy_arns = ["arn:aws:iam::aws:policy/job-function/Billing", "arn:aws:iam::aws:policy/AWSSupportAccess"]
+
+  provider_id = aws_iam_saml_provider.idp_saml.id
+}
+
+################################################
+# IAM assumable roles with SAML with self assume
+################################################
+module "iam_assumable_roles_with_saml_with_self_assume" {
+  source = "../../modules/iam-assumable-roles-with-saml"
+
+  create_admin_role      = true
+  allow_self_assume_role = true
+  create_poweruser_role  = true
+  admin_role_name        = "Admin-Role-Name-Self-Assume"
+  poweruser_role_name    = "Poweruser-Role-Name-Self-Assume"
+  readonly_role_name     = "Readonly-Role-Name-Self-Assume"
+  create_readonly_role   = true
 
   provider_id = aws_iam_saml_provider.idp_saml.id
 }

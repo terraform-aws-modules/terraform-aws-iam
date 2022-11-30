@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.8.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.7.0...v5.8.0) (2022-11-21)
+
+
+### Features
+
+* Add additional permissions to Karpenter EKS IRSA role for native node termination handling support ([#304](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/304)) ([d6865d2](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/d6865d29eafe709fb3a5682979ea5288f81bb882))
+
+## [5.7.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.6.0...v5.7.0) (2022-11-21)
+
+
+### Features
+
+* Ensure that GitHub OIDC subject prefixes are normalied for `repo:` ([#310](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/310)) ([b9873a0](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/b9873a0b4772a0b854b3bc4283d7c172df35ab51))
+
+## [5.6.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.5.7...v5.6.0) (2022-11-19)
+
+
+### Features
+
+* Add support for creating IAM GitHub OIDC provider and role(s) ([#308](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/308)) ([cc44693](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/cc446936d2d3bfd04daa17ef81ae11fbe8c68bc7))
+
+### [5.5.7](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.5.6...v5.5.7) (2022-11-09)
+
+
+### Bug Fixes
+
+* Add `secretsmanager:ListSecrets` to `external-secrets` policy ([#305](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/305)) ([d3fb017](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/d3fb017ea3439f945ff78ecf06c39690186dff52))
+
+### [5.5.6](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.5.5...v5.5.6) (2022-11-07)
+
+
+### Bug Fixes
+
+* Update CI configuration files to use latest version ([#302](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/302)) ([4c1c958](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/4c1c95824e17a1af215f216698e796569cce536c))
+
+### [5.5.5](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.5.4...v5.5.5) (2022-11-01)
+
+
+### Bug Fixes
+
+* Add missing locals in iam-assumable-role module ([#290](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/290)) ([8af6d28](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/8af6d284ad1c22b54783828888469e2edb43b04a))
+
 ### [5.5.4](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.5.3...v5.5.4) (2022-10-26)
 
 

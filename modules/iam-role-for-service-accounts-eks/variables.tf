@@ -215,6 +215,12 @@ variable "karpenter_subnet_account_id" {
   default     = ""
 }
 
+variable "karpenter_sqs_queue_arn" {
+  description = "(Optional) ARN of SQS used by Karpenter when native node termination handling is enabled"
+  type        = string
+  default     = null
+}
+
 # AWS Load Balancer Controller
 variable "attach_load_balancer_controller_policy" {
   description = "Determines whether to attach the Load Balancer Controller policy to the role"

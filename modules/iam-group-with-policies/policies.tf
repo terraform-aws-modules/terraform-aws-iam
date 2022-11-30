@@ -6,6 +6,7 @@ data "aws_partition" "current" {}
 
 locals {
   aws_account_id = try(data.aws_caller_identity.current[0].account_id, var.aws_account_id)
+  partition      = data.aws_partition.current.partition
 }
 
 data "aws_iam_policy_document" "iam_self_management" {
@@ -40,9 +41,9 @@ data "aws_iam_policy_document" "iam_self_management" {
 
     # Allow for both users with "path" and without it
     resources = [
-      "arn:${data.aws_partition.current.partition}:iam::${local.aws_account_id}:user/*/$${aws:username}",
-      "arn:${data.aws_partition.current.partition}:iam::${local.aws_account_id}:user/$${aws:username}",
-      "arn:${data.aws_partition.current.partition}:iam::${local.aws_account_id}:mfa/$${aws:username}",
+      "arn:${local.partition}:iam::${local.aws_account_id}:user/*/$${aws:username}",
+      "arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}",
+      "arn:${local.partition}:iam::${local.aws_account_id}:mfa/$${aws:username}",
     ]
   }
 
@@ -70,9 +71,9 @@ data "aws_iam_policy_document" "iam_self_management" {
 
     # Allow for both users with "path" and without it
     resources = [
-      "arn:${data.aws_partition.current.partition}:iam::${local.aws_account_id}:user/*/$${aws:username}",
-      "arn:${data.aws_partition.current.partition}:iam::${local.aws_account_id}:user/$${aws:username}",
-      "arn:${data.aws_partition.current.partition}:iam::${local.aws_account_id}:mfa/$${aws:username}",
+      "arn:${local.partition}:iam::${local.aws_account_id}:user/*/$${aws:username}",
+      "arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}",
+      "arn:${local.partition}:iam::${local.aws_account_id}:mfa/$${aws:username}",
     ]
 
     condition {
