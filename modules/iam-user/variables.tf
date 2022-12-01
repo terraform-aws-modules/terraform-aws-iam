@@ -42,7 +42,7 @@ variable "pgp_key" {
 variable "iam_access_key_status" {
   description = "Access key status to apply."
   type        = string
-  default     = "Active"
+  default     = null
 }
 
 variable "password_reset_required" {
