@@ -39,6 +39,12 @@ variable "pgp_key" {
   default     = ""
 }
 
+variable "iam_access_key_status" {
+  description = "Access key status to apply."
+  type        = string
+  default     = null
+}
+
 variable "password_reset_required" {
   description = "Whether the user should be forced to reset the generated password on first login."
   type        = bool
