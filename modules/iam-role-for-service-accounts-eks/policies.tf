@@ -410,7 +410,7 @@ data "aws_iam_policy_document" "external_secrets" {
   count = var.create_role && var.attach_external_secrets_policy ? 1 : 0
 
   statement {
-    actions   = [
+    actions = [
       "ssm:GetParameter",
       "ssm:GetParameters",
     ]
