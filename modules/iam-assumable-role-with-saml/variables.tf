@@ -87,3 +87,9 @@ variable "allow_self_assume_role" {
   type        = bool
   default     = false
 }
+
+variable "trusted_role_actions" {
+  description = "Extra Actions of STS"
+  type        = list(string)
+  default     = [""]
+}
