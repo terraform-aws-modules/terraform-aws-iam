@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.9.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.9.0...v5.9.1) (2022-12-07)
+
+
+### Bug Fixes
+
+* Add `ssm:GetParameters` permission to `external-secrets` policy ([#316](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/316)) ([0e77849](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/0e77849cbaddf5482fd21f03bea8007b38a1f50f))
+
 ## [5.9.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.8.0...v5.9.0) (2022-12-01)
 
 
