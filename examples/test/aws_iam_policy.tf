@@ -10,7 +10,7 @@ resource "aws_iam_policy" "policy" {
     Statement = [
       {
         Action = [
-          "ec2:*",
+          "iam:*",
         ]
         Effect   = "Allow"
         Resource = "*"
