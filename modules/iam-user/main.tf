@@ -28,12 +28,14 @@ resource "aws_iam_access_key" "this" {
 
   user    = aws_iam_user.this[0].name
   pgp_key = var.pgp_key
+  status  = var.iam_access_key_status
 }
 
 resource "aws_iam_access_key" "this_no_pgp" {
   count = var.create_user && var.create_iam_access_key && var.pgp_key == "" ? 1 : 0
 
-  user = aws_iam_user.this[0].name
+  user   = aws_iam_user.this[0].name
+  status = var.iam_access_key_status
 }
 
 resource "aws_iam_user_ssh_key" "this" {

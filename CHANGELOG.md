@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.9.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.8.0...v5.9.0) (2022-12-01)
+
+
+### Features
+
+* Support IAM access key status ([#315](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/315)) ([705040a](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/705040aa806420522d3e66b9f188d68c143d1561))
+
 ## [5.8.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.7.0...v5.8.0) (2022-11-21)
 
 
