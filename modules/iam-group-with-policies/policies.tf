@@ -43,7 +43,7 @@ data "aws_iam_policy_document" "iam_self_management" {
     resources = [
       "arn:${local.partition}:iam::${local.aws_account_id}:user/*/$${aws:username}",
       "arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}",
-      "arn:${local.partition}:iam::${local.aws_account_id}:mfa/*",
+      "arn:${local.partition}:iam::${local.aws_account_id}:mfa/$${aws:username}",
     ]
   }
 
@@ -57,6 +57,20 @@ data "aws_iam_policy_document" "iam_self_management" {
 
     resources = ["*"]
     effect    = "Allow"
+  }
+
+  statement {
+    sid = "AllowManageOwnVirtualMFADevice"
+
+    actions = [
+      "iam:CreateVirtualMFADevice",
+    ]
+
+    resources = [
+      "arn:${local.partition}:iam::${local.aws_account_id}:mfa/*",
+    ]
+
+    effect = "Allow"
   }
 
   # Allow to deactivate MFA only when logging in with MFA
@@ -73,6 +87,33 @@ data "aws_iam_policy_document" "iam_self_management" {
     resources = [
       "arn:${local.partition}:iam::${local.aws_account_id}:user/*/$${aws:username}",
       "arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}",
+      "arn:${local.partition}:iam::${local.aws_account_id}:mfa/$${aws:username}",
+    ]
+
+    condition {
+      test     = "Bool"
+      variable = "aws:MultiFactorAuthPresent"
+      values   = ["true"]
+    }
+
+    condition {
+      test     = "NumericLessThan"
+      variable = "aws:MultiFactorAuthAge"
+      values   = ["3600"]
+    }
+  }
+
+  # Allow to delete MFA only when logging in with MFA
+  statement {
+    sid = "AllowDeleteVirtualMFADevice"
+
+    effect = "Allow"
+
+    actions = [
+      "iam:DeleteVirtualMFADevice",
+    ]
+
+    resources = [
       "arn:${local.partition}:iam::${local.aws_account_id}:mfa/*",
     ]
 
