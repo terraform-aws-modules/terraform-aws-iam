@@ -43,7 +43,7 @@ variable "create_instance_profile" {
 variable "role_name" {
   description = "IAM role name"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "role_name_prefix" {
