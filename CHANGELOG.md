@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.9.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.9.1...v5.9.2) (2022-12-10)
+
+
+### Bug Fixes
+
+* Update `role_name` default to `null` ([#319](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/319)) ([0baa2c1](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/0baa2c10ddd66e48f0d5f9fba1ae5e4fafcf6547))
+
 ### [5.9.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.9.0...v5.9.1) (2022-12-07)
 
 
