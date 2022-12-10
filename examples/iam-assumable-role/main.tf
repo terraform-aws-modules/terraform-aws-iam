@@ -23,7 +23,7 @@ module "iam_assumable_role_admin" {
   create_role             = true
   create_instance_profile = true
 
-  role_name         = "adminTest"
+  role_name         = "admin"
   role_requires_mfa = true
 
   attach_admin_policy = true
