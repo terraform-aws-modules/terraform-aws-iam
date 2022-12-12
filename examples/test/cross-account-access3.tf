@@ -14,7 +14,7 @@ resource "aws_iam_role" "test_role" {
           Service = "ec2.amazonaws.com"
         Condition = {
 		      StringEquals =  { 
-            "sts:ExternalId" = "12345"
+            "sts:ExternalId" = "111111111111"
           }
         }
       }
