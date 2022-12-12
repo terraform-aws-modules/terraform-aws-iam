@@ -11,16 +11,17 @@ resource "aws_iam_role" "test_role" {
         Effect = "Allow"
         Sid    = ""
         Principal = {
-          AWS = "ec2.amazonaws.com"
+          Service = "ec2.amazonaws.com"
         Condition = {
-                "BoolIfExists" =  {
-                    "aws:MultiFactorAuthPresent"= "true"
-                }
-            }
+		      StringEquals =  { 
+            "sts:ExternalId" = "12345"
+          }
         }
-      },
-    ]
-  })
+      }
+    }
+	]
+}
+  )
 
   tags = {
     tag-key = "tag-value"
