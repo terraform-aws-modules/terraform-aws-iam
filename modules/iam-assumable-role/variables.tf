@@ -83,7 +83,7 @@ variable "custom_role_policy_arns" {
 }
 
 variable "custom_role_trust_policy" {
-  description = "A custom role trust policy"
+  description = "A custom role trust policy. (Only valid if create_custom_role_trust_policy = true)"
   type        = string
   default     = ""
 }
