@@ -49,7 +49,7 @@ module "iam_assumable_role_custom" {
 
   create_role = true
 
-  role_name         = "custom"
+  role_name_prefix  = "custom-"
   role_requires_mfa = false
 
   role_sts_externalid = "some-id-goes-here"
