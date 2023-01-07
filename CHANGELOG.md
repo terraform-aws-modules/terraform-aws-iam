@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.10.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.9.2...v5.10.0) (2023-01-06)
+
+
+### Features
+
+* Added Extra STS actions param in assumable role with SAML ([#317](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/317)) ([a2ad4cd](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/a2ad4cde3343abe499a9cf7585804663a6298738))
+
+
+### Bug Fixes
+
+* Use a version for  to avoid GitHub API rate limiting on CI workflows ([#323](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/323)) ([90349fa](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/90349fa122d9b7f043d6678d66da2bf31ba15f93))
+
+### [5.9.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.9.1...v5.9.2) (2022-12-10)
+
+
+### Bug Fixes
+
+* Update `role_name` default to `null` ([#319](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/319)) ([0baa2c1](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/0baa2c10ddd66e48f0d5f9fba1ae5e4fafcf6547))
+
 ### [5.9.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.9.0...v5.9.1) (2022-12-07)
 
 
