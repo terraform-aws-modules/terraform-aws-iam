@@ -9,8 +9,8 @@ resource "aws_iam_policy" "policy" {
     Statement = [
         {
             Effect = "Allow",
-            Action = "*",
-            Resource = "kms:Decrypt",
+            Action = "kms:Decrypt",
+            Resource = "*",
             Condition = {
                 BoolIfExists = {
                     aws = MultiFactorAuthPresent = "false"
