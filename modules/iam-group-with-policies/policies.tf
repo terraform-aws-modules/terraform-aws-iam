@@ -9,124 +9,146 @@ locals {
   partition      = data.aws_partition.current.partition
 }
 
+# Allows MFA-authenticated IAM users to manage their own credentials on the My security credentials page
+# https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_aws_my-sec-creds-self-manage.html
 data "aws_iam_policy_document" "iam_self_management" {
   statement {
-    sid = "AllowSelfManagement"
+    sid = "AllowViewAccountInfo"
+    
+    effect = "Allow"
+    
+    actions = [
+      "iam:GetAccountPasswordPolicy",
+      "iam:ListVirtualMFADevices"     
+    ]
+
+    resources = ["*"]
+  }
+  
+  statement {
+    sid = "AllowManageOwnPasswords"
 
     effect = "Allow"
 
     actions = [
       "iam:ChangePassword",
-      "iam:CreateAccessKey",
-      "iam:CreateLoginProfile",
-      "iam:CreateVirtualMFADevice",
-      "iam:DeleteAccessKey",
-      "iam:DeleteLoginProfile",
-      "iam:DeleteVirtualMFADevice",
-      "iam:EnableMFADevice",
-      "iam:GenerateCredentialReport",
-      "iam:GenerateServiceLastAccessedDetails",
-      "iam:Get*",
-      "iam:List*",
-      "iam:ResyncMFADevice",
-      "iam:UpdateAccessKey",
-      "iam:UpdateLoginProfile",
-      "iam:UpdateUser",
-      "iam:UploadSigningCertificate",
-      "iam:UploadSSHPublicKey",
-      "iam:TagUser",
-      "iam:ListUserTags",
-      "iam:UntagUser",
+      "iam:GetUser"
     ]
 
-    # Allow for both users with "path" and without it
-    resources = [
-      "arn:${local.partition}:iam::${local.aws_account_id}:user/*/$${aws:username}",
-      "arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}",
-      "arn:${local.partition}:iam::${local.aws_account_id}:mfa/$${aws:username}",
+    resources = ["arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}"]
+  }  
+
+  statement {
+    sid = "AllowManageOwnAccessKeys"
+
+    effect = "Allow"
+
+    actions = [
+      "iam:CreateAccessKey",
+      "iam:DeleteAccessKey",
+      "iam:ListAccessKeys",
+      "iam:UpdateAccessKey"
     ]
+
+    resources = ["arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}"]
+  }    
+
+  statement {
+    sid = "AllowManageOwnSigningCertificates"
+
+    effect = "Allow"
+
+    actions = [
+      "iam:DeleteSigningCertificate",
+      "iam:ListSigningCertificates",
+      "iam:UpdateSigningCertificate",
+      "iam:UploadSigningCertificate"
+    ]
+
+    resources = ["arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}"]
   }
 
   statement {
-    sid = "AllowIAMReadOnly"
+    sid = "AllowManageOwnSSHPublicKeys"
+
+    effect = "Allow"
 
     actions = [
-      "iam:Get*",
-      "iam:List*",
+      "iam:DeleteSSHPublicKey",
+      "iam:GetSSHPublicKey",
+      "iam:ListSSHPublicKeys",
+      "iam:UpdateSSHPublicKey",
+      "iam:UploadSSHPublicKey"
     ]
 
-    resources = ["*"]
-    effect    = "Allow"
+    resources = ["arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}"]
+  }
+  
+  statement {
+    sid = "AllowManageOwnGitCredentials"
+
+    effect = "Allow"
+
+    actions = [
+      "iam:CreateServiceSpecificCredential",
+      "iam:DeleteServiceSpecificCredential",
+      "iam:ListServiceSpecificCredentials",
+      "iam:ResetServiceSpecificCredential",
+      "iam:UpdateServiceSpecificCredential"
+    ]
+
+    resources = ["arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}"]
   }
 
   statement {
     sid = "AllowManageOwnVirtualMFADevice"
 
-    actions = [
-      "iam:CreateVirtualMFADevice",
-    ]
-
-    resources = [
-      "arn:${local.partition}:iam::${local.aws_account_id}:mfa/*",
-    ]
-
     effect = "Allow"
+
+    actions = [
+      "iam:CreateVirtualMFADevice"
+    ]
+
+    resources = ["arn:${local.partition}:iam::${local.aws_account_id}:mfa/*"]
   }
 
-  # Allow to deactivate MFA only when logging in with MFA
   statement {
-    sid = "AllowDeactivateMFADevice"
+    sid = "AllowManageOwnUserMFA"
 
     effect = "Allow"
 
     actions = [
       "iam:DeactivateMFADevice",
+      "iam:EnableMFADevice",
+      "iam:ListMFADevices",
+      "iam:ResyncMFADevice"
     ]
 
-    # Allow for both users with "path" and without it
-    resources = [
-      "arn:${local.partition}:iam::${local.aws_account_id}:user/*/$${aws:username}",
-      "arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}",
-      "arn:${local.partition}:iam::${local.aws_account_id}:mfa/$${aws:username}",
-    ]
+    resources = ["arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}"]
 
-    condition {
-      test     = "Bool"
-      variable = "aws:MultiFactorAuthPresent"
-      values   = ["true"]
-    }
-
-    condition {
-      test     = "NumericLessThan"
-      variable = "aws:MultiFactorAuthAge"
-      values   = ["3600"]
-    }
   }
 
-  # Allow to delete MFA only when logging in with MFA
   statement {
-    sid = "AllowDeleteVirtualMFADevice"
+    sid = "DenyAllExceptListedIfNoMFA"
 
-    effect = "Allow"
+    effect = "Deny"
 
-    actions = [
-      "iam:DeleteVirtualMFADevice",
-    ]
+    not_actions = [
+      "iam:CreateVirtualMFADevice",
+      "iam:EnableMFADevice",
+      "iam:GetUser",
+      "iam:ListMFADevices",
+      "iam:ListVirtualMFADevices",
+      "iam:ResyncMFADevice",
+      "sts:GetSessionToken"
+]
 
-    resources = [
-      "arn:${local.partition}:iam::${local.aws_account_id}:mfa/*",
-    ]
+    resources = ["*"]
 
     condition {
-      test     = "Bool"
+      test     = "BoolIfExists"
       variable = "aws:MultiFactorAuthPresent"
-      values   = ["true"]
+      values   = ["false"]
     }
-
-    condition {
-      test     = "NumericLessThan"
-      variable = "aws:MultiFactorAuthAge"
-      values   = ["3600"]
-    }
-  }
+  }  
 }
