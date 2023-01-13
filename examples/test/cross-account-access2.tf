@@ -9,7 +9,7 @@ resource "aws_iam_role" "test_role" {
       {
         Action = "sts:AssumeRole"
         Effect = "Allow"
-        Sid    = ""
+        Sid    = "12-12-2007"
         Principal = {
           AWS = "*"
         }
