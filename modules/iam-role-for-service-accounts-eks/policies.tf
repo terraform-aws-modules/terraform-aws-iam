@@ -226,6 +226,17 @@ data "aws_iam_policy_document" "ebs_csi" {
   }
 
   statement {
+    actions   = ["ec2:DeleteVolume"]
+    resources = ["*"]
+
+    condition {
+      test     = "StringLike"
+      variable = "ec2:ResourceTag/kubernetes.io/created-for/pvc/name"
+      values   = ["*"]
+    }
+  }
+
+  statement {
     actions   = ["ec2:DeleteSnapshot"]
     resources = ["*"]
 
