@@ -1303,7 +1303,7 @@ data "aws_iam_policy_document" "custom" {
 resource "aws_iam_policy" "custom" {
   count = var.create_role && var.attach_custom_policy ? 1 : 0
 
-  name_prefix = "${var.policy_name_prefix}"
+  name_prefix = var.policy_name_prefix
   path        = var.role_path
   description = ""
   policy      = data.aws_iam_policy_document.custom[0].json

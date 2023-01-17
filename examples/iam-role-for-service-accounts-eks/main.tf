@@ -351,7 +351,7 @@ module "s3_bucket" {
     status = true
   }
   #Bucket policies
-  attach_policy = true
+  attach_policy                         = true
   attach_deny_insecure_transport_policy = true
   attach_require_latest_tls_policy      = true
 
@@ -366,8 +366,8 @@ module "s3_bucket" {
 module "custom_irsa_role" {
   source = "./terraform-aws-iam/modules/iam-role-for-service-accounts-eks"
 
-  role_name                  = "custom-irsa-role"
-  attach_custom_policy       = true
+  role_name            = "custom-irsa-role"
+  attach_custom_policy = true
 
   assume_role_condition_test = "StringLike"
 
@@ -379,7 +379,7 @@ module "custom_irsa_role" {
           "s3:*",
         ]
         Resource = module.s3_bucket.s3_bucket_arn
-      }, 
+      },
       {
         Effect = "Allow"
         Action = [
