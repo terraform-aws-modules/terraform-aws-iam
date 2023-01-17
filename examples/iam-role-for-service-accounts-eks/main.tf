@@ -329,6 +329,78 @@ module "vpc_cni_ipv6_irsa_role" {
 }
 
 ################################################################################
+# Custom IRSA Roles
+################################################################################
+
+# This is an example of a custom IRSA role which allows workloads with the specified serviceccount to perform actions in a S3 bucket.
+module "s3_bucket" {
+  source = "terraform-aws-modules/s3-bucket/aws"
+
+  bucket = "custom-irsa-role-bucket"
+  acl    = "private"
+
+  server_side_encryption_configuration = {
+    rule = {
+      apply_server_side_encryption_by_default = {
+        sse_algorithm = "aws:kms"
+      }
+    }
+  }
+
+  versioning = {
+    status = true
+  }
+  #Bucket policies
+  attach_policy = true
+  attach_deny_insecure_transport_policy = true
+  attach_require_latest_tls_policy      = true
+
+  # S3 bucket-level Public Access Block configuration
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+
+}
+
+module "custom_irsa_role" {
+  source = "./terraform-aws-iam/modules/iam-role-for-service-accounts-eks"
+
+  role_name                  = "custom-irsa-role"
+  attach_custom_policy       = true
+
+  assume_role_condition_test = "StringLike"
+
+  custom_policy_document = jsonencode({
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:*",
+        ]
+        Resource = module.s3_bucket.s3_bucket_arn
+      }, 
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:*",
+        ]
+        Resource = "${s3_bucket.s3_bucket_arn}/*"
+      }
+    ]
+  })
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["*:custom-irsa-role"]
+    }
+  }
+
+  tags = local.tags
+}
+
+################################################################################
 # Supporting Resources
 ################################################################################
 
