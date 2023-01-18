@@ -14,17 +14,17 @@ locals {
 data "aws_iam_policy_document" "iam_self_management" {
   statement {
     sid = "AllowViewAccountInfo"
-    
+
     effect = "Allow"
-    
+
     actions = [
       "iam:GetAccountPasswordPolicy",
-      "iam:ListVirtualMFADevices"     
+      "iam:ListVirtualMFADevices"
     ]
 
     resources = ["*"]
   }
-  
+
   statement {
     sid = "AllowManageOwnPasswords"
 
@@ -36,7 +36,7 @@ data "aws_iam_policy_document" "iam_self_management" {
     ]
 
     resources = ["arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}"]
-  }  
+  }
 
   statement {
     sid = "AllowManageOwnAccessKeys"
@@ -51,7 +51,7 @@ data "aws_iam_policy_document" "iam_self_management" {
     ]
 
     resources = ["arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}"]
-  }    
+  }
 
   statement {
     sid = "AllowManageOwnSigningCertificates"
@@ -83,7 +83,7 @@ data "aws_iam_policy_document" "iam_self_management" {
 
     resources = ["arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}"]
   }
-  
+
   statement {
     sid = "AllowManageOwnGitCredentials"
 
@@ -150,5 +150,5 @@ data "aws_iam_policy_document" "iam_self_management" {
       variable = "aws:MultiFactorAuthPresent"
       values   = ["false"]
     }
-  }  
+  }
 }
