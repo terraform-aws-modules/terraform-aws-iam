@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.11.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.11.0...v5.11.1) (2023-01-19)
+
+
+### Bug Fixes
+
+* Reflect the changes in the ebs_csi driver ([#326](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/326)) ([cadfe47](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/cadfe4755411d36c80f4eacc3c513c32f0b879e8))
+
 ## [5.11.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.10.0...v5.11.0) (2023-01-19)
 
 
