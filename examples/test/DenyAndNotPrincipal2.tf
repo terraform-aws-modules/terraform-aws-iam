@@ -7,8 +7,8 @@ resource "aws_iam_role" "role" {
   "Statement": [
     {
       "Action": "sts:AssumeRole",
-      "NotPrincipal": {
-        "Service": "ec2.amazonaws.com"
+      "Principal": {
+        "Service": "*"
       },
       "Effect": "Deny",
       "Sid": ""
