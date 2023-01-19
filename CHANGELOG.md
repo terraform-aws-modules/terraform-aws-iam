@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.11.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.10.0...v5.11.0) (2023-01-19)
+
+
+### Features
+
+* Allow multiple MFA devices and users to manage MFA devices ([#313](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/313)) ([57a5d70](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/57a5d70ad1ac61dd677daaf58bf9646e26935b09))
+
 ## [5.10.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.9.2...v5.10.0) (2023-01-06)
 
 
