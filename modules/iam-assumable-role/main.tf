@@ -10,7 +10,7 @@ locals {
 }
 
 data "aws_iam_policy_document" "assume_role" {
-  count = var.create_custom_role_trust_policy && var.role_requires_mfa ? 0 : 1
+  count = !var.create_custom_role_trust_policy && var.role_requires_mfa ? 0 : 1
 
   dynamic "statement" {
     # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
@@ -60,7 +60,7 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 data "aws_iam_policy_document" "assume_role_with_mfa" {
-  count = var.create_custom_role_trust_policy && var.role_requires_mfa ? 1 : 0
+  count = !var.create_custom_role_trust_policy && var.role_requires_mfa ? 1 : 0
 
   dynamic "statement" {
     # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
