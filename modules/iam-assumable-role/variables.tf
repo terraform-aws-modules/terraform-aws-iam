@@ -89,10 +89,7 @@ variable "custom_role_trust_policy" {
 }
 
 variable "create_custom_role_trust_policy" {
-  description = <<EOF
-    Whether to create a custom_role_trust_policy.
-    This help to prevent errors with count, when custom_role_trust_policy have to be computed
-  EOF
+  description = "Whether to create a custom_role_trust_policy. Prevent errors with count, when custom_role_trust_policy is computed"
   type        = bool
   default     = false
 }
