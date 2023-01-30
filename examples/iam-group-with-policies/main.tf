@@ -38,6 +38,25 @@ module "iam_group_superadmins" {
 }
 
 #####################################################################################
+# IAM group for billing with full Administrator access
+#####################################################################################
+module "iam_group_force_mfa" {
+  source = "../../modules/iam-group-with-policies"
+
+  name = "billing"
+
+  group_users = [
+    module.iam_user1.iam_user_name,
+    module.iam_user2.iam_user_name,
+  ]
+
+  custom_group_policy_arns = [
+    "arn:aws:iam::aws:policy/job-function/Billing",
+  ]
+  attach_force_mfa_policy = true
+}
+
+#####################################################################################
 # IAM group for users with custom access
 #####################################################################################
 module "iam_group_with_custom_policies" {
