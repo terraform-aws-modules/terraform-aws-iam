@@ -52,6 +52,15 @@ resource "aws_iam_policy" "iam_self_management" {
   tags = var.tags
 }
 
+resource "aws_iam_policy" "force_mfa" {
+  count = var.attach_force_mfa_policy ? 1 : 0
+
+  name_prefix = var.force_mfa_policy_name_prefix
+  policy      = data.aws_iam_policy_document.force_mfa.json
+
+  tags = var.tags
+}
+
 resource "aws_iam_policy" "custom" {
   count = length(var.custom_group_policies)
 
