@@ -14,6 +14,7 @@ module "iam_user2" {
   source = "../../modules/iam-user"
 
   name = "user2"
+  path = "/developers/"
 
   create_iam_user_login_profile = false
   create_iam_access_key         = false
