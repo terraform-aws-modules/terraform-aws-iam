@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.11.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.11.1...v5.11.2) (2023-02-15)
+
+
+### Bug Fixes
+
+* Allow Change Password when no MFA present ([#340](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/340)) ([0c1cfaa](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/0c1cfaaaa2a4aca668c1e30800c6c0392976f6bb))
+
 ### [5.11.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.11.0...v5.11.1) (2023-01-19)
 
 
