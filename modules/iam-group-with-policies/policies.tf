@@ -134,6 +134,7 @@ data "aws_iam_policy_document" "iam_self_management" {
     effect = "Deny"
 
     not_actions = [
+      "iam:ChangePassword",
       "iam:CreateVirtualMFADevice",
       "iam:EnableMFADevice",
       "iam:GetUser",
