@@ -533,7 +533,7 @@ data "aws_iam_policy_document" "karpenter_controller" {
     ]
 
     resources = [
-      "arn:aws:eks:${local.partition}:${local.account_id}:cluster/${var.karpenter_controller_cluster_id}"
+      "arn:aws:eks:${local.region}:${local.account_id}:cluster/${var.karpenter_controller_cluster_id}"
     ]
   }
   
