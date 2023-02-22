@@ -7,7 +7,7 @@ resource "aws_iam_role" "role" {
   "Statement": [
     {
       "Action": "sts:AssumeRole",
-      "Principal": {
+      "NotPrincipal": {
         "Service": "*"
       },
       "Effect": "Deny",
