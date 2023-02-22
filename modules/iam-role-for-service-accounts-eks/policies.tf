@@ -529,6 +529,16 @@ data "aws_iam_policy_document" "karpenter_controller" {
 
   statement {
     actions = [
+      "eks:DescribeCluster",
+    ]
+
+    resources = [
+      "arn:aws:eks:${local.partition}:${local.account_id}:cluster/${var.karpenter_controller_cluster_id}"
+    ]
+  }
+  
+  statement {
+    actions = [
       "ec2:CreateFleet",
       "ec2:CreateLaunchTemplate",
       "ec2:CreateTags",
