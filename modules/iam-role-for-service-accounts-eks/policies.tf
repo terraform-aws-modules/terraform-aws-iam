@@ -1288,32 +1288,3 @@ resource "aws_iam_role_policy_attachment" "vpc_cni" {
   role       = aws_iam_role.this[0].name
   policy_arn = aws_iam_policy.vpc_cni[0].arn
 }
-
-################################################################################
-# Custom Policy
-################################################################################
-
-data "aws_iam_policy_document" "custom" {
-  count = var.create_role && var.attach_custom_policy ? 1 : 0
-
-  source_policy_documents = [var.custom_policy_document]
-
-}
-
-resource "aws_iam_policy" "custom" {
-  count = var.create_role && var.attach_custom_policy ? 1 : 0
-
-  name_prefix = var.policy_name_prefix
-  path        = var.role_path
-  description = ""
-  policy      = data.aws_iam_policy_document.custom[0].json
-
-  tags = var.tags
-}
-
-resource "aws_iam_role_policy_attachment" "custom" {
-  count = var.create_role && var.attach_custom_policy ? 1 : 0
-
-  role       = aws_iam_role.this[0].name
-  policy_arn = aws_iam_policy.custom[0].arn
-}

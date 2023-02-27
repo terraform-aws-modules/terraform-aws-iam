@@ -307,16 +307,3 @@ variable "node_termination_handler_sqs_queue_arns" {
   type        = list(string)
   default     = ["*"]
 }
-
-# Custom policy
-variable "attach_custom_policy" {
-  description = "Determines whether to attach the Custom policy to the role"
-  type        = bool
-  default     = false
-}
-
-variable "custom_policy_document" {
-  description = "Custom IAM policy document jsonencoded"
-  type        = string
-  default     = false
-}
