@@ -334,14 +334,14 @@ module "vpc_cni_ipv6_irsa_role" {
 
 # This is an example of a custom IRSA role which allows workloads with the specified serviceccount to perform actions in a S3 bucket.
 module "iam_policy" {
-  source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
+  source = "terraform-aws-modules/iam/aws//modules/iam-policy"
 
   name        = "myapp"
   path        = "/"
   description = "Example policy"
 
   policy = jsonencode({
-    Version   = "2012-10-17"
+    Version = "2012-10-17"
     Statement = [
       {
         Effect = "Allow"
