@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.12.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.11.2...v5.12.0) (2023-03-08)
+
+
+### Features
+
+* Add `eks:DescribeCluster` for Karpenter cluster endpoint auto discovery ([#343](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/343)) ([3f2cdc8](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/3f2cdc888e94f4acc45c756c43a0d9f79354b73e))
+
 ### [5.11.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.11.1...v5.11.2) (2023-02-15)
 
 
