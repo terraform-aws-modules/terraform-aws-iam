@@ -601,7 +601,7 @@ data "aws_iam_policy_document" "karpenter_controller" {
 
   statement {
     actions   = ["eks:DescribeCluster"]
-    resources = ["arn:aws:eks:${local.region}:${local.account_id}:cluster/${var.karpenter_controller_cluster_id}"]
+    resources = ["arn:${local.partition}:eks:${local.region}:${local.account_id}:cluster/${var.karpenter_controller_cluster_id}"]
   }
 
   dynamic "statement" {
