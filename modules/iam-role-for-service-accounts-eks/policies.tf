@@ -599,6 +599,11 @@ data "aws_iam_policy_document" "karpenter_controller" {
     resources = var.karpenter_controller_node_iam_role_arns
   }
 
+  statement {
+    actions   = ["eks:DescribeCluster"]
+    resources = ["arn:${local.partition}:eks:${local.region}:${local.account_id}:cluster/${var.karpenter_controller_cluster_id}"]
+  }
+
   dynamic "statement" {
     for_each = var.karpenter_sqs_queue_arn != null ? [1] : []
 
