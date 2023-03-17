@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.14.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.13.0...v5.14.0) (2023-03-17)
+
+
+### Features
+
+* Update efs_csi policy to support resource tagging ([#352](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/352)) ([47cb7a2](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/47cb7a234786c0ce3d3eb9f403d975a17823ba76))
+
+## [5.13.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.12.0...v5.13.0) (2023-03-10)
+
+
+### Features
+
+* Add support for `path` in `iam-group-with-assumable-roles-policy` ([#345](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/345)) ([761368e](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/761368e495ca04beaf5259c29fde5e107db7989f))
+
 ## [5.12.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.11.2...v5.12.0) (2023-03-08)
 
 
