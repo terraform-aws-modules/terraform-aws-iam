@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.14.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.13.0...v5.14.0) (2023-03-17)
+
+
+### Features
+
+* Update efs_csi policy to support resource tagging ([#352](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/352)) ([47cb7a2](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/47cb7a234786c0ce3d3eb9f403d975a17823ba76))
+
 ## [5.13.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.12.0...v5.13.0) (2023-03-10)
 
 
