@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.14.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.14.0...v5.14.1) (2023-03-21)
+
+
+### Bug Fixes
+
+* Update self manage policy to support users with path ([#335](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/335)) ([9a8d5cb](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/9a8d5cb68da61f8bf19e45051f2faf399026dd44))
+
 ## [5.14.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.13.0...v5.14.0) (2023-03-17)
 
 
