@@ -14,8 +14,6 @@ data "aws_caller_identity" "current" {}
 data "aws_partition" "current" {}
 
 data "aws_iam_policy_document" "assume_role_with_oidc" {
-  count = var.create_role ? 1 : 0
-
   dynamic "statement" {
     # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
     for_each = var.allow_self_assume_role ? [1] : []
@@ -96,7 +94,7 @@ resource "aws_iam_role" "this" {
   force_detach_policies = var.force_detach_policies
   permissions_boundary  = var.role_permissions_boundary_arn
 
-  assume_role_policy = data.aws_iam_policy_document.assume_role_with_oidc[0].json
+  assume_role_policy = data.aws_iam_policy_document.assume_role_with_oidc.json
 
   tags = var.tags
 }

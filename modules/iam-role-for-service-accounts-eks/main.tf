@@ -11,8 +11,6 @@ locals {
 }
 
 data "aws_iam_policy_document" "this" {
-  count = var.create_role ? 1 : 0
-
   dynamic "statement" {
     # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
     for_each = var.allow_self_assume_role ? [1] : []
@@ -72,7 +70,7 @@ resource "aws_iam_role" "this" {
   path        = var.role_path
   description = var.role_description
 
-  assume_role_policy    = data.aws_iam_policy_document.this[0].json
+  assume_role_policy    = data.aws_iam_policy_document.this.json
   max_session_duration  = var.max_session_duration
   permissions_boundary  = var.role_permissions_boundary_arn
   force_detach_policies = var.force_detach_policies

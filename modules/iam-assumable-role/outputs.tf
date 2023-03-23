@@ -47,3 +47,8 @@ output "role_sts_externalid" {
   description = "STS ExternalId condition value to use with a role"
   value       = var.role_sts_externalid
 }
+
+output "iam_role_assume_role_policy_json" {
+  description = "Assume Role Policy JSON document of IAM Role"
+  value       = local.assume_role_policy_json
+}

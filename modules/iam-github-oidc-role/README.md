@@ -102,6 +102,7 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_arn"></a> [arn](#output\_arn) | ARN of IAM role |
+| <a name="output_assume_role_policy_json"></a> [assume\_role\_policy\_json](#output\_assume\_role\_policy\_json) | Assume Role Policy JSON document of IAM Role |
 | <a name="output_name"></a> [name](#output\_name) | Name of IAM role |
 | <a name="output_path"></a> [path](#output\_path) | Path of IAM role |
 | <a name="output_unique_id"></a> [unique\_id](#output\_unique\_id) | Unique ID of IAM role |

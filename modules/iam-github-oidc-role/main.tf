@@ -14,8 +14,6 @@ locals {
 ################################################################################
 
 data "aws_iam_policy_document" "this" {
-  count = var.create ? 1 : 0
-
   statement {
     sid    = "GithubOidcAuth"
     effect = "Allow"
@@ -58,7 +56,7 @@ resource "aws_iam_role" "this" {
   path        = var.path
   description = var.description
 
-  assume_role_policy    = data.aws_iam_policy_document.this[0].json
+  assume_role_policy    = data.aws_iam_policy_document.this.json
   max_session_duration  = var.max_session_duration
   permissions_boundary  = var.permissions_boundary_arn
   force_detach_policies = var.force_detach_policies
