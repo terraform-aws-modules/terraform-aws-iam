@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.14.3](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.14.2...v5.14.3) (2023-03-23)
+
+
+### Bug Fixes
+
+* Do not attach force MFA statement for iam-groups-with-policies by default ([#333](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/333)) ([b9f3409](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/b9f3409fb696abee186b5b914e87ef7a783492a0))
+
 ### [5.14.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.14.1...v5.14.2) (2023-03-21)
 
 
