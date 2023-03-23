@@ -432,10 +432,14 @@ data "aws_iam_policy_document" "external_secrets" {
   count = var.create_role && var.attach_external_secrets_policy ? 1 : 0
 
   statement {
+    actions   = ["ssm:DescribeParameters"]
+    resources = ["*"]
+  }
+
+  statement {
     actions = [
       "ssm:GetParameter",
       "ssm:GetParameters",
-      "ssm:DescribeParameters",
     ]
     resources = var.external_secrets_ssm_parameter_arns
   }
