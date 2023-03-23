@@ -144,31 +144,30 @@ data "aws_iam_policy_document" "iam_self_management" {
       "arn:${local.partition}:iam::${local.aws_account_id}:user/*/$${aws:username}"
     ]
   }
-}
 
-data "aws_iam_policy_document" "force_mfa" {
-  statement {
-    sid = "DenyAllExceptListedIfNoMFA"
+  dynamic "statement" {
+    for_each = var.enable_mfa_enforcment ? [1] : []
 
-    effect = "Deny"
+    content {
+      sid    = "DenyAllExceptListedIfNoMFA"
+      effect = "Deny"
+      not_actions = [
+        "iam:ChangePassword",
+        "iam:CreateVirtualMFADevice",
+        "iam:EnableMFADevice",
+        "iam:GetUser",
+        "iam:ListMFADevices",
+        "iam:ListVirtualMFADevices",
+        "iam:ResyncMFADevice",
+        "sts:GetSessionToken"
+      ]
+      resources = ["*"]
 
-    not_actions = [
-      "iam:ChangePassword",
-      "iam:CreateVirtualMFADevice",
-      "iam:EnableMFADevice",
-      "iam:GetUser",
-      "iam:ListMFADevices",
-      "iam:ListVirtualMFADevices",
-      "iam:ResyncMFADevice",
-      "sts:GetSessionToken"
-    ]
-
-    resources = ["*"]
-
-    condition {
-      test     = "BoolIfExists"
-      variable = "aws:MultiFactorAuthPresent"
-      values   = ["false"]
+      condition {
+        test     = "BoolIfExists"
+        variable = "aws:MultiFactorAuthPresent"
+        values   = ["false"]
+      }
     }
   }
 }

@@ -32,7 +32,6 @@ Run `terraform destroy` when you don't need these resources.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_iam_group_force_mfa"></a> [iam\_group\_force\_mfa](#module\_iam\_group\_force\_mfa) | ../../modules/iam-group-with-policies | n/a |
 | <a name="module_iam_group_superadmins"></a> [iam\_group\_superadmins](#module\_iam\_group\_superadmins) | ../../modules/iam-group-with-policies | n/a |
 | <a name="module_iam_group_with_custom_policies"></a> [iam\_group\_with\_custom\_policies](#module\_iam\_group\_with\_custom\_policies) | ../../modules/iam-group-with-policies | n/a |
 | <a name="module_iam_user1"></a> [iam\_user1](#module\_iam\_user1) | ../../modules/iam-user | n/a |

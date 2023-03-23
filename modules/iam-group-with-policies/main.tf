@@ -26,13 +26,6 @@ resource "aws_iam_group_policy_attachment" "iam_self_management" {
   policy_arn = aws_iam_policy.iam_self_management[0].arn
 }
 
-resource "aws_iam_group_policy_attachment" "force_mfa" {
-  count = var.attach_force_mfa_policy ? 1 : 0
-
-  group      = local.group_name
-  policy_arn = aws_iam_policy.force_mfa[0].arn
-}
-
 resource "aws_iam_group_policy_attachment" "custom_arns" {
   count = length(var.custom_group_policy_arns)
 
@@ -55,15 +48,6 @@ resource "aws_iam_policy" "iam_self_management" {
 
   name_prefix = var.iam_self_management_policy_name_prefix
   policy      = data.aws_iam_policy_document.iam_self_management.json
-
-  tags = var.tags
-}
-
-resource "aws_iam_policy" "force_mfa" {
-  count = var.attach_force_mfa_policy ? 1 : 0
-
-  name_prefix = var.force_mfa_policy_name_prefix
-  policy      = data.aws_iam_policy_document.force_mfa.json
 
   tags = var.tags
 }

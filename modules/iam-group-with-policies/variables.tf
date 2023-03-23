@@ -28,16 +28,10 @@ variable "custom_group_policies" {
   default     = []
 }
 
-variable "attach_force_mfa_policy" {
-  description = "Whether to attach IAM policy which users to use MFA for console and API requests"
+variable "enable_mfa_enforcment" {
+  description = "Determines whether permissions are added to the policy which requires the groups IAM users to use MFA"
   type        = bool
-  default     = false
-}
-
-variable "force_mfa_policy_name_prefix" {
-  description = "Name prefix for IAM policy to create with Force MFA statements"
-  type        = string
-  default     = "ForceMFA-"
+  default     = true
 }
 
 variable "attach_iam_self_management_policy" {
