@@ -28,6 +28,12 @@ variable "custom_group_policies" {
   default     = []
 }
 
+variable "enable_mfa_enforcment" {
+  description = "Determines whether permissions are added to the policy which requires the groups IAM users to use MFA"
+  type        = bool
+  default     = true
+}
+
 variable "attach_iam_self_management_policy" {
   description = "Whether to attach IAM policy which allows IAM users to manage their credentials and MFA"
   type        = bool

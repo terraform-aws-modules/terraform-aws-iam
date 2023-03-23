@@ -44,6 +44,7 @@ No modules.
 | <a name="input_create_group"></a> [create\_group](#input\_create\_group) | Whether to create IAM group | `bool` | `true` | no |
 | <a name="input_custom_group_policies"></a> [custom\_group\_policies](#input\_custom\_group\_policies) | List of maps of inline IAM policies to attach to IAM group. Should have `name` and `policy` keys in each element. | `list(map(string))` | `[]` | no |
 | <a name="input_custom_group_policy_arns"></a> [custom\_group\_policy\_arns](#input\_custom\_group\_policy\_arns) | List of IAM policies ARNs to attach to IAM group | `list(string)` | `[]` | no |
+| <a name="input_enable_mfa_enforcment"></a> [enable\_mfa\_enforcment](#input\_enable\_mfa\_enforcment) | Determines whether permissions are added to the policy which requires the groups IAM users to use MFA | `bool` | `true` | no |
 | <a name="input_group_users"></a> [group\_users](#input\_group\_users) | List of IAM users to have in an IAM group which can assume the role | `list(string)` | `[]` | no |
 | <a name="input_iam_self_management_policy_name_prefix"></a> [iam\_self\_management\_policy\_name\_prefix](#input\_iam\_self\_management\_policy\_name\_prefix) | Name prefix for IAM policy to create with IAM self-management permissions | `string` | `"IAMSelfManagement-"` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of IAM group | `string` | `""` | no |

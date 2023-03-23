@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.14.3](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.14.2...v5.14.3) (2023-03-23)
+
+
+### Bug Fixes
+
+* Do not attach force MFA statement for iam-groups-with-policies by default ([#333](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/333)) ([b9f3409](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/b9f3409fb696abee186b5b914e87ef7a783492a0))
+
+### [5.14.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.14.1...v5.14.2) (2023-03-21)
+
+
+### Bug Fixes
+
+* Add `ssm:DescribeParameters` permission to `external-secrets` IAM role for service account (IRSA) ([#348](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/348)) ([fe8d73b](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/fe8d73b6ee0b96f4578e1744e023112f141b7bc4))
+
+### [5.14.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.14.0...v5.14.1) (2023-03-21)
+
+
+### Bug Fixes
+
+* Update self manage policy to support users with path ([#335](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/335)) ([9a8d5cb](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/9a8d5cb68da61f8bf19e45051f2faf399026dd44))
+
 ## [5.14.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.13.0...v5.14.0) (2023-03-17)
 
 
