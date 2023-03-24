@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.14.4](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.14.3...v5.14.4) (2023-03-24)
+
+
+### Bug Fixes
+
+* Add `kms:decrypt` policy for External Secret ([#349](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/349)) ([2359a03](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/2359a03662a5a713f37ed615c36e25ac5a1ee044))
+
 ### [5.14.3](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.14.2...v5.14.3) (2023-03-23)
 
 
