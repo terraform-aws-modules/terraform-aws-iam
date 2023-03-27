@@ -432,6 +432,11 @@ data "aws_iam_policy_document" "external_secrets" {
   count = var.create_role && var.attach_external_secrets_policy ? 1 : 0
 
   statement {
+    actions   = ["ssm:DescribeParameters"]
+    resources = ["*"]
+  }
+
+  statement {
     actions = [
       "ssm:GetParameter",
       "ssm:GetParameters",
@@ -452,6 +457,13 @@ data "aws_iam_policy_document" "external_secrets" {
       "secretsmanager:ListSecretVersionIds",
     ]
     resources = var.external_secrets_secrets_manager_arns
+  }
+
+  statement {
+    actions = [
+      "kms:Decrypt"
+    ]
+    resources = var.external_secrets_kms_key_arns
   }
 }
 

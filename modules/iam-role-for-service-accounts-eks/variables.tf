@@ -164,6 +164,12 @@ variable "external_secrets_secrets_manager_arns" {
   default     = ["arn:aws:secretsmanager:*:*:secret:*"]
 }
 
+variable "external_secrets_kms_key_arns" {
+  description = "List of KMS Key ARNs that are used by Secrets Manager that contain secrets to mount using External Secrets"
+  type        = list(string)
+  default     = ["arn:aws:kms:*:*:key/*"]
+}
+
 # FSx Lustre CSI
 variable "attach_fsx_lustre_csi_policy" {
   description = "Determines whether to attach the FSx for Lustre CSI Driver IAM policy to the role"
