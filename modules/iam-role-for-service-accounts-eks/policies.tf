@@ -877,6 +877,32 @@ data "aws_iam_policy_document" "load_balancer_controller" {
 
   statement {
     actions = [
+      "elasticloadbalancing:AddTags"
+    ]
+    resources = [
+      "arn:${local.partition}:elasticloadbalancing:*:*:targetgroup/*/*",
+      "arn:${local.partition}:elasticloadbalancing:*:*:loadbalancer/net/*/*",
+      "arn:${local.partition}:elasticloadbalancing:*:*:loadbalancer/app/*/*",
+    ]
+
+    condition {
+      test     = "StringEquals"
+      variable = "elasticloadbalancing:CreateAction"
+      values = [
+        "CreateTargetGroup",
+        "CreateLoadBalancer",
+      ]
+    }
+
+    condition {
+      test     = "Null"
+      variable = "aws:RequestTag/elbv2.k8s.aws/cluster"
+      values   = ["false"]
+    }
+  }
+
+  statement {
+    actions = [
       "elasticloadbalancing:RegisterTargets",
       "elasticloadbalancing:DeregisterTargets",
     ]
