@@ -75,7 +75,7 @@ data "aws_iam_policy_document" "cluster_autoscaler" {
       actions = [
         "autoscaling:SetDesiredCapacity",
         "autoscaling:TerminateInstanceInAutoScalingGroup",
-        "autoscaling:UpdateAutoScalingGroup"
+        "autoscaling:UpdateAutoScalingGroup",
       ]
 
       resources = ["*"]
