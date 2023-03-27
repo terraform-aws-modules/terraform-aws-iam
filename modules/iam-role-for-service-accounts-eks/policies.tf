@@ -62,6 +62,8 @@ data "aws_iam_policy_document" "cluster_autoscaler" {
       "ec2:DescribeLaunchTemplateVersions",
       "ec2:DescribeInstanceTypes",
       "eks:DescribeNodegroup",
+      "ec2:DescribeImages",
+      "ec2:GetInstanceTypesFromInstanceRequirements"
     ]
 
     resources = ["*"]
@@ -73,7 +75,7 @@ data "aws_iam_policy_document" "cluster_autoscaler" {
       actions = [
         "autoscaling:SetDesiredCapacity",
         "autoscaling:TerminateInstanceInAutoScalingGroup",
-        "autoscaling:UpdateAutoScalingGroup",
+        "autoscaling:UpdateAutoScalingGroup"
       ]
 
       resources = ["*"]
