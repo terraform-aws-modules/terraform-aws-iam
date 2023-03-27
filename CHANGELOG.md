@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.15.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.14.4...v5.15.0) (2023-03-27)
+
+
+### Features
+
+* Add permissions for instance requirements support for cluster autoscaler IRSA policy ([#356](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/356)) ([fac0cdc](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/fac0cdcc714e9497c3ef161bfa3c6ee94da339ef))
+
 ### [5.14.4](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.14.3...v5.14.4) (2023-03-24)
 
 
