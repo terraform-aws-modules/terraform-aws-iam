@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.16.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.15.0...v5.16.0) (2023-03-27)
+
+
+### Features
+
+* Add `elasticloadbalancing:AddTags` permissions to AWS Load Balancer Controller policy required for version 2.4.7+ ([#358](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/358)) ([e1403c1](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/e1403c15285137147db2698465e794d17059c848))
+
 ## [5.15.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.14.4...v5.15.0) (2023-03-27)
 
 
