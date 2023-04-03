@@ -2,9 +2,12 @@ data "aws_caller_identity" "current" {}
 data "aws_partition" "current" {}
 
 locals {
-  account_id  = data.aws_caller_identity.current.account_id
-  identifiers = compact(distinct(concat(var.provider_ids, [var.provider_id])))
-  partition   = data.aws_partition.current.partition
+  account_id                     = data.aws_caller_identity.current.account_id
+  identifiers                    = compact(distinct(concat(var.provider_ids, [var.provider_id])))
+  partition                      = data.aws_partition.current.partition
+  admin_max_session_duration     = var.admin_max_session_duration == null ? var.max_session_duration : var.admin_max_session_duration
+  poweruser_max_session_duration = var.poweruser_max_session_duration == null ? var.max_session_duration : var.poweruser_max_session_duration
+  readonly_max_session_duration  = var.readonly_max_session_duration == null ? var.max_session_duration : var.readonly_max_session_duration
 }
 
 data "aws_iam_policy_document" "assume_role_with_saml" {
@@ -99,7 +102,7 @@ resource "aws_iam_role" "admin" {
 
   name                 = var.admin_role_name
   path                 = var.admin_role_path
-  max_session_duration = var.max_session_duration
+  max_session_duration = local.admin_max_session_duration
 
   force_detach_policies = var.force_detach_policies
   permissions_boundary  = var.admin_role_permissions_boundary_arn
@@ -122,7 +125,7 @@ resource "aws_iam_role" "poweruser" {
 
   name                 = var.poweruser_role_name
   path                 = var.poweruser_role_path
-  max_session_duration = var.max_session_duration
+  max_session_duration = local.poweruser_max_session_duration
 
   force_detach_policies = var.force_detach_policies
   permissions_boundary  = var.poweruser_role_permissions_boundary_arn
@@ -145,7 +148,7 @@ resource "aws_iam_role" "readonly" {
 
   name                 = var.readonly_role_name
   path                 = var.readonly_role_path
-  max_session_duration = var.max_session_duration
+  max_session_duration = local.readonly_max_session_duration
 
   force_detach_policies = var.force_detach_policies
   permissions_boundary  = var.readonly_role_permissions_boundary_arn

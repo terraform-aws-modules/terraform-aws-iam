@@ -42,6 +42,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_admin_max_session_duration"></a> [admin\_max\_session\_duration](#input\_admin\_max\_session\_duration) | Maximum CLI/API session duration in seconds between 3600 and 43200 (admin role). If not set, max\_session\_duration will be used. | `number` | `null` | no |
 | <a name="input_admin_role_name"></a> [admin\_role\_name](#input\_admin\_role\_name) | IAM role with admin access | `string` | `"admin"` | no |
 | <a name="input_admin_role_path"></a> [admin\_role\_path](#input\_admin\_role\_path) | Path of admin IAM role | `string` | `"/"` | no |
 | <a name="input_admin_role_permissions_boundary_arn"></a> [admin\_role\_permissions\_boundary\_arn](#input\_admin\_role\_permissions\_boundary\_arn) | Permissions boundary ARN to use for admin role | `string` | `""` | no |
@@ -54,6 +55,7 @@ No modules.
 | <a name="input_create_readonly_role"></a> [create\_readonly\_role](#input\_create\_readonly\_role) | Whether to create readonly role | `bool` | `false` | no |
 | <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies) | Whether policies should be detached from this role when destroying | `bool` | `false` | no |
 | <a name="input_max_session_duration"></a> [max\_session\_duration](#input\_max\_session\_duration) | Maximum CLI/API session duration in seconds between 3600 and 43200 | `number` | `3600` | no |
+| <a name="input_poweruser_max_session_duration"></a> [poweruser\_max\_session\_duration](#input\_poweruser\_max\_session\_duration) | Maximum CLI/API session duration in seconds between 3600 and 43200 (poweruser role). If not set, max\_session\_duration will be used. | `number` | `null` | no |
 | <a name="input_poweruser_role_name"></a> [poweruser\_role\_name](#input\_poweruser\_role\_name) | IAM role with poweruser access | `string` | `"poweruser"` | no |
 | <a name="input_poweruser_role_path"></a> [poweruser\_role\_path](#input\_poweruser\_role\_path) | Path of poweruser IAM role | `string` | `"/"` | no |
 | <a name="input_poweruser_role_permissions_boundary_arn"></a> [poweruser\_role\_permissions\_boundary\_arn](#input\_poweruser\_role\_permissions\_boundary\_arn) | Permissions boundary ARN to use for poweruser role | `string` | `""` | no |
@@ -61,6 +63,7 @@ No modules.
 | <a name="input_poweruser_role_tags"></a> [poweruser\_role\_tags](#input\_poweruser\_role\_tags) | A map of tags to add to poweruser role resource. | `map(string)` | `{}` | no |
 | <a name="input_provider_id"></a> [provider\_id](#input\_provider\_id) | ID of the SAML Provider. Use provider\_ids to specify several IDs. | `string` | `""` | no |
 | <a name="input_provider_ids"></a> [provider\_ids](#input\_provider\_ids) | List of SAML Provider IDs | `list(string)` | `[]` | no |
+| <a name="input_readonly_max_session_duration"></a> [readonly\_max\_session\_duration](#input\_readonly\_max\_session\_duration) | Maximum CLI/API session duration in seconds between 3600 and 43200 (readonly role). If not set, max\_session\_duration will be used. | `number` | `null` | no |
 | <a name="input_readonly_role_name"></a> [readonly\_role\_name](#input\_readonly\_role\_name) | IAM role with readonly access | `string` | `"readonly"` | no |
 | <a name="input_readonly_role_path"></a> [readonly\_role\_path](#input\_readonly\_role\_path) | Path of readonly IAM role | `string` | `"/"` | no |
 | <a name="input_readonly_role_permissions_boundary_arn"></a> [readonly\_role\_permissions\_boundary\_arn](#input\_readonly\_role\_permissions\_boundary\_arn) | Permissions boundary ARN to use for readonly role | `string` | `""` | no |

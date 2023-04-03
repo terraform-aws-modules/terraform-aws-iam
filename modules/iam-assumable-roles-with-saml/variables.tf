@@ -59,6 +59,12 @@ variable "admin_role_tags" {
   default     = {}
 }
 
+variable "admin_max_session_duration" {
+  description = "Maximum CLI/API session duration in seconds between 3600 and 43200 (admin role). If not set, max_session_duration will be used."
+  type        = number
+  default     = null
+}
+
 # Poweruser
 variable "create_poweruser_role" {
   description = "Whether to create poweruser role"
@@ -96,6 +102,12 @@ variable "poweruser_role_tags" {
   default     = {}
 }
 
+variable "poweruser_max_session_duration" {
+  description = "Maximum CLI/API session duration in seconds between 3600 and 43200 (poweruser role). If not set, max_session_duration will be used."
+  type        = number
+  default     = null
+}
+
 # Readonly
 variable "create_readonly_role" {
   description = "Whether to create readonly role"
@@ -131,6 +143,12 @@ variable "readonly_role_tags" {
   description = "A map of tags to add to readonly role resource."
   type        = map(string)
   default     = {}
+}
+
+variable "readonly_max_session_duration" {
+  description = "Maximum CLI/API session duration in seconds between 3600 and 43200 (readonly role). If not set, max_session_duration will be used."
+  type        = number
+  default     = null
 }
 
 variable "max_session_duration" {
