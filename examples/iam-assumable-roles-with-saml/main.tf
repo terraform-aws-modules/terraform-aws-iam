@@ -77,3 +77,24 @@ module "iam_assumable_roles_with_saml_with_self_assume" {
 
   provider_id = aws_iam_saml_provider.idp_saml.id
 }
+
+###########################################################################
+# IAM assumable roles with SAML with dedicated max session duration per role
+###########################################################################
+module "iam_assumable_roles_with_saml_with_dedicated_max_session_duration" {
+  source = "../../modules/iam-assumable-roles-with-saml"
+
+  create_admin_role          = true
+  admin_role_name            = "Admin-Role-Custom-Max-Session-Duration"
+  admin_max_session_duration = 7200
+
+  create_poweruser_role          = true
+  poweruser_role_name            = "Poweruser-Role-Custom-Max-Session-Duration"
+  poweruser_max_session_duration = 14400
+
+  create_readonly_role          = true
+  readonly_role_name            = "Readonly-Role-Custom-Max-Session-Duration"
+  readonly_max_session_duration = 43200
+
+  provider_id = aws_iam_saml_provider.idp_saml.id
+}
