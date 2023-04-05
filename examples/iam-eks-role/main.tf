@@ -40,6 +40,27 @@ module "iam_eks_role_with_self_assume" {
   }
 }
 
+#############################################
+# IAM EKS role with wildcard assume condition
+#############################################
+module "iam_eks_role_with_assume_wildcard" {
+  source    = "../../modules/iam-eks-role"
+  role_name = "my-app-assume-wildcard"
+
+  cluster_service_accounts = {
+    (random_pet.this.id) = ["default:my-app-prefix-*"]
+  }
+  assume_role_condition_test = "StringLike"
+
+  tags = {
+    Name = "my-app-assume-wildcard"
+  }
+
+  role_policy_arns = {
+    AmazonEKS_CNI_Policy = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+  }
+}
+
 ##################
 # Extra resources
 ##################
