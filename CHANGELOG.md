@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.17.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.16.0...v5.17.0) (2023-04-08)
+
+
+### Features
+
+* Add `name_prefix` to iam-policy and iam-read-only-policy modules ([#369](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/369)) ([5bf5f6f](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/5bf5f6f7e539db6c9bd373370613a78dcf2d79ac))
+
 ## [5.16.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.15.0...v5.16.0) (2023-03-27)
 
 
