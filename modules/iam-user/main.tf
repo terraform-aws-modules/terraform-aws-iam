@@ -1,3 +1,9 @@
+data "http" "pgp_key" {
+  count = startswith(var.pgp_key, "http") ? 1 : 0
+  url   = var.pgp_key
+  request_headers = var.pgp_key_request_headers
+}
+
 resource "aws_iam_user" "this" {
   count = var.create_user ? 1 : 0
 
@@ -13,7 +19,7 @@ resource "aws_iam_user_login_profile" "this" {
   count = var.create_user && var.create_iam_user_login_profile ? 1 : 0
 
   user                    = aws_iam_user.this[0].name
-  pgp_key                 = var.pgp_key
+  pgp_key                 = startswith(var.pgp_key, "http") ? data.http.pgp_key.response_body : var.pgp_key
   password_length         = var.password_length
   password_reset_required = var.password_reset_required
 
