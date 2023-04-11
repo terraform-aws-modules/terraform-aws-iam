@@ -2,16 +2,21 @@
 
 Creates IAM user, IAM login profile, IAM access key and uploads IAM SSH user public key. All of these are optional resources.
 
-## Notes for keybase users
-
 **If possible, always use PGP encryption to prevent Terraform from keeping unencrypted password and access secret key in state file.**
 
-### Keybase pre-requisits
+## PGP encryption
 
+To encrypt passwords and access keys, provide a PGP key to `pgp_key` variable in one of three formats. 
+1. Keybase hosted public key: `keybase:username`
+2. Generic HTTP hosted public key: `http://example.com/my_pgp_key.pub`
+3. Explicit public key string: `-----BEGIN PGP PUBLIC KEY BLOCK----- .....`
+
+### Keybase
+
+#### Prerequsites
 When `pgp_key` is specified as `keybase:username`, make sure that that user has already uploaded public key to keybase.io. For example, user with username `test` has done it properly and you can [verify it here](https://keybase.io/test/pgp_keys.asc).
 
-### How to decrypt user's encrypted password and secret key
-
+#### How to decrypt user's encrypted password and secret key
 This module outputs commands and PGP messages which can be decrypted either using [keybase.io web-site](https://keybase.io/decrypt) or using command line to get user's password and user's secret key:
 - `keybase_password_decrypt_command`
 - `keybase_secret_key_decrypt_command`
@@ -19,6 +24,16 @@ This module outputs commands and PGP messages which can be decrypted either usin
 - `keybase_password_pgp_message`
 - `keybase_secret_key_pgp_message`
 - `keybase_ses_smtp_password_v4_pgp_message`
+
+
+### PGP key over Generic HTTP or as explicit string
+When `pgp_key` is a string starting with `http` or `https`, the module will attempt to download the public key over HTTP. Ensure that the key is available over the network, and provide any necessary request headers via `pgp_key_request_headers`.
+
+Note, when using the Generic HTTP URL or as explicit string, the Keybase decryption commands may not work. Instead, use the encrypted outputs directly in any decryption tool:
+- `iam_user_login_profile_encrypted_password`
+- `iam_access_key_encrypted_secret`
+- `iam_access_key_encrypted_ses_smtp_password_v4`
+
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
