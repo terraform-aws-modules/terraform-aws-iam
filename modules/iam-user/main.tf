@@ -1,6 +1,6 @@
 data "http" "pgp_key" {
-  count = startswith(var.pgp_key, "http") ? 1 : 0
-  url   = var.pgp_key
+  count           = startswith(var.pgp_key, "http") ? 1 : 0
+  url             = var.pgp_key
   request_headers = var.pgp_key_request_headers
 }
 

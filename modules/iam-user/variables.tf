@@ -34,9 +34,15 @@ variable "force_destroy" {
 }
 
 variable "pgp_key" {
-  description = "Either a base-64 encoded PGP public key, or a keybase username in the form `keybase:username`. Used to encrypt password and access key."
+  description = "Either a base-64 encoded PGP public key, a keybase username in the form `keybase:username`, or an HTTP/HTTPS url where the key is hosted. Used to encrypt password and access key."
   type        = string
   default     = ""
+}
+
+variable "pgp_key_request_headers" {
+  description = "Additional headers if fetching the key over HTTP."
+  type        = map(string)
+  default     = {}
 }
 
 variable "iam_access_key_status" {
