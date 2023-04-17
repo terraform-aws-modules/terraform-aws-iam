@@ -444,3 +444,36 @@ resource "aws_iam_policy" "additional" {
 
   tags = local.tags
 }
+
+module "role_with_inline_policies" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name = "role-with-inline"
+
+  inline_policies = [
+    {
+      name = "example-policy-name"
+      policy = jsonencode({
+        Version = "2012-10-17"
+        Statement = [
+          {
+            Action = [
+              "ec2:Describe*",
+            ]
+            Effect   = "Allow"
+            Resource = "*"
+          },
+        ]
+      })
+    }
+  ]
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["custom-ns:custom-role"]
+    }
+  }
+
+  tags = local.tags
+}

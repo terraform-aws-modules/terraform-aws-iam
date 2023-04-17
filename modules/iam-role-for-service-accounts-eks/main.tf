@@ -78,6 +78,15 @@ resource "aws_iam_role" "this" {
   force_detach_policies = var.force_detach_policies
 
   tags = var.tags
+
+  dynamic "inline_policy" {
+    for_each = var.inline_policies
+
+    content {
+      name   = lookup(inline_policy.value, "name")
+      policy = lookup(inline_policy.value, "policy")
+    }
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "this" {
