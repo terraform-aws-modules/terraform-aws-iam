@@ -20,7 +20,7 @@ resource "aws_iam_user_login_profile" "this" {
   count = var.create_user && var.create_iam_user_login_profile ? 1 : 0
 
   user                    = aws_iam_user.this[0].name
-  pgp_key                 = try(data.http.pgp_key[0].response_body, var.pgp_key)
+  pgp_key                 = try(base64encode(data.http.pgp_key[0].response_body), var.pgp_key)
   password_length         = var.password_length
   password_reset_required = var.password_reset_required
 
