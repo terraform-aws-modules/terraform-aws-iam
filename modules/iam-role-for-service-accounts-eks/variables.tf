@@ -167,7 +167,7 @@ variable "external_secrets_secrets_manager_arns" {
 variable "external_secrets_kms_key_arns" {
   description = "List of KMS Key ARNs that are used by Secrets Manager that contain secrets to mount using External Secrets"
   type        = list(string)
-  default     = ["arn:aws:kms:*:*:key/*"]
+  default     = []
 }
 
 # FSx Lustre CSI
