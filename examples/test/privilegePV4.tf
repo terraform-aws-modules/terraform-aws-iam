@@ -13,7 +13,7 @@ resource "aws_iam_policy" "privilegeEscalation_policy" {
           "sts:AssumeRole",
         ]
         Effect   = "Allow"
-        Resource = "role"
+        Resource = "arn:aws:iam::974224957526:role/Test-AdminAccess"
       },
     ]
   })
