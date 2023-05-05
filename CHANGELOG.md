@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.17.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.17.0...v5.17.1) (2023-05-05)
+
+
+### Bug Fixes
+
+* Remove `"autoscaling:UpdateAutoScalingGroup"` permission from cluster-autoscaler IRSA ([#357](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/357)) ([aeb5d7f](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/aeb5d7f3226714014f3cb8957d50de45fcfab007))
+
 ## [5.17.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.16.0...v5.17.0) (2023-04-08)
 
 
