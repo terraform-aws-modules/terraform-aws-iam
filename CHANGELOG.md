@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.17.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.17.0...v5.17.1) (2023-05-05)
+
+
+### Bug Fixes
+
+* Remove `"autoscaling:UpdateAutoScalingGroup"` permission from cluster-autoscaler IRSA ([#357](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/357)) ([aeb5d7f](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/aeb5d7f3226714014f3cb8957d50de45fcfab007))
+
+## [5.17.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.16.0...v5.17.0) (2023-04-08)
+
+
+### Features
+
+* Add `name_prefix` to iam-policy and iam-read-only-policy modules ([#369](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/369)) ([5bf5f6f](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/5bf5f6f7e539db6c9bd373370613a78dcf2d79ac))
+
 ## [5.16.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.15.0...v5.16.0) (2023-03-27)
 
 

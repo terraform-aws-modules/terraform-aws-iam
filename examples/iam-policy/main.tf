@@ -16,7 +16,7 @@ data "aws_iam_policy_document" "bucket_policy" {
 module "iam_policy" {
   source = "../../modules/iam-policy"
 
-  name        = "example"
+  name_prefix = "example-"
   path        = "/"
   description = "My example policy"
 
