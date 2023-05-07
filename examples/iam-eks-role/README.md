@@ -36,6 +36,7 @@ Run `terraform destroy` when you don't need these resources.
 |------|--------|---------|
 | <a name="module_eks"></a> [eks](#module\_eks) | terraform-aws-modules/eks/aws | ~> 18.0 |
 | <a name="module_iam_eks_role"></a> [iam\_eks\_role](#module\_iam\_eks\_role) | ../../modules/iam-eks-role | n/a |
+| <a name="module_iam_eks_role_with_assume_wildcard"></a> [iam\_eks\_role\_with\_assume\_wildcard](#module\_iam\_eks\_role\_with\_assume\_wildcard) | ../../modules/iam-eks-role | n/a |
 | <a name="module_iam_eks_role_with_self_assume"></a> [iam\_eks\_role\_with\_self\_assume](#module\_iam\_eks\_role\_with\_self\_assume) | ../../modules/iam-eks-role | n/a |
 
 ## Resources
