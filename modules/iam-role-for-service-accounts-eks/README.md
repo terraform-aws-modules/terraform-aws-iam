@@ -122,6 +122,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [aws_iam_policy.amazon_managed_service_prometheus](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
+| [aws_iam_policy.api_gateway_controller](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_policy.appmesh_controller](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_policy.appmesh_envoy_proxy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_policy.cert_manager](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
@@ -139,6 +140,7 @@ No modules.
 | [aws_iam_policy.vpc_cni](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_role.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy_attachment.amazon_managed_service_prometheus](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role_policy_attachment.api_gateway_controller](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.appmesh_controller](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.appmesh_envoy_proxy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.cert_manager](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
@@ -157,6 +159,7 @@ No modules.
 | [aws_iam_role_policy_attachment.vpc_cni](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.amazon_managed_service_prometheus](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.api_gateway_controller](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.appmesh_controller](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.appmesh_envoy_proxy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.cert_manager](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
@@ -184,6 +187,7 @@ No modules.
 | <a name="input_amazon_managed_service_prometheus_workspace_arns"></a> [amazon\_managed\_service\_prometheus\_workspace\_arns](#input\_amazon\_managed\_service\_prometheus\_workspace\_arns) | List of AMP Workspace ARNs to read and write metrics | `list(string)` | <pre>[<br>  "*"<br>]</pre> | no |
 | <a name="input_assume_role_condition_test"></a> [assume\_role\_condition\_test](#input\_assume\_role\_condition\_test) | Name of the [IAM condition operator](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html) to evaluate when assuming the role | `string` | `"StringEquals"` | no |
 | <a name="input_attach_amazon_managed_service_prometheus_policy"></a> [attach\_amazon\_managed\_service\_prometheus\_policy](#input\_attach\_amazon\_managed\_service\_prometheus\_policy) | Determines whether to attach the Amazon Managed Service for Prometheus IAM policy to the role | `bool` | `false` | no |
+| <a name="input_attach_api_gateway_controller_policy"></a> [attach\_api\_gateway\_controller\_policy](#input\_attach\_api\_gateway\_controller\_policy) | Determines whether to attach the API Gateway Controller IAM policy to the role | `bool` | `false` | no |
 | <a name="input_attach_appmesh_controller_policy"></a> [attach\_appmesh\_controller\_policy](#input\_attach\_appmesh\_controller\_policy) | Determines whether to attach the Appmesh Controller policy to the role | `bool` | `false` | no |
 | <a name="input_attach_appmesh_envoy_proxy_policy"></a> [attach\_appmesh\_envoy\_proxy\_policy](#input\_attach\_appmesh\_envoy\_proxy\_policy) | Determines whether to attach the Appmesh envoy proxy policy to the role | `bool` | `false` | no |
 | <a name="input_attach_cert_manager_policy"></a> [attach\_cert\_manager\_policy](#input\_attach\_cert\_manager\_policy) | Determines whether to attach the Cert Manager IAM policy to the role | `bool` | `false` | no |

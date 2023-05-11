@@ -33,6 +33,7 @@ Run `terraform destroy` when you don't need these resources.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_amazon_managed_service_prometheus_irsa_role"></a> [amazon\_managed\_service\_prometheus\_irsa\_role](#module\_amazon\_managed\_service\_prometheus\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
+| <a name="module_api_gateway_controller_irsa_role"></a> [api\_gateway\_controller\_irsa\_role](#module\_api\_gateway\_controller\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
 | <a name="module_appmesh_controller_irsa_role"></a> [appmesh\_controller\_irsa\_role](#module\_appmesh\_controller\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
 | <a name="module_appmesh_envoy_proxy_irsa_role"></a> [appmesh\_envoy\_proxy\_irsa\_role](#module\_appmesh\_envoy\_proxy\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
 | <a name="module_cert_manager_irsa_role"></a> [cert\_manager\_irsa\_role](#module\_cert\_manager\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |

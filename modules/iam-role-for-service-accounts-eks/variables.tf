@@ -86,6 +86,13 @@ variable "allow_self_assume_role" {
 # Policies
 ################################################################################
 
+# API Gateway Controller
+variable "attach_api_gateway_controller_policy" {
+  description = "Determines whether to attach the API Gateway Controller IAM policy to the role"
+  type        = bool
+  default     = false
+}
+
 # Cert Manager
 variable "attach_cert_manager_policy" {
   description = "Determines whether to attach the Cert Manager IAM policy to the role"

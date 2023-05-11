@@ -47,6 +47,22 @@ module "irsa_role" {
   tags = local.tags
 }
 
+module "api_gateway_controller_irsa_role" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name                            = "api-gateway-controller"
+  attach_api_gateway_controller_policy = true
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["aws-application-networking-system:gateway-api-controller"]
+    }
+  }
+
+  tags = local.tags
+}
+
 module "cert_manager_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 

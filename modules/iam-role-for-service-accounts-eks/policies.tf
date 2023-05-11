@@ -1,4 +1,42 @@
 ################################################################################
+# API Gateway Controller Policy
+################################################################################
+
+data "aws_iam_policy_document" "api_gateway_controller" {
+  count = var.create_role && var.attach_api_gateway_controller_policy ? 1 : 0
+
+  # https://github.com/aws/aws-application-networking-k8s/blob/main/examples/recommended-inline-policy.json
+  statement {
+    actions = [
+      "vpc-lattice:*",
+      "iam:CreateServiceLinkedRole",
+      "ec2:DescribeVpcs",
+      "ec2:DescribeSubnets",
+    ]
+    resources = ["*"]
+  }
+}
+
+
+resource "aws_iam_policy" "api_gateway_controller" {
+  count = var.create_role && var.attach_api_gateway_controller_policy ? 1 : 0
+
+  name_prefix = "${var.policy_name_prefix}APIGatewayController-"
+  path        = var.role_path
+  description = "Provides permissions for the API Gateway Controller"
+  policy      = data.aws_iam_policy_document.api_gateway_controller[0].json
+
+  tags = var.tags
+}
+
+resource "aws_iam_role_policy_attachment" "api_gateway_controller" {
+  count = var.create_role && var.attach_api_gateway_controller_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.api_gateway_controller[0].arn
+}
+
+################################################################################
 # Cert Manager Policy
 ################################################################################
 
