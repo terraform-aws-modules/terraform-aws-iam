@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.18.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.17.1...v5.18.0) (2023-05-07)
+
+
+### Features
+
+* **iam-eks-role:** Add variable to allow change of IAM assume role condition test operator ([#367](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/367)) ([542fc5a](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/542fc5ab905de0ac904523e48493f1f3174d3806))
+
 ### [5.17.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.17.0...v5.17.1) (2023-05-05)
 
 
