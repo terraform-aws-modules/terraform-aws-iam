@@ -19,7 +19,7 @@ resource "aws_iam_saml_provider" "second_idp_saml" {
 module "iam_assumable_roles_with_saml" {
   source = "../../modules/iam-assumable-roles-with-saml"
 
-  # create_admin_role = true
+  create_admin_role = true
 
   create_poweruser_role = true
   poweruser_role_name   = "developer"
