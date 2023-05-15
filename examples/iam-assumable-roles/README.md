@@ -24,18 +24,23 @@ Run `terraform destroy` when you don't need these resources.
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_iam_assumable_roles"></a> [iam\_assumable\_roles](#module\_iam\_assumable\_roles) | ../../modules/iam-assumable-roles | n/a |
+| <a name="module_iam_assumable_roles_with_custom_trust"></a> [iam\_assumable\_roles\_with\_custom\_trust](#module\_iam\_assumable\_roles\_with\_custom\_trust) | ../../modules/iam-assumable-roles | n/a |
 | <a name="module_iam_assumable_roles_with_self_assume"></a> [iam\_assumable\_roles\_with\_self\_assume](#module\_iam\_assumable\_roles\_with\_self\_assume) | ../../modules/iam-assumable-roles | n/a |
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [aws_iam_policy_document.custom_trust_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
 

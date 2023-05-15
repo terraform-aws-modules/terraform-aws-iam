@@ -19,7 +19,7 @@ resource "aws_iam_saml_provider" "second_idp_saml" {
 module "iam_assumable_roles_with_saml" {
   source = "../../modules/iam-assumable-roles-with-saml"
 
-  create_admin_role = true
+  # create_admin_role = true
 
   create_poweruser_role = true
   poweruser_role_name   = "developer"
@@ -76,4 +76,59 @@ module "iam_assumable_roles_with_saml_with_self_assume" {
   create_readonly_role   = true
 
   provider_id = aws_iam_saml_provider.idp_saml.id
+}
+
+################################################
+# IAM assumable roles with SAML with custom trust
+################################################
+module "iam_assumable_roles_with_saml_with_custom_trust" {
+  source = "../../modules/iam-assumable-roles-with-saml"
+
+  create_admin_role               = true
+  create_custom_role_trust_policy = true
+  custom_role_trust_policy        = data.aws_iam_policy_document.custom_trust_policy.json
+  create_poweruser_role           = true
+  admin_role_name                 = "Admin-Role-Name-Custom-Trust"
+  poweruser_role_name             = "Poweruser-Role-Name-Custom-Trust"
+  readonly_role_name              = "Readonly-Role-Name-Custom-Trust"
+  create_readonly_role            = true
+
+  provider_id = aws_iam_saml_provider.idp_saml.id
+}
+
+data "aws_iam_policy_document" "custom_trust_policy" {
+  statement {
+    effect  = "Allow"
+    actions = ["sts:AssumeRoleWithSAML"]
+
+    principals {
+      type = "Federated"
+      identifiers = [
+        aws_iam_saml_provider.idp_saml.id
+      ]
+    }
+    condition {
+      test     = "StringEquals"
+      variable = "SAML:aud"
+      values = [
+        "https://signin.aws.amazon.com/saml"
+      ]
+    }
+  }
+  statement {
+    effect  = "Allow"
+    actions = ["sts:TagSession"]
+
+    principals {
+      type = "Federated"
+      identifiers = [
+        aws_iam_saml_provider.idp_saml.id
+      ]
+    }
+    condition {
+      test     = "StringLike"
+      variable = "aws:RequestTag/groups"
+      values   = ["*"]
+    }
+  }
 }

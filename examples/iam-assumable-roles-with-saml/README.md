@@ -35,6 +35,7 @@ Run `terraform destroy` when you don't need these resources.
 | <a name="module_iam_assumable_roles_with_saml"></a> [iam\_assumable\_roles\_with\_saml](#module\_iam\_assumable\_roles\_with\_saml) | ../../modules/iam-assumable-roles-with-saml | n/a |
 | <a name="module_iam_assumable_roles_with_saml_custom"></a> [iam\_assumable\_roles\_with\_saml\_custom](#module\_iam\_assumable\_roles\_with\_saml\_custom) | ../../modules/iam-assumable-roles-with-saml | n/a |
 | <a name="module_iam_assumable_roles_with_saml_second_provider"></a> [iam\_assumable\_roles\_with\_saml\_second\_provider](#module\_iam\_assumable\_roles\_with\_saml\_second\_provider) | ../../modules/iam-assumable-roles-with-saml | n/a |
+| <a name="module_iam_assumable_roles_with_saml_with_custom_trust"></a> [iam\_assumable\_roles\_with\_saml\_with\_custom\_trust](#module\_iam\_assumable\_roles\_with\_saml\_with\_custom\_trust) | ../../modules/iam-assumable-roles-with-saml | n/a |
 | <a name="module_iam_assumable_roles_with_saml_with_self_assume"></a> [iam\_assumable\_roles\_with\_saml\_with\_self\_assume](#module\_iam\_assumable\_roles\_with\_saml\_with\_self\_assume) | ../../modules/iam-assumable-roles-with-saml | n/a |
 
 ## Resources
@@ -43,6 +44,7 @@ Run `terraform destroy` when you don't need these resources.
 |------|------|
 | [aws_iam_saml_provider.idp_saml](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_saml_provider) | resource |
 | [aws_iam_saml_provider.second_idp_saml](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_saml_provider) | resource |
+| [aws_iam_policy_document.custom_trust_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
 

@@ -105,3 +105,15 @@ variable "allow_self_assume_role" {
   type        = bool
   default     = false
 }
+
+variable "create_custom_role_trust_policy" {
+  description = "Whether to create a custom role trust policy to IAM role or not."
+  type        = bool
+  default     = false
+}
+
+variable "custom_role_trust_policy" {
+  description = "A custom role trust policy"
+  type        = string
+  default     = ""
+}

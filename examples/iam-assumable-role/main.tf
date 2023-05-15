@@ -104,8 +104,9 @@ module "iam_assumable_role_custom_trust_policy" {
 
   role_name = "iam_assumable_role_custom_trust_policy"
 
-  custom_role_trust_policy = data.aws_iam_policy_document.custom_trust_policy.json
-  custom_role_policy_arns  = ["arn:aws:iam::aws:policy/AmazonCognitoReadOnly"]
+  create_custom_role_trust_policy = true
+  custom_role_trust_policy        = data.aws_iam_policy_document.custom_trust_policy.json
+  custom_role_policy_arns         = ["arn:aws:iam::aws:policy/AmazonCognitoReadOnly"]
 }
 
 data "aws_iam_policy_document" "custom_trust_policy" {
@@ -156,62 +157,4 @@ module "iam_policy" {
   ]
 }
 EOF
-}
-
-# #########################################
-# # IAM assumable role with custom trust policy 2
-# #########################################
-
-resource "aws_iam_saml_provider" "idp_saml" {
-  name                   = "idp_saml"
-  saml_metadata_document = file("saml-metadata.xml")
-}
-
-data "aws_iam_policy_document" "custom_trust_policy_2" {
-  statement {
-    effect  = "Allow"
-    actions = ["sts:AssumeRoleWithSAML"]
-
-    principals {
-      type = "Federated"
-      identifiers = [
-        aws_iam_saml_provider.idp_saml.id
-      ]
-    }
-    condition {
-      test     = "StringEquals"
-      variable = "SAML:aud"
-      values = [
-        "https://signin.aws.amazon.com/saml"
-      ]
-    }
-  }
-  statement {
-    effect  = "Allow"
-    actions = ["sts:TagSession"]
-
-    principals {
-      type = "Federated"
-      identifiers = [
-        aws_iam_saml_provider.idp_saml.id
-      ]
-    }
-    condition {
-      test     = "StringLike"
-      variable = "aws:RequestTag/groups"
-      values   = ["*"]
-    }
-  }
-}
-
-module "iam_assumable_role_custom_trust_policy_2" {
-  source = "../../modules/iam-assumable-role"
-
-  create_role = true
-
-  role_name = "iam_assumable_role_custom_trust_policy_2"
-
-  create_custom_role_trust_policy = true
-  custom_role_trust_policy        = data.aws_iam_policy_document.custom_trust_policy_2.json
-  custom_role_policy_arns         = ["arn:aws:iam::aws:policy/AmazonCognitoReadOnly"]
 }
