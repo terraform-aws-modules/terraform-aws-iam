@@ -26,9 +26,9 @@ module "iam_assumable_role_admin" {
   oidc_fully_qualified_subjects = ["system:serviceaccount:default:sa1", "system:serviceaccount:default:sa2"]
 }
 
-#####################################
-# IAM assumable role with self assume
-#####################################
+################################################################
+# IAM assumable role with self assume and assume from Admin role
+################################################################
 module "iam_assumable_role_self_assume" {
   source = "../../modules/iam-assumable-role-with-oidc"
 
@@ -36,6 +36,15 @@ module "iam_assumable_role_self_assume" {
   allow_self_assume_role = true
 
   role_name = "role-with-oidc-self-assume"
+
+  assume_role_source_policies = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect    = "Allow"
+      Action    = ["sts:AssumeRole"]
+      Principal = { AWS = ["arn:aws:iam::012345678901:role/Admin"] }
+    }]
+  })
 
   tags = {
     Role = "role-with-oidc-self-assume"
@@ -50,3 +59,4 @@ module "iam_assumable_role_self_assume" {
 
   oidc_fully_qualified_subjects = ["system:serviceaccount:default:sa1", "system:serviceaccount:default:sa2"]
 }
+
