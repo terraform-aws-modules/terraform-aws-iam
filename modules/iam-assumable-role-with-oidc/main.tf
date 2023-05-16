@@ -16,6 +16,8 @@ data "aws_partition" "current" {}
 data "aws_iam_policy_document" "assume_role_with_oidc" {
   count = var.create_role ? 1 : 0
 
+  source_policy_documents = var.assume_role_source_policies
+
   dynamic "statement" {
     # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
     for_each = var.allow_self_assume_role ? [1] : []

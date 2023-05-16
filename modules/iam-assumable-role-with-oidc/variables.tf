@@ -105,3 +105,9 @@ variable "allow_self_assume_role" {
   type        = bool
   default     = false
 }
+
+variable "assume_role_source_policies" {
+  description = "JSON blobs to use as source_policy_documents for the assume role policy"
+  type        = list(string)
+  default     = []
+}
