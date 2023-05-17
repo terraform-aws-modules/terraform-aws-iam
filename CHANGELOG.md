@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.19.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.18.0...v5.19.0) (2023-05-17)
+
+
+### Features
+
+* Add support for condition role_session_name when assuming a role ([#379](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/379)) ([5aabe67](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/5aabe67c945a9a1cb05bb5d3820e6e54e4ef8f81))
+
 ## [5.18.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.17.1...v5.18.0) (2023-05-07)
 
 
