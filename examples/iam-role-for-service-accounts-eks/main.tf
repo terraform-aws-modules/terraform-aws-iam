@@ -2,9 +2,14 @@ provider "aws" {
   region = local.region
 }
 
+data "aws_availability_zones" "available" {}
+
 locals {
-  name   = "ex-iam-eks-role"
+  name   = "ex-irsa"
   region = "eu-west-1"
+
+  vpc_cidr = "10.0.0.0/16"
+  azs      = slice(data.aws_availability_zones.available.names, 0, 3)
 
   tags = {
     Example    = local.name
@@ -47,11 +52,11 @@ module "irsa_role" {
   tags = local.tags
 }
 
-module "api_gateway_controller_irsa_role" {
+module "aws_gateway_controller_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
-  role_name                            = "api-gateway-controller"
-  attach_api_gateway_controller_policy = true
+  role_name                            = "aws-gateway-controller"
+  attach_aws_gateway_controller_policy = true
 
   oidc_providers = {
     ex = {
@@ -85,7 +90,7 @@ module "cluster_autoscaler_irsa_role" {
 
   role_name                        = "cluster-autoscaler"
   attach_cluster_autoscaler_policy = true
-  cluster_autoscaler_cluster_ids   = [module.eks.cluster_id]
+  cluster_autoscaler_cluster_names = [module.eks.cluster_name]
 
   oidc_providers = {
     ex = {
@@ -185,7 +190,7 @@ module "karpenter_controller_irsa_role" {
   role_name                          = "karpenter-controller"
   attach_karpenter_controller_policy = true
 
-  karpenter_controller_cluster_id         = module.eks.cluster_id
+  karpenter_controller_cluster_name       = module.eks.cluster_name
   karpenter_controller_node_iam_role_arns = [module.eks.eks_managed_node_groups["default"].iam_role_arn]
 
   oidc_providers = {
@@ -377,7 +382,7 @@ module "iam_eks_role" {
   role_name = "my-app"
 
   role_policy_arns = {
-    policy = "arn:aws:iam::012345678901:policy/myapp"
+    policy = module.iam_policy.arn
   }
 
   oidc_providers = {
@@ -398,27 +403,24 @@ module "iam_eks_role" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 3.0"
+  version = "~> 4.0"
 
   name = local.name
-  cidr = "10.0.0.0/16"
+  cidr = local.vpc_cidr
 
-  azs             = ["${local.region}a", "${local.region}b", "${local.region}c"]
-  private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
-  public_subnets  = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
+  azs             = local.azs
+  private_subnets = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 4, k)]
+  public_subnets  = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 48)]
 
-  enable_nat_gateway   = true
-  single_nat_gateway   = true
-  enable_dns_hostnames = true
+  enable_nat_gateway = true
+  single_nat_gateway = true
 
   public_subnet_tags = {
-    "kubernetes.io/cluster/${local.name}" = "shared"
-    "kubernetes.io/role/elb"              = 1
+    "kubernetes.io/role/elb" = 1
   }
 
   private_subnet_tags = {
-    "kubernetes.io/cluster/${local.name}" = "shared"
-    "kubernetes.io/role/internal-elb"     = 1
+    "kubernetes.io/role/internal-elb" = 1
   }
 
   tags = local.tags
@@ -426,10 +428,10 @@ module "vpc" {
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 18.21"
+  version = "~> 19.14"
 
   cluster_name    = local.name
-  cluster_version = "1.22"
+  cluster_version = "1.26"
 
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
