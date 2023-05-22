@@ -105,3 +105,15 @@ variable "allow_self_assume_role" {
   type        = bool
   default     = false
 }
+
+variable "role_requires_session_name" {
+  description = "Determines if the role-session-name variable is needed when assuming a role(https://aws.amazon.com/blogs/security/easily-control-naming-individual-iam-role-sessions/)"
+  type        = bool
+  default     = false
+}
+
+variable "role_session_name" {
+  description = "role_session_name for roles which require this parameter when being assumed."
+  type        = list(string)
+  default     = [""]
+}
