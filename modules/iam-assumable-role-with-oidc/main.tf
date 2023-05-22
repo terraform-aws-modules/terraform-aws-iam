@@ -83,7 +83,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
 
       dynamic "condition" {
         for_each = var.role_requires_session_name ? [1] : []
-      
+
         content {
           test     = "StringEquals"
           variable = "sts:RoleSessionName"
