@@ -55,6 +55,8 @@ No modules.
 | <a name="input_role_path"></a> [role\_path](#input\_role\_path) | Path of IAM role | `string` | `"/"` | no |
 | <a name="input_role_permissions_boundary_arn"></a> [role\_permissions\_boundary\_arn](#input\_role\_permissions\_boundary\_arn) | Permissions boundary ARN to use for IAM role | `string` | `""` | no |
 | <a name="input_role_policy_arns"></a> [role\_policy\_arns](#input\_role\_policy\_arns) | List of ARNs of IAM policies to attach to IAM role | `list(string)` | `[]` | no |
+| <a name="input_role_requires_session_name"></a> [role\_requires\_session\_name](#input\_role\_requires\_session\_name) | Determines if the role-session-name variable is needed when assuming a role(https://aws.amazon.com/blogs/security/easily-control-naming-individual-iam-role-sessions/) | `bool` | `false` | no |
+| <a name="input_role_session_name"></a> [role\_session\_name](#input\_role\_session\_name) | role\_session\_name for roles which require this parameter when being assumed. | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to IAM role resources | `map(string)` | `{}` | no |
 
 ## Outputs
