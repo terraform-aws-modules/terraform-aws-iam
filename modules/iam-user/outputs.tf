@@ -149,3 +149,8 @@ output "iam_user_ssh_key_fingerprint" {
   description = "The MD5 message digest of the SSH public key"
   value       = try(aws_iam_user_ssh_key.this[0].fingerprint, "")
 }
+
+output "custom_iam_policy_arns" {
+  description = "The list of ARNs of policies directly assigned to the IAM user"
+  value       = var.custom_iam_policy_arns
+}
