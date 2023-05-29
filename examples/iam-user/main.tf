@@ -46,3 +46,21 @@ module "iam_user3" {
   create_iam_access_key         = true
   iam_access_key_status         = "Inactive"
 }
+
+###################################################################
+# IAM user with AmazonSNSReadOnlyAccess policy assigned
+###################################################################
+
+data "aws_iam_policy" "example" {
+  name = "AmazonS3ReadOnlyAccess"
+}
+
+module "iam_user4" {
+  source = "../../modules/iam-user"
+
+  name = "vasya.pupkin6"
+
+  create_iam_user_login_profile = false
+  create_iam_access_key         = true
+  custom_iam_policy_arns        = [data.aws_iam_policy.example.arn]
+}
