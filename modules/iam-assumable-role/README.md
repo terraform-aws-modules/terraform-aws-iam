@@ -63,6 +63,8 @@ No modules.
 | <a name="input_role_path"></a> [role\_path](#input\_role\_path) | Path of IAM role | `string` | `"/"` | no |
 | <a name="input_role_permissions_boundary_arn"></a> [role\_permissions\_boundary\_arn](#input\_role\_permissions\_boundary\_arn) | Permissions boundary ARN to use for IAM role | `string` | `""` | no |
 | <a name="input_role_requires_mfa"></a> [role\_requires\_mfa](#input\_role\_requires\_mfa) | Whether role requires MFA | `bool` | `true` | no |
+| <a name="input_role_requires_session_name"></a> [role\_requires\_session\_name](#input\_role\_requires\_session\_name) | Determines if the role-session-name variable is needed when assuming a role(https://aws.amazon.com/blogs/security/easily-control-naming-individual-iam-role-sessions/) | `bool` | `false` | no |
+| <a name="input_role_session_name"></a> [role\_session\_name](#input\_role\_session\_name) | role\_session\_name for roles which require this parameter when being assumed. By default, you need to set your own username as role\_session\_name | `list(string)` | <pre>[<br>  "${aws:username}"<br>]</pre> | no |
 | <a name="input_role_sts_externalid"></a> [role\_sts\_externalid](#input\_role\_sts\_externalid) | STS ExternalId condition values to use with a role (when MFA is not required) | `any` | `[]` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to IAM role resources | `map(string)` | `{}` | no |
 | <a name="input_trusted_role_actions"></a> [trusted\_role\_actions](#input\_trusted\_role\_actions) | Actions of STS | `list(string)` | <pre>[<br>  "sts:AssumeRole"<br>]</pre> | no |

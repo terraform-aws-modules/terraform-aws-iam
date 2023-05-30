@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.20.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.19.0...v5.20.0) (2023-05-22)
+
+
+### Features
+
+* Add support for AWS Gateway controller (VPC Lattice) to IRSA module ([#378](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/378)) ([fdee003](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/fdee003477c5f86c4236be08ef6a69dffbcc39fd))
+
+## [5.19.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.18.0...v5.19.0) (2023-05-17)
+
+
+### Features
+
+* Add support for condition role_session_name when assuming a role ([#379](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/379)) ([5aabe67](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/5aabe67c945a9a1cb05bb5d3820e6e54e4ef8f81))
+
 ## [5.18.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.17.1...v5.18.0) (2023-05-07)
 
 

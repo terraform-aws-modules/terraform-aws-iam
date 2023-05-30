@@ -86,6 +86,13 @@ variable "allow_self_assume_role" {
 # Policies
 ################################################################################
 
+# AWS Gateway Controller
+variable "attach_aws_gateway_controller_policy" {
+  description = "Determines whether to attach the AWS Gateway Controller IAM policy to the role"
+  type        = bool
+  default     = false
+}
+
 # Cert Manager
 variable "attach_cert_manager_policy" {
   description = "Determines whether to attach the Cert Manager IAM policy to the role"
@@ -107,7 +114,13 @@ variable "attach_cluster_autoscaler_policy" {
 }
 
 variable "cluster_autoscaler_cluster_ids" {
-  description = "List of cluster IDs to appropriately scope permissions within the Cluster Autoscaler IAM policy"
+  description = "[Deprecated - use `cluster_autoscaler_cluster_names`] List of cluster names to appropriately scope permissions within the Cluster Autoscaler IAM policy"
+  type        = list(string)
+  default     = []
+}
+
+variable "cluster_autoscaler_cluster_names" {
+  description = "List of cluster names to appropriately scope permissions within the Cluster Autoscaler IAM policy"
   type        = list(string)
   default     = []
 }
@@ -191,7 +204,13 @@ variable "attach_karpenter_controller_policy" {
 }
 
 variable "karpenter_controller_cluster_id" {
-  description = "Cluster ID where the Karpenter controller is provisioned/managing"
+  description = "[Deprecated - use `karpenter_controller_cluster_name`] The name of the cluster where the Karpenter controller is provisioned/managing"
+  type        = string
+  default     = "*"
+}
+
+variable "karpenter_controller_cluster_name" {
+  description = "The name of the cluster where the Karpenter controller is provisioned/managing"
   type        = string
   default     = "*"
 }

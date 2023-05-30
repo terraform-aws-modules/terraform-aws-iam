@@ -1,4 +1,42 @@
 ################################################################################
+# AWS Gateway Controller Policy
+################################################################################
+
+data "aws_iam_policy_document" "aws_gateway_controller" {
+  count = var.create_role && var.attach_aws_gateway_controller_policy ? 1 : 0
+
+  # https://github.com/aws/aws-application-networking-k8s/blob/v0.0.11/examples/recommended-inline-policy.json
+  statement {
+    actions = [
+      "vpc-lattice:*",
+      "iam:CreateServiceLinkedRole",
+      "ec2:DescribeVpcs",
+      "ec2:DescribeSubnets",
+    ]
+    resources = ["*"]
+  }
+}
+
+
+resource "aws_iam_policy" "aws_gateway_controller" {
+  count = var.create_role && var.attach_aws_gateway_controller_policy ? 1 : 0
+
+  name_prefix = "${var.policy_name_prefix}AWSGatewayController-"
+  path        = var.role_path
+  description = "Provides permissions for the AWS Gateway Controller"
+  policy      = data.aws_iam_policy_document.aws_gateway_controller[0].json
+
+  tags = var.tags
+}
+
+resource "aws_iam_role_policy_attachment" "aws_gateway_controller" {
+  count = var.create_role && var.attach_aws_gateway_controller_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.aws_gateway_controller[0].arn
+}
+
+################################################################################
 # Cert Manager Policy
 ################################################################################
 
@@ -70,7 +108,8 @@ data "aws_iam_policy_document" "cluster_autoscaler" {
   }
 
   dynamic "statement" {
-    for_each = toset(var.cluster_autoscaler_cluster_ids)
+    # TODO - remove *_ids at next breaking change
+    for_each = toset(coalescelist(var.cluster_autoscaler_cluster_ids, var.cluster_autoscaler_cluster_names))
     content {
       actions = [
         "autoscaling:SetDesiredCapacity",
@@ -547,6 +586,11 @@ resource "aws_iam_role_policy_attachment" "fsx_lustre_csi" {
 # Karpenter Controller Policy
 ################################################################################
 
+locals {
+  # TODO - remove this at next breaking change
+  karpenter_controller_cluster_name = var.karpenter_controller_cluster_name != "*" ? var.karpenter_controller_cluster_name : var.karpenter_controller_cluster_id
+}
+
 # https://github.com/aws/karpenter/blob/502d275cc330fb0f2435b124935c49632146d945/website/content/en/v0.19.0/getting-started/getting-started-with-eksctl/cloudformation.yaml#L34
 data "aws_iam_policy_document" "karpenter_controller" {
   count = var.create_role && var.attach_karpenter_controller_policy ? 1 : 0
@@ -583,7 +627,7 @@ data "aws_iam_policy_document" "karpenter_controller" {
     condition {
       test     = "StringEquals"
       variable = "ec2:ResourceTag/${var.karpenter_tag_key}"
-      values   = [var.karpenter_controller_cluster_id]
+      values   = [local.karpenter_controller_cluster_name]
     }
   }
 
@@ -596,7 +640,7 @@ data "aws_iam_policy_document" "karpenter_controller" {
     condition {
       test     = "StringEquals"
       variable = "ec2:ResourceTag/${var.karpenter_tag_key}"
-      values   = [var.karpenter_controller_cluster_id]
+      values   = [local.karpenter_controller_cluster_name]
     }
   }
 
@@ -625,7 +669,7 @@ data "aws_iam_policy_document" "karpenter_controller" {
 
   statement {
     actions   = ["eks:DescribeCluster"]
-    resources = ["arn:${local.partition}:eks:${local.region}:${local.account_id}:cluster/${var.karpenter_controller_cluster_id}"]
+    resources = ["arn:${local.partition}:eks:${local.region}:${local.account_id}:cluster/${local.karpenter_controller_cluster_name}"]
   }
 
   dynamic "statement" {
@@ -795,6 +839,7 @@ data "aws_iam_policy_document" "load_balancer_controller" {
 
   statement {
     actions = [
+      "elasticloadbalancing:AddTags",
       "elasticloadbalancing:CreateLoadBalancer",
       "elasticloadbalancing:CreateTargetGroup",
     ]
@@ -809,6 +854,7 @@ data "aws_iam_policy_document" "load_balancer_controller" {
 
   statement {
     actions = [
+      "elasticloadbalancing:AddTags",
       "elasticloadbalancing:CreateListener",
       "elasticloadbalancing:DeleteListener",
       "elasticloadbalancing:CreateRule",
