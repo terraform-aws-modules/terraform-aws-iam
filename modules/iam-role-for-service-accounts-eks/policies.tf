@@ -402,6 +402,20 @@ data "aws_iam_policy_document" "efs_csi" {
       values   = ["true"]
     }
   }
+
+  statement {
+    actions = [
+      "elasticfilesystem:ClientRootAccess",
+      "elasticfilesystem:ClientWrite",
+      "elasticfilesystem:ClientMount",
+    ]
+    resources = ["*"]
+    condition {
+      test     = "Bool"
+      variable = "elasticfilesystem:AccessedViaMountTarget"
+      values   = ["true"]
+    }
+  }
 }
 
 resource "aws_iam_policy" "efs_csi" {
