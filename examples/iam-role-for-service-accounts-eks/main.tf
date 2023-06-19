@@ -397,6 +397,27 @@ module "iam_eks_role" {
   }
 }
 
+module "kasten_irsa" {
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  version = "~> v5.3.1"
+
+  role_name                     = format("bea-babbage-eks-%s-kasten-irsa", local.region)
+  role_permissions_boundary_arn = format("arn:aws:iam::%s:policy/bea-platform-boundary-iam-policy", data.aws_caller_identity.current.account_id)
+
+  oidc_providers = {
+    main = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["kasten-io:kasten-sa"]
+    }
+  }
+  role_policy_arns = {
+    policy = data.aws_iam_policy.kasten_access_policy.arn
+      }
+  tags = local.tags
+}
+
+
+
 ################################################################################
 # Supporting Resources
 ################################################################################
