@@ -89,7 +89,7 @@ variable "allow_self_assume_role" {
 }
 
 variable "trusted_role_actions" {
-  description = "Extra Actions of STS"
+  description = "Actions of STS"
   type        = list(string)
-  default     = [""]
+  default     = ["sts:AssumeRoleWithSAML"]
 }

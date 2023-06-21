@@ -1,7 +1,7 @@
 variable "trusted_role_actions" {
-  description = "Extra Actions of STS"
+  description = "Actions of STS"
   type        = list(string)
-  default     = [""]
+  default     = ["sts:AssumeRole"]
 }
 
 variable "trusted_role_arns" {
