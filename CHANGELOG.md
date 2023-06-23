@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.21.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.20.0...v5.21.0) (2023-06-23)
+
+
+### Features
+
+* Added permissions to list zone tags in iam-role-for-service-accounts-eks module ([#394](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/394)) ([740945f](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/740945f62ea4c7a90631eaa3131415af5e3fa02b))
+
 ## [5.20.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.19.0...v5.20.0) (2023-05-22)
 
 
