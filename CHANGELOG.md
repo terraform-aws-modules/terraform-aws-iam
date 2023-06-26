@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.22.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.21.0...v5.22.0) (2023-06-26)
+
+
+### Features
+
+* Add wrapper modules ([#396](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/396)) ([9284b3e](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/9284b3e0899a1e89b8c3b5a78ddd76da762620ac))
+
 ## [5.21.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.20.0...v5.21.0) (2023-06-23)
 
 
