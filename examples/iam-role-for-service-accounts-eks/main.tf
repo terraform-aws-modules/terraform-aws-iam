@@ -350,6 +350,24 @@ module "vpc_cni_ipv6_irsa_role" {
   tags = local.tags
 }
 
+module "adot_collector_irsa_role" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name                                    = "adot-collector"
+  attach_amazon_prometheus_remote_write_policy = true
+  attach_aws_xray_write_only_access_policy     = true
+  attach_cloudwatch_agent_server_policy        = true
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["opentelemetry-operator-system:adot-collector"]
+    }
+  }
+
+  tags = local.tags
+}
+
 ################################################################################
 # Custom IRSA Roles
 ################################################################################

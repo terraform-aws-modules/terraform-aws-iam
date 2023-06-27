@@ -55,4 +55,7 @@ module "wrapper" {
   vpc_cni_enable_ipv6                                             = try(each.value.vpc_cni_enable_ipv6, var.defaults.vpc_cni_enable_ipv6, false)
   attach_node_termination_handler_policy                          = try(each.value.attach_node_termination_handler_policy, var.defaults.attach_node_termination_handler_policy, false)
   node_termination_handler_sqs_queue_arns                         = try(each.value.node_termination_handler_sqs_queue_arns, var.defaults.node_termination_handler_sqs_queue_arns, ["*"])
+  attach_amazon_prometheus_remote_write_policy                    = try(each.value.attach_amazon_prometheus_remote_write_policy, var.defaults.attach_amazon_prometheus_remote_write_policy, false)
+  attach_aws_xray_write_only_access_policy                        = try(each.value.attach_aws_xray_write_only_access_policy, var.defaults.attach_aws_xray_write_only_access_policy, false)
+  attach_cloudwatch_agent_server_policy                           = try(each.value.attach_cloudwatch_agent_server_policy, var.defaults.attach_cloudwatch_agent_server_policy, false)
 }

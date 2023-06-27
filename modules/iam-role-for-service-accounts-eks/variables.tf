@@ -332,3 +332,22 @@ variable "node_termination_handler_sqs_queue_arns" {
   type        = list(string)
   default     = ["*"]
 }
+
+# ADOT collector
+variable "attach_amazon_prometheus_remote_write_policy" {
+  description = "Determines whether to attach the aws managed AmazonPrometheusRemoteWriteAccess policy to the role"
+  type        = bool
+  default     = false
+}
+
+variable "attach_aws_xray_write_only_access_policy" {
+  description = "Determines whether to attach the aws managed AWSXrayWriteOnlyAccess policy to the role"
+  type        = bool
+  default     = false
+}
+
+variable "attach_cloudwatch_agent_server_policy" {
+  description = "Determines whether to attach the aws managed CloudWatchAgentServerPolicy policy to the role"
+  type        = bool
+  default     = false
+}

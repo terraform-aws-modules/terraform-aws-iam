@@ -1401,3 +1401,28 @@ resource "aws_iam_role_policy_attachment" "vpc_cni" {
   role       = aws_iam_role.this[0].name
   policy_arn = aws_iam_policy.vpc_cni[0].arn
 }
+
+################################################################################
+# ADOT collector Policy
+################################################################################
+
+resource "aws_iam_role_policy_attachment" "adot_collector_prometheus" {
+  count = var.create_role && var.attach_amazon_prometheus_remote_write_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonPrometheusRemoteWriteAccess"
+}
+
+resource "aws_iam_role_policy_attachment" "adot_collector_xray" {
+  count = var.create_role && var.attach_aws_xray_write_only_access_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess"
+}
+
+resource "aws_iam_role_policy_attachment" "adot_collector_cloudwatch_agent" {
+  count = var.create_role && var.attach_cloudwatch_agent_server_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
+}
