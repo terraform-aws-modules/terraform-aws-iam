@@ -75,13 +75,11 @@ data "aws_iam_policy_document" "assume_role_with_saml" {
   }
 
   statement {
-    effect = "Allow"
-
-    actions = ["sts:AssumeRoleWithSAML"]
+    effect  = "Allow"
+    actions = compact(distinct(concat(["sts:AssumeRoleWithSAML"], var.trusted_role_actions)))
 
     principals {
-      type = "Federated"
-
+      type        = "Federated"
       identifiers = local.identifiers
     }
 
@@ -103,8 +101,7 @@ resource "aws_iam_role" "admin" {
 
   force_detach_policies = var.force_detach_policies
   permissions_boundary  = var.admin_role_permissions_boundary_arn
-
-  assume_role_policy = data.aws_iam_policy_document.assume_role_with_saml.json
+  assume_role_policy    = data.aws_iam_policy_document.assume_role_with_saml.json
 
   tags = var.admin_role_tags
 }
@@ -126,8 +123,7 @@ resource "aws_iam_role" "poweruser" {
 
   force_detach_policies = var.force_detach_policies
   permissions_boundary  = var.poweruser_role_permissions_boundary_arn
-
-  assume_role_policy = data.aws_iam_policy_document.assume_role_with_saml.json
+  assume_role_policy    = data.aws_iam_policy_document.assume_role_with_saml.json
 
   tags = var.poweruser_role_tags
 }
@@ -149,8 +145,7 @@ resource "aws_iam_role" "readonly" {
 
   force_detach_policies = var.force_detach_policies
   permissions_boundary  = var.readonly_role_permissions_boundary_arn
-
-  assume_role_policy = data.aws_iam_policy_document.assume_role_with_saml.json
+  assume_role_policy    = data.aws_iam_policy_document.assume_role_with_saml.json
 
   tags = var.readonly_role_tags
 }
