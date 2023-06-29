@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.23.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.22.0...v5.23.0) (2023-06-29)
+
+
+### Features
+
+* Added variable trusted_role_actions to sub modules as a "Action of STS" ([#393](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/393)) ([5702679](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/5702679064861e364aefa909794da440f91f32fc))
+
 ## [5.22.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.21.0...v5.22.0) (2023-06-26)
 
 
