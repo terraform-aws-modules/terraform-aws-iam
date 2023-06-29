@@ -31,7 +31,8 @@ module "disabled" {
 module "irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
-  role_name = local.name
+  role_name              = local.name
+  allow_self_assume_role = true
 
   oidc_providers = {
     one = {

@@ -7,7 +7,7 @@ locals {
   partition           = data.aws_partition.current.partition
   dns_suffix          = data.aws_partition.current.dns_suffix
   region              = data.aws_region.current.name
-  role_name_condition = try(coalesce(var.role_name, "${var.role_name_prefix}*"), null)
+  role_name_condition = var.role_name != null ? var.role_name : "${var.role_name_prefix}*"
 }
 
 data "aws_iam_policy_document" "this" {
