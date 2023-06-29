@@ -23,9 +23,9 @@ variable "allow_self_assume_role" {
 }
 
 variable "trusted_role_actions" {
-  description = "Actions of STS"
+  description = "Additional role actions"
   type        = list(string)
-  default     = ["sts:AssumeRoleWithSAML"]
+  default     = ["sts:AssumeRoleWithSAML", "sts:TagSession"]
 }
 
 # Admin

@@ -1,7 +1,13 @@
 variable "trusted_role_actions" {
-  description = "Actions of STS"
+  description = "Additional trusted role actions"
   type        = list(string)
   default     = ["sts:AssumeRole", "sts:TagSession"]
+}
+
+variable "trusted_role_arns" {
+  description = "ARNs of AWS entities who can assume these roles"
+  type        = list(string)
+  default     = []
 }
 
 variable "trusted_role_services" {
@@ -20,12 +26,6 @@ variable "allow_self_assume_role" {
   description = "Determines whether to allow the role to be [assume itself](https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/)"
   type        = bool
   default     = false
-}
-
-variable "trusted_role_actions" {
-  description = "Actions of STS"
-  type        = list(string)
-  default     = ["sts:AssumeRole"]
 }
 
 # Admin
