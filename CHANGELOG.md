@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.24.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.23.1...v5.24.0) (2023-06-29)
+
+
+### Features
+
+* Add `path` variable to IAM group module ([#390](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/390)) ([e5c42c3](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/e5c42c37417f4eb289154d0745c731f55b9f5108))
+
 ### [5.23.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.23.0...v5.23.1) (2023-06-29)
 
 
