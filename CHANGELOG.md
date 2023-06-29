@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.23.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.23.0...v5.23.1) (2023-06-29)
+
+
+### Bug Fixes
+
+* Ensure `role_name_condition` is set correctly ([#389](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/389)) ([0024928](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/0024928698ffc9f35213c1fe3564f6eb62664a3f))
+
 ## [5.23.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.22.0...v5.23.0) (2023-06-29)
 
 
