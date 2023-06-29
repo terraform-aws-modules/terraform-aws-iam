@@ -5,6 +5,7 @@ module "wrapper" {
 
   create_group                           = try(each.value.create_group, var.defaults.create_group, true)
   name                                   = try(each.value.name, var.defaults.name, "")
+  path                                   = try(each.value.path, var.defaults.path, "/")
   group_users                            = try(each.value.group_users, var.defaults.group_users, [])
   custom_group_policy_arns               = try(each.value.custom_group_policy_arns, var.defaults.custom_group_policy_arns, [])
   custom_group_policies                  = try(each.value.custom_group_policies, var.defaults.custom_group_policies, [])
