@@ -48,6 +48,7 @@ No modules.
 | <a name="input_group_users"></a> [group\_users](#input\_group\_users) | List of IAM users to have in an IAM group which can assume the role | `list(string)` | `[]` | no |
 | <a name="input_iam_self_management_policy_name_prefix"></a> [iam\_self\_management\_policy\_name\_prefix](#input\_iam\_self\_management\_policy\_name\_prefix) | Name prefix for IAM policy to create with IAM self-management permissions | `string` | `"IAMSelfManagement-"` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of IAM group | `string` | `""` | no |
+| <a name="input_path"></a> [path](#input\_path) | Desired path for the IAM group | `string` | `"/"` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to all resources. | `map(string)` | `{}` | no |
 
 ## Outputs
