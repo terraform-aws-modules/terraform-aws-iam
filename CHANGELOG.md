@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.23.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.23.0...v5.23.1) (2023-06-29)
+
+
+### Bug Fixes
+
+* Ensure `role_name_condition` is set correctly ([#389](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/389)) ([0024928](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/0024928698ffc9f35213c1fe3564f6eb62664a3f))
+
+## [5.23.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.22.0...v5.23.0) (2023-06-29)
+
+
+### Features
+
+* Added variable trusted_role_actions to sub modules as a "Action of STS" ([#393](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/393)) ([5702679](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/5702679064861e364aefa909794da440f91f32fc))
+
+## [5.22.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.21.0...v5.22.0) (2023-06-26)
+
+
+### Features
+
+* Add wrapper modules ([#396](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/396)) ([9284b3e](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/9284b3e0899a1e89b8c3b5a78ddd76da762620ac))
+
+## [5.21.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.20.0...v5.21.0) (2023-06-23)
+
+
+### Features
+
+* Added permissions to list zone tags in iam-role-for-service-accounts-eks module ([#394](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/394)) ([740945f](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/740945f62ea4c7a90631eaa3131415af5e3fa02b))
+
 ## [5.20.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.19.0...v5.20.0) (2023-05-22)
 
 
