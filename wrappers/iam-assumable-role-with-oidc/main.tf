@@ -21,4 +21,5 @@ module "wrapper" {
   oidc_fully_qualified_audiences = try(each.value.oidc_fully_qualified_audiences, var.defaults.oidc_fully_qualified_audiences, [])
   force_detach_policies          = try(each.value.force_detach_policies, var.defaults.force_detach_policies, false)
   allow_self_assume_role         = try(each.value.allow_self_assume_role, var.defaults.allow_self_assume_role, false)
+  assume_role_source_policies    = try(each.value.assume_role_source_policies, var.defaults.assume_role_source_policies, [])
 }
