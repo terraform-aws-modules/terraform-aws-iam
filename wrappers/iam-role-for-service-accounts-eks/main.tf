@@ -44,6 +44,7 @@ module "wrapper" {
   karpenter_sqs_queue_arn                                         = try(each.value.karpenter_sqs_queue_arn, var.defaults.karpenter_sqs_queue_arn, null)
   attach_load_balancer_controller_policy                          = try(each.value.attach_load_balancer_controller_policy, var.defaults.attach_load_balancer_controller_policy, false)
   attach_load_balancer_controller_targetgroup_binding_only_policy = try(each.value.attach_load_balancer_controller_targetgroup_binding_only_policy, var.defaults.attach_load_balancer_controller_targetgroup_binding_only_policy, false)
+  load_balancer_controller_targetgroup_arns                       = try(each.value.load_balancer_controller_targetgroup_arns, var.defaults.load_balancer_controller_targetgroup_arns, ["arn:aws:elasticloadbalancing:*:*:targetgroup/*/*"])
   attach_appmesh_controller_policy                                = try(each.value.attach_appmesh_controller_policy, var.defaults.attach_appmesh_controller_policy, false)
   attach_appmesh_envoy_proxy_policy                               = try(each.value.attach_appmesh_envoy_proxy_policy, var.defaults.attach_appmesh_envoy_proxy_policy, false)
   attach_amazon_managed_service_prometheus_policy                 = try(each.value.attach_amazon_managed_service_prometheus_policy, var.defaults.attach_amazon_managed_service_prometheus_policy, false)
