@@ -1016,7 +1016,7 @@ data "aws_iam_policy_document" "load_balancer_controller_targetgroup_only" {
       "elasticloadbalancing:DeregisterTargets",
     ]
 
-    resources = [var.load_balancer_controller_targetgroup_arns]
+    resources = var.load_balancer_controller_targetgroup_arns
   }
 }
 
