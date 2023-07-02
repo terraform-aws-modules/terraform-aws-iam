@@ -21,3 +21,9 @@ variable "url" {
   type        = string
   default     = "https://token.actions.githubusercontent.com"
 }
+
+variable "additional_thumbprint_list" {
+  description = "List of additional thumbprints to add to the thumbprint list."
+  type        = list(string)
+  default     = []
+}
