@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.26.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.25.0...v5.26.0) (2023-07-03)
+
+
+### Features
+
+* Github OIDC add extra thumbprints as needed ([#403](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/403)) ([56511f3](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/56511f3d790f21f0102d5e15e5f6a3304dc646b1))
+
 ## [5.25.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.24.0...v5.25.0) (2023-07-02)
 
 
