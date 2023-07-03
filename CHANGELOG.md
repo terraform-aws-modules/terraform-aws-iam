@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.25.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.24.0...v5.25.0) (2023-07-02)
+
+
+### Features
+
+* Added variable load_balancer_controller_targetgroup_arns in iam-role-for-service-accounts-eks module ([#402](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/402)) ([61a5dbe](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/61a5dbe4cca3d844903f784ae0fb176b3ff8e486))
+
 ## [5.24.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.23.1...v5.24.0) (2023-06-29)
 
 
