@@ -22,8 +22,12 @@ variable "url" {
   default     = "https://token.actions.githubusercontent.com"
 }
 
-variable "additional_thumbprint_list" {
+variable "additional_thumbprints" {
   description = "List of additional thumbprints to add to the thumbprint list."
   type        = list(string)
-  default     = []
+  default = [
+    # https://github.blog/changelog/2023-06-27-github-actions-update-on-oidc-integration-with-aws/
+    "6938fd4d98bab03faadb97b34396831e3780aea1",
+    "1c58a3a8518e8759bf075b76b750d4f2df264fcd"
+  ]
 }

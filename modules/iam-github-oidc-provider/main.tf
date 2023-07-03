@@ -15,7 +15,7 @@ resource "aws_iam_openid_connect_provider" "this" {
 
   url             = var.url
   client_id_list  = coalescelist(var.client_id_list, ["sts.${data.aws_partition.current.dns_suffix}"])
-  thumbprint_list = distinct(concat(data.tls_certificate.this[0].certificates[*].sha1_fingerprint, var.additional_thumbprint_list))
+  thumbprint_list = distinct(concat(data.tls_certificate.this[0].certificates[*].sha1_fingerprint, var.additional_thumbprints))
 
   tags = var.tags
 }
