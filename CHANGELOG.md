@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.27.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.26.0...v5.27.0) (2023-07-04)
+
+
+### Features
+
+* Correct enable_mfa_enforcement spelling ([#404](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/404)) ([54b7165](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/54b7165ef00a9701d0ebcdcf37ba6b210feda51a))
+
 ## [5.26.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.25.0...v5.26.0) (2023-07-03)
 
 
