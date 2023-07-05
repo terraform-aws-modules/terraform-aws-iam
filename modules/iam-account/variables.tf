@@ -15,6 +15,11 @@ variable "create_account_password_policy" {
   default     = true
 }
 
+variable "create_account_alias" {
+  description = "Whether to create AWS IAM account alias"
+  type        = bool
+  default     = true
+}
 variable "max_password_age" {
   description = "The number of days that an user password is valid."
   type        = number

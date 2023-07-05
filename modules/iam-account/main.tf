@@ -3,6 +3,7 @@ data "aws_caller_identity" "this" {
 }
 
 resource "aws_iam_account_alias" "this" {
+  count         = var.create_account_alias ? 1 : 0
   account_alias = var.account_alias
 }
 
