@@ -3,7 +3,7 @@ module "wrapper" {
 
   for_each = var.items
 
-  trusted_role_actions              = try(each.value.trusted_role_actions, var.defaults.trusted_role_actions, ["sts:AssumeRole"])
+  trusted_role_actions              = try(each.value.trusted_role_actions, var.defaults.trusted_role_actions, ["sts:AssumeRole", "sts:TagSession"])
   trusted_role_arns                 = try(each.value.trusted_role_arns, var.defaults.trusted_role_arns, [])
   trusted_role_services             = try(each.value.trusted_role_services, var.defaults.trusted_role_services, [])
   mfa_age                           = try(each.value.mfa_age, var.defaults.mfa_age, 86400)

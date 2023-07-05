@@ -1,3 +1,9 @@
+variable "trusted_role_actions" {
+  description = "Additional trusted role actions"
+  type        = list(string)
+  default     = ["sts:AssumeRole", "sts:TagSession"]
+}
+
 variable "trusted_role_arns" {
   description = "ARNs of AWS entities who can assume these roles"
   type        = list(string)

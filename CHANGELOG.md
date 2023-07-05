@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.27.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.26.0...v5.27.0) (2023-07-04)
+
+
+### Features
+
+* Correct enable_mfa_enforcement spelling ([#404](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/404)) ([54b7165](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/54b7165ef00a9701d0ebcdcf37ba6b210feda51a))
+
+## [5.26.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.25.0...v5.26.0) (2023-07-03)
+
+
+### Features
+
+* Github OIDC add extra thumbprints as needed ([#403](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/403)) ([56511f3](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/56511f3d790f21f0102d5e15e5f6a3304dc646b1))
+
+## [5.25.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.24.0...v5.25.0) (2023-07-02)
+
+
+### Features
+
+* Added variable load_balancer_controller_targetgroup_arns in iam-role-for-service-accounts-eks module ([#402](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/402)) ([61a5dbe](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/61a5dbe4cca3d844903f784ae0fb176b3ff8e486))
+
+## [5.24.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.23.1...v5.24.0) (2023-06-29)
+
+
+### Features
+
+* Add `path` variable to IAM group module ([#390](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/390)) ([e5c42c3](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/e5c42c37417f4eb289154d0745c731f55b9f5108))
+
+### [5.23.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.23.0...v5.23.1) (2023-06-29)
+
+
+### Bug Fixes
+
+* Ensure `role_name_condition` is set correctly ([#389](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/389)) ([0024928](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/0024928698ffc9f35213c1fe3564f6eb62664a3f))
+
+## [5.23.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.22.0...v5.23.0) (2023-06-29)
+
+
+### Features
+
+* Added variable trusted_role_actions to sub modules as a "Action of STS" ([#393](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/393)) ([5702679](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/5702679064861e364aefa909794da440f91f32fc))
+
 ## [5.22.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.21.0...v5.22.0) (2023-06-26)
 
 
