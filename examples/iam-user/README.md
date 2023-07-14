@@ -25,7 +25,9 @@ Run `terraform destroy` when you don't need these resources.
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.0 |
 
 ## Modules
 
@@ -34,11 +36,13 @@ No providers.
 | <a name="module_iam_user"></a> [iam\_user](#module\_iam\_user) | ../../modules/iam-user | n/a |
 | <a name="module_iam_user2"></a> [iam\_user2](#module\_iam\_user2) | ../../modules/iam-user | n/a |
 | <a name="module_iam_user3"></a> [iam\_user3](#module\_iam\_user3) | ../../modules/iam-user | n/a |
-| <a name="module_iam_user4"></a> [iam\_user3](#module\_iam\_user4) | ../../modules/iam-user | n/a |
+| <a name="module_iam_user4"></a> [iam\_user4](#module\_iam\_user4) | ../../modules/iam-user | n/a |
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [aws_iam_policy.example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy) | data source |
 
 ## Inputs
 
@@ -48,6 +52,7 @@ No inputs.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_custom_iam_policy_arns"></a> [custom\_iam\_policy\_arns](#output\_custom\_iam\_policy\_arns) | The list of ARNs of policies directly assigned to the IAM user |
 | <a name="output_iam_access_key_encrypted_secret"></a> [iam\_access\_key\_encrypted\_secret](#output\_iam\_access\_key\_encrypted\_secret) | The encrypted secret, base64 encoded |
 | <a name="output_iam_access_key_id"></a> [iam\_access\_key\_id](#output\_iam\_access\_key\_id) | The access key ID |
 | <a name="output_iam_access_key_key_fingerprint"></a> [iam\_access\_key\_key\_fingerprint](#output\_iam\_access\_key\_key\_fingerprint) | The fingerprint of the PGP key used to encrypt the secret |

@@ -17,5 +17,6 @@ module "wrapper" {
   ssh_key_encoding              = try(each.value.ssh_key_encoding, var.defaults.ssh_key_encoding, "SSH")
   ssh_public_key                = try(each.value.ssh_public_key, var.defaults.ssh_public_key, "")
   permissions_boundary          = try(each.value.permissions_boundary, var.defaults.permissions_boundary, "")
+  custom_iam_policy_arns        = try(each.value.custom_iam_policy_arns, var.defaults.custom_iam_policy_arns, [])
   tags                          = try(each.value.tags, var.defaults.tags, {})
 }
