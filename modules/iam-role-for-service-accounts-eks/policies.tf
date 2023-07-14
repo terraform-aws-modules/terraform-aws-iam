@@ -1003,13 +1003,20 @@ data "aws_iam_policy_document" "load_balancer_controller_targetgroup_only" {
       "ec2:RevokeSecurityGroupIngress",
       "elasticloadbalancing:DescribeTargetGroups",
       "elasticloadbalancing:DescribeTargetHealth",
+    ]
+
+    resources = ["*"]
+  }
+
+  statement {
+    actions = [
       "elasticloadbalancing:ModifyTargetGroup",
       "elasticloadbalancing:ModifyTargetGroupAttributes",
       "elasticloadbalancing:RegisterTargets",
       "elasticloadbalancing:DeregisterTargets",
     ]
 
-    resources = ["*"]
+    resources = var.load_balancer_controller_targetgroup_arns
   }
 }
 

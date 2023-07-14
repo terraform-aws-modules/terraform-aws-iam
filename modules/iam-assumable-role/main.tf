@@ -35,7 +35,7 @@ data "aws_iam_policy_document" "assume_role" {
 
   statement {
     effect  = "Allow"
-    actions = var.trusted_role_actions
+    actions = compact(distinct(concat(["sts:AssumeRole"], var.trusted_role_actions)))
 
     principals {
       type        = "AWS"
@@ -85,7 +85,7 @@ data "aws_iam_policy_document" "assume_role_with_mfa" {
 
   statement {
     effect  = "Allow"
-    actions = var.trusted_role_actions
+    actions = compact(distinct(concat(["sts:AssumeRole"], var.trusted_role_actions)))
 
     principals {
       type        = "AWS"

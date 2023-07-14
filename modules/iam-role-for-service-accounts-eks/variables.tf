@@ -261,6 +261,12 @@ variable "attach_load_balancer_controller_targetgroup_binding_only_policy" {
   default     = false
 }
 
+variable "load_balancer_controller_targetgroup_arns" {
+  description = "List of Target groups ARNs using Load Balancer Controller"
+  type        = list(string)
+  default     = ["arn:aws:elasticloadbalancing:*:*:targetgroup/*/*"]
+}
+
 # AWS Appmesh Controller
 variable "attach_appmesh_controller_policy" {
   description = "Determines whether to attach the Appmesh Controller policy to the role"
