@@ -46,6 +46,7 @@ No modules.
 | [aws_iam_access_key.this_no_pgp](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key) | resource |
 | [aws_iam_user.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user) | resource |
 | [aws_iam_user_login_profile.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_login_profile) | resource |
+| [aws_iam_user_policy_attachment.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_policy_attachment) | resource |
 | [aws_iam_user_ssh_key.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_ssh_key) | resource |
 
 ## Inputs
@@ -63,6 +64,7 @@ No modules.
 | <a name="input_path"></a> [path](#input\_path) | Desired path for the IAM user | `string` | `"/"` | no |
 | <a name="input_permissions_boundary"></a> [permissions\_boundary](#input\_permissions\_boundary) | The ARN of the policy that is used to set the permissions boundary for the user. | `string` | `""` | no |
 | <a name="input_pgp_key"></a> [pgp\_key](#input\_pgp\_key) | Either a base-64 encoded PGP public key, or a keybase username in the form `keybase:username`. Used to encrypt password and access key. | `string` | `""` | no |
+| <a name="input_policy_arns"></a> [policy\_arns](#input\_policy\_arns) | The list of ARNs of policies directly assigned to the IAM user | `list(string)` | `[]` | no |
 | <a name="input_ssh_key_encoding"></a> [ssh\_key\_encoding](#input\_ssh\_key\_encoding) | Specifies the public key encoding format to use in the response. To retrieve the public key in ssh-rsa format, use SSH. To retrieve the public key in PEM format, use PEM | `string` | `"SSH"` | no |
 | <a name="input_ssh_public_key"></a> [ssh\_public\_key](#input\_ssh\_public\_key) | The SSH public key. The public key must be encoded in ssh-rsa format or PEM format | `string` | `""` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to all resources. | `map(string)` | `{}` | no |
@@ -94,4 +96,5 @@ No modules.
 | <a name="output_keybase_ses_smtp_password_v4_decrypt_command"></a> [keybase\_ses\_smtp\_password\_v4\_decrypt\_command](#output\_keybase\_ses\_smtp\_password\_v4\_decrypt\_command) | Decrypt SES SMTP password command |
 | <a name="output_keybase_ses_smtp_password_v4_pgp_message"></a> [keybase\_ses\_smtp\_password\_v4\_pgp\_message](#output\_keybase\_ses\_smtp\_password\_v4\_pgp\_message) | Encrypted SES SMTP password |
 | <a name="output_pgp_key"></a> [pgp\_key](#output\_pgp\_key) | PGP key used to encrypt sensitive data for this user (if empty - secrets are not encrypted) |
+| <a name="output_policy_arns"></a> [policy\_arns](#output\_policy\_arns) | The list of ARNs of policies directly assigned to the IAM user |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
