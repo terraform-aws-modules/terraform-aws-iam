@@ -48,7 +48,7 @@ module "iam_user3" {
 }
 
 ###################################################################
-# IAM user with AmazonSNSReadOnlyAccess policy assigned
+# IAM user with IAM policy attached
 ###################################################################
 
 data "aws_iam_policy" "example" {
