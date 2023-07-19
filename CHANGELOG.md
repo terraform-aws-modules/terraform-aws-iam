@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.28.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.27.0...v5.28.0) (2023-07-19)
+
+
+### Features
+
+* Added direct policy attachment in iam-user module ([#387](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/387)) ([9fa481f](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/9fa481f0c82496fb8f5722147a1d319528d772a5))
+
 ## [5.27.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.26.0...v5.27.0) (2023-07-04)
 
 
