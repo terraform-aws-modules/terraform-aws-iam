@@ -62,5 +62,5 @@ module "iam_user4" {
 
   create_iam_user_login_profile = false
   create_iam_access_key         = true
-  custom_iam_policy_arns        = [data.aws_iam_policy.example.arn]
+  policy_arns                   = [data.aws_iam_policy.example.arn]
 }

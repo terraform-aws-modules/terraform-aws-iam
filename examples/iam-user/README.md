@@ -52,7 +52,6 @@ No inputs.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_custom_iam_policy_arns"></a> [custom\_iam\_policy\_arns](#output\_custom\_iam\_policy\_arns) | The list of ARNs of policies directly assigned to the IAM user |
 | <a name="output_iam_access_key_encrypted_secret"></a> [iam\_access\_key\_encrypted\_secret](#output\_iam\_access\_key\_encrypted\_secret) | The encrypted secret, base64 encoded |
 | <a name="output_iam_access_key_id"></a> [iam\_access\_key\_id](#output\_iam\_access\_key\_id) | The access key ID |
 | <a name="output_iam_access_key_key_fingerprint"></a> [iam\_access\_key\_key\_fingerprint](#output\_iam\_access\_key\_key\_fingerprint) | The fingerprint of the PGP key used to encrypt the secret |
@@ -70,4 +69,5 @@ No inputs.
 | <a name="output_keybase_secret_key_decrypt_command"></a> [keybase\_secret\_key\_decrypt\_command](#output\_keybase\_secret\_key\_decrypt\_command) | Decrypt access secret key command |
 | <a name="output_keybase_secret_key_pgp_message"></a> [keybase\_secret\_key\_pgp\_message](#output\_keybase\_secret\_key\_pgp\_message) | Encrypted access secret key |
 | <a name="output_pgp_key"></a> [pgp\_key](#output\_pgp\_key) | PGP key used to encrypt sensitive data for this user (if empty - secrets are not encrypted) |
+| <a name="output_policy_arns"></a> [policy\_arns](#output\_policy\_arns) | The list of ARNs of policies directly assigned to the IAM user |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

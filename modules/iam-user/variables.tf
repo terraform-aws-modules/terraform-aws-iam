@@ -81,7 +81,7 @@ variable "permissions_boundary" {
   default     = ""
 }
 
-variable "custom_iam_policy_arns" {
+variable "policy_arns" {
   description = "The list of ARNs of policies directly assigned to the IAM user"
   type        = list(string)
   default     = []

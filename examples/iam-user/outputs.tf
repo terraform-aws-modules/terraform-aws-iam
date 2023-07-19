@@ -86,7 +86,7 @@ output "keybase_secret_key_pgp_message" {
   value       = module.iam_user.keybase_secret_key_pgp_message
 }
 
-output "custom_iam_policy_arns" {
+output "policy_arns" {
   description = "The list of ARNs of policies directly assigned to the IAM user"
   value       = module.iam_user.policy_arns
 }
