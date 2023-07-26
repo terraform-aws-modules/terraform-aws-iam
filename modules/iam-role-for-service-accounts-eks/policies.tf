@@ -1408,3 +1408,29 @@ resource "aws_iam_role_policy_attachment" "vpc_cni" {
   role       = aws_iam_role.this[0].name
   policy_arn = aws_iam_policy.vpc_cni[0].arn
 }
+
+################################################################################
+# AWS Distro for OpenTelemetry (ADOT)
+################################################################################
+
+# https://docs.aws.amazon.com/eks/latest/userguide/adot-iam.html
+resource "aws_iam_role_policy_attachment" "adot_cloudwatch_policy_attachment" {
+  count = var.attach_cloudwatch_agent_policy_adot ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
+}
+
+resource "aws_iam_role_policy_attachment" "adot_xray_policy_attachment" {
+  count = var.attach_xray_policy_adot ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess"
+}
+
+resource "aws_iam_role_policy_attachment" "adot_prometheus_policy_attachment" {
+  count = var.attach_prometheus_policy_adot ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonPrometheusRemoteWriteAccess"
+}

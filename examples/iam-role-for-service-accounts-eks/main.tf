@@ -351,6 +351,24 @@ module "vpc_cni_ipv6_irsa_role" {
   tags = local.tags
 }
 
+module "adot_irsa_role" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name                           = "adot"
+  attach_cloudwatch_agent_policy_adot = true
+  attach_xray_policy_adot             = true
+  attach_prometheus_policy_adot       = true
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["kube-system:aws-node"]
+    }
+  }
+
+  tags = local.tags
+}
+
 ################################################################################
 # Custom IRSA Roles
 ################################################################################

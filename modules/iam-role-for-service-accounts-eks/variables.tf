@@ -338,3 +338,22 @@ variable "node_termination_handler_sqs_queue_arns" {
   type        = list(string)
   default     = ["*"]
 }
+
+# AWS Distro for OpenTelemetry (ADOT)
+variable "attach_cloudwatch_agent_policy_adot" {
+  description = "Determines whether to attach the CloudWatch Agent Server IAM policy to the ADOT role"
+  type        = bool
+  default     = false
+}
+
+variable "attach_xray_policy_adot" {
+  description = "Determines whether to attach the XRay write-only policy to the ADOT role"
+  type        = bool
+  default     = false
+}
+
+variable "attach_prometheus_policy_adot" {
+  description = "Determines whether to attach the Prometheus Remote Write policy to the ADOT role"
+  type        = bool
+  default     = false
+}
