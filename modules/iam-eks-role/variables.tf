@@ -75,3 +75,9 @@ variable "assume_role_condition_test" {
   type        = string
   default     = "StringEquals"
 }
+
+variable "assume_role_additional_principals" {
+  description = "Additional AWS principal ARNs which should be allowed to assume the managed role"
+  type        = list(string)
+  default     = null
+}

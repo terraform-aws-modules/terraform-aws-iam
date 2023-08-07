@@ -74,6 +74,29 @@ module "iam_eks_role" {
 }
 ```
 
+## Provide additional principal ARNs which could assume the managed role
+
+In some cases you might need to provide additional custom principal ARNs which should be able to assume the role.
+This kind of principal ARNs must be provided only in the `assume_role_policy` of the `aws_iam_role` resource.
+The example below shows the case when the existing role of the `my-service-b` is able to assume the `my-service-a`
+role.
+
+```hcl
+module "iam_eks_role" {
+  source = "terraform-aws-modules/iam/aws//modules/iam-eks-role"
+
+  role_name = "my-service-a"
+
+  cluster_service_accounts = {
+    "cluster1" = ["default:my-serviceaccount"]
+  }
+
+  assume_role_additional_principals = [
+    "arn:aws:iam::123456789012:role/my-service-b"
+  ]
+}
+```
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
@@ -120,6 +143,7 @@ No modules.
 | <a name="input_role_permissions_boundary_arn"></a> [role\_permissions\_boundary\_arn](#input\_role\_permissions\_boundary\_arn) | Permissions boundary ARN to use for IAM role | `string` | `""` | no |
 | <a name="input_role_policy_arns"></a> [role\_policy\_arns](#input\_role\_policy\_arns) | ARNs of any policies to attach to the IAM role | `map(string)` | `{}` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add the the IAM role | `map(any)` | `{}` | no |
+| <a name="input_assume_role_additional_principals"></a> [assume\_role\_additional\_principals](#input\_assume\_role\_additional\_principals) | ARNs of additional AWS principals which should be allowed to assume the managed role | `list(string)` | `null` | no |
 
 ## Outputs
 
