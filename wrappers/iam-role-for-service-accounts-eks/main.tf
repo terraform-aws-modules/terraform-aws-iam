@@ -53,6 +53,8 @@ module "wrapper" {
   velero_s3_bucket_arns                                           = try(each.value.velero_s3_bucket_arns, var.defaults.velero_s3_bucket_arns, ["*"])
   attach_vpc_cni_policy                                           = try(each.value.attach_vpc_cni_policy, var.defaults.attach_vpc_cni_policy, false)
   vpc_cni_enable_ipv4                                             = try(each.value.vpc_cni_enable_ipv4, var.defaults.vpc_cni_enable_ipv4, false)
+  vpc_cni_cluster_name                                            = try(each.value.vpc_cni_cluster_name, var.defaults.vpc_cni_cluster_name, "")
+  vpc_cni_vpc_id                                                  = try(each.value.vpc_cni_vpc_id, var.defaults.vpc_cni_vpc_id, "")
   vpc_cni_enable_ipv6                                             = try(each.value.vpc_cni_enable_ipv6, var.defaults.vpc_cni_enable_ipv6, false)
   attach_node_termination_handler_policy                          = try(each.value.attach_node_termination_handler_policy, var.defaults.attach_node_termination_handler_policy, false)
   node_termination_handler_sqs_queue_arns                         = try(each.value.node_termination_handler_sqs_queue_arns, var.defaults.node_termination_handler_sqs_queue_arns, ["*"])

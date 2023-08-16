@@ -1346,25 +1346,102 @@ resource "aws_iam_role_policy_attachment" "velero" {
 data "aws_iam_policy_document" "vpc_cni" {
   count = var.create_role && var.attach_vpc_cni_policy ? 1 : 0
 
-  # arn:${local.partition}:iam::aws:policy/AmazonEKS_CNI_Policy
+  # https://www.elttam.com/blog/amazon-vpc-cni/
+  # https://github.com/aws/amazon-vpc-cni-k8s/blob/master/docs/iam-policy.md#scope-down-iam-policy-per-eks-cluster
   dynamic "statement" {
     for_each = var.vpc_cni_enable_ipv4 ? [1] : []
     content {
-      sid = "IPV4"
       actions = [
-        "ec2:AssignPrivateIpAddresses",
-        "ec2:AttachNetworkInterface",
-        "ec2:CreateNetworkInterface",
-        "ec2:DeleteNetworkInterface",
         "ec2:DescribeInstances",
         "ec2:DescribeTags",
         "ec2:DescribeNetworkInterfaces",
-        "ec2:DescribeInstanceTypes",
-        "ec2:DetachNetworkInterface",
-        "ec2:ModifyNetworkInterfaceAttribute",
-        "ec2:UnassignPrivateIpAddresses",
+        "ec2:DescribeInstanceTypes"
       ]
       resources = ["*"]
+    }
+  }
+  dynamic "statement" {
+    for_each = var.vpc_cni_enable_ipv4 ? [1] : []
+    content {
+      actions = [
+        "ec2:CreateTags"
+      ]
+      resources = ["arn:aws:ec2:*:*:network-interface/*"]
+    }
+  }
+  dynamic "statement" {
+    for_each = var.vpc_cni_enable_ipv4 ? [1] : []
+    content {
+      actions = [
+        "ec2:CreateNetworkInterface"
+      ]
+      resources = ["arn:aws:ec2:*:*:network-interface/*"]
+      condition {
+        test     = "StringEquals "
+        variable = "aws:RequestTag/cluster.k8s.amazonaws.com/name"
+        values   = [var.vpc_cni_cluster_name]
+      }
+    }
+  }
+  dynamic "statement" {
+    for_each = var.vpc_cni_enable_ipv4 ? [1] : []
+    content {
+      actions = [
+        "ec2:CreateNetworkInterface"
+      ]
+      resources = [
+        "arn:aws:ec2:*:*:subnet/*",
+        "arn:aws:ec2:*:*:security-group/*"
+      ]
+      condition {
+        test     = "ArnEquals"
+        variable = "ec2:Vpc"
+        values   = ["arn:aws:ec2:*:*:vpc/${var.vpc_cni_vpc_id}"]
+      }
+    }
+  }
+  dynamic "statement" {
+    for_each = var.vpc_cni_enable_ipv4 ? [1] : []
+    content {
+      actions = [
+        "ec2:DeleteNetworkInterface",
+        "ec2:UnassignPrivateIpAddresses",
+        "ec2:AssignPrivateIpAddresses",
+        "ec2:AttachNetworkInterface",
+        "ec2:DetachNetworkInterface",
+        "ec2:ModifyNetworkInterfaceAttribute"
+      ]
+      resources = ["arn:aws:ec2:*:*:network-interface/*"]
+      condition {
+        test     = "StringEquals"
+        variable = "aws:ResourceTag/cluster.k8s.amazonaws.com/name"
+        values   = [var.vpc_cni_cluster_name]
+      }
+    }
+  }
+  dynamic "statement" {
+    for_each = var.vpc_cni_enable_ipv4 ? [1] : []
+    content {
+      actions = [
+        "ec2:AttachNetworkInterface",
+        "ec2:DetachNetworkInterface",
+        "ec2:ModifyNetworkInterfaceAttribute"
+      ]
+      resources = ["arn:aws:ec2:*:*:instance/*"]
+      condition {
+        test     = "StringEquals"
+        variable = "aws:ResourceTag/kubernetes.io/cluster/${var.vpc_cni_cluster_name}"
+        values   = ["owned"]
+      }
+    }
+  }
+  dynamic "statement" {
+    for_each = var.vpc_cni_enable_ipv4 ? [1] : []
+    content {
+      actions = [
+        "ec2:ModifyNetworkInterfaceAttribute"
+      ]
+      resources = ["arn:aws:ec2:*:*:security-group/*"]
     }
   }
 

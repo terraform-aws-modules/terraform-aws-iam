@@ -234,8 +234,10 @@ No modules.
 | <a name="input_role_policy_arns"></a> [role\_policy\_arns](#input\_role\_policy\_arns) | ARNs of any policies to attach to the IAM role | `map(string)` | `{}` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add the the IAM role | `map(any)` | `{}` | no |
 | <a name="input_velero_s3_bucket_arns"></a> [velero\_s3\_bucket\_arns](#input\_velero\_s3\_bucket\_arns) | List of S3 Bucket ARNs that Velero needs access to in order to backup and restore cluster resources | `list(string)` | <pre>[<br>  "*"<br>]</pre> | no |
-| <a name="input_vpc_cni_enable_ipv4"></a> [vpc\_cni\_enable\_ipv4](#input\_vpc\_cni\_enable\_ipv4) | Determines whether to enable IPv4 permissions for VPC CNI policy | `bool` | `false` | no |
+| <a name="input_vpc_cni_cluster_name"></a> [vpc\_cni\_cluster\_name](#input\_vpc\_cni\_cluster\_name) | The name of the cluster that the VPC CNI gives permissions for VPC CNI policy. | `string` | `""` | no |
+| <a name="input_vpc_cni_enable_ipv4"></a> [vpc\_cni\_enable\_ipv4](#input\_vpc\_cni\_enable\_ipv4) | Determines whether to enable IPv4 permissions for VPC CNI policy. | `bool` | `false` | no |
 | <a name="input_vpc_cni_enable_ipv6"></a> [vpc\_cni\_enable\_ipv6](#input\_vpc\_cni\_enable\_ipv6) | Determines whether to enable IPv6 permissions for VPC CNI policy | `bool` | `false` | no |
+| <a name="input_vpc_cni_vpc_id"></a> [vpc\_cni\_vpc\_id](#input\_vpc\_cni\_vpc\_id) | The ID of the VPC that the VPC CNI gives permissions for VPC CNI policy. | `string` | `""` | no |
 
 ## Outputs
 

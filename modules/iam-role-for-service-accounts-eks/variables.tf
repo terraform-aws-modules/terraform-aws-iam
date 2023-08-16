@@ -315,9 +315,21 @@ variable "attach_vpc_cni_policy" {
 }
 
 variable "vpc_cni_enable_ipv4" {
-  description = "Determines whether to enable IPv4 permissions for VPC CNI policy"
+  description = "Determines whether to enable IPv4 permissions for VPC CNI policy."
   type        = bool
   default     = false
+}
+
+variable "vpc_cni_cluster_name" {
+  description = "The name of the cluster that the VPC CNI gives permissions for VPC CNI policy."
+  type        = string
+  default     = ""
+}
+
+variable "vpc_cni_vpc_id" {
+  description = "The ID of the VPC that the VPC CNI gives permissions for VPC CNI policy."
+  type        = string
+  default     = ""
 }
 
 variable "vpc_cni_enable_ipv6" {
