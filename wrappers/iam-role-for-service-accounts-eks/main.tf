@@ -32,6 +32,7 @@ module "wrapper" {
   external_secrets_ssm_parameter_arns                             = try(each.value.external_secrets_ssm_parameter_arns, var.defaults.external_secrets_ssm_parameter_arns, ["arn:aws:ssm:*:*:parameter/*"])
   external_secrets_secrets_manager_arns                           = try(each.value.external_secrets_secrets_manager_arns, var.defaults.external_secrets_secrets_manager_arns, ["arn:aws:secretsmanager:*:*:secret:*"])
   external_secrets_kms_key_arns                                   = try(each.value.external_secrets_kms_key_arns, var.defaults.external_secrets_kms_key_arns, ["arn:aws:kms:*:*:key/*"])
+  external_secrets_secrets_manager_create_permission              = try(each.value.external_secrets_secrets_manager_create_permission, var.defaults.external_secrets_secrets_manager_create_permission, false)
   attach_fsx_lustre_csi_policy                                    = try(each.value.attach_fsx_lustre_csi_policy, var.defaults.attach_fsx_lustre_csi_policy, false)
   fsx_lustre_csi_service_role_arns                                = try(each.value.fsx_lustre_csi_service_role_arns, var.defaults.fsx_lustre_csi_service_role_arns, ["arn:aws:iam::*:role/aws-service-role/s3.data-source.lustre.fsx.amazonaws.com/*"])
   attach_karpenter_controller_policy                              = try(each.value.attach_karpenter_controller_policy, var.defaults.attach_karpenter_controller_policy, false)
