@@ -506,6 +506,16 @@ data "aws_iam_policy_document" "external_secrets" {
     ]
     resources = var.external_secrets_kms_key_arns
   }
+
+  dynamic "statement" {
+    for_each = var.external_secrets_secrets_manager_create_permission ? [1] : []
+    content {
+      actions = [
+        "secretsmanager:CreateSecret"
+      ]
+      resources = var.external_secrets_secrets_manager_arns
+    }
+  }
 }
 
 resource "aws_iam_policy" "external_secrets" {
