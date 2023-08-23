@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.29.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.28.0...v5.29.0) (2023-08-23)
+
+
+### Features
+
+* Add variable for adding statement for `secretsmanager:CreateSecret` ([#414](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/414)) ([24996cd](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/24996cd443573c216cc97c9984acb6183f0a6321))
+
 ## [5.28.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.27.0...v5.28.0) (2023-07-19)
 
 
