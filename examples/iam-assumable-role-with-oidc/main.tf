@@ -57,7 +57,7 @@ module "iam_assumable_role_self_assume" {
 module "iam_assumable_role_cross_account" {
   source = "../../modules/iam-assumable-role-with-oidc"
 
-  create_role            = true
+  create_role = true
 
   role_name = "role-with-oidc-cross-account"
 
@@ -73,5 +73,5 @@ module "iam_assumable_role_cross_account" {
   ]
 
   oidc_fully_qualified_audiences = ["sts.amazonaws.com"]
-  oidc_fully_qualified_subjects = ["system:serviceaccount:default:sa1", "system:serviceaccount:default:sa2"]
+  oidc_fully_qualified_subjects  = ["system:serviceaccount:default:sa1", "system:serviceaccount:default:sa2"]
 }
