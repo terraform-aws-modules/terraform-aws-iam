@@ -511,9 +511,24 @@ data "aws_iam_policy_document" "external_secrets" {
     for_each = var.external_secrets_secrets_manager_create_permission ? [1] : []
     content {
       actions = [
-        "secretsmanager:CreateSecret"
+        "secretsmanager:CreateSecret",
+        "secretsmanager:PutSecretValue",
+        "secretsmanager:TagResource",
       ]
       resources = var.external_secrets_secrets_manager_arns
+    }
+  }
+
+  dynamic "statement" {
+    for_each = var.external_secrets_secrets_manager_create_permission ? [1] : []
+    content {
+      actions   = ["secretsmanager:DeleteSecret"]
+      resources = var.external_secrets_secrets_manager_arns
+      condition {
+        test     = "StringEquals"
+        variable = "secretsmanager:ResourceTag/managed-by"
+        values   = ["external-secrets"]
+      }
     }
   }
 }
