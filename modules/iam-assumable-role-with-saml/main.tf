@@ -50,12 +50,7 @@ data "aws_iam_policy_document" "assume_role_with_saml" {
 
   statement {
     effect  = "Allow"
-    actions = compact(distinct(concat(["sts:AssumeRole"], var.trusted_role_actions)))
-
-    principals {
-      type        = "AWS"
-      identifiers = var.trusted_role_arns
-    }
+    actions = compact(distinct(concat(["sts:AssumeRole"], var.trusted_role_services_actions)))
 
     principals {
       type        = "Service"
