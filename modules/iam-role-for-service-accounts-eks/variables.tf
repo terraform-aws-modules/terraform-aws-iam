@@ -183,6 +183,12 @@ variable "external_secrets_kms_key_arns" {
   default     = ["arn:aws:kms:*:*:key/*"]
 }
 
+variable "external_secrets_secrets_manager_create_permission" {
+  description = "Determins whether External Secrets may use secretsmanager:CreateSecret"
+  type        = bool
+  default     = false
+}
+
 # FSx Lustre CSI
 variable "attach_fsx_lustre_csi_policy" {
   description = "Determines whether to attach the FSx for Lustre CSI Driver IAM policy to the role"
