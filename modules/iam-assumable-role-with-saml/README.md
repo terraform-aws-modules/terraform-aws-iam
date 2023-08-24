@@ -53,6 +53,8 @@ No modules.
 | <a name="input_role_policy_arns"></a> [role\_policy\_arns](#input\_role\_policy\_arns) | List of ARNs of IAM policies to attach to IAM role | `list(string)` | `[]` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to IAM role resources | `map(string)` | `{}` | no |
 | <a name="input_trusted_role_actions"></a> [trusted\_role\_actions](#input\_trusted\_role\_actions) | Additional role actions | `list(string)` | <pre>[<br>  "sts:AssumeRoleWithSAML",<br>  "sts:TagSession"<br>]</pre> | no |
+| <a name="input_trusted_role_services"></a> [trusted\_role\_services](#input\_trusted\_role\_services) | AWS Services that can assume these roles | `list(string)` | `[]` | no |
+| <a name="input_trusted_role_services_actions"></a> [trusted\_role\_services\_actions](#input\_trusted\_role\_services\_actions) | Additional trusted role services actions | `list(string)` | `[]` | no |
 
 ## Outputs
 
