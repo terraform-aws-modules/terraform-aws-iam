@@ -47,6 +47,21 @@ data "aws_iam_policy_document" "assume_role_with_saml" {
       values   = [var.aws_saml_endpoint]
     }
   }
+
+  statement {
+    effect  = "Allow"
+    actions = compact(distinct(concat(["sts:AssumeRole"], var.trusted_role_actions)))
+
+    principals {
+      type        = "AWS"
+      identifiers = var.trusted_role_arns
+    }
+
+    principals {
+      type        = "Service"
+      identifiers = var.trusted_role_services
+    }
+  }
 }
 
 resource "aws_iam_role" "this" {
