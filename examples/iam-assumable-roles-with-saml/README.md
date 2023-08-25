@@ -36,7 +36,6 @@ Run `terraform destroy` when you don't need these resources.
 | <a name="module_iam_assumable_roles_with_saml_custom"></a> [iam\_assumable\_roles\_with\_saml\_custom](#module\_iam\_assumable\_roles\_with\_saml\_custom) | ../../modules/iam-assumable-roles-with-saml | n/a |
 | <a name="module_iam_assumable_roles_with_saml_second_provider"></a> [iam\_assumable\_roles\_with\_saml\_second\_provider](#module\_iam\_assumable\_roles\_with\_saml\_second\_provider) | ../../modules/iam-assumable-roles-with-saml | n/a |
 | <a name="module_iam_assumable_roles_with_saml_with_self_assume"></a> [iam\_assumable\_roles\_with\_saml\_with\_self\_assume](#module\_iam\_assumable\_roles\_with\_saml\_with\_self\_assume) | ../../modules/iam-assumable-roles-with-saml | n/a |
-| <a name="module_iam_assumable_roles_with_saml_with_trusted_services"></a> [iam\_assumable\_roles\_with\_saml\_with\_trusted\_services](#module\_iam\_assumable\_roles\_with\_saml\_with\_trusted\_services) | ../../modules/iam-assumable-roles-with-saml | n/a |
 
 ## Resources
 

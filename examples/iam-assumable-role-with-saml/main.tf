@@ -56,3 +56,18 @@ module "iam_assumable_role_self_assume" {
     "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
   ]
 }
+
+################################################
+# IAM assumable roles with SAML with trusted services
+################################################
+module "iam_assumable_roles_with_saml_with_trusted_services" {
+  source = "../../modules/iam-assumable-role-with-saml"
+
+  create_role            = true
+  role_name              = "Saml-with-trusted-service"
+  allow_self_assume_role = false
+
+  trusted_role_services = ["batchoperations.s3.amazonaws.com"]
+
+  provider_id = aws_iam_saml_provider.idp_saml.id
+}

@@ -19,4 +19,6 @@ module "wrapper" {
   force_detach_policies         = try(each.value.force_detach_policies, var.defaults.force_detach_policies, false)
   allow_self_assume_role        = try(each.value.allow_self_assume_role, var.defaults.allow_self_assume_role, false)
   trusted_role_actions          = try(each.value.trusted_role_actions, var.defaults.trusted_role_actions, ["sts:AssumeRoleWithSAML", "sts:TagSession"])
+  trusted_role_services_actions = try(each.value.trusted_role_services_actions, var.defaults.trusted_role_services_actions, [])
+  trusted_role_services         = try(each.value.trusted_role_services, var.defaults.trusted_role_services, [])
 }

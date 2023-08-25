@@ -48,13 +48,16 @@ data "aws_iam_policy_document" "assume_role_with_saml" {
     }
   }
 
-  statement {
-    effect  = "Allow"
-    actions = compact(distinct(concat(["sts:AssumeRole"], var.trusted_role_services_actions)))
+  dynamic "statement" {
+    for_each = length(var.trusted_role_services) > 0 ? [1] : []
+    content {
+      effect  = "Allow"
+      actions = compact(distinct(concat(["sts:AssumeRole"], var.trusted_role_services_actions)))
 
-    principals {
-      type        = "Service"
-      identifiers = var.trusted_role_services
+      principals {
+        type        = "Service"
+        identifiers = var.trusted_role_services
+      }
     }
   }
 }
