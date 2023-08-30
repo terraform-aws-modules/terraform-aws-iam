@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.29.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.29.1...v5.29.2) (2023-08-30)
+
+
+### Bug Fixes
+
+* Expand Permissions for external-secrets IRSA Policy towards AWS Secrets Manager ([#416](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/416)) ([fa74a18](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/fa74a1817cf5aa49cb1ff30f2b1946be706fc640))
+
 ### [5.29.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.29.0...v5.29.1) (2023-08-30)
 
 
