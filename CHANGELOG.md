@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.30.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.29.2...v5.30.0) (2023-08-31)
+
+
+### Features
+
+* Add `create_custom_role_trust_policy` to control when a `custom_role_trust_policy` should be used ([#321](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/321)) ([481095e](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/481095ee1282860c913158a0775731cb586e600d))
+
 ### [5.29.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.29.1...v5.29.2) (2023-08-30)
 
 
