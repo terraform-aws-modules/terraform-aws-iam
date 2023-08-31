@@ -63,9 +63,8 @@ module "iam_assumable_role_self_assume" {
 module "iam_assumable_role_custom_trust_policy" {
   source = "../../modules/iam-assumable-role-with-saml"
 
-  create_role                     = true
-  create_custom_role_trust_policy = true
-  custom_role_trust_policy        = data.aws_iam_policy_document.custom_trust_policy.json
+  create_role        = true
+  assume_role_policy = data.aws_iam_policy_document.custom_trust_policy.json
 
   role_name = "role-with-saml-custom-trust"
 

@@ -48,12 +48,11 @@ No modules.
 | <a name="input_admin_role_policy_arns"></a> [admin\_role\_policy\_arns](#input\_admin\_role\_policy\_arns) | List of policy ARNs to use for admin role | `list(string)` | <pre>[<br>  "arn:aws:iam::aws:policy/AdministratorAccess"<br>]</pre> | no |
 | <a name="input_admin_role_tags"></a> [admin\_role\_tags](#input\_admin\_role\_tags) | A map of tags to add to admin role resource. | `map(string)` | `{}` | no |
 | <a name="input_allow_self_assume_role"></a> [allow\_self\_assume\_role](#input\_allow\_self\_assume\_role) | Determines whether to allow the role to be [assume itself](https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/) | `bool` | `false` | no |
+| <a name="input_assume_role_policy"></a> [assume\_role\_policy](#input\_assume\_role\_policy) | Custom policy that grants an entity permission to assume the role. A policy will be created if a custom policy is not provided. | `string` | `null` | no |
 | <a name="input_aws_saml_endpoint"></a> [aws\_saml\_endpoint](#input\_aws\_saml\_endpoint) | AWS SAML Endpoint | `string` | `"https://signin.aws.amazon.com/saml"` | no |
 | <a name="input_create_admin_role"></a> [create\_admin\_role](#input\_create\_admin\_role) | Whether to create admin role | `bool` | `false` | no |
-| <a name="input_create_custom_role_trust_policy"></a> [create\_custom\_role\_trust\_policy](#input\_create\_custom\_role\_trust\_policy) | Whether to create a custom role trust policy to IAM role or not. | `bool` | `false` | no |
 | <a name="input_create_poweruser_role"></a> [create\_poweruser\_role](#input\_create\_poweruser\_role) | Whether to create poweruser role | `bool` | `false` | no |
 | <a name="input_create_readonly_role"></a> [create\_readonly\_role](#input\_create\_readonly\_role) | Whether to create readonly role | `bool` | `false` | no |
-| <a name="input_custom_role_trust_policy"></a> [custom\_role\_trust\_policy](#input\_custom\_role\_trust\_policy) | A custom role trust policy | `string` | `""` | no |
 | <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies) | Whether policies should be detached from this role when destroying | `bool` | `false` | no |
 | <a name="input_max_session_duration"></a> [max\_session\_duration](#input\_max\_session\_duration) | Maximum CLI/API session duration in seconds between 3600 and 43200 | `number` | `3600` | no |
 | <a name="input_poweruser_role_name"></a> [poweruser\_role\_name](#input\_poweruser\_role\_name) | IAM role with poweruser access | `string` | `"poweruser"` | no |
