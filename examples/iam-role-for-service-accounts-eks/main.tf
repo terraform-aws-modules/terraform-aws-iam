@@ -31,7 +31,8 @@ module "disabled" {
 module "irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
-  role_name = local.name
+  role_name              = local.name
+  allow_self_assume_role = true
 
   oidc_providers = {
     one = {
@@ -154,11 +155,12 @@ module "external_dns_irsa_role" {
 module "external_secrets_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
-  role_name                             = "external-secrets"
-  attach_external_secrets_policy        = true
-  external_secrets_ssm_parameter_arns   = ["arn:aws:ssm:*:*:parameter/foo"]
-  external_secrets_secrets_manager_arns = ["arn:aws:secretsmanager:*:*:secret:bar"]
-  external_secrets_kms_key_arns         = ["arn:aws:kms:*:*:key/1234abcd-12ab-34cd-56ef-1234567890ab"]
+  role_name                                          = "external-secrets"
+  attach_external_secrets_policy                     = true
+  external_secrets_ssm_parameter_arns                = ["arn:aws:ssm:*:*:parameter/foo"]
+  external_secrets_secrets_manager_arns              = ["arn:aws:secretsmanager:*:*:secret:bar"]
+  external_secrets_kms_key_arns                      = ["arn:aws:kms:*:*:key/1234abcd-12ab-34cd-56ef-1234567890ab"]
+  external_secrets_secrets_manager_create_permission = false
 
   oidc_providers = {
     ex = {

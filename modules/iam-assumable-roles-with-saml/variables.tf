@@ -22,6 +22,12 @@ variable "allow_self_assume_role" {
   default     = false
 }
 
+variable "trusted_role_actions" {
+  description = "Additional role actions"
+  type        = list(string)
+  default     = ["sts:AssumeRoleWithSAML", "sts:TagSession"]
+}
+
 # Admin
 variable "create_admin_role" {
   description = "Whether to create admin role"

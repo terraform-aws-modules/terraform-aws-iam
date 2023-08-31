@@ -439,6 +439,7 @@ data "aws_iam_policy_document" "external_dns" {
     actions = [
       "route53:ListHostedZones",
       "route53:ListResourceRecordSets",
+      "route53:ListTagsForResource",
     ]
 
     resources = ["*"]
@@ -500,10 +501,33 @@ data "aws_iam_policy_document" "external_secrets" {
   }
 
   statement {
-    actions = [
-      "kms:Decrypt"
-    ]
+    actions   = ["kms:Decrypt"]
     resources = var.external_secrets_kms_key_arns
+  }
+
+  dynamic "statement" {
+    for_each = var.external_secrets_secrets_manager_create_permission ? [1] : []
+    content {
+      actions = [
+        "secretsmanager:CreateSecret",
+        "secretsmanager:PutSecretValue",
+        "secretsmanager:TagResource",
+      ]
+      resources = var.external_secrets_secrets_manager_arns
+    }
+  }
+
+  dynamic "statement" {
+    for_each = var.external_secrets_secrets_manager_create_permission ? [1] : []
+    content {
+      actions   = ["secretsmanager:DeleteSecret"]
+      resources = var.external_secrets_secrets_manager_arns
+      condition {
+        test     = "StringEquals"
+        variable = "secretsmanager:ResourceTag/managed-by"
+        values   = ["external-secrets"]
+      }
+    }
   }
 }
 
@@ -1002,13 +1026,20 @@ data "aws_iam_policy_document" "load_balancer_controller_targetgroup_only" {
       "ec2:RevokeSecurityGroupIngress",
       "elasticloadbalancing:DescribeTargetGroups",
       "elasticloadbalancing:DescribeTargetHealth",
+    ]
+
+    resources = ["*"]
+  }
+
+  statement {
+    actions = [
       "elasticloadbalancing:ModifyTargetGroup",
       "elasticloadbalancing:ModifyTargetGroupAttributes",
       "elasticloadbalancing:RegisterTargets",
       "elasticloadbalancing:DeregisterTargets",
     ]
 
-    resources = ["*"]
+    resources = var.load_balancer_controller_targetgroup_arns
   }
 }
 

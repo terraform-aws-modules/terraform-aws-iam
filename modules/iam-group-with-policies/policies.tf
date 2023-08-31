@@ -146,7 +146,7 @@ data "aws_iam_policy_document" "iam_self_management" {
   }
 
   dynamic "statement" {
-    for_each = var.enable_mfa_enforcment ? [1] : []
+    for_each = var.enable_mfa_enforcement ? [1] : []
 
     content {
       sid    = "DenyAllExceptListedIfNoMFA"

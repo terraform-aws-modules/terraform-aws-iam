@@ -6,6 +6,7 @@ resource "aws_iam_group" "this" {
   count = var.create_group ? 1 : 0
 
   name = var.name
+  path = var.path
 }
 
 resource "aws_iam_group_membership" "this" {

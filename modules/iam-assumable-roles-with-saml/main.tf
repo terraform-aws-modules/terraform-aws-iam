@@ -75,13 +75,11 @@ data "aws_iam_policy_document" "assume_role_with_saml" {
   }
 
   statement {
-    effect = "Allow"
-
-    actions = ["sts:AssumeRoleWithSAML"]
+    effect  = "Allow"
+    actions = compact(distinct(concat(["sts:AssumeRoleWithSAML"], var.trusted_role_actions)))
 
     principals {
-      type = "Federated"
-
+      type        = "Federated"
       identifiers = local.identifiers
     }
 

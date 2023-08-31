@@ -45,6 +45,7 @@ module "iam_group_with_custom_policies" {
   source = "../../modules/iam-group-with-policies"
 
   name = "custom"
+  path = "/custom/"
 
   group_users = [
     module.iam_user1.iam_user_name,

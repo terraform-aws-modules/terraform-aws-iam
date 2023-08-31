@@ -183,6 +183,12 @@ variable "external_secrets_kms_key_arns" {
   default     = ["arn:aws:kms:*:*:key/*"]
 }
 
+variable "external_secrets_secrets_manager_create_permission" {
+  description = "Determins whether External Secrets may use secretsmanager:CreateSecret"
+  type        = bool
+  default     = false
+}
+
 # FSx Lustre CSI
 variable "attach_fsx_lustre_csi_policy" {
   description = "Determines whether to attach the FSx for Lustre CSI Driver IAM policy to the role"
@@ -259,6 +265,12 @@ variable "attach_load_balancer_controller_targetgroup_binding_only_policy" {
   description = "Determines whether to attach the Load Balancer Controller policy for the TargetGroupBinding only"
   type        = bool
   default     = false
+}
+
+variable "load_balancer_controller_targetgroup_arns" {
+  description = "List of Target groups ARNs using Load Balancer Controller"
+  type        = list(string)
+  default     = ["arn:aws:elasticloadbalancing:*:*:targetgroup/*/*"]
 }
 
 # AWS Appmesh Controller

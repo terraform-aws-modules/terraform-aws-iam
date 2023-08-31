@@ -45,3 +45,10 @@ resource "aws_iam_user_ssh_key" "this" {
   encoding   = var.ssh_key_encoding
   public_key = var.ssh_public_key
 }
+
+resource "aws_iam_user_policy_attachment" "this" {
+  for_each = var.create_user ? toset(var.policy_arns) : []
+
+  user       = aws_iam_user.this[0].name
+  policy_arn = each.value
+}

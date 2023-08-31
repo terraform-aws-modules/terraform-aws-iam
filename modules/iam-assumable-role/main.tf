@@ -35,7 +35,7 @@ data "aws_iam_policy_document" "assume_role" {
 
   statement {
     effect  = "Allow"
-    actions = var.trusted_role_actions
+    actions = compact(distinct(concat(["sts:AssumeRole"], var.trusted_role_actions)))
 
     principals {
       type        = "AWS"
@@ -53,6 +53,15 @@ data "aws_iam_policy_document" "assume_role" {
         test     = "StringEquals"
         variable = "sts:ExternalId"
         values   = local.role_sts_externalid
+      }
+    }
+
+    dynamic "condition" {
+      for_each = var.role_requires_session_name ? [1] : []
+      content {
+        test     = "StringEquals"
+        variable = "sts:RoleSessionName"
+        values   = var.role_session_name
       }
     }
   }
@@ -85,7 +94,7 @@ data "aws_iam_policy_document" "assume_role_with_mfa" {
 
   statement {
     effect  = "Allow"
-    actions = var.trusted_role_actions
+    actions = compact(distinct(concat(["sts:AssumeRole"], var.trusted_role_actions)))
 
     principals {
       type        = "AWS"
