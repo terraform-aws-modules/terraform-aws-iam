@@ -52,7 +52,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
       }
 
       condition {
-        test     = "StringEquals"
+        test     = var.assume_role_condition_test
         variable = "${replace(data.aws_eks_cluster.main[statement.key].identity[0].oidc[0].issuer, "https://", "")}:sub"
         values   = [for s in statement.value : "system:serviceaccount:${s}"]
       }

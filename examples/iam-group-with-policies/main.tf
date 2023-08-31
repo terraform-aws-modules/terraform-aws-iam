@@ -14,6 +14,7 @@ module "iam_user2" {
   source = "../../modules/iam-user"
 
   name = "user2"
+  path = "/developers/"
 
   create_iam_user_login_profile = false
   create_iam_access_key         = false
@@ -44,6 +45,7 @@ module "iam_group_with_custom_policies" {
   source = "../../modules/iam-group-with-policies"
 
   name = "custom"
+  path = "/custom/"
 
   group_users = [
     module.iam_user1.iam_user_name,

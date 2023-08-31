@@ -1,7 +1,7 @@
 variable "trusted_role_actions" {
-  description = "Actions of STS"
+  description = "Additional trusted role actions"
   type        = list(string)
-  default     = ["sts:AssumeRole"]
+  default     = ["sts:AssumeRole", "sts:TagSession"]
 }
 
 variable "trusted_role_arns" {
@@ -159,4 +159,16 @@ variable "allow_self_assume_role" {
   description = "Determines whether to allow the role to be [assume itself](https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/)"
   type        = bool
   default     = false
+}
+
+variable "role_requires_session_name" {
+  description = "Determines if the role-session-name variable is needed when assuming a role(https://aws.amazon.com/blogs/security/easily-control-naming-individual-iam-role-sessions/)"
+  type        = bool
+  default     = false
+}
+
+variable "role_session_name" {
+  description = "role_session_name for roles which require this parameter when being assumed. By default, you need to set your own username as role_session_name"
+  type        = list(string)
+  default     = ["$${aws:username}"]
 }

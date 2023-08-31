@@ -10,6 +10,12 @@ variable "name" {
   default     = ""
 }
 
+variable "path" {
+  description = "Desired path for the IAM group"
+  type        = string
+  default     = "/"
+}
+
 variable "group_users" {
   description = "List of IAM users to have in an IAM group which can assume the role"
   type        = list(string)
@@ -26,6 +32,12 @@ variable "custom_group_policies" {
   description = "List of maps of inline IAM policies to attach to IAM group. Should have `name` and `policy` keys in each element."
   type        = list(map(string))
   default     = []
+}
+
+variable "enable_mfa_enforcement" {
+  description = "Determines whether permissions are added to the policy which requires the groups IAM users to use MFA"
+  type        = bool
+  default     = true
 }
 
 variable "attach_iam_self_management_policy" {

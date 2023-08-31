@@ -35,7 +35,10 @@ data "aws_iam_policy_document" "iam_self_management" {
       "iam:GetUser"
     ]
 
-    resources = ["arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}"]
+    resources = [
+      "arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}",
+      "arn:${local.partition}:iam::${local.aws_account_id}:user/*/$${aws:username}"
+    ]
   }
 
   statement {
@@ -50,7 +53,10 @@ data "aws_iam_policy_document" "iam_self_management" {
       "iam:UpdateAccessKey"
     ]
 
-    resources = ["arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}"]
+    resources = [
+      "arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}",
+      "arn:${local.partition}:iam::${local.aws_account_id}:user/*/$${aws:username}"
+    ]
   }
 
   statement {
@@ -65,7 +71,10 @@ data "aws_iam_policy_document" "iam_self_management" {
       "iam:UploadSigningCertificate"
     ]
 
-    resources = ["arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}"]
+    resources = [
+      "arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}",
+      "arn:${local.partition}:iam::${local.aws_account_id}:user/*/$${aws:username}"
+    ]
   }
 
   statement {
@@ -81,7 +90,10 @@ data "aws_iam_policy_document" "iam_self_management" {
       "iam:UploadSSHPublicKey"
     ]
 
-    resources = ["arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}"]
+    resources = [
+      "arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}",
+      "arn:${local.partition}:iam::${local.aws_account_id}:user/*/$${aws:username}"
+    ]
   }
 
   statement {
@@ -97,7 +109,10 @@ data "aws_iam_policy_document" "iam_self_management" {
       "iam:UpdateServiceSpecificCredential"
     ]
 
-    resources = ["arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}"]
+    resources = [
+      "arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}",
+      "arn:${local.partition}:iam::${local.aws_account_id}:user/*/$${aws:username}"
+    ]
   }
 
   statement {
@@ -124,32 +139,35 @@ data "aws_iam_policy_document" "iam_self_management" {
       "iam:ResyncMFADevice"
     ]
 
-    resources = ["arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}"]
-
+    resources = [
+      "arn:${local.partition}:iam::${local.aws_account_id}:user/$${aws:username}",
+      "arn:${local.partition}:iam::${local.aws_account_id}:user/*/$${aws:username}"
+    ]
   }
 
-  statement {
-    sid = "DenyAllExceptListedIfNoMFA"
+  dynamic "statement" {
+    for_each = var.enable_mfa_enforcement ? [1] : []
 
-    effect = "Deny"
+    content {
+      sid    = "DenyAllExceptListedIfNoMFA"
+      effect = "Deny"
+      not_actions = [
+        "iam:ChangePassword",
+        "iam:CreateVirtualMFADevice",
+        "iam:EnableMFADevice",
+        "iam:GetUser",
+        "iam:ListMFADevices",
+        "iam:ListVirtualMFADevices",
+        "iam:ResyncMFADevice",
+        "sts:GetSessionToken"
+      ]
+      resources = ["*"]
 
-    not_actions = [
-      "iam:ChangePassword",
-      "iam:CreateVirtualMFADevice",
-      "iam:EnableMFADevice",
-      "iam:GetUser",
-      "iam:ListMFADevices",
-      "iam:ListVirtualMFADevices",
-      "iam:ResyncMFADevice",
-      "sts:GetSessionToken"
-    ]
-
-    resources = ["*"]
-
-    condition {
-      test     = "BoolIfExists"
-      variable = "aws:MultiFactorAuthPresent"
-      values   = ["false"]
+      condition {
+        test     = "BoolIfExists"
+        variable = "aws:MultiFactorAuthPresent"
+        values   = ["false"]
+      }
     }
   }
 }
