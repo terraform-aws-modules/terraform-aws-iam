@@ -69,13 +69,14 @@ module "iam_assumable_roles_with_custom_trust" {
     "codedeploy.amazonaws.com"
   ]
 
-  create_admin_role          = true
-  create_poweruser_role      = true
-  assume_role_policy         = data.aws_iam_policy_document.custom_trust_policy.json
-  admin_role_name            = "Admin-Role-Name-Custom-Trust"
-  poweruser_role_name        = "Billing-And-Support-Access-Custom-Trust"
-  poweruser_role_policy_arns = ["arn:aws:iam::aws:policy/job-function/Billing", "arn:aws:iam::aws:policy/AWSSupportAccess"]
-  readonly_role_name         = "Read-Only-Role-Name-Custom-Trust"
+  create_admin_role               = true
+  create_poweruser_role           = true
+  create_custom_role_trust_policy = true
+  custom_role_trust_policy        = data.aws_iam_policy_document.custom_trust_policy.json
+  admin_role_name                 = "Admin-Role-Name-Custom-Trust"
+  poweruser_role_name             = "Billing-And-Support-Access-Custom-Trust"
+  poweruser_role_policy_arns      = ["arn:aws:iam::aws:policy/job-function/Billing", "arn:aws:iam::aws:policy/AWSSupportAccess"]
+  readonly_role_name              = "Read-Only-Role-Name-Custom-Trust"
 
   create_readonly_role       = true
   readonly_role_requires_mfa = false

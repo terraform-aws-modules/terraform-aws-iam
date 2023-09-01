@@ -82,10 +82,16 @@ variable "custom_role_policy_arns" {
   default     = []
 }
 
-variable "assume_role_policy" {
-  description = "Custom policy that grants an entity permission to assume the role. A policy will be created if a custom policy is not provided."
+variable "custom_role_trust_policy" {
+  description = "A custom role trust policy. (Only valid if create_custom_role_trust_policy = true)"
   type        = string
-  default     = null
+  default     = ""
+}
+
+variable "create_custom_role_trust_policy" {
+  description = "Whether to create a custom_role_trust_policy. Prevent errors with count, when custom_role_trust_policy is computed"
+  type        = bool
+  default     = false
 }
 
 variable "number_of_custom_role_policy_arns" {

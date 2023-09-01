@@ -61,7 +61,7 @@ resource "aws_iam_role" "this" {
   force_detach_policies = var.force_detach_policies
   permissions_boundary  = var.role_permissions_boundary_arn
 
-  assume_role_policy = coalesce(var.assume_role_policy, data.aws_iam_policy_document.assume_role_with_saml.json)
+  assume_role_policy = var.create_custom_role_trust_policy ? var.custom_role_trust_policy : data.aws_iam_policy_document.assume_role_with_saml.json
 
   tags = var.tags
 }
