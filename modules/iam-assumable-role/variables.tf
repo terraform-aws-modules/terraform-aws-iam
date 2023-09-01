@@ -88,12 +88,6 @@ variable "assume_role_policy" {
   default     = null
 }
 
-variable "create_custom_role_trust_policy" {
-  description = "Whether to create a custom_role_trust_policy. Prevent errors with count, when custom_role_trust_policy is computed"
-  type        = bool
-  default     = false
-}
-
 variable "number_of_custom_role_policy_arns" {
   description = "Number of IAM policies to attach to IAM role"
   type        = number
