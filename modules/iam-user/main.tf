@@ -47,8 +47,8 @@ resource "aws_iam_user_ssh_key" "this" {
 }
 
 resource "aws_iam_user_policy_attachment" "this" {
-  for_each = var.create_user ? toset(var.policy_arns) : []
+  count = var.create_user ? length(var.policy_arns) : 0
 
   user       = aws_iam_user.this[0].name
-  policy_arn = each.value
+  policy_arn = element(var.policy_arns, count.index)
 }
