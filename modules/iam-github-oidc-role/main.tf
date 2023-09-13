@@ -47,6 +47,15 @@ data "aws_iam_policy_document" "this" {
       # Strip `repo:` to normalize for cases where users may prepend it
       values = [for subject in var.subjects : "repo:${trimprefix(subject, "repo:")}"]
     }
+
+    dynamic "condition" {
+      for_each = length(var.allowed_cidrs) > 0 ? [1] : []
+      content {
+        test     = "IpAddress"
+        variable = "aws:SourceIp"
+        values   = var.allowed_cidrs
+      }
+    }
   }
 }
 

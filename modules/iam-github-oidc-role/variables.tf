@@ -79,3 +79,9 @@ variable "provider_url" {
   type        = string
   default     = "token.actions.githubusercontent.com"
 }
+
+variable "allowed_cidrs" {
+  description = "List of CIDR blocks to allow access from. Defaults to `0.0.0.0/0`"
+  type        = list(string)
+  default     = []
+}
