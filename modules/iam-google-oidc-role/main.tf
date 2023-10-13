@@ -7,6 +7,7 @@ locals {
 
   account_id = data.aws_caller_identity.current.account_id
   partition  = data.aws_partition.current.partition
+  number_of_role_policy_arns = length(var.role_policy_arns)
 }
 
 ################################################################################
@@ -63,9 +64,9 @@ resource "aws_iam_role" "this" {
   tags = var.tags
 }
 
-resource "aws_iam_role_policy_attachment" "this" {
-  for_each = { for k, v in var.policies : k => v if var.create }
+resource "aws_iam_role_policy_attachment" "custom" {
+  count = var.create ? local.number_of_role_policy_arns : 0
 
   role       = aws_iam_role.this[0].name
-  policy_arn = each.value
+  policy_arn = var.role_policy_arns[count.index]
 }

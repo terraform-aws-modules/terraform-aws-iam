@@ -44,12 +44,6 @@ variable "name_prefix" {
   default     = null
 }
 
-variable "policies" {
-  description = "Policies to attach to the IAM role in `{'static_name' = 'policy_arn'}` format"
-  type        = map(string)
-  default     = {}
-}
-
 variable "force_detach_policies" {
   description = "Whether policies should be detached from this role when destroying"
   type        = bool
@@ -60,6 +54,12 @@ variable "max_session_duration" {
   description = "Maximum CLI/API session duration in seconds between 3600 and 43200"
   type        = number
   default     = null
+}
+
+variable "role_policy_arns" {
+  description = "List of ARNs of IAM policies to attach to IAM role"
+  type        = list(string)
+  default     = []
 }
 
 variable "google_service_account_ids" {
