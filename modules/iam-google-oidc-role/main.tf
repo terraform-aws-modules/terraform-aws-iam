@@ -30,7 +30,7 @@ data "aws_iam_policy_document" "this" {
     condition {
       test     = "StringEquals"
       variable = "${local.provider_url}:iss"
-      values   = "https://${local.provider_url}"
+      values   = ["https://${local.provider_url}"]
     }
 
     condition {
