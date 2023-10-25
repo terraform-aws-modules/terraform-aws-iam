@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.30.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.29.2...v5.30.0) (2023-08-31)
+
+
+### Features
+
+* Add `create_custom_role_trust_policy` to control when a `custom_role_trust_policy` should be used ([#321](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/321)) ([481095e](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/481095ee1282860c913158a0775731cb586e600d))
+
+### [5.29.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.29.1...v5.29.2) (2023-08-30)
+
+
+### Bug Fixes
+
+* Expand Permissions for external-secrets IRSA Policy towards AWS Secrets Manager ([#416](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/416)) ([fa74a18](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/fa74a1817cf5aa49cb1ff30f2b1946be706fc640))
+
+### [5.29.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.29.0...v5.29.1) (2023-08-30)
+
+
+### Bug Fixes
+
+* Add missing condition role_session_name when assuming a role ([#418](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/418)) ([89d011e](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/89d011ee19fc9262f26565f6e935ab64e0e15066))
+
 ## [5.29.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.28.0...v5.29.0) (2023-08-23)
 
 

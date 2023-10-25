@@ -104,8 +104,9 @@ module "iam_assumable_role_custom_trust_policy" {
 
   role_name = "iam_assumable_role_custom_trust_policy"
 
-  custom_role_trust_policy = data.aws_iam_policy_document.custom_trust_policy.json
-  custom_role_policy_arns  = ["arn:aws:iam::aws:policy/AmazonCognitoReadOnly"]
+  create_custom_role_trust_policy = true
+  custom_role_trust_policy        = data.aws_iam_policy_document.custom_trust_policy.json
+  custom_role_policy_arns         = ["arn:aws:iam::aws:policy/AmazonCognitoReadOnly"]
 }
 
 data "aws_iam_policy_document" "custom_trust_policy" {
