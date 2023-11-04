@@ -47,7 +47,7 @@ resource "aws_iam_user_ssh_key" "this" {
 }
 
 resource "aws_iam_user_policy_attachment" "this" {
-  for_each = var.create_user ? toset(var.policy_arns) : []
+  for_each = { for k, v in var.policy_arns : k => v if var.create_user }
 
   user       = aws_iam_user.this[0].name
   policy_arn = each.value
