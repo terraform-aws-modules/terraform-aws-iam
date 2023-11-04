@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.30.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.30.0...v5.30.1) (2023-11-04)
+
+
+### Bug Fixes
+
+* Direct policy attachment of `iam-policy`-created resources ([#428](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/428)) ([543f101](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/543f101e286a628d5f324ca794c73b60962ff4ae))
+
 ## [5.30.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.29.2...v5.30.0) (2023-08-31)
 
 
