@@ -50,7 +50,8 @@ data "aws_iam_policy_document" "iam_self_management" {
       "iam:CreateAccessKey",
       "iam:DeleteAccessKey",
       "iam:ListAccessKeys",
-      "iam:UpdateAccessKey"
+      "iam:UpdateAccessKey",
+      "iam:GetAccessKeyLastUsed"
     ]
 
     resources = [
