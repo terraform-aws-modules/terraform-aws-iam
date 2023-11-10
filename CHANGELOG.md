@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.30.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.30.1...v5.30.2) (2023-11-10)
+
+
+### Bug Fixes
+
+* Update AllowManageOwnAccessKeys statement ([#432](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/432)) ([741afc9](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/741afc9017b7600bb41eeefb9a61e61b2f4bd3da))
+
 ### [5.30.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.30.0...v5.30.1) (2023-11-04)
 
 
