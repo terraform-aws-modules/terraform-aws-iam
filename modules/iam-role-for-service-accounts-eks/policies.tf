@@ -692,6 +692,98 @@ data "aws_iam_policy_document" "karpenter_controller" {
   }
 
   statement {
+    actions   = ["iam:CreateInstanceProfile"]
+    resources = ["*"]
+    condition {
+      test     = "StringEquals"
+      variable = "aws:RequestTag/kubernetes.io/cluster/${local.karpenter_controller_cluster_name}"
+      values   = ["owned"]
+    }
+    condition {
+      test     = "StringEquals"
+      variable = "aws:RequestTag/topology.kubernetes.io/region"
+      values   = [local.region]
+    }
+    condition {
+      test     = "StringLike"
+      variable = "aws:RequestTag/karpenter.k8s.aws/ec2nodeclass"
+      values   = ["*"]
+    }
+  }
+
+  statement {
+
+    actions = [
+      "iam:TagInstanceProfile"
+    ]
+
+    resources = ["*"]
+
+    dynamic "condition" {
+      for_each = {
+        "aws:ResourceTag/kubernetes.io/cluster/${local.karpenter_controller_cluster_name}" = "owned"
+        "aws:ResourceTag/topology.kubernetes.io/region"                                    = local.region
+        "aws:RequestTag/kubernetes.io/cluster/${local.karpenter_controller_cluster_name}"  = "owned"
+        "aws:RequestTag/topology.kubernetes.io/region"                                     = local.region
+      }
+      content {
+        test     = "StringEquals"
+        variable = condition.key
+        values   = [condition.value]
+      }
+    }
+
+    dynamic "condition" {
+      for_each = {
+        "aws:ResourceTag/karpenter.k8s.aws/ec2nodeclass" = "*"
+        "aws:RequestTag/karpenter.k8s.aws/ec2nodeclass"  = "*"
+      }
+      content {
+        test     = "StringLike"
+        variable = condition.key
+        values   = [condition.value]
+      }
+    }
+  }
+
+  statement {
+    actions = [
+      "iam:AddRoleToInstanceProfile",
+      "iam:RemoveRoleFromInstanceProfile",
+      "iam:DeleteInstanceProfile"
+    ]
+
+    resources = ["*"]
+
+    dynamic "condition" {
+      for_each = {
+        "aws:ResourceTag/kubernetes.io/cluster/${local.karpenter_controller_cluster_name}" = "owned"
+        "aws:ResourceTag/topology.kubernetes.io/region"                                    = local.region
+      }
+
+      content {
+        test     = "StringEquals"
+        variable = condition.key
+        values   = [condition.value]
+      }
+    }
+
+    condition {
+      test     = "StringLike"
+      variable = "aws:ResourceTag/karpenter.k8s.aws/ec2nodeclass"
+      values   = ["*"]
+    }
+  }
+
+  statement {
+    actions = [
+      "iam:GetInstanceProfile"
+    ]
+    resources = ["*"]
+  }
+
+
+  statement {
     actions   = ["eks:DescribeCluster"]
     resources = ["arn:${local.partition}:eks:${local.region}:${local.account_id}:cluster/${local.karpenter_controller_cluster_name}"]
   }
