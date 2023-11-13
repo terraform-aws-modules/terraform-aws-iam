@@ -32,7 +32,9 @@ data "aws_iam_policy_document" "iam_self_management" {
 
     actions = [
       "iam:ChangePassword",
-      "iam:GetUser"
+      "iam:GetLoginProfile",
+      "iam:GetUser",
+      "iam:UpdateLoginProfile"
     ]
 
     resources = [
@@ -153,10 +155,10 @@ data "aws_iam_policy_document" "iam_self_management" {
       sid    = "DenyAllExceptListedIfNoMFA"
       effect = "Deny"
       not_actions = [
-        "iam:ChangePassword",
         "iam:CreateVirtualMFADevice",
         "iam:EnableMFADevice",
         "iam:GetUser",
+        "iam:GetMFADevice",
         "iam:ListMFADevices",
         "iam:ListVirtualMFADevices",
         "iam:ResyncMFADevice",
