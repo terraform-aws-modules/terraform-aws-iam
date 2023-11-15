@@ -8,7 +8,7 @@ locals {
 }
 
 data "aws_eks_cluster" "main" {
-  for_each = var.cluster_service_accounts
+  for_each = var.create_role ? var.cluster_service_accounts : {}
 
   name = each.key
 }
@@ -37,7 +37,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
   }
 
   dynamic "statement" {
-    for_each = var.cluster_service_accounts
+    for_each = var.create_role ? var.cluster_service_accounts : {}
 
     content {
       effect  = "Allow"
