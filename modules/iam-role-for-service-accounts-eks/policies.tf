@@ -694,20 +694,24 @@ data "aws_iam_policy_document" "karpenter_controller" {
   statement {
     actions   = ["iam:CreateInstanceProfile"]
     resources = ["*"]
-    condition {
-      test     = "StringEquals"
-      variable = "aws:RequestTag/kubernetes.io/cluster/${local.karpenter_controller_cluster_name}"
-      values   = ["owned"]
-    }
-    condition {
-      test     = "StringEquals"
-      variable = "aws:RequestTag/topology.kubernetes.io/region"
-      values   = [local.region]
-    }
+
     condition {
       test     = "StringLike"
       variable = "aws:RequestTag/karpenter.k8s.aws/ec2nodeclass"
       values   = ["*"]
+    }
+
+    dynamic "condition" {
+      for_each = {
+        "aws:RequestTag/kubernetes.io/cluster/${local.karpenter_controller_cluster_name}" = "owned"
+        "aws:RequestTag/topology.kubernetes.io/region"                                    = local.region
+      }
+
+      content {
+        test     = "StringEquals"
+        variable = condition.key
+        values   = [condition.value]
+      }
     }
   }
 
