@@ -252,6 +252,12 @@ variable "karpenter_sqs_queue_arn" {
   default     = null
 }
 
+variable "enable_karpenter_instance_profile_creation" {
+  description = "Determines whether Karpenter will be allowed to create the IAM instance profile (v1beta1/v0.32+)"
+  type        = bool
+  default     = false
+}
+
 # AWS Load Balancer Controller
 variable "attach_load_balancer_controller_policy" {
   description = "Determines whether to attach the Load Balancer Controller policy to the role"

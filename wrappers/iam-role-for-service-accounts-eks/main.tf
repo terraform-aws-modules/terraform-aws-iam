@@ -28,6 +28,7 @@ module "wrapper" {
   cluster_autoscaler_cluster_names                                = try(each.value.cluster_autoscaler_cluster_names, var.defaults.cluster_autoscaler_cluster_names, [])
   create_role                                                     = try(each.value.create_role, var.defaults.create_role, true)
   ebs_csi_kms_cmk_ids                                             = try(each.value.ebs_csi_kms_cmk_ids, var.defaults.ebs_csi_kms_cmk_ids, [])
+  enable_karpenter_instance_profile_creation                      = try(each.value.enable_karpenter_instance_profile_creation, var.defaults.enable_karpenter_instance_profile_creation, false)
   external_dns_hosted_zone_arns                                   = try(each.value.external_dns_hosted_zone_arns, var.defaults.external_dns_hosted_zone_arns, ["arn:aws:route53:::hostedzone/*"])
   external_secrets_kms_key_arns                                   = try(each.value.external_secrets_kms_key_arns, var.defaults.external_secrets_kms_key_arns, ["arn:aws:kms:*:*:key/*"])
   external_secrets_secrets_manager_arns                           = try(each.value.external_secrets_secrets_manager_arns, var.defaults.external_secrets_secrets_manager_arns, ["arn:aws:secretsmanager:*:*:secret:*"])
