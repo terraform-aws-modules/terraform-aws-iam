@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.32.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.31.0...v5.32.0) (2023-11-17)
+
+
+### Features
+
+* Add instance profile permissions to Karpenter IRSA policy ([#434](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/434)) ([50348dd](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/50348dd6ac008a38fce1c8d3549915c1dd9ccb65)), closes [#433](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/433)
+
 ## [5.31.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.30.2...v5.31.0) (2023-11-13)
 
 
