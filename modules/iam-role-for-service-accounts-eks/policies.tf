@@ -645,7 +645,6 @@ data "aws_iam_policy_document" "karpenter_controller" {
       "ec2:TerminateInstances",
       "ec2:DeleteLaunchTemplate",
     ]
-
     resources = ["*"]
 
     condition {
@@ -706,7 +705,6 @@ data "aws_iam_policy_document" "karpenter_controller" {
         "aws:RequestTag/kubernetes.io/cluster/${local.karpenter_controller_cluster_name}" = "owned"
         "aws:RequestTag/topology.kubernetes.io/region"                                    = local.region
       }
-
       content {
         test     = "StringEquals"
         variable = condition.key
@@ -716,11 +714,7 @@ data "aws_iam_policy_document" "karpenter_controller" {
   }
 
   statement {
-
-    actions = [
-      "iam:TagInstanceProfile"
-    ]
-
+    actions   = ["iam:TagInstanceProfile"]
     resources = ["*"]
 
     dynamic "condition" {
@@ -756,7 +750,6 @@ data "aws_iam_policy_document" "karpenter_controller" {
       "iam:RemoveRoleFromInstanceProfile",
       "iam:DeleteInstanceProfile"
     ]
-
     resources = ["*"]
 
     dynamic "condition" {
@@ -764,7 +757,6 @@ data "aws_iam_policy_document" "karpenter_controller" {
         "aws:ResourceTag/kubernetes.io/cluster/${local.karpenter_controller_cluster_name}" = "owned"
         "aws:ResourceTag/topology.kubernetes.io/region"                                    = local.region
       }
-
       content {
         test     = "StringEquals"
         variable = condition.key
@@ -780,12 +772,9 @@ data "aws_iam_policy_document" "karpenter_controller" {
   }
 
   statement {
-    actions = [
-      "iam:GetInstanceProfile"
-    ]
+    actions   = ["iam:GetInstanceProfile"]
     resources = ["*"]
   }
-
 
   statement {
     actions   = ["eks:DescribeCluster"]
