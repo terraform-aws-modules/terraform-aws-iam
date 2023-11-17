@@ -645,7 +645,6 @@ data "aws_iam_policy_document" "karpenter_controller" {
       "ec2:TerminateInstances",
       "ec2:DeleteLaunchTemplate",
     ]
-
     resources = ["*"]
 
     condition {
@@ -689,6 +688,22 @@ data "aws_iam_policy_document" "karpenter_controller" {
   statement {
     actions   = ["iam:PassRole"]
     resources = var.karpenter_controller_node_iam_role_arns
+  }
+
+  dynamic "statement" {
+    for_each = var.enable_karpenter_instance_profile_creation ? [1] : []
+
+    content {
+      actions = [
+        "iam:AddRoleToInstanceProfile",
+        "iam:CreateInstanceProfile",
+        "iam:DeleteInstanceProfile",
+        "iam:GetInstanceProfile",
+        "iam:RemoveRoleFromInstanceProfile",
+        "iam:TagInstanceProfile",
+      ]
+      resources = ["*"]
+    }
   }
 
   statement {
