@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.31.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.30.2...v5.31.0) (2023-11-13)
+
+
+### Features
+
+* Allow users to change own password in iam-group-with-policies module ([#435](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/435)) ([eb5b218](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/eb5b21840bdb1e5549c24200920250692844bcee))
+
 ### [5.30.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.30.1...v5.30.2) (2023-11-10)
 
 
