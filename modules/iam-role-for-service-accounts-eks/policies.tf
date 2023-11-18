@@ -1446,3 +1446,38 @@ resource "aws_iam_role_policy_attachment" "vpc_cni" {
   role       = aws_iam_role.this[0].name
   policy_arn = aws_iam_policy.vpc_cni[0].arn
 }
+
+################################################################################
+# Custom Policies
+################################################################################
+data "aws_iam_policy_document" "custom_policies" {
+  count = var.create_role && length(var.custom_policies) > 0 ? 1 : 0
+
+  dynamic "statement" {
+    for_each = var.custom_policies
+    content {
+      sid       = lookup(statement.value, "sid", null)
+      effect    = lookup(statement.value, "effect", "Allow")
+      actions   = lookup(statement.value, "actions", [])
+      resources = lookup(statement.value, "resources", [])
+    }
+  }
+}
+
+resource "aws_iam_policy" "custom_policies" {
+  count = var.create_role && length(var.custom_policies) > 0 ? 1 : 0
+
+  name_prefix = "${var.policy_name_prefix}Custom_Policies-"
+  path        = var.role_path
+  description = "Provides custom permissions to the role"
+  policy      = data.aws_iam_policy_document.custom_policies[0].json
+
+  tags = var.tags
+}
+
+resource "aws_iam_role_policy_attachment" "custom_policies" {
+  count = var.create_role && length(var.custom_policies) > 0 ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.custom_policies[0].arn
+}

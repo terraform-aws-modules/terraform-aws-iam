@@ -345,8 +345,15 @@ variable "attach_node_termination_handler_policy" {
   default     = false
 }
 
+
 variable "node_termination_handler_sqs_queue_arns" {
   description = "List of SQS ARNs that contain node termination events"
   type        = list(string)
   default     = ["*"]
+}
+
+variable "custom_policies" {
+  description = "List of custom IAM policies to attach to the role"
+  type        = list(any)
+  default     = []
 }
