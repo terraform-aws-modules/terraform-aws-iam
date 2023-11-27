@@ -21,21 +21,21 @@ resource "aws_iam_group_membership" "this" {
 # IAM group policy attachements
 ################################
 resource "aws_iam_group_policy_attachment" "iam_self_management" {
-  count = var.attach_iam_self_management_policy ? 1 : 0
+  count = var.create_group && var.attach_iam_self_management_policy ? 1 : 0
 
   group      = local.group_name
   policy_arn = aws_iam_policy.iam_self_management[0].arn
 }
 
 resource "aws_iam_group_policy_attachment" "custom_arns" {
-  count = length(var.custom_group_policy_arns)
+  count = var.create_group ? length(var.custom_group_policy_arns) : 0
 
   group      = local.group_name
   policy_arn = element(var.custom_group_policy_arns, count.index)
 }
 
 resource "aws_iam_group_policy_attachment" "custom" {
-  count = length(var.custom_group_policies)
+  count = var.create_group ? length(var.custom_group_policies) : 0
 
   group      = local.group_name
   policy_arn = element(aws_iam_policy.custom[*].arn, count.index)
@@ -45,7 +45,7 @@ resource "aws_iam_group_policy_attachment" "custom" {
 # IAM policies
 ###############
 resource "aws_iam_policy" "iam_self_management" {
-  count = var.attach_iam_self_management_policy ? 1 : 0
+  count = var.create_group && var.attach_iam_self_management_policy ? 1 : 0
 
   name_prefix = var.iam_self_management_policy_name_prefix
   policy      = data.aws_iam_policy_document.iam_self_management.json
@@ -54,7 +54,7 @@ resource "aws_iam_policy" "iam_self_management" {
 }
 
 resource "aws_iam_policy" "custom" {
-  count = length(var.custom_group_policies)
+  count = var.create_group ? length(var.custom_group_policies) : 0
 
   name        = var.custom_group_policies[count.index]["name"]
   policy      = var.custom_group_policies[count.index]["policy"]

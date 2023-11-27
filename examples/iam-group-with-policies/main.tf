@@ -65,6 +65,35 @@ module "iam_group_with_custom_policies" {
   ]
 }
 
+#####################################################################################
+# IAM group to test the `create_group = false` option
+#####################################################################################
+module "iam_group_with_custom_policies_disabled" {
+  source = "../../modules/iam-group-with-policies"
+
+  create_group = false
+
+  name = "custom-disabled"
+  path = "/custom/"
+
+  group_users = [
+    module.iam_user1.iam_user_name,
+    module.iam_user2.iam_user_name,
+  ]
+
+  custom_group_policy_arns = [
+    "arn:aws:iam::aws:policy/AmazonCognitoReadOnly",
+    "arn:aws:iam::aws:policy/AlexaForBusinessFullAccess",
+  ]
+
+  custom_group_policies = [
+    {
+      name   = "AllowS3Listing"
+      policy = data.aws_iam_policy_document.sample.json
+    },
+  ]
+}
+
 ######################
 # IAM policy (sample)
 ######################
