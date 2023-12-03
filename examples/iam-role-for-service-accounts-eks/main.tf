@@ -400,6 +400,26 @@ module "iam_eks_role" {
 }
 
 ################################################################################
+# Pod Identity Roles
+################################################################################
+module "iam_pod_identity_role" {
+  source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  role_name = "my-pod-identity"
+
+  role_policy_arns = {
+    policy = module.iam_policy.arn
+  }
+}
+
+# This resource requires installed eks-pod-identity-agent to work
+resource "aws_eks_pod_identity_association" "my_app_staging" {
+  cluster_name    = module.eks.cluster_name
+  role_arn        = module.iam_pod_identity_role.iam_role_arn
+  namespace       = "default"
+  service_account = "my-app-staging"
+}
+
+################################################################################
 # Supporting Resources
 ################################################################################
 
@@ -437,6 +457,13 @@ module "eks" {
 
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
+
+  cluster_addons = {
+    # Required for Pod Identity roles
+    eks-pod-identity-agent = {
+      most_recent = true
+    }
+  }
 
   eks_managed_node_groups = {
     default = {}
