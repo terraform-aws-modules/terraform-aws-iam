@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.32.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.32.0...v5.32.1) (2023-12-11)
+
+
+### Bug Fixes
+
+* Remove unused TLS provider in `iam-github-oidc-role` ([#439](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/439)) ([2ce3885](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/2ce3885a6d511a6512a9607abcf839939bbf7b59))
+
 ## [5.32.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.31.0...v5.32.0) (2023-11-17)
 
 
