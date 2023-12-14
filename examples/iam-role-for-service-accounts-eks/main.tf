@@ -352,6 +352,23 @@ module "vpc_cni_ipv6_irsa_role" {
   tags = local.tags
 }
 
+module "amazon_cloudwatch_observability_irsa_role" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name                        = "amazon_cloudwatch_observability"
+  attach_amazon_cloudwatch_observability_policy = true
+  amazon_cloudwatch_observability_enable_ebs_volume_ids = true
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["amazon-cloudwatch:cloudwatch-agent"]
+    }
+  }
+
+  tags = local.tags
+}
+
 ################################################################################
 # Custom IRSA Roles
 ################################################################################

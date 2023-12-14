@@ -5,7 +5,9 @@ module "wrapper" {
 
   allow_self_assume_role                                          = try(each.value.allow_self_assume_role, var.defaults.allow_self_assume_role, false)
   amazon_managed_service_prometheus_workspace_arns                = try(each.value.amazon_managed_service_prometheus_workspace_arns, var.defaults.amazon_managed_service_prometheus_workspace_arns, ["*"])
+  amazon_cloudwatch_observability_enable_ebs_volume_ids           = try(each.value.amazon_cloudwatch_observability_enable_ebs_volume_ids, var.defaults.amazon_cloudwatch_observability_enable_ebs_volume_ids, false)
   assume_role_condition_test                                      = try(each.value.assume_role_condition_test, var.defaults.assume_role_condition_test, "StringEquals")
+  attach_amazon_cloudwatch_observability_policy                   = try(each.value.attach_amazon_cloudwatch_observability_policy, var.defaults.attach_amazon_cloudwatch_observability_policy, false)
   attach_amazon_managed_service_prometheus_policy                 = try(each.value.attach_amazon_managed_service_prometheus_policy, var.defaults.attach_amazon_managed_service_prometheus_policy, false)
   attach_appmesh_controller_policy                                = try(each.value.attach_appmesh_controller_policy, var.defaults.attach_appmesh_controller_policy, false)
   attach_appmesh_envoy_proxy_policy                               = try(each.value.attach_appmesh_envoy_proxy_policy, var.defaults.attach_appmesh_envoy_proxy_policy, false)

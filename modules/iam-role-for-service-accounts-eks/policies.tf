@@ -1446,3 +1446,76 @@ resource "aws_iam_role_policy_attachment" "vpc_cni" {
   role       = aws_iam_role.this[0].name
   policy_arn = aws_iam_policy.vpc_cni[0].arn
 }
+
+################################################################################
+# Amazon CloudWatch Observability Policy
+################################################################################
+
+data "aws_iam_policy_document" "amazon_cloudwatch_observability" {
+  count = var.create_role && var.attach_amazon_cloudwatch_observability_policy ? 1 : 0
+  dynamic "statement" {
+    for_each = var.amazon_cloudwatch_observability_enable_ebs_volume_ids ? [1] : []
+    content {
+      sid = "CollectEBSVolumeIDs"
+      actions = [
+        "ec2:DescribeVolumes"
+      ]
+      resources = ["*"]
+    }
+  }
+
+  # arn:${local.partition}:iam::aws:policy/CloudWatchAgentServerPolicy
+  # arn:${local.partition}:iam::aws:policy/AWSXrayWriteOnlyAccess
+  statement {
+    sid = "CloudWatchAgentServerPolicy"
+    actions = [
+      "cloudwatch:PutMetricData",
+      "ec2:DescribeVolumes",
+      "ec2:DescribeTags",
+      "logs:PutLogEvents",
+      "logs:DescribeLogStreams",
+      "logs:DescribeLogGroups",
+      "logs:CreateLogStream",
+      "logs:CreateLogGroup"
+    ]
+    resources = ["*"]
+  }
+
+  statement {
+    sid = "GetAmazonCloudWatchSSMParameter"
+    actions = [
+      "ssm:GetParameter"
+    ]
+    resources = ["arn:${local.partition}:ssm:*:*:parameter/AmazonCloudWatch-*"]
+  }
+
+  statement {
+    sid = "AWSXrayWriteOnlyAccess"
+    actions = [
+      "xray:PutTraceSegments",
+      "xray:PutTelemetryRecords",
+      "xray:GetSamplingRules",
+      "xray:GetSamplingTargets",
+      "xray:GetSamplingStatisticSummaries"
+    ]
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_policy" "amazon_cloudwatch_observability" {
+  count = var.create_role && var.attach_amazon_cloudwatch_observability_policy ? 1 : 0
+
+  name_prefix = "${var.policy_name_prefix}Amazon_CloudWatch_Observability_Policy-"
+  path        = var.role_path
+  description = "Provided the Amazon CloudWatch Observability add-on the permissions it requires to send logs to CloudWatch Logs and send traces to AWS X-Ray"
+  policy      = data.aws_iam_policy_document.amazon_cloudwatch_observability[0].json
+
+  tags = var.tags
+}
+
+resource "aws_iam_role_policy_attachment" "amazon_cloudwatch_observability" {
+  count = var.create_role && var.attach_amazon_cloudwatch_observability_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.amazon_cloudwatch_observability[0].arn
+}
