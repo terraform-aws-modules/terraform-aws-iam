@@ -32,6 +32,7 @@ Run `terraform destroy` when you don't need these resources.
 
 | Name | Source | Version |
 |------|--------|---------|
+| <a name="module_amazon_cloudwatch_observability_irsa_role"></a> [amazon\_cloudwatch\_observability\_irsa\_role](#module\_amazon\_cloudwatch\_observability\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
 | <a name="module_amazon_managed_service_prometheus_irsa_role"></a> [amazon\_managed\_service\_prometheus\_irsa\_role](#module\_amazon\_managed\_service\_prometheus\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
 | <a name="module_appmesh_controller_irsa_role"></a> [appmesh\_controller\_irsa\_role](#module\_appmesh\_controller\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
 | <a name="module_appmesh_envoy_proxy_irsa_role"></a> [appmesh\_envoy\_proxy\_irsa\_role](#module\_appmesh\_envoy\_proxy\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |

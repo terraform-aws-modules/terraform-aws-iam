@@ -355,8 +355,8 @@ module "vpc_cni_ipv6_irsa_role" {
 module "amazon_cloudwatch_observability_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
-  role_name                        = "amazon_cloudwatch_observability"
-  attach_amazon_cloudwatch_observability_policy = true
+  role_name                                             = "amazon_cloudwatch_observability"
+  attach_amazon_cloudwatch_observability_policy         = true
   amazon_cloudwatch_observability_enable_ebs_volume_ids = true
 
   oidc_providers = {
