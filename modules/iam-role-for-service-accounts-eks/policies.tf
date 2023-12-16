@@ -1451,67 +1451,12 @@ resource "aws_iam_role_policy_attachment" "vpc_cni" {
 # Amazon CloudWatch Observability Policy
 ################################################################################
 
-data "aws_iam_policy_document" "amazon_cloudwatch_observability" {
-  count = var.create_role && var.attach_cloudwatch_observability_policy ? 1 : 0
-
-  statement {
-    sid       = "CollectEBSVolumeIDs"
-    actions   = ["ec2:DescribeVolumes"]
-    resources = ["*"]
-  }
-
-  # arn:${local.partition}:iam::aws:policy/CloudWatchAgentServerPolicy
-  # arn:${local.partition}:iam::aws:policy/AWSXrayWriteOnlyAccess
-  statement {
-    sid = "CloudWatchAgentServerPolicy"
-    actions = [
-      "cloudwatch:PutMetricData",
-      "ec2:DescribeVolumes",
-      "ec2:DescribeTags",
-      "logs:PutLogEvents",
-      "logs:DescribeLogStreams",
-      "logs:DescribeLogGroups",
-      "logs:CreateLogStream",
-      "logs:CreateLogGroup"
-    ]
-    resources = ["*"]
-  }
-
-  statement {
-    sid = "GetAmazonCloudWatchSSMParameter"
-    actions = [
-      "ssm:GetParameter"
-    ]
-    resources = ["arn:${local.partition}:ssm:*:*:parameter/AmazonCloudWatch-*"]
-  }
-
-  statement {
-    sid = "AWSXrayWriteOnlyAccess"
-    actions = [
-      "xray:PutTraceSegments",
-      "xray:PutTelemetryRecords",
-      "xray:GetSamplingRules",
-      "xray:GetSamplingTargets",
-      "xray:GetSamplingStatisticSummaries"
-    ]
-    resources = ["*"]
-  }
-}
-
-resource "aws_iam_policy" "amazon_cloudwatch_observability" {
-  count = var.create_role && var.attach_cloudwatch_observability_policy ? 1 : 0
-
-  name_prefix = "${var.policy_name_prefix}CloudWatch_Observability_Policy-"
-  path        = var.role_path
-  description = "Provides the Amazon CloudWatch Observability add-on the permissions"
-  policy      = data.aws_iam_policy_document.amazon_cloudwatch_observability[0].json
-
-  tags = var.tags
-}
-
 resource "aws_iam_role_policy_attachment" "amazon_cloudwatch_observability" {
-  count = var.create_role && var.attach_cloudwatch_observability_policy ? 1 : 0
+  for_each = { for k, v in {
+    CloudWatchAgentServerPolicy = "arn:${local.partition}:iam::aws:policy/CloudWatchAgentServerPolicy"
+    AWSXrayWriteOnlyAccess      = "arn:${local.partition}:iam::aws:policy/AWSXrayWriteOnlyAccess"
+  } : k => v if var.create_role && var.attach_cloudwatch_observability_policy }
 
   role       = aws_iam_role.this[0].name
-  policy_arn = aws_iam_policy.amazon_cloudwatch_observability[0].arn
+  policy_arn = each.value
 }
