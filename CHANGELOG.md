@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.33.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.32.1...v5.33.0) (2023-12-16)
+
+
+### Features
+
+* Add support for Amazon CloudWatch Observability IRSA role ([#446](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/446)) ([25e2bf9](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/25e2bf9f9f4757a7014b55db981be9d2beeab445))
+
 ### [5.32.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.32.0...v5.32.1) (2023-12-11)
 
 
