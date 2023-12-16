@@ -1452,16 +1452,12 @@ resource "aws_iam_role_policy_attachment" "vpc_cni" {
 ################################################################################
 
 data "aws_iam_policy_document" "amazon_cloudwatch_observability" {
-  count = var.create_role && var.attach_amazon_cloudwatch_observability_policy ? 1 : 0
-  dynamic "statement" {
-    for_each = var.amazon_cloudwatch_observability_enable_ebs_volume_ids ? [1] : []
-    content {
-      sid = "CollectEBSVolumeIDs"
-      actions = [
-        "ec2:DescribeVolumes"
-      ]
-      resources = ["*"]
-    }
+  count = var.create_role && var.attach_cloudwatch_observability_policy ? 1 : 0
+
+  statement {
+    sid       = "CollectEBSVolumeIDs"
+    actions   = ["ec2:DescribeVolumes"]
+    resources = ["*"]
   }
 
   # arn:${local.partition}:iam::aws:policy/CloudWatchAgentServerPolicy
@@ -1503,18 +1499,18 @@ data "aws_iam_policy_document" "amazon_cloudwatch_observability" {
 }
 
 resource "aws_iam_policy" "amazon_cloudwatch_observability" {
-  count = var.create_role && var.attach_amazon_cloudwatch_observability_policy ? 1 : 0
+  count = var.create_role && var.attach_cloudwatch_observability_policy ? 1 : 0
 
-  name_prefix = "${var.policy_name_prefix}Amazon_CloudWatch_Observability_Policy-"
+  name_prefix = "${var.policy_name_prefix}CloudWatch_Observability_Policy-"
   path        = var.role_path
-  description = "Provided the Amazon CloudWatch Observability add-on the permissions it requires to send logs to CloudWatch Logs and send traces to AWS X-Ray"
+  description = "Provides the Amazon CloudWatch Observability add-on the permissions"
   policy      = data.aws_iam_policy_document.amazon_cloudwatch_observability[0].json
 
   tags = var.tags
 }
 
 resource "aws_iam_role_policy_attachment" "amazon_cloudwatch_observability" {
-  count = var.create_role && var.attach_amazon_cloudwatch_observability_policy ? 1 : 0
+  count = var.create_role && var.attach_cloudwatch_observability_policy ? 1 : 0
 
   role       = aws_iam_role.this[0].name
   policy_arn = aws_iam_policy.amazon_cloudwatch_observability[0].arn

@@ -352,14 +352,8 @@ variable "node_termination_handler_sqs_queue_arns" {
 }
 
 # Amazon CloudWatch Observability
-variable "attach_amazon_cloudwatch_observability_policy" {
+variable "attach_cloudwatch_observability_policy" {
   description = "Determines whether to attach the Amazon CloudWatch Observability IAM policies to the role"
-  type        = bool
-  default     = false
-}
-
-variable "amazon_cloudwatch_observability_enable_ebs_volume_ids" {
-  description = "Determines whether to enable the collection of EBS volume IDs for Amazon CloudWatch Observability policy"
   type        = bool
   default     = false
 }
