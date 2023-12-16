@@ -350,3 +350,10 @@ variable "node_termination_handler_sqs_queue_arns" {
   type        = list(string)
   default     = ["*"]
 }
+
+# Amazon CloudWatch Observability
+variable "attach_cloudwatch_observability_policy" {
+  description = "Determines whether to attach the Amazon CloudWatch Observability IAM policies to the role"
+  type        = bool
+  default     = false
+}

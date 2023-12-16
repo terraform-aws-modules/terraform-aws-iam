@@ -1446,3 +1446,17 @@ resource "aws_iam_role_policy_attachment" "vpc_cni" {
   role       = aws_iam_role.this[0].name
   policy_arn = aws_iam_policy.vpc_cni[0].arn
 }
+
+################################################################################
+# Amazon CloudWatch Observability Policy
+################################################################################
+
+resource "aws_iam_role_policy_attachment" "amazon_cloudwatch_observability" {
+  for_each = { for k, v in {
+    CloudWatchAgentServerPolicy = "arn:${local.partition}:iam::aws:policy/CloudWatchAgentServerPolicy"
+    AWSXrayWriteOnlyAccess      = "arn:${local.partition}:iam::aws:policy/AWSXrayWriteOnlyAccess"
+  } : k => v if var.create_role && var.attach_cloudwatch_observability_policy }
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = each.value
+}

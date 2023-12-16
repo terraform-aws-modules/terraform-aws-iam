@@ -11,6 +11,7 @@ module "wrapper" {
   attach_appmesh_envoy_proxy_policy                               = try(each.value.attach_appmesh_envoy_proxy_policy, var.defaults.attach_appmesh_envoy_proxy_policy, false)
   attach_aws_gateway_controller_policy                            = try(each.value.attach_aws_gateway_controller_policy, var.defaults.attach_aws_gateway_controller_policy, false)
   attach_cert_manager_policy                                      = try(each.value.attach_cert_manager_policy, var.defaults.attach_cert_manager_policy, false)
+  attach_cloudwatch_observability_policy                          = try(each.value.attach_cloudwatch_observability_policy, var.defaults.attach_cloudwatch_observability_policy, false)
   attach_cluster_autoscaler_policy                                = try(each.value.attach_cluster_autoscaler_policy, var.defaults.attach_cluster_autoscaler_policy, false)
   attach_ebs_csi_policy                                           = try(each.value.attach_ebs_csi_policy, var.defaults.attach_ebs_csi_policy, false)
   attach_efs_csi_policy                                           = try(each.value.attach_efs_csi_policy, var.defaults.attach_efs_csi_policy, false)
