@@ -1,37 +1,45 @@
-name: Release
-
+# This GitHub action can publish assets for release when a tag is created.
+# Currently its setup to run on any tag that matches the pattern "v*" (ie. v0.1.0).
+#
+# This uses an action (hashicorp/ghaction-import-gpg) that assumes you set your
+# private key in the `GPG_PRIVATE_KEY` secret and passphrase in the `PASSPHRASE`
+# secret. If you would rather own your own GPG handling, please fork this action
+# or use an alternative one for key handling.
+#
+# You will need to pass the `--batch` flag to `gpg` in your signing step
+# in `goreleaser` to indicate this is being used in a non-interactive mode.
+#
+name: release
 on:
-  workflow_dispatch:
   push:
-    branches:
-      - main
-      - master
-    paths:
-      - '**/*.tpl'
-      - '**/*.py'
-      - '**/*.tf'
-      - '.github/workflows/release.yml'
-
+    tags:
+      - "v*"
+permissions:
+  contents: write
 jobs:
-  release:
-    name: Release
+  goreleaser:
     runs-on: ubuntu-latest
-    # Skip running release workflow on forks
-    if: github.repository_owner == 'terraform-aws-modules'
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          persist-credentials: false
-          fetch-depth: 0
 
-      - name: Release
-        uses: cycjimmy/semantic-release-action@v3
+      - uses: actions/setup-go@v3
         with:
-          semantic_version: 18.0.0
-          extra_plugins: |
-            @semantic-release/changelog@6.0.0
-            @semantic-release/git@10.0.0
-            conventional-changelog-conventionalcommits@4.6.3
+          go-version-file: "go.mod"
+          cache: true
+
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v5
+        id: import_gpg
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v4.2.0
+        with:
+          version: latest
+          args: release --rm-dist
         env:
-          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+          GPG_FINGERPRINT: ${{ steps.import_gpg.outputs.fingerprint }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
