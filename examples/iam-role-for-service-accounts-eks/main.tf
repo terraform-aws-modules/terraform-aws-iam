@@ -52,8 +52,7 @@ module "irsa_role" {
   }
 
   allow_additional_role_assume = [
-    "arn:aws:iam::012345678901:role/role1",
-    "arn:aws:iam::012345678901:role/role2",
+    module.aws_gateway_controller_irsa_role.iam_role_arn,
   ]
 
   tags = local.tags
