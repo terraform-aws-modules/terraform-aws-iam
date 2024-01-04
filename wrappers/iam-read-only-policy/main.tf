@@ -5,9 +5,9 @@ module "wrapper" {
 
   additional_policy_json       = try(each.value.additional_policy_json, var.defaults.additional_policy_json, "{}")
   allow_cloudwatch_logs_query  = try(each.value.allow_cloudwatch_logs_query, var.defaults.allow_cloudwatch_logs_query, true)
+  allowed_services             = try(each.value.allowed_services, var.defaults.allowed_services)
   allow_predefined_sts_actions = try(each.value.allow_predefined_sts_actions, var.defaults.allow_predefined_sts_actions, true)
   allow_web_console_services   = try(each.value.allow_web_console_services, var.defaults.allow_web_console_services, true)
-  allowed_services             = try(each.value.allowed_services, var.defaults.allowed_services)
   create_policy                = try(each.value.create_policy, var.defaults.create_policy, true)
   description                  = try(each.value.description, var.defaults.description, "IAM Policy")
   name                         = try(each.value.name, var.defaults.name, null)

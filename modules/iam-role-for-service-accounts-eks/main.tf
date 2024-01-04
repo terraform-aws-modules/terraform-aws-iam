@@ -17,7 +17,7 @@ data "aws_iam_policy_document" "this" {
     for_each = var.allow_additional_role_assume
 
     content {
-      effect = "Allow"
+      effect  = "Allow"
       actions = ["sts:AssumeRole"]
 
       principals {
