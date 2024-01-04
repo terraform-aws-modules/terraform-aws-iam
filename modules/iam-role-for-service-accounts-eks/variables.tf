@@ -82,6 +82,12 @@ variable "allow_self_assume_role" {
   default     = false
 }
 
+variable "allow_additional_role_assume" {
+  description = "A list of additional roles to allow assuming this role"
+  type        = list(string)
+  default     = []
+}
+
 ################################################################################
 # Policies
 ################################################################################

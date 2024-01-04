@@ -17,7 +17,6 @@ data "aws_iam_policy_document" "aws_gateway_controller" {
   }
 }
 
-
 resource "aws_iam_policy" "aws_gateway_controller" {
   count = var.create_role && var.attach_aws_gateway_controller_policy ? 1 : 0
 

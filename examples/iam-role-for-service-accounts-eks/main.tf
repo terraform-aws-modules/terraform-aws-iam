@@ -51,6 +51,11 @@ module "irsa_role" {
     additional           = aws_iam_policy.additional.arn
   }
 
+  allow_additional_role_assume = [
+    "arn:aws:iam::012345678901:role/role1",
+    "arn:aws:iam::012345678901:role/role2",
+  ]
+
   tags = local.tags
 }
 

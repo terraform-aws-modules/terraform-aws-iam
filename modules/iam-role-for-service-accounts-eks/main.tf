@@ -14,6 +14,20 @@ data "aws_iam_policy_document" "this" {
   count = var.create_role ? 1 : 0
 
   dynamic "statement" {
+    for_each = var.allow_additional_role_assume
+
+    content {
+      effect = "Allow"
+      actions = ["sts:AssumeRole"]
+
+      principals {
+        identifiers = [statement.value]
+        type        = "AWS"
+      }
+    }
+  }
+
+  dynamic "statement" {
     # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
     for_each = var.allow_self_assume_role ? [1] : []
 
@@ -59,7 +73,6 @@ data "aws_iam_policy_document" "this" {
         variable = "${replace(statement.value.provider_arn, "/^(.*provider/)/", "")}:aud"
         values   = ["sts.amazonaws.com"]
       }
-
     }
   }
 }
