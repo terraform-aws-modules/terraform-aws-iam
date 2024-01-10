@@ -3,6 +3,7 @@ data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
 locals {
+  audience            = data.aws_partition.current.partition == "aws-cn" ? "sts.amazonaws.com.cn" : "sts.amazonaws.com"
   account_id          = data.aws_caller_identity.current.account_id
   partition           = data.aws_partition.current.partition
   dns_suffix          = data.aws_partition.current.dns_suffix
@@ -57,7 +58,7 @@ data "aws_iam_policy_document" "this" {
       condition {
         test     = var.assume_role_condition_test
         variable = "${replace(statement.value.provider_arn, "/^(.*provider/)/", "")}:aud"
-        values   = ["sts.amazonaws.com"]
+        values   = [local.audience]
       }
 
     }
