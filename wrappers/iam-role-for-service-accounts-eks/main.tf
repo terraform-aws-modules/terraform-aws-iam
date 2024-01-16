@@ -49,7 +49,7 @@ module "wrapper" {
   node_termination_handler_sqs_queue_arns                         = try(each.value.node_termination_handler_sqs_queue_arns, var.defaults.node_termination_handler_sqs_queue_arns, ["*"])
   oidc_providers                                                  = try(each.value.oidc_providers, var.defaults.oidc_providers, {})
   policy_name_prefix                                              = try(each.value.policy_name_prefix, var.defaults.policy_name_prefix, "AmazonEKS_")
-  role_description                                                = try(each.value.role_description, var.defaults.role_description, null)
+  role_description                                                = try(each.value.role_description, var.defaults.role_description, "Provides Route53 access for the external-dns oidc providers")
   role_name                                                       = try(each.value.role_name, var.defaults.role_name, null)
   role_name_prefix                                                = try(each.value.role_name_prefix, var.defaults.role_name_prefix, null)
   role_path                                                       = try(each.value.role_path, var.defaults.role_path, "/")
