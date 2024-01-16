@@ -25,7 +25,7 @@ variable "role_permissions_boundary_arn" {
 variable "role_description" {
   description = "IAM Role description"
   type        = string
-  default     = null
+  default     = "Provides Route53 access for the external-dns oidc providers"
 }
 
 variable "role_name_prefix" {
