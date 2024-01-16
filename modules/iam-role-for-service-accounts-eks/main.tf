@@ -39,6 +39,7 @@ data "aws_iam_policy_document" "this" {
     for_each = var.oidc_providers
 
     content {
+      sid     = "OIDCRoleAssumption${index(var.oidc_providers, each.value) + 1}"
       effect  = "Allow"
       actions = ["sts:AssumeRoleWithWebIdentity"]
 
