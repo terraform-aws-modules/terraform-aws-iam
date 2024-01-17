@@ -645,7 +645,6 @@ data "aws_iam_policy_document" "karpenter_controller" {
       "ec2:TerminateInstances",
       "ec2:DeleteLaunchTemplate",
     ]
-
     resources = ["*"]
 
     condition {
@@ -689,6 +688,22 @@ data "aws_iam_policy_document" "karpenter_controller" {
   statement {
     actions   = ["iam:PassRole"]
     resources = var.karpenter_controller_node_iam_role_arns
+  }
+
+  dynamic "statement" {
+    for_each = var.enable_karpenter_instance_profile_creation ? [1] : []
+
+    content {
+      actions = [
+        "iam:AddRoleToInstanceProfile",
+        "iam:CreateInstanceProfile",
+        "iam:DeleteInstanceProfile",
+        "iam:GetInstanceProfile",
+        "iam:RemoveRoleFromInstanceProfile",
+        "iam:TagInstanceProfile",
+      ]
+      resources = ["*"]
+    }
   }
 
   statement {
@@ -1430,4 +1445,18 @@ resource "aws_iam_role_policy_attachment" "vpc_cni" {
 
   role       = aws_iam_role.this[0].name
   policy_arn = aws_iam_policy.vpc_cni[0].arn
+}
+
+################################################################################
+# Amazon CloudWatch Observability Policy
+################################################################################
+
+resource "aws_iam_role_policy_attachment" "amazon_cloudwatch_observability" {
+  for_each = { for k, v in {
+    CloudWatchAgentServerPolicy = "arn:${local.partition}:iam::aws:policy/CloudWatchAgentServerPolicy"
+    AWSXrayWriteOnlyAccess      = "arn:${local.partition}:iam::aws:policy/AWSXrayWriteOnlyAccess"
+  } : k => v if var.create_role && var.attach_cloudwatch_observability_policy }
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = each.value
 }

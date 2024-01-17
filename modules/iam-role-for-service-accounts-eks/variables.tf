@@ -47,7 +47,7 @@ variable "role_policy_arns" {
 }
 
 variable "oidc_providers" {
-  description = "Map of OIDC providers where each provider map should contain the `provider`, `provider_arn`, and `namespace_service_accounts`"
+  description = "Map of OIDC providers where each provider map should contain the `provider_arn` and `namespace_service_accounts`"
   type        = any
   default     = {}
 }
@@ -252,6 +252,12 @@ variable "karpenter_sqs_queue_arn" {
   default     = null
 }
 
+variable "enable_karpenter_instance_profile_creation" {
+  description = "Determines whether Karpenter will be allowed to create the IAM instance profile (v1beta1/v0.32+)"
+  type        = bool
+  default     = false
+}
+
 # AWS Load Balancer Controller
 variable "attach_load_balancer_controller_policy" {
   description = "Determines whether to attach the Load Balancer Controller policy to the role"
@@ -343,4 +349,11 @@ variable "node_termination_handler_sqs_queue_arns" {
   description = "List of SQS ARNs that contain node termination events"
   type        = list(string)
   default     = ["*"]
+}
+
+# Amazon CloudWatch Observability
+variable "attach_cloudwatch_observability_policy" {
+  description = "Determines whether to attach the Amazon CloudWatch Observability IAM policies to the role"
+  type        = bool
+  default     = false
 }
