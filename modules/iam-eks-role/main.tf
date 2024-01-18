@@ -8,7 +8,7 @@ locals {
 }
 
 data "aws_eks_cluster" "main" {
-  for_each = var.create_role ? var.cluster_service_accounts : {}
+  for_each = { for k, v in var.cluster_service_accounts : k => v if var.create_role }
 
   name = each.key
 }
