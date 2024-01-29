@@ -47,7 +47,7 @@ variable "role_policy_arns" {
 }
 
 variable "oidc_providers" {
-  description = "Map of OIDC providers where each provider map should contain the `provider`, `provider_arn`, and `namespace_service_accounts`"
+  description = "Map of OIDC providers where each provider map should contain the `provider_arn` and `namespace_service_accounts`"
   type        = any
   default     = {}
 }

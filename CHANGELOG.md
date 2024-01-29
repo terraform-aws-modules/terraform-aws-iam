@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.33.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.33.0...v5.33.1) (2024-01-18)
+
+
+### Bug Fixes
+
+* Skip retrieving EKS cluster data when not creating the role ([#436](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/436)) ([bcdf554](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/bcdf554783c0e841430f215c94932fb75f86a3e9))
+
 ## [5.33.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.32.1...v5.33.0) (2023-12-16)
 
 
