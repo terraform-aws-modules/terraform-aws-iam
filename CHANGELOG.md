@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.34.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.33.1...v5.34.0) (2024-02-02)
+
+
+### Features
+
+* Support new mTLS feature in awslb IAM policy ([#458](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/458)) ([452c37f](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/452c37fe5d01ec4fef60ff6d54d683fff3f041ee))
+
 ### [5.33.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.33.0...v5.33.1) (2024-01-18)
 
 
