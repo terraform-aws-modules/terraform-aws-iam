@@ -145,6 +145,19 @@ variable "attach_efs_csi_policy" {
   default     = false
 }
 
+# S3 CSI
+variable "attach_s3_csi_policy" {
+  description = "Determines whether to attach the EFS CSI IAM policy to the role"
+  type        = bool
+  default     = false
+}
+
+variable "s3_csi_bucket_arns" {
+  description = "S3 bucket ARNs to allow S3 CSI to manage buckets"
+  type        = list(string)
+  default     = ["arn:aws:s3:::*"]
+}
+
 # External DNS
 variable "attach_external_dns_policy" {
   description = "Determines whether to attach the External DNS IAM policy to the role"
