@@ -444,7 +444,7 @@ data "aws_iam_policy_document" "s3_csi" {
       "s3:AbortMultipartUpload",
       "s3:DeleteObject"
     ]
-    resources = var.s3_csi_bucket_arns
+    resources = formatlist("%s/*", var.s3_csi_bucket_arns)
   }
 }
 
