@@ -139,7 +139,7 @@ module "efs_csi_irsa_role" {
 module "s3_csi_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
-  role_name             = "s3-csi"
+  role_name            = "s3-csi"
   attach_s3_csi_policy = true
 
   oidc_providers = {
