@@ -52,8 +52,8 @@ Run `terraform destroy` when you don't need these resources.
 | <a name="module_karpenter_controller_irsa_role"></a> [karpenter\_controller\_irsa\_role](#module\_karpenter\_controller\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
 | <a name="module_load_balancer_controller_irsa_role"></a> [load\_balancer\_controller\_irsa\_role](#module\_load\_balancer\_controller\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
 | <a name="module_load_balancer_controller_targetgroup_binding_only_irsa_role"></a> [load\_balancer\_controller\_targetgroup\_binding\_only\_irsa\_role](#module\_load\_balancer\_controller\_targetgroup\_binding\_only\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
+| <a name="module_mountpoint_s3_csi_irsa_role"></a> [mountpoint\_s3\_csi\_irsa\_role](#module\_mountpoint\_s3\_csi\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
 | <a name="module_node_termination_handler_irsa_role"></a> [node\_termination\_handler\_irsa\_role](#module\_node\_termination\_handler\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
-| <a name="module_s3_csi_irsa_role"></a> [s3\_csi\_irsa\_role](#module\_s3\_csi\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
 | <a name="module_velero_irsa_role"></a> [velero\_irsa\_role](#module\_velero\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 5.0 |
 | <a name="module_vpc_cni_ipv4_irsa_role"></a> [vpc\_cni\_ipv4\_irsa\_role](#module\_vpc\_cni\_ipv4\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |

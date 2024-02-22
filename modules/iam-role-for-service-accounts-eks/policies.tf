@@ -427,13 +427,13 @@ resource "aws_iam_role_policy_attachment" "efs_csi" {
 ################################################################################
 
 #https://github.com/awslabs/mountpoint-s3/blob/main/doc/CONFIGURATION.md#iam-permissions
-data "aws_iam_policy_document" "s3_csi" {
-  count = var.create_role && var.attach_s3_csi_policy ? 1 : 0
+data "aws_iam_policy_document" "mountpoint_s3_csi" {
+  count = var.create_role && var.attach_mountpoint_s3_csi_policy ? 1 : 0
 
   statement {
     sid       = "MountpointFullBucketAccess"
     actions   = ["s3:ListBucket"]
-    resources = var.s3_csi_bucket_arns
+    resources = coalescelist(var.mountpoint_s3_csi_bucket_arns, ["arn:${local.partition}:s3:::*"])
   }
 
   statement {
@@ -444,26 +444,26 @@ data "aws_iam_policy_document" "s3_csi" {
       "s3:AbortMultipartUpload",
       "s3:DeleteObject"
     ]
-    resources = formatlist("%s/*", var.s3_csi_bucket_arns)
+    resources = coalescelist(var.mountpoint_s3_csi_path_arns, ["arn:${local.partition}:s3:::*/*"])
   }
 }
 
-resource "aws_iam_policy" "s3_csi" {
-  count = var.create_role && var.attach_s3_csi_policy ? 1 : 0
+resource "aws_iam_policy" "mountpoint_s3_csi" {
+  count = var.create_role && var.attach_mountpoint_s3_csi_policy ? 1 : 0
 
   name_prefix = "${var.policy_name_prefix}S3_CSI_Policy-"
   path        = var.role_path
   description = "S3 CSI policy to allow management of S3"
-  policy      = data.aws_iam_policy_document.s3_csi[0].json
+  policy      = data.aws_iam_policy_document.mountpoint_s3_csi[0].json
 
   tags = var.tags
 }
 
-resource "aws_iam_role_policy_attachment" "s3_csi" {
-  count = var.create_role && var.attach_s3_csi_policy ? 1 : 0
+resource "aws_iam_role_policy_attachment" "mountpoint_s3_csi" {
+  count = var.create_role && var.attach_mountpoint_s3_csi_policy ? 1 : 0
 
   role       = aws_iam_role.this[0].name
-  policy_arn = aws_iam_policy.s3_csi[0].arn
+  policy_arn = aws_iam_policy.mountpoint_s3_csi[0].arn
 }
 
 ################################################################################

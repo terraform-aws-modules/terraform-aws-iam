@@ -136,16 +136,16 @@ module "efs_csi_irsa_role" {
   tags = local.tags
 }
 
-module "s3_csi_irsa_role" {
+module "mountpoint_s3_csi_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
-  role_name            = "s3-csi"
-  attach_s3_csi_policy = true
+  role_name                       = "s3-csi"
+  attach_mountpoint_s3_csi_policy = true
 
   oidc_providers = {
     ex = {
       provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["kube-system:s3-csi-controller-sa"]
+      namespace_service_accounts = ["kube-system:s3-csi-driver-sa"]
     }
   }
 
