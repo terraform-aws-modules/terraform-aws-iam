@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.35.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.34.0...v5.35.0) (2024-02-27)
+
+
+### Features
+
+* Allow users to set and read own access keys description (iam-group-with-policies) ([#461](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/461)) ([c80cd10](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/c80cd10e1f6058b5a4b800dd291ce28eb787ad13))
+
 ## [5.34.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.33.1...v5.34.0) (2024-02-02)
 
 
