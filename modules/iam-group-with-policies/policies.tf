@@ -18,7 +18,9 @@ data "aws_iam_policy_document" "iam_self_management" {
     effect = "Allow"
 
     actions = [
+      "iam:GetAccountSummary",
       "iam:GetAccountPasswordPolicy",
+      "iam:ListAccountAliases",
       "iam:ListVirtualMFADevices"
     ]
 
