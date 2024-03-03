@@ -147,19 +147,19 @@ variable "attach_efs_csi_policy" {
 
 # S3 CSI
 variable "attach_mountpoint_s3_csi_policy" {
-  description = "Determines whether to attach the S3 CSI IAM policy to the role"
+  description = "Determines whether to attach the Mountpoint S3 CSI IAM policy to the role"
   type        = bool
   default     = false
 }
 
 variable "mountpoint_s3_csi_bucket_arns" {
-  description = "S3 bucket ARNs to allow S3 CSI to manage buckets"
+  description = "S3 bucket ARNs to allow Mountpoint S3 CSI to list buckets"
   type        = list(string)
   default     = []
 }
 
 variable "mountpoint_s3_csi_path_arns" {
-  description = "S3 path ARNs to allow S3 CSI to manage items at the path"
+  description = "S3 path ARNs to allow Mountpoint S3 CSI driver to manage items at the provided path(s). This is required if `attach_mountpoint_s3_csi_policy = true`"
   type        = list(string)
   default     = []
 }

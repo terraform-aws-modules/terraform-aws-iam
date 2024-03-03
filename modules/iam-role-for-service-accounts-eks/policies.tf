@@ -423,7 +423,7 @@ resource "aws_iam_role_policy_attachment" "efs_csi" {
 }
 
 ################################################################################
-# S3 CSI Driver Policy
+# Mountpoint S3 CSI Driver Policy
 ################################################################################
 
 #https://github.com/awslabs/mountpoint-s3/blob/main/doc/CONFIGURATION.md#iam-permissions
@@ -451,9 +451,9 @@ data "aws_iam_policy_document" "mountpoint_s3_csi" {
 resource "aws_iam_policy" "mountpoint_s3_csi" {
   count = var.create_role && var.attach_mountpoint_s3_csi_policy ? 1 : 0
 
-  name_prefix = "${var.policy_name_prefix}S3_CSI_Policy-"
+  name_prefix = "${var.policy_name_prefix}Mountpoint_S3_CSI-"
   path        = var.role_path
-  description = "S3 CSI policy to allow management of S3"
+  description = "Mountpoint S3 CSI driver policy to allow management of S3"
   policy      = data.aws_iam_policy_document.mountpoint_s3_csi[0].json
 
   tags = var.tags
