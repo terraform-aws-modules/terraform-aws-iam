@@ -136,6 +136,24 @@ module "efs_csi_irsa_role" {
   tags = local.tags
 }
 
+module "mountpoint_s3_csi_irsa_role" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name                       = "mountpoint-s3-csi"
+  attach_mountpoint_s3_csi_policy = true
+  mountpoint_s3_csi_bucket_arns   = ["arn:aws:s3:::mountpoint-s3-csi-bucket"]
+  mountpoint_s3_csi_path_arns     = ["arn:aws:s3:::mountpoint-s3-csi-bucket/example/*"]
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["kube-system:s3-csi-driver-sa"]
+    }
+  }
+
+  tags = local.tags
+}
+
 module "external_dns_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
