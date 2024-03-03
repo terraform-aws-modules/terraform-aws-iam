@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.36.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.35.0...v5.36.0) (2024-03-03)
+
+
+### Features
+
+* Add support for Mountpoint S3 CSI driver to EKS IRSA ([#459](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/459)) ([21fb8d9](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/21fb8d9ce7c88cc782789a81db720cc9b320e7a8))
+
 ## [5.35.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.34.0...v5.35.0) (2024-02-27)
 
 
