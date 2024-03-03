@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.37.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.36.0...v5.37.0) (2024-03-03)
+
+
+### Features
+
+* Extend self-management policy to read account summary (iam-group-with-policies) ([#462](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/462)) ([0bedaf4](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/0bedaf4dc50752e004c39691bbaf64c49ba3f167))
+
 ## [5.36.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.35.0...v5.36.0) (2024-03-03)
 
 
