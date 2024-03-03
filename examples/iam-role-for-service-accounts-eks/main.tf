@@ -139,8 +139,10 @@ module "efs_csi_irsa_role" {
 module "mountpoint_s3_csi_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
-  role_name                       = "s3-csi"
+  role_name                       = "mountpoint-s3-csi"
   attach_mountpoint_s3_csi_policy = true
+  mountpoint_s3_csi_bucket_arns   = ["arn:aws:s3:::mountpoint-s3-csi-bucket"]
+  mountpoint_s3_csi_path_arns     = ["arn:aws:s3:::mountpoint-s3-csi-bucket/example/*"]
 
   oidc_providers = {
     ex = {
