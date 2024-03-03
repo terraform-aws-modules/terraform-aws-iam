@@ -444,7 +444,7 @@ data "aws_iam_policy_document" "mountpoint_s3_csi" {
       "s3:AbortMultipartUpload",
       "s3:DeleteObject"
     ]
-    resources = coalescelist(var.mountpoint_s3_csi_path_arns, ["arn:${local.partition}:s3:::*/*"])
+    resources = var.mountpoint_s3_csi_path_arns
   }
 }
 
