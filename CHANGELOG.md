@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.37.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.37.0...v5.37.1) (2024-03-07)
+
+
+### Bug Fixes
+
+* Update CI workflow versions to remove deprecated runtime warnings ([#465](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/465)) ([82348df](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/82348df91afa484bc2ba2984f2a3763e655a9952))
+
 ## [5.37.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.36.0...v5.37.0) (2024-03-03)
 
 
