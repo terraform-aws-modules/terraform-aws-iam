@@ -12,9 +12,9 @@ This wrapper does not implement any extra functionality.
 
 ```hcl
 terraform {
-  source = "tfr:///terraform-aws-modules/iam/aws//wrappers/iam-group-with-policies"
+  source = "tfr:///terraform-aws-modules/lint/aws//wrappers/iam-group-with-policies"
   # Alternative source:
-  # source = "git::git@github.com:terraform-aws-modules/terraform-aws-iam.git//wrappers/iam-group-with-policies?ref=master"
+  # source = "git::git@github.com:terraform-aws-modules/terraform-aws-lint.git//wrappers/iam-group-with-policies?ref=master"
 }
 
 inputs = {
@@ -42,7 +42,7 @@ inputs = {
 
 ```hcl
 module "wrapper" {
-  source = "terraform-aws-modules/iam/aws//wrappers/iam-group-with-policies"
+  source = "terraform-aws-modules/lint/aws//wrappers/iam-group-with-policies"
 
   defaults = { # Default values
     create = true
