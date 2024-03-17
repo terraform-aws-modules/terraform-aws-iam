@@ -26,3 +26,9 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "assume_role_policy_name" {
+  description = "Use this name for the policy that allows to assume the given roles (default: group name)"
+  type        = string
+  default     = null
+}
