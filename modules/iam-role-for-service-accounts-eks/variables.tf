@@ -132,6 +132,12 @@ variable "attach_ebs_csi_policy" {
   default     = false
 }
 
+variable "ebs_csi_fast_snapshot_restore" {
+  description = "Determines whether to attach addition IAM policy to enable fast snapshot restores for EBS CSI"
+  type        = bool
+  default     = false
+}
+
 variable "ebs_csi_kms_cmk_ids" {
   description = "KMS CMK IDs to allow EBS CSI to manage encrypted volumes"
   type        = list(string)
