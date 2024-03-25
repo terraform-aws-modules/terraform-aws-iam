@@ -670,7 +670,6 @@ data "aws_iam_policy_document" "karpenter_controller" {
       "ec2:CreateTags",
       "ec2:DescribeAvailabilityZones",
       "ec2:DescribeImages",
-      "ec2:DescribeImages",
       "ec2:DescribeInstances",
       "ec2:DescribeInstanceTypeOfferings",
       "ec2:DescribeInstanceTypes",
