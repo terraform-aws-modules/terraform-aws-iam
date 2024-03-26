@@ -12,9 +12,9 @@ This wrapper does not implement any extra functionality.
 
 ```hcl
 terraform {
-  source = "tfr:///terraform-aws-modules/iam/aws//wrappers/iam-eks-role"
+  source = "tfr:///terraform-aws-modules/lint/aws//wrappers/iam-eks-role"
   # Alternative source:
-  # source = "git::git@github.com:terraform-aws-modules/terraform-aws-iam.git//wrappers/iam-eks-role?ref=master"
+  # source = "git::git@github.com:terraform-aws-modules/terraform-aws-lint.git//wrappers/iam-eks-role?ref=master"
 }
 
 inputs = {
@@ -42,7 +42,7 @@ inputs = {
 
 ```hcl
 module "wrapper" {
-  source = "terraform-aws-modules/iam/aws//wrappers/iam-eks-role"
+  source = "terraform-aws-modules/lint/aws//wrappers/iam-eks-role"
 
   defaults = { # Default values
     create = true

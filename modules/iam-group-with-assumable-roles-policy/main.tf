@@ -7,7 +7,7 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 resource "aws_iam_policy" "this" {
-  name        = var.name
+  name        = "${var.name}${var.assumable_roles_policy_name_suffix}"
   path        = var.path
   description = "Allows to assume role in another AWS account"
   policy      = data.aws_iam_policy_document.assume_role.json

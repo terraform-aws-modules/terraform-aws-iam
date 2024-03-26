@@ -1,15 +1,10 @@
 provider "aws" {
-  region = "eu-west-1"
+  region = "ca-central-1"
 }
 
 provider "aws" {
-  region = "eu-west-1"
-
-  assume_role {
-    role_arn = "arn:aws:iam::835367859851:role/anton-demo"
-  }
-
-  alias = "production"
+  region = "us-east-1"
+  alias  = "production"
 }
 
 data "aws_caller_identity" "iam" {}
@@ -107,7 +102,8 @@ module "iam_group_with_assumable_roles_policy_production_readonly" {
 module "iam_group_with_assumable_roles_policy_production_admin" {
   source = "../../modules/iam-group-with-assumable-roles-policy"
 
-  name = "production-admin"
+  name                               = "production-admin"
+  assumable_roles_policy_name_suffix = "-assumable-roles"
 
   assumable_roles = [module.iam_assumable_roles_in_prod.admin_iam_role_arn]
 
