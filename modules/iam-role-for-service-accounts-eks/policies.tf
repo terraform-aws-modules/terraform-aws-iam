@@ -331,6 +331,17 @@ data "aws_iam_policy_document" "ebs_csi" {
       resources = var.ebs_csi_kms_cmk_ids
     }
   }
+
+  # https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/fast-snapshot-restores.md#prerequisites
+  dynamic "statement" {
+    for_each = var.ebs_csi_fast_snapshot_restore ? [1] : []
+    content {
+      actions = [
+        "ec2:EnableFastSnapshotRestores"
+      ]
+      resources = ["*"]
+    }
+  }
 }
 
 resource "aws_iam_policy" "ebs_csi" {

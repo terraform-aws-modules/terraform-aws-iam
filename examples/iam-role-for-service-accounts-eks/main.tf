@@ -107,8 +107,9 @@ module "cluster_autoscaler_irsa_role" {
 module "ebs_csi_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
-  role_name             = "ebs-csi"
-  attach_ebs_csi_policy = true
+  role_name                     = "ebs-csi"
+  attach_ebs_csi_policy         = true
+  ebs_csi_fast_snapshot_restore = true
 
   oidc_providers = {
     ex = {
