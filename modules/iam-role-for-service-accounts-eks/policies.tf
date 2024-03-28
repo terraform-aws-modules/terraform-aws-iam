@@ -760,7 +760,6 @@ data "aws_iam_policy_document" "karpenter_controller" {
     content {
       actions = [
         "sqs:DeleteMessage",
-        "sqs:GetQueueAttributes",
         "sqs:GetQueueUrl",
         "sqs:ReceiveMessage",
       ]
