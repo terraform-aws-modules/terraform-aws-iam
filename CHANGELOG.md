@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.38.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.37.2...v5.38.0) (2024-04-02)
+
+
+### Features
+
+* EBS fast snapshot restores persmission for EKS IRSA ([#469](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/469)) ([9ea77ca](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/9ea77ca6ff435702e8c22b74e14dc3931b2f1207))
+
 ## [5.37.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.37.1...v5.37.2) (2024-03-25)
 
 
