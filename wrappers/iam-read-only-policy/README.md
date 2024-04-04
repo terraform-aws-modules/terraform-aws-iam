@@ -12,9 +12,9 @@ This wrapper does not implement any extra functionality.
 
 ```hcl
 terraform {
-  source = "tfr:///terraform-aws-modules/lint/aws//wrappers/iam-read-only-policy"
+  source = "tfr:///terraform-aws-modules/iam/aws//wrappers/iam-read-only-policy"
   # Alternative source:
-  # source = "git::git@github.com:terraform-aws-modules/terraform-aws-lint.git//wrappers/iam-read-only-policy?ref=master"
+  # source = "git::git@github.com:terraform-aws-modules/terraform-aws-iam.git//wrappers/iam-read-only-policy?ref=master"
 }
 
 inputs = {
@@ -42,7 +42,7 @@ inputs = {
 
 ```hcl
 module "wrapper" {
-  source = "terraform-aws-modules/lint/aws//wrappers/iam-read-only-policy"
+  source = "terraform-aws-modules/iam/aws//wrappers/iam-read-only-policy"
 
   defaults = { # Default values
     create = true
