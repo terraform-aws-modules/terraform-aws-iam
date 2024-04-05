@@ -1,10 +1,15 @@
 provider "aws" {
-  region = "ca-central-1"
+  region = "eu-west-1"
 }
 
 provider "aws" {
-  region = "us-east-1"
-  alias  = "production"
+  region = "eu-west-1"
+
+  assume_role {
+    role_arn = "arn:aws:iam::835367859851:role/anton-demo"
+  }
+
+  alias = "production"
 }
 
 data "aws_caller_identity" "iam" {}
