@@ -35,6 +35,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_assumable_roles"></a> [assumable\_roles](#input\_assumable\_roles) | List of IAM roles ARNs which can be assumed by the group | `list(string)` | `[]` | no |
+| <a name="input_assumable_roles_policy_name_suffix"></a> [assumable\_roles\_policy\_name\_suffix](#input\_assumable\_roles\_policy\_name\_suffix) | Append this name to the policy name that will be created for assuming the given roles (default: null -- the policy name will be group name) | `string` | `""` | no |
 | <a name="input_group_users"></a> [group\_users](#input\_group\_users) | List of IAM users to have in an IAM group which can assume the role | `list(string)` | `[]` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of IAM policy and IAM group | `string` | n/a | yes |
 | <a name="input_path"></a> [path](#input\_path) | Path of IAM policy and IAM group | `string` | `"/"` | no |
