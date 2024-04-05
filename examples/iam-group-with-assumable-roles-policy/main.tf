@@ -107,7 +107,8 @@ module "iam_group_with_assumable_roles_policy_production_readonly" {
 module "iam_group_with_assumable_roles_policy_production_admin" {
   source = "../../modules/iam-group-with-assumable-roles-policy"
 
-  name = "production-admin"
+  name                               = "production-admin"
+  assumable_roles_policy_name_suffix = "-assumable-roles"
 
   assumable_roles = [module.iam_assumable_roles_in_prod.admin_iam_role_arn]
 

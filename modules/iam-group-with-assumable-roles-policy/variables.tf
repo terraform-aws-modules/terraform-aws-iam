@@ -15,6 +15,12 @@ variable "assumable_roles" {
   default     = []
 }
 
+variable "assumable_roles_policy_name_suffix" {
+  description = "Append this name to the policy name that will be created for assuming the given roles (default: null -- the policy name will be group name)"
+  type        = string
+  default     = ""
+}
+
 variable "group_users" {
   description = "List of IAM users to have in an IAM group which can assume the role"
   type        = list(string)
