@@ -57,7 +57,7 @@ module "irsa_role" {
 module "vpc_cni_pod_identity_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
-  role_name = "pod-identity-vpc-cni-example"
+  role_name = "pod-identity-example"
 
   attach_vpc_cni_policy = true
   vpc_cni_enable_ipv4   = true
@@ -66,7 +66,7 @@ module "vpc_cni_pod_identity_irsa_role" {
   pod_identities = {
     # tflint-ignore: terraform_deprecated_interpolation
     "${module.eks.cluster_name}" = {
-      "kube-system" = ["aws-node"]
+      "default" = ["my-application"]
     }
   }
 
