@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.39.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.38.0...v5.39.0) (2024-04-08)
+
+
+### Features
+
+* Enable override policy name iam-group-with-assumable-roles-policy ([#468](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/468)) ([bf013d2](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/bf013d23ec4329e6ee1ead1eb372acb5c1a86566))
+* Update VPC CNI policy to 3/4/24 ([#476](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/476)) ([f9d5e28](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/f9d5e28996ca282af4c09cb97f6291cf77ac03ea))
+
 ## [5.38.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.37.2...v5.38.0) (2024-04-02)
 
 
