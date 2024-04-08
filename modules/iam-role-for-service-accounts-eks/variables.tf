@@ -83,7 +83,7 @@ variable "assume_role_pod_identity" {
 }
 
 variable "pod_identities" {
-  description = "Map of identities per cluster. Root key is a cluster name values is a map of identities. Identities is a map of list(string), where key is a name of namespace, and value is a list of kubernetes service account names in the respective namespace"
+  description = "Map of identities per cluster. Root map key is a cluster name, root values is a map of identities. Identities is a map of list(string), where key is a namespace, and value is a list of service account names in the respective namespace"
   type        = map(map(list(string)))
   default     = {}
 }

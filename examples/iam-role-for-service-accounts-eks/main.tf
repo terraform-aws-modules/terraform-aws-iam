@@ -54,13 +54,10 @@ module "irsa_role" {
   tags = local.tags
 }
 
-module "vpc_cni_pod_identity_irsa_role" {
+module "pod_identity_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
   role_name = "pod-identity-example"
-
-  attach_vpc_cni_policy = true
-  vpc_cni_enable_ipv4   = true
 
   assume_role_pod_identity = true
   pod_identities = {
