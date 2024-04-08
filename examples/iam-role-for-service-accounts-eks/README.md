@@ -58,6 +58,7 @@ Run `terraform destroy` when you don't need these resources.
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 5.0 |
 | <a name="module_vpc_cni_ipv4_irsa_role"></a> [vpc\_cni\_ipv4\_irsa\_role](#module\_vpc\_cni\_ipv4\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
 | <a name="module_vpc_cni_ipv6_irsa_role"></a> [vpc\_cni\_ipv6\_irsa\_role](#module\_vpc\_cni\_ipv6\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
+| <a name="module_vpc_cni_pod_identity_irsa_role"></a> [vpc\_cni\_pod\_identity\_irsa\_role](#module\_vpc\_cni\_pod\_identity\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
 
 ## Resources
 

@@ -54,6 +54,26 @@ module "irsa_role" {
   tags = local.tags
 }
 
+module "vpc_cni_pod_identity_irsa_role" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name = "pod-identity-vpc-cni-example"
+
+  attach_vpc_cni_policy = true
+  vpc_cni_enable_ipv4   = true
+
+  assume_role_pod_identity = true
+  pod_identities = {
+    # tflint-ignore: terraform_deprecated_interpolation
+    "${module.eks.cluster_name}" = {
+      "kube-system" = ["aws-node"]
+    }
+  }
+
+  tags = local.tags
+}
+
+
 module "aws_gateway_controller_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 

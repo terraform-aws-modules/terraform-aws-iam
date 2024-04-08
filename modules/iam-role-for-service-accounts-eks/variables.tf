@@ -76,6 +76,18 @@ variable "assume_role_condition_test" {
   default     = "StringEquals"
 }
 
+variable "assume_role_pod_identity" {
+  description = "Enable support of [Pod Identities](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html) allowing assuming by service pods.eks.amazonaws.com"
+  type        = bool
+  default     = false
+}
+
+variable "pod_identities" {
+  description = "Map of identities per cluster. Root key is a cluster name values is a map of identities. Identities is a map of list(string), where key is a name of namespace, and value is a list of kubernetes service account names in the respective namespace"
+  type        = map(map(list(string)))
+  default     = {}
+}
+
 variable "allow_self_assume_role" {
   description = "Determines whether to allow the role to be [assume itself](https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/)"
   type        = bool

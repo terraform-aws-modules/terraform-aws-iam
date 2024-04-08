@@ -62,6 +62,20 @@ data "aws_iam_policy_document" "this" {
 
     }
   }
+
+  # https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html
+  dynamic "statement" {
+    for_each = var.assume_role_pod_identity ? toset([1]) : toset([])
+    content {
+      effect  = "Allow"
+      actions = ["sts:TagSession", "sts:AssumeRole"]
+
+      principals {
+        type        = "Service"
+        identifiers = ["pods.eks.amazonaws.com"]
+      }
+    }
+  }
 }
 
 resource "aws_iam_role" "this" {
@@ -85,4 +99,35 @@ resource "aws_iam_role_policy_attachment" "this" {
 
   role       = aws_iam_role.this[0].name
   policy_arn = each.value
+}
+
+################################################################################
+# Pod Identity associations
+################################################################################
+
+locals {
+  create_pod_identity_associations = var.create_role && var.assume_role_pod_identity
+  pod_identity_associations = flatten([
+    for cluster_name, identities in var.pod_identities :
+    [
+      for namespace, service_accounts in identities :
+      [
+        for name in service_accounts :
+        {
+          cluster_name    = cluster_name
+          namespace       = namespace
+          service_account = name
+        }
+      ]
+    ]
+    if local.create_pod_identity_associations
+  ])
+}
+
+resource "aws_eks_pod_identity_association" "this" {
+  count           = length(local.pod_identity_associations)
+  cluster_name    = local.pod_identity_associations[count.index].cluster_name
+  namespace       = local.pod_identity_associations[count.index].namespace
+  service_account = local.pod_identity_associations[count.index].service_account
+  role_arn        = aws_iam_role.this[0].arn
 }
