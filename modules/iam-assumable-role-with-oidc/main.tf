@@ -43,7 +43,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
 
     content {
       effect  = "Allow"
-      actions = ["sts:AssumeRoleWithWebIdentity"]
+      actions = ["sts:AssumeRoleWithWebIdentity", "sts:TagSession"]
 
       principals {
         type = "Federated"
@@ -78,6 +78,16 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
           test     = "StringLike"
           variable = "${statement.value}:aud"
           values   = var.oidc_fully_qualified_audiences
+        }
+      }
+
+      dynamic "condition" {
+        for_each = var.policy_conditions
+
+        content {
+          test     = condition.value.test
+          values   = condition.value.values
+          variable = condition.value.variable
         }
       }
     }
