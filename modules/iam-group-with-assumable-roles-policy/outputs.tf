@@ -15,10 +15,15 @@ output "policy_arn" {
 
 output "group_name" {
   description = "IAM group name"
-  value       = aws_iam_group.this.name
+  value       = local.group_name
+}
+
+data "aws_iam_group" "ref_group" {
+  count = var.create_group ? 0 : 1
+  group_name = var.name
 }
 
 output "group_arn" {
   description = "IAM group arn"
-  value       = aws_iam_group.this.arn
+  value       = try(aws_iam_group.this[0].arn, data.aws_iam_group.ref_group[0].arn)
 }

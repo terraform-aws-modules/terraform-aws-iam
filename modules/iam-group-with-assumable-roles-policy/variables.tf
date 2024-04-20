@@ -1,3 +1,9 @@
+variable "create_group" {
+  description = "Whether to create IAM group"
+  type        = bool
+  default     = true
+}
+
 variable "name" {
   description = "Name of IAM policy and IAM group"
   type        = string
