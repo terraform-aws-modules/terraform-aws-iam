@@ -1,10 +1,10 @@
 # IAM Group with policies and optional assumable roles
 
-Configuration in this directory creates IAM group with users who have IAM policies AND 
+Configuration in this directory creates IAM group with users who have IAM policies AND
 optionally assumable roles.
 
-This is a combination of `iam-group-with-assumable-roles-policy` and `iam-group-with-policies` 
-exampled. The difference from the "complete" example is that assumable-roles list can be empty.  
+This is a combination of `iam-group-with-assumable-roles-policy` and `iam-group-with-policies`
+exampled. The difference from the "complete" example is that assumable-roles list can be empty.
 
 # Usage
 
@@ -33,8 +33,8 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_iam_group_complete"></a> [iam\_group\_complete](#module\_iam\_group\_complete) | ../../modules/iam-group-with-assumable-roles-policy | n/a |
-| <a name="module_iam_group_complete_with_custom_policy"></a> [iam\_group\_complete\_with\_custom\_policy](#module\_iam\_group\_complete\_with\_custom\_policy) | ../../modules/iam-group-with-policies | n/a |
+| <a name="module_iam_group_optional_assumable_roles"></a> [iam\_group\_optional\_assumable\_roles](#module\_iam\_group\_optional\_assumable\_roles) | ../../modules/iam-group-with-assumable-roles-policy | n/a |
+| <a name="module_iam_group_with_custom_policy"></a> [iam\_group\_with\_custom\_policy](#module\_iam\_group\_with\_custom\_policy) | ../../modules/iam-group-with-policies | n/a |
 | <a name="module_iam_user1"></a> [iam\_user1](#module\_iam\_user1) | ../../modules/iam-user | n/a |
 | <a name="module_iam_user2"></a> [iam\_user2](#module\_iam\_user2) | ../../modules/iam-user | n/a |
 
@@ -44,7 +44,9 @@ No resources.
 
 ## Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_assumable_roles"></a> [assumable\_roles](#input\_assumable\_roles) | (possibly empty) List of ARNS for roles assumable by this group | `list(string)` | `[]` | no |
 
 ## Outputs
 

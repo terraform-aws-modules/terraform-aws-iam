@@ -46,4 +46,3 @@ module "iam_group_optional_assumable_roles" {
   create_group    = length(var.assumable_roles) > 0
   assumable_roles = var.assumable_roles
 }
-

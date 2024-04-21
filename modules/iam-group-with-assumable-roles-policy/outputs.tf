@@ -19,7 +19,7 @@ output "group_name" {
 }
 
 data "aws_iam_group" "ref_group" {
-  count = var.create_group ? 0 : 1
+  count      = var.create_group ? 0 : 1
   group_name = var.name
 }
 
