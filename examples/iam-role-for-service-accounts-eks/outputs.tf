@@ -17,3 +17,8 @@ output "iam_role_unique_id" {
   description = "Unique ID of IAM role"
   value       = module.irsa_role.iam_role_unique_id
 }
+
+output "external_dns_policy_arn" {
+  description = "ARN of IAM policy for external-dns"
+  value       = module.irsa_role.external_dns_policy_arn
+}
