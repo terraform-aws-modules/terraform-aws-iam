@@ -78,5 +78,5 @@ No inputs.
 | <a name="output_iam_role_name"></a> [iam\_role\_name](#output\_iam\_role\_name) | Name of IAM role |
 | <a name="output_iam_role_path"></a> [iam\_role\_path](#output\_iam\_role\_path) | Path of IAM role |
 | <a name="output_iam_role_unique_id"></a> [iam\_role\_unique\_id](#output\_iam\_role\_unique\_id) | Unique ID of IAM role |
-| <a name="output_external_dns_policy_arn"></a> [external\_dns\_policy\_arn](#output\_external\_dns\_policy\_arn) | ARN of the IAM  created for external-dns |
+| <a name="output_external_dns_policy_arn"></a> [external\_dns\_policy\_arn](#output\_external\_dns\_policy\_arn) | ARN of the created External DNS IAM policy |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
