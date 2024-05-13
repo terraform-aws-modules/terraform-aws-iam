@@ -61,6 +61,33 @@ module "iam_github_oidc_role_disabled" {
 }
 
 ################################################################################
+# GitHub OIDC Role w/ fine-grained job_workflow_refs
+################################################################################
+
+module "iam_github_oidc_job_workflow_refs" {
+  source = "../../modules/iam-github-oidc-role"
+
+  name   = "${local.name}-job-workflow-refs"
+  create = true
+
+  policies = {
+    S3ReadOnly = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
+  }
+
+  # We can still say "I only want these repos to be the only principals"
+  subjects = [
+    "repo:terraform-aws-modules/terraform-aws-iam:pull_request",
+    "terraform-aws-modules/terraform-aws-iam:ref:refs/heads/master",
+  ]
+
+  # But we can now say "Only allow them to be the principal if they're running an approved workflow from this branch"
+  job_workflow_refs = [
+    "terraform-aws-modules/terraform-aws-iam/.github/workflows/pre-commit.yml@refs/heads/main",
+    "terraform-aws-modules/terraform-aws-iam/.github/workflows/pr-title@refs/heads/main",
+  ]
+}
+
+################################################################################
 # Supporting Resources
 ################################################################################
 
