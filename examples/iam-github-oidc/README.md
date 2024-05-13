@@ -35,6 +35,7 @@ Run `terraform destroy` when you don't need these resources.
 
 | Name | Source | Version |
 |------|--------|---------|
+| <a name="module_iam_github_oidc_job_workflow_refs"></a> [iam\_github\_oidc\_job\_workflow\_refs](#module\_iam\_github\_oidc\_job\_workflow\_refs) | ../../modules/iam-github-oidc-role | n/a |
 | <a name="module_iam_github_oidc_provider"></a> [iam\_github\_oidc\_provider](#module\_iam\_github\_oidc\_provider) | ../../modules/iam-github-oidc-provider | n/a |
 | <a name="module_iam_github_oidc_provider_disabled"></a> [iam\_github\_oidc\_provider\_disabled](#module\_iam\_github\_oidc\_provider\_disabled) | ../../modules/iam-github-oidc-provider | n/a |
 | <a name="module_iam_github_oidc_role"></a> [iam\_github\_oidc\_role](#module\_iam\_github\_oidc\_role) | ../../modules/iam-github-oidc-role | n/a |

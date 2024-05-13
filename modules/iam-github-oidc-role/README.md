@@ -86,6 +86,7 @@ No modules.
 | <a name="input_create"></a> [create](#input\_create) | Controls if resources should be created (affects all resources) | `bool` | `true` | no |
 | <a name="input_description"></a> [description](#input\_description) | IAM Role description | `string` | `null` | no |
 | <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies) | Whether policies should be detached from this role when destroying | `bool` | `true` | no |
+| <a name="input_job_workflow_refs"></a> [job\_workflow\_refs](#input\_job\_workflow\_refs) | List of references to workflows that should be allowed to assume an OIDC role. Allows fine-grained workflow access to an AWS account. Example `['octo-org/reusable-workflows/.github/workflows/ci-terraform.yml@refs/heads/main']` | `list(string)` | `[]` | no |
 | <a name="input_max_session_duration"></a> [max\_session\_duration](#input\_max\_session\_duration) | Maximum CLI/API session duration in seconds between 3600 and 43200 | `number` | `null` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of IAM role | `string` | `null` | no |
 | <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | IAM role name prefix | `string` | `null` | no |
