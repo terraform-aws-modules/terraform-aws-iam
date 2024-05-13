@@ -7,6 +7,7 @@ module "wrapper" {
   create                   = try(each.value.create, var.defaults.create, true)
   description              = try(each.value.description, var.defaults.description, null)
   force_detach_policies    = try(each.value.force_detach_policies, var.defaults.force_detach_policies, true)
+  job_workflow_refs        = try(each.value.job_workflow_refs, var.defaults.job_workflow_refs, [])
   max_session_duration     = try(each.value.max_session_duration, var.defaults.max_session_duration, null)
   name                     = try(each.value.name, var.defaults.name, null)
   name_prefix              = try(each.value.name_prefix, var.defaults.name_prefix, null)
