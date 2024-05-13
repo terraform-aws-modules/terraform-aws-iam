@@ -47,6 +47,15 @@ data "aws_iam_policy_document" "this" {
       # Strip `repo:` to normalize for cases where users may prepend it
       values = [for subject in var.subjects : "repo:${trimprefix(subject, "repo:")}"]
     }
+
+    dynamic "condition" {
+      for_each = length(var.job_workflow_refs) > 0 ? [1] : []
+      content {
+        test     = "ForAllValues:StringEquals"
+        variable = "${local.provider_url}:job_workflow_ref"
+        values   = var.job_workflow_ref
+      }
+    }
   }
 }
 

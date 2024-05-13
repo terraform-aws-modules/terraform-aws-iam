@@ -74,6 +74,12 @@ variable "subjects" {
   default     = []
 }
 
+variable "job_workflow_refs" {
+  description = "List of references to workflows that should be allowed to assume an OIDC role. Allows fine-grained workflow access to an AWS account. Example `['octo-org/reusable-workflows/.github/workflows/ci-terraform.yml@refs/heads/main']`"
+  type        = list(string)
+  default     = []
+}
+
 variable "provider_url" {
   description = "The URL of the identity provider. Corresponds to the iss claim"
   type        = string
