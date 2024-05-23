@@ -37,6 +37,7 @@ Run `terraform destroy` when you don't need these resources.
 | <a name="module_iam_assumable_role_admin"></a> [iam\_assumable\_role\_admin](#module\_iam\_assumable\_role\_admin) | ../../modules/iam-assumable-role | n/a |
 | <a name="module_iam_assumable_role_custom"></a> [iam\_assumable\_role\_custom](#module\_iam\_assumable\_role\_custom) | ../../modules/iam-assumable-role | n/a |
 | <a name="module_iam_assumable_role_custom_trust_policy"></a> [iam\_assumable\_role\_custom\_trust\_policy](#module\_iam\_assumable\_role\_custom\_trust\_policy) | ../../modules/iam-assumable-role | n/a |
+| <a name="module_iam_assumable_role_inline_policy"></a> [iam\_assumable\_role\_inline\_policy](#module\_iam\_assumable\_role\_inline\_policy) | ../../modules/iam-assumable-role | n/a |
 | <a name="module_iam_assumable_role_sts"></a> [iam\_assumable\_role\_sts](#module\_iam\_assumable\_role\_sts) | ../../modules/iam-assumable-role | n/a |
 | <a name="module_iam_policy"></a> [iam\_policy](#module\_iam\_policy) | ../../modules/iam-policy | n/a |
 

@@ -100,6 +100,17 @@ variable "number_of_custom_role_policy_arns" {
   default     = null
 }
 
+variable "inline_policy_statements" {
+  description = "List of inline policy statements to attach to IAM role as an inline policy"
+  type = list(object({
+    sid       = string
+    actions   = list(string)
+    effect    = string
+    resources = list(string)
+  }))
+  default = []
+}
+
 # Pre-defined policies
 variable "admin_role_policy_arn" {
   description = "Policy ARN to use for admin role"

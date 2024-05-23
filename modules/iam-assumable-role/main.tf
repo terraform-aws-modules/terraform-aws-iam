@@ -189,6 +189,28 @@ resource "aws_iam_role_policy_attachment" "readonly" {
   policy_arn = var.readonly_role_policy_arn
 }
 
+data "aws_iam_policy_document" "inline" {
+  count = var.create_role && length(var.inline_policy_statements) > 0 ? 1 : 0
+
+  dynamic "statement" {
+    for_each = var.inline_policy_statements
+    content {
+      sid       = statement.value.sid
+      actions   = statement.value.actions
+      effect    = statement.value.effect
+      resources = statement.value.resources
+    }
+  }
+}
+
+resource "aws_iam_role_policy" "inline" {
+  count = var.create_role && length(var.inline_policy_statements) > 0 ? 1 : 0
+
+  role        = aws_iam_role.this[0].name
+  name_prefix = "${var.role_name}_inline_"
+  policy      = data.aws_iam_policy_document.inline[0].json
+}
+
 resource "aws_iam_instance_profile" "this" {
   count = var.create_role && var.create_instance_profile ? 1 : 0
   name  = var.role_name

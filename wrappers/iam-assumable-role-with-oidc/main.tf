@@ -7,6 +7,7 @@ module "wrapper" {
   aws_account_id                 = try(each.value.aws_account_id, var.defaults.aws_account_id, "")
   create_role                    = try(each.value.create_role, var.defaults.create_role, false)
   force_detach_policies          = try(each.value.force_detach_policies, var.defaults.force_detach_policies, false)
+  inline_policy_statements       = try(each.value.inline_policy_statements, var.defaults.inline_policy_statements, [])
   max_session_duration           = try(each.value.max_session_duration, var.defaults.max_session_duration, 3600)
   number_of_role_policy_arns     = try(each.value.number_of_role_policy_arns, var.defaults.number_of_role_policy_arns, null)
   oidc_fully_qualified_audiences = try(each.value.oidc_fully_qualified_audiences, var.defaults.oidc_fully_qualified_audiences, [])

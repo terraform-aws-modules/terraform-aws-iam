@@ -14,6 +14,7 @@ module "wrapper" {
   custom_role_policy_arns           = try(each.value.custom_role_policy_arns, var.defaults.custom_role_policy_arns, [])
   custom_role_trust_policy          = try(each.value.custom_role_trust_policy, var.defaults.custom_role_trust_policy, "")
   force_detach_policies             = try(each.value.force_detach_policies, var.defaults.force_detach_policies, false)
+  inline_policy_statements          = try(each.value.inline_policy_statements, var.defaults.inline_policy_statements, [])
   max_session_duration              = try(each.value.max_session_duration, var.defaults.max_session_duration, 3600)
   mfa_age                           = try(each.value.mfa_age, var.defaults.mfa_age, 86400)
   number_of_custom_role_policy_arns = try(each.value.number_of_custom_role_policy_arns, var.defaults.number_of_custom_role_policy_arns, null)

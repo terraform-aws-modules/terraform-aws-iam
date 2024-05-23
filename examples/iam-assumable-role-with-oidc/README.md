@@ -31,6 +31,7 @@ No providers.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_iam_assumable_role_admin"></a> [iam\_assumable\_role\_admin](#module\_iam\_assumable\_role\_admin) | ../../modules/iam-assumable-role-with-oidc | n/a |
+| <a name="module_iam_assumable_role_inline_policy"></a> [iam\_assumable\_role\_inline\_policy](#module\_iam\_assumable\_role\_inline\_policy) | ../../modules/iam-assumable-role-with-oidc | n/a |
 | <a name="module_iam_assumable_role_self_assume"></a> [iam\_assumable\_role\_self\_assume](#module\_iam\_assumable\_role\_self\_assume) | ../../modules/iam-assumable-role-with-oidc | n/a |
 
 ## Resources
