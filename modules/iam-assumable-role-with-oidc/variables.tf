@@ -105,3 +105,15 @@ variable "allow_self_assume_role" {
   type        = bool
   default     = false
 }
+
+variable "enable_session_tags" {
+  description = "Should the trust policy allow the `sts:TagSession` permission?"
+  type        = bool
+  default     = false
+}
+
+variable "oidc_session_tags" {
+  description = "OIDC Session Tags to apply to trust policy"
+  type        = map(string)
+  default     = {}
+}

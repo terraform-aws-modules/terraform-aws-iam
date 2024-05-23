@@ -6,8 +6,10 @@ locals {
     for url in compact(distinct(concat(var.provider_urls, [var.provider_url]))) :
     replace(url, "https://", "")
   ]
-  number_of_role_policy_arns = coalesce(var.number_of_role_policy_arns, length(var.role_policy_arns))
-  role_name_condition        = var.role_name != null ? var.role_name : "${var.role_name_prefix}*"
+  number_of_role_policy_arns      = coalesce(var.number_of_role_policy_arns, length(var.role_policy_arns))
+  role_name_condition             = var.role_name != null ? var.role_name : "${var.role_name_prefix}*"
+  trust_policy_session_tag_action = var.enable_session_tags ? ["sts:TagSession"] : []
+  trust_policy_actions            = concat(["sts:AssumeRoleWithWebIdentity"], local.trust_policy_session_tag_action)
 }
 
 data "aws_caller_identity" "current" {}
@@ -43,7 +45,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
 
     content {
       effect  = "Allow"
-      actions = ["sts:AssumeRoleWithWebIdentity"]
+      actions = local.trust_policy_actions
 
       principals {
         type = "Federated"
@@ -78,6 +80,16 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
           test     = "StringLike"
           variable = "${statement.value}:aud"
           values   = var.oidc_fully_qualified_audiences
+        }
+      }
+
+      dynamic "condition" {
+        for_each = var.enable_session_tags ? var.oidc_session_tags : {}
+
+        content {
+          test     = "StringLike"
+          variable = "aws:RequestTag/${condition.key}"
+          values   = [condition.value]
         }
       }
     }
