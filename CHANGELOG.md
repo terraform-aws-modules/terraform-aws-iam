@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.39.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.39.0...v5.39.1) (2024-05-15)
+
+
+### Bug Fixes
+
+* Fixed trust condition in modules/iam-github-oidc-role to be https ([#490](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/490)) ([ecaed18](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/ecaed18729368514c3a451af727a10dde63c23cf))
+
 ## [5.39.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.38.0...v5.39.0) (2024-04-08)
 
 
