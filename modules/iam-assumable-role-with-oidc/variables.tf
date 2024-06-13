@@ -94,6 +94,12 @@ variable "oidc_fully_qualified_audiences" {
   default     = []
 }
 
+variable "oidc_audiences_with_wildcards" {
+  description = "The audiences using wildcards to be added to the role policy."
+  type        = set(string)
+  default     = []
+}
+
 variable "force_detach_policies" {
   description = "Whether policies should be detached from this role when destroying"
   type        = bool
