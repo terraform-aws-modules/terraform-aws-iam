@@ -9,6 +9,7 @@ module "wrapper" {
   force_detach_policies          = try(each.value.force_detach_policies, var.defaults.force_detach_policies, false)
   max_session_duration           = try(each.value.max_session_duration, var.defaults.max_session_duration, 3600)
   number_of_role_policy_arns     = try(each.value.number_of_role_policy_arns, var.defaults.number_of_role_policy_arns, null)
+  oidc_audiences_with_wildcards  = try(each.value.oidc_audiences_with_wildcards, var.defaults.oidc_audiences_with_wildcards, [])
   oidc_fully_qualified_audiences = try(each.value.oidc_fully_qualified_audiences, var.defaults.oidc_fully_qualified_audiences, [])
   oidc_fully_qualified_subjects  = try(each.value.oidc_fully_qualified_subjects, var.defaults.oidc_fully_qualified_subjects, [])
   oidc_subjects_with_wildcards   = try(each.value.oidc_subjects_with_wildcards, var.defaults.oidc_subjects_with_wildcards, [])
