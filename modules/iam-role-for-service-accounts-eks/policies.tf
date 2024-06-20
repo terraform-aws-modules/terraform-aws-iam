@@ -447,6 +447,18 @@ data "aws_iam_policy_document" "mountpoint_s3_csi" {
     ]
     resources = var.mountpoint_s3_csi_path_arns
   }
+
+  dynamic "statement" {
+    for_each = length(var.mountpoint_s3_csi_kms_arns) > 0 ? [1] : []
+    content {
+      actions = [
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
+      ]
+
+      resources = var.mountpoint_s3_csi_kms_arns
+    }
+  }
 }
 
 resource "aws_iam_policy" "mountpoint_s3_csi" {
