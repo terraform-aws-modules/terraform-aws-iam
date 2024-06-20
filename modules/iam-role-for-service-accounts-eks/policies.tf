@@ -452,8 +452,8 @@ data "aws_iam_policy_document" "mountpoint_s3_csi" {
     for_each = length(var.mountpoint_s3_csi_kms_cmk_ids) > 0 ? [1] : []
     content {
       actions = [
-        "kms:Decrypt",
         "kms:GenerateDataKey",
+        "kms:Decrypt"
       ]
 
       resources = var.mountpoint_s3_csi_kms_cmk_ids
