@@ -456,7 +456,7 @@ data "aws_iam_policy_document" "mountpoint_s3_csi" {
         "kms:GenerateDataKey",
       ]
 
-      resources = var.mountpoint_s3_kms_cmk_ids
+      resources = var.mountpoint_s3_csi_kms_cmk_ids
     }
   }
 }
