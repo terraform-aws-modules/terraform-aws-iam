@@ -449,14 +449,14 @@ data "aws_iam_policy_document" "mountpoint_s3_csi" {
   }
 
   dynamic "statement" {
-    for_each = length(var.mountpoint_s3_csi_kms_ids) > 0 ? [1] : []
+    for_each = length(var.mountpoint_s3_csi_kms_arns) > 0 ? [1] : []
     content {
       actions = [
         "kms:GenerateDataKey",
         "kms:Decrypt"
       ]
 
-      resources = var.mountpoint_s3_csi_kms_ids
+      resources = var.mountpoint_s3_csi_kms_arns
     }
   }
 }

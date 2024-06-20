@@ -158,8 +158,8 @@ variable "mountpoint_s3_csi_bucket_arns" {
   default     = []
 }
 
-variable "mountpoint_s3_csi_kms_ids" {
-  description = "KMS CMK IDs to allow Mountpoint S3 CSI driver to download and upload Objects of a S3 bucket using `aws:kms` SSE"
+variable "mountpoint_s3_csi_kms_arns" {
+  description = "KMS Key ARNs to allow Mountpoint S3 CSI driver to download and upload Objects of a S3 bucket using `aws:kms` SSE"
   type        = list(string)
   default     = []
 }
