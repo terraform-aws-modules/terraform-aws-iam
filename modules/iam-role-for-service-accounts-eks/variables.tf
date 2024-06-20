@@ -158,6 +158,12 @@ variable "mountpoint_s3_csi_bucket_arns" {
   default     = []
 }
 
+variable "mountpoint_s3_csi_kms_cmk_ids" {
+  description = "KMS CMK IDs to allow Mountpoint S3 CSI driver to download and upload Objects of a S3 bucket using `aws:kms` SSE"
+  type        = list(string)
+  default     = []
+}
+
 variable "mountpoint_s3_csi_path_arns" {
   description = "S3 path ARNs to allow Mountpoint S3 CSI driver to manage items at the provided path(s). This is required if `attach_mountpoint_s3_csi_policy = true`"
   type        = list(string)

@@ -48,6 +48,7 @@ module "wrapper" {
   load_balancer_controller_targetgroup_arns                       = try(each.value.load_balancer_controller_targetgroup_arns, var.defaults.load_balancer_controller_targetgroup_arns, ["arn:aws:elasticloadbalancing:*:*:targetgroup/*/*"])
   max_session_duration                                            = try(each.value.max_session_duration, var.defaults.max_session_duration, null)
   mountpoint_s3_csi_bucket_arns                                   = try(each.value.mountpoint_s3_csi_bucket_arns, var.defaults.mountpoint_s3_csi_bucket_arns, [])
+  mountpoint_s3_csi_kms_cmk_ids                                   = try(each.value.mountpoint_s3_csi_kms_cmk_ids, var.defaults.mountpoint_s3_csi_kms_cmk_ids, [])
   mountpoint_s3_csi_path_arns                                     = try(each.value.mountpoint_s3_csi_path_arns, var.defaults.mountpoint_s3_csi_path_arns, [])
   node_termination_handler_sqs_queue_arns                         = try(each.value.node_termination_handler_sqs_queue_arns, var.defaults.node_termination_handler_sqs_queue_arns, ["*"])
   oidc_providers                                                  = try(each.value.oidc_providers, var.defaults.oidc_providers, {})
