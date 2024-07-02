@@ -77,14 +77,9 @@ variable "number_of_role_policy_arns" {
 }
 
 variable "inline_policy_statements" {
-  description = "List of inline policy statements to attach to IAM role as an inline policy"
-  type = list(object({
-    sid       = string
-    actions   = list(string)
-    effect    = string
-    resources = list(string)
-  }))
-  default = []
+  description = "List of inline policy [statements](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#statement) to attach to IAM role as an inline policy"
+  type        = any
+  default     = []
 }
 
 variable "oidc_fully_qualified_subjects" {
