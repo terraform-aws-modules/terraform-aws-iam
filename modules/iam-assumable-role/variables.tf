@@ -100,6 +100,12 @@ variable "number_of_custom_role_policy_arns" {
   default     = null
 }
 
+variable "inline_policy_statements" {
+  description = "List of inline policy [statements](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#statement) to attach to IAM role as an inline policy"
+  type        = any
+  default     = []
+}
+
 # Pre-defined policies
 variable "admin_role_policy_arn" {
   description = "Policy ARN to use for admin role"
