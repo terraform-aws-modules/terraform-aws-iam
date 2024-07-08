@@ -82,7 +82,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
       }
 
       dynamic "condition" {
-        for_each = var.policy_conditions
+        for_each = var.provider_trust_policy_conditions
 
         content {
           test     = condition.value.test

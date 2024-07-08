@@ -93,7 +93,7 @@ module "iam_assumable_role_inline_policy" {
 #####################################
 # IAM assumable role with policy conditions
 #####################################
-module "iam_assumable_role_policy_conditions" {
+module "iam_assumable_role_provider_trust_policy_conditions" {
   source = "../../modules/iam-assumable-role-with-oidc"
 
   create_role = true
@@ -112,7 +112,7 @@ module "iam_assumable_role_policy_conditions" {
     "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
   ]
 
-  policy_conditions = [
+  provider_trust_policy_conditions = [
     {
       test     = "StringLike"
       variable = "aws:RequestTag/Environment"

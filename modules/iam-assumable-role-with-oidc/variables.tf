@@ -112,7 +112,7 @@ variable "allow_self_assume_role" {
   default     = false
 }
 
-variable "policy_conditions" {
+variable "provider_trust_policy_conditions" {
   description = "[Condition constraints](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#condition) applied to the trust policy"
   type        = any
   default     = []
