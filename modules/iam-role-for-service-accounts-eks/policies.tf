@@ -628,6 +628,7 @@ data "aws_iam_policy_document" "fsx_lustre_csi" {
       "fsx:DeleteFileSystem",
       "fsx:DescribeFileSystems",
       "fsx:TagResource",
+      "fsx:UpdateFileSystem"
     ]
     resources = ["*"]
   }
