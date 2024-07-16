@@ -79,3 +79,15 @@ variable "provider_url" {
   type        = string
   default     = "token.actions.githubusercontent.com"
 }
+
+variable "inline_policy_statements" {
+  description = "List of inline policy [statements](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#statement) to attach to IAM role as an inline policy"
+  type        = any
+  default     = []
+}
+
+variable "inline_policy_json_document" {
+  description = "IAM policy JSON document to attach to IAM role as an inline policy."
+  type        = string
+  default     = null
+}

@@ -82,6 +82,12 @@ variable "inline_policy_statements" {
   default     = []
 }
 
+variable "inline_policy_json_document" {
+  description = "IAM policy JSON document to attach to IAM role as an inline policy."
+  type        = string
+  default     = null
+}
+
 variable "oidc_fully_qualified_subjects" {
   description = "The fully qualified OIDC subjects to be added to the role policy"
   type        = set(string)

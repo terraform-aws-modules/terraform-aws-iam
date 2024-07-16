@@ -108,16 +108,12 @@ resource "aws_iam_role_policy_attachment" "custom" {
   policy_arn = var.role_policy_arns[count.index]
 }
 
-###############################
+################################################################################
 # IAM Role Inline policy
-###############################
-
-locals {
-  create_iam_role_inline_policy = var.create_role && length(var.inline_policy_statements) > 0
-}
+################################################################################
 
 data "aws_iam_policy_document" "inline" {
-  count = local.create_iam_role_inline_policy ? 1 : 0
+  count = var.create_role && length(var.inline_policy_statements) > 0 ? 1 : 0
 
   dynamic "statement" {
     for_each = var.inline_policy_statements
@@ -162,9 +158,9 @@ data "aws_iam_policy_document" "inline" {
 }
 
 resource "aws_iam_role_policy" "inline" {
-  count = local.create_iam_role_inline_policy ? 1 : 0
+  count = var.create_role && (length(var.inline_policy_statements) > 0 || var.inline_policy_json_document != null) ? 1 : 0
 
   role        = aws_iam_role.this[0].name
   name_prefix = "${var.role_name}_inline_"
-  policy      = data.aws_iam_policy_document.inline[0].json
+  policy      = var.inline_policy_json_document != null ? var.inline_policy_json_document : data.aws_iam_policy_document.inline[0].json
 }

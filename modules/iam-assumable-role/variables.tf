@@ -106,6 +106,12 @@ variable "inline_policy_statements" {
   default     = []
 }
 
+variable "inline_policy_json_document" {
+  description = "IAM policy JSON document to attach to IAM role as an inline policy."
+  type        = string
+  default     = null
+}
+
 # Pre-defined policies
 variable "admin_role_policy_arn" {
   description = "Policy ARN to use for admin role"
