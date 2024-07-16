@@ -44,7 +44,7 @@ No modules.
 | <a name="input_aws_account_id"></a> [aws\_account\_id](#input\_aws\_account\_id) | The AWS account ID where the OIDC provider lives, leave empty to use the account for the AWS provider | `string` | `""` | no |
 | <a name="input_create_role"></a> [create\_role](#input\_create\_role) | Whether to create a role | `bool` | `false` | no |
 | <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies) | Whether policies should be detached from this role when destroying | `bool` | `false` | no |
-| <a name="input_inline_policy_json_document"></a> [inline\_policy\_json\_document](#input\_inline\_policy\_json\_document) | IAM policy JSON document to attach to IAM role as an inline policy. | `string` | `null` | no |
+| <a name="input_inline_policy_json_document"></a> [inline\_policy\_json\_document](#input\_inline\_policy\_json\_document) | IAM policy JSON document to attach to IAM role as an inline policy (takes precedence over 'inline\_policy\_statements' variable). | `string` | `null` | no |
 | <a name="input_inline_policy_statements"></a> [inline\_policy\_statements](#input\_inline\_policy\_statements) | List of inline policy [statements](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#statement) to attach to IAM role as an inline policy | `any` | `[]` | no |
 | <a name="input_max_session_duration"></a> [max\_session\_duration](#input\_max\_session\_duration) | Maximum CLI/API session duration in seconds between 3600 and 43200 | `number` | `3600` | no |
 | <a name="input_number_of_role_policy_arns"></a> [number\_of\_role\_policy\_arns](#input\_number\_of\_role\_policy\_arns) | Number of IAM policies to attach to IAM role | `number` | `null` | no |

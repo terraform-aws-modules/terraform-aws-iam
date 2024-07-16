@@ -83,7 +83,7 @@ variable "inline_policy_statements" {
 }
 
 variable "inline_policy_json_document" {
-  description = "IAM policy JSON document to attach to IAM role as an inline policy."
+  description = "IAM policy JSON document to attach to IAM role as an inline policy (takes precedence over 'inline_policy_statements' variable)."
   type        = string
   default     = null
 }
