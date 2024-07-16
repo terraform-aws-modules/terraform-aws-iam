@@ -129,7 +129,7 @@ module "iam_assumable_role_inline_policy_json" {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid: "AllowECRPushPull",
+      "Sid": "AllowECRPushPull",
       "Action": [
         "ecr:GetAuthorizationToken",
         "ecr:BatchGetImage",

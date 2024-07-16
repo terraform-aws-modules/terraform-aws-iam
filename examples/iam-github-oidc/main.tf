@@ -56,7 +56,7 @@ module "iam_github_oidc_role" {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid: "AllowECRPushPull",
+      "Sid": "AllowECRPushPull",
       "Action": [
         "ecr:GetAuthorizationToken",
         "ecr:BatchGetImage",
