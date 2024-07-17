@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.41.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.40.0...v5.41.0) (2024-07-11)
+
+
+### Features
+
+* Adding sse-kms support for Mountpoint S3 CSI driver EKS IRSA ([#493](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/493)) ([5039e10](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/5039e10b5dc3f4129018f3ca19aab68c7e75fbf4))
+
+## [5.40.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.39.1...v5.40.0) (2024-07-05)
+
+
+### Features
+
+* Add support for inline policy creation ([#479](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/479)) ([e13cb1e](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/e13cb1e5d1356ccb2ddd1bae0ad4c3a17e88eee2))
+
 ## [5.39.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.39.0...v5.39.1) (2024-05-15)
 
 
