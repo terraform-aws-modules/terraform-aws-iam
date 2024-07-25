@@ -94,3 +94,44 @@ data "aws_subnets" "all" {
     values = [data.aws_vpc.default.id]
   }
 }
+
+#####################################
+# IAM assumable role with inline policy
+#####################################
+module "iam_assumable_role_inline_policy" {
+  source = "../../modules/iam-eks-role"
+
+  create_role = true
+
+  role_name = "my-app-inline-policy"
+
+  cluster_service_accounts = {
+    (random_pet.this.id) = ["default:my-app"]
+  }
+
+  tags = {
+    Name = "eks-role"
+  }
+
+  inline_policy_statements = [
+    {
+      sid = "AllowECRPushPull"
+      actions = [
+        "ecr:GetAuthorizationToken",
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:DescribeImages",
+        "ecr:DescribeRepositories",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:ListImages",
+        "ecr:PutImage",
+        "ecr:InitiateLayerUpload",
+        "ecr:UploadLayerPart",
+        "ecr:CompleteLayerUpload"
+      ]
+      effect    = "Allow"
+      resources = ["*"]
+    }
+  ]
+}

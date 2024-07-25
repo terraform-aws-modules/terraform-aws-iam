@@ -8,6 +8,7 @@ module "wrapper" {
   cluster_service_accounts      = try(each.value.cluster_service_accounts, var.defaults.cluster_service_accounts, {})
   create_role                   = try(each.value.create_role, var.defaults.create_role, true)
   force_detach_policies         = try(each.value.force_detach_policies, var.defaults.force_detach_policies, false)
+  inline_policy_statements      = try(each.value.inline_policy_statements, var.defaults.inline_policy_statements, [])
   max_session_duration          = try(each.value.max_session_duration, var.defaults.max_session_duration, 43200)
   role_description              = try(each.value.role_description, var.defaults.role_description, "")
   role_name                     = try(each.value.role_name, var.defaults.role_name, null)

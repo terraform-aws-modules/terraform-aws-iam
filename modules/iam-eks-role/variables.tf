@@ -40,6 +40,12 @@ variable "role_policy_arns" {
   default     = {}
 }
 
+variable "inline_policy_statements" {
+  description = "List of inline policy [statements](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#statement) to attach to IAM role as an inline policy"
+  type        = any
+  default     = []
+}
+
 variable "cluster_service_accounts" {
   description = "EKS cluster and k8s ServiceAccount pairs. Each EKS cluster can have multiple k8s ServiceAccount. See README for details"
   type        = map(list(string))
