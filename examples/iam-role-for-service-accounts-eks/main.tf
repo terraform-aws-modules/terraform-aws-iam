@@ -340,9 +340,10 @@ module "velero_irsa_role" {
 module "vpc_cni_ipv4_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
-  role_name             = "vpc-cni-ipv4"
-  attach_vpc_cni_policy = true
-  vpc_cni_enable_ipv4   = true
+  role_name                      = "vpc-cni-ipv4"
+  attach_vpc_cni_policy          = true
+  vpc_cni_enable_ipv4            = true
+  vpc_cni_enable_cloudwatch_logs = true
 
   oidc_providers = {
     ex = {

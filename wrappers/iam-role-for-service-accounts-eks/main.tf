@@ -61,6 +61,7 @@ module "wrapper" {
   role_policy_arns                                                = try(each.value.role_policy_arns, var.defaults.role_policy_arns, {})
   tags                                                            = try(each.value.tags, var.defaults.tags, {})
   velero_s3_bucket_arns                                           = try(each.value.velero_s3_bucket_arns, var.defaults.velero_s3_bucket_arns, ["*"])
+  vpc_cni_enable_cloudwatch_logs                                  = try(each.value.vpc_cni_enable_cloudwatch_logs, var.defaults.vpc_cni_enable_cloudwatch_logs, false)
   vpc_cni_enable_ipv4                                             = try(each.value.vpc_cni_enable_ipv4, var.defaults.vpc_cni_enable_ipv4, false)
   vpc_cni_enable_ipv6                                             = try(each.value.vpc_cni_enable_ipv6, var.defaults.vpc_cni_enable_ipv6, false)
 }

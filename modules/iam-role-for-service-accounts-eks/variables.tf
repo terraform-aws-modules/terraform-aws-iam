@@ -351,6 +351,12 @@ variable "attach_vpc_cni_policy" {
   default     = false
 }
 
+variable "vpc_cni_enable_cloudwatch_logs" {
+  description = "Determines whether to enable VPC CNI permission to create CloudWatch Log groups and publish network policy events"
+  type        = bool
+  default     = false
+}
+
 variable "vpc_cni_enable_ipv4" {
   description = "Determines whether to enable IPv4 permissions for VPC CNI policy"
   type        = bool
