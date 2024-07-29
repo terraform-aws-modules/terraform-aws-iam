@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.42.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.41.0...v5.42.0) (2024-07-29)
+
+
+### Features
+
+* Add cloudwatch logs policy to vpc-cni for networkpolicy logging ([#504](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/504)) ([88ee443](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/88ee443b60ecaf542ec221eb4aa8a4c4b3bfa70b))
+
 ## [5.41.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.40.0...v5.41.0) (2024-07-11)
 
 
