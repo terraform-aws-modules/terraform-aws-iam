@@ -12,9 +12,9 @@ This wrapper does not implement any extra functionality.
 
 ```hcl
 terraform {
-  source = "tfr:///terraform-aws-modules/foo/aws//wrappers/iam-account"
+  source = "tfr:///terraform-aws-modules/iam/aws//wrappers/iam-account"
   # Alternative source:
-  # source = "git::git@github.com:terraform-aws-modules/terraform-aws-foo.git//wrappers/iam-account?ref=master"
+  # source = "git::git@github.com:terraform-aws-modules/terraform-aws-iam.git//wrappers/iam-account?ref=master"
 }
 
 inputs = {
@@ -42,7 +42,7 @@ inputs = {
 
 ```hcl
 module "wrapper" {
-  source = "terraform-aws-modules/foo/aws//wrappers/iam-account"
+  source = "terraform-aws-modules/iam/aws//wrappers/iam-account"
 
   defaults = { # Default values
     create = true
