@@ -12,9 +12,9 @@ This wrapper does not implement any extra functionality.
 
 ```hcl
 terraform {
-  source = "tfr:///terraform-aws-modules/iam/aws//wrappers/iam-assumable-role-with-saml"
+  source = "tfr:///terraform-aws-modules/foo/aws//wrappers/iam-assumable-role-with-saml"
   # Alternative source:
-  # source = "git::git@github.com:terraform-aws-modules/terraform-aws-iam.git//wrappers/iam-assumable-role-with-saml?ref=master"
+  # source = "git::git@github.com:terraform-aws-modules/terraform-aws-foo.git//wrappers/iam-assumable-role-with-saml?ref=master"
 }
 
 inputs = {
@@ -42,7 +42,7 @@ inputs = {
 
 ```hcl
 module "wrapper" {
-  source = "terraform-aws-modules/iam/aws//wrappers/iam-assumable-role-with-saml"
+  source = "terraform-aws-modules/foo/aws//wrappers/iam-assumable-role-with-saml"
 
   defaults = { # Default values
     create = true

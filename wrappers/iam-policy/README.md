@@ -12,9 +12,9 @@ This wrapper does not implement any extra functionality.
 
 ```hcl
 terraform {
-  source = "tfr:///terraform-aws-modules/iam/aws//wrappers/iam-policy"
+  source = "tfr:///terraform-aws-modules/foo/aws//wrappers/iam-policy"
   # Alternative source:
-  # source = "git::git@github.com:terraform-aws-modules/terraform-aws-iam.git//wrappers/iam-policy?ref=master"
+  # source = "git::git@github.com:terraform-aws-modules/terraform-aws-foo.git//wrappers/iam-policy?ref=master"
 }
 
 inputs = {
@@ -42,7 +42,7 @@ inputs = {
 
 ```hcl
 module "wrapper" {
-  source = "terraform-aws-modules/iam/aws//wrappers/iam-policy"
+  source = "terraform-aws-modules/foo/aws//wrappers/iam-policy"
 
   defaults = { # Default values
     create = true
