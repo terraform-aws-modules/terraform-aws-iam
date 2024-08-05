@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.43.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.42.0...v5.43.0) (2024-08-05)
+
+
+### Features
+
+* Allow changing iss for the github oidc role ([#507](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/507)) ([56e4364](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/56e436441a2064ddfba6db379993127937aa7f28))
+
 ## [5.42.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.41.0...v5.42.0) (2024-07-29)
 
 
