@@ -31,8 +31,8 @@ data "aws_iam_policy_document" "this" {
 
     condition {
       test     = "ForAllValues:StringEquals"
-      variable = "token.actions.githubusercontent.com:iss"
-      values   = ["https://token.actions.githubusercontent.com"]
+      variable = "${local.provider_url}:iss"
+      values   = ["https://${local.provider_url}"]
     }
 
     condition {
