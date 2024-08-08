@@ -89,3 +89,34 @@ module "iam_assumable_role_inline_policy" {
     }
   ]
 }
+
+#####################################
+# IAM assumable role with policy conditions
+#####################################
+module "iam_assumable_role_provider_trust_policy_conditions" {
+  source = "../../modules/iam-assumable-role-with-oidc"
+
+  create_role = true
+
+  role_name = "role-with-oidc-policy-conditions"
+
+  tags = {
+    Role = "role-with-oidc-policy-conditions"
+  }
+
+  provider_url = "oidc.circleci.com/org/<CIRCLECI_ORG_UUID>"
+
+  oidc_fully_qualified_audiences = ["<CIRCLECI_ORG_UUID>"]
+
+  role_policy_arns = [
+    "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
+  ]
+
+  provider_trust_policy_conditions = [
+    {
+      test     = "StringLike"
+      variable = "aws:RequestTag/Environment"
+      values   = ["example"]
+    }
+  ]
+}
