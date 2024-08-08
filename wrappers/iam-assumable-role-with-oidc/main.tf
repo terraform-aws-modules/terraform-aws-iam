@@ -13,7 +13,7 @@ module "wrapper" {
   oidc_fully_qualified_audiences   = try(each.value.oidc_fully_qualified_audiences, var.defaults.oidc_fully_qualified_audiences, [])
   oidc_fully_qualified_subjects    = try(each.value.oidc_fully_qualified_subjects, var.defaults.oidc_fully_qualified_subjects, [])
   oidc_subjects_with_wildcards     = try(each.value.oidc_subjects_with_wildcards, var.defaults.oidc_subjects_with_wildcards, [])
-  provider_trust_policy_conditions = try(each.value.policy_conditions, var.defaults.policy_conditions, [])
+  provider_trust_policy_conditions = try(each.value.provider_trust_policy_conditions, var.defaults.provider_trust_policy_conditions, [])
   provider_url                     = try(each.value.provider_url, var.defaults.provider_url, "")
   provider_urls                    = try(each.value.provider_urls, var.defaults.provider_urls, [])
   role_description                 = try(each.value.role_description, var.defaults.role_description, "")
