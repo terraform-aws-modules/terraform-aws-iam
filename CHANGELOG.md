@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.44.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.43.0...v5.44.0) (2024-08-08)
+
+
+### Features
+
+* Add support for OIDC policy conditions ([#480](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/480)) ([02a5b7f](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/02a5b7f35ecdd60498d978166ab2033bbdae5013))
+
 ## [5.43.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.42.0...v5.43.0) (2024-08-05)
 
 
