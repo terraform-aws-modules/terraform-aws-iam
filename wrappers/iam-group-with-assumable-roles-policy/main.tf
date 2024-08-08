@@ -5,6 +5,7 @@ module "wrapper" {
 
   assumable_roles                    = try(each.value.assumable_roles, var.defaults.assumable_roles, [])
   assumable_roles_policy_name_suffix = try(each.value.assumable_roles_policy_name_suffix, var.defaults.assumable_roles_policy_name_suffix, "")
+  create_group                       = try(each.value.create_group, var.defaults.create_group, true)
   group_users                        = try(each.value.group_users, var.defaults.group_users, [])
   name                               = try(each.value.name, var.defaults.name)
   path                               = try(each.value.path, var.defaults.path, "/")
