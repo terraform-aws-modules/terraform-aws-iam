@@ -35,9 +35,9 @@ variable "custom_group_policies" {
 }
 
 variable "enable_mfa_enforcement" {
-  description = "Determines whether permissions are added to the policy which requires the groups IAM users to use MFA"
+  description = "Determines whether permissions are added to the policy which requires the groups IAM users to use MFA. Warning: If set to `true`, users without MFA in this group will be denied access to resources, even though permissions are given."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "attach_iam_self_management_policy" {
