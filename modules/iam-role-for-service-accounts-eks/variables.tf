@@ -158,6 +158,12 @@ variable "mountpoint_s3_csi_bucket_arns" {
   default     = []
 }
 
+variable "mountpoint_s3_csi_kms_arns" {
+  description = "KMS Key ARNs to allow Mountpoint S3 CSI driver to download and upload Objects of a S3 bucket using `aws:kms` SSE"
+  type        = list(string)
+  default     = []
+}
+
 variable "mountpoint_s3_csi_path_arns" {
   description = "S3 path ARNs to allow Mountpoint S3 CSI driver to manage items at the provided path(s). This is required if `attach_mountpoint_s3_csi_policy = true`"
   type        = list(string)
@@ -341,6 +347,12 @@ variable "velero_s3_bucket_arns" {
 # VPC CNI
 variable "attach_vpc_cni_policy" {
   description = "Determines whether to attach the VPC CNI IAM policy to the role"
+  type        = bool
+  default     = false
+}
+
+variable "vpc_cni_enable_cloudwatch_logs" {
+  description = "Determines whether to enable VPC CNI permission to create CloudWatch Log groups and publish network policy events"
   type        = bool
   default     = false
 }

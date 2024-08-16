@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.44.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.43.0...v5.44.0) (2024-08-08)
+
+
+### Features
+
+* Add support for OIDC policy conditions ([#480](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/480)) ([02a5b7f](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/02a5b7f35ecdd60498d978166ab2033bbdae5013))
+
+## [5.43.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.42.0...v5.43.0) (2024-08-05)
+
+
+### Features
+
+* Allow changing iss for the github oidc role ([#507](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/507)) ([56e4364](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/56e436441a2064ddfba6db379993127937aa7f28))
+
+## [5.42.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.41.0...v5.42.0) (2024-07-29)
+
+
+### Features
+
+* Add cloudwatch logs policy to vpc-cni for networkpolicy logging ([#504](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/504)) ([88ee443](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/88ee443b60ecaf542ec221eb4aa8a4c4b3bfa70b))
+
+## [5.41.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.40.0...v5.41.0) (2024-07-11)
+
+
+### Features
+
+* Adding sse-kms support for Mountpoint S3 CSI driver EKS IRSA ([#493](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/493)) ([5039e10](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/5039e10b5dc3f4129018f3ca19aab68c7e75fbf4))
+
+## [5.40.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.39.1...v5.40.0) (2024-07-05)
+
+
+### Features
+
+* Add support for inline policy creation ([#479](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/479)) ([e13cb1e](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/e13cb1e5d1356ccb2ddd1bae0ad4c3a17e88eee2))
+
 ## [5.39.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.39.0...v5.39.1) (2024-05-15)
 
 

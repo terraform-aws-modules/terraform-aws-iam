@@ -48,6 +48,7 @@ module "wrapper" {
   load_balancer_controller_targetgroup_arns                       = try(each.value.load_balancer_controller_targetgroup_arns, var.defaults.load_balancer_controller_targetgroup_arns, ["arn:aws:elasticloadbalancing:*:*:targetgroup/*/*"])
   max_session_duration                                            = try(each.value.max_session_duration, var.defaults.max_session_duration, null)
   mountpoint_s3_csi_bucket_arns                                   = try(each.value.mountpoint_s3_csi_bucket_arns, var.defaults.mountpoint_s3_csi_bucket_arns, [])
+  mountpoint_s3_csi_kms_arns                                      = try(each.value.mountpoint_s3_csi_kms_arns, var.defaults.mountpoint_s3_csi_kms_arns, [])
   mountpoint_s3_csi_path_arns                                     = try(each.value.mountpoint_s3_csi_path_arns, var.defaults.mountpoint_s3_csi_path_arns, [])
   node_termination_handler_sqs_queue_arns                         = try(each.value.node_termination_handler_sqs_queue_arns, var.defaults.node_termination_handler_sqs_queue_arns, ["*"])
   oidc_providers                                                  = try(each.value.oidc_providers, var.defaults.oidc_providers, {})
@@ -60,6 +61,7 @@ module "wrapper" {
   role_policy_arns                                                = try(each.value.role_policy_arns, var.defaults.role_policy_arns, {})
   tags                                                            = try(each.value.tags, var.defaults.tags, {})
   velero_s3_bucket_arns                                           = try(each.value.velero_s3_bucket_arns, var.defaults.velero_s3_bucket_arns, ["*"])
+  vpc_cni_enable_cloudwatch_logs                                  = try(each.value.vpc_cni_enable_cloudwatch_logs, var.defaults.vpc_cni_enable_cloudwatch_logs, false)
   vpc_cni_enable_ipv4                                             = try(each.value.vpc_cni_enable_ipv4, var.defaults.vpc_cni_enable_ipv4, false)
   vpc_cni_enable_ipv6                                             = try(each.value.vpc_cni_enable_ipv6, var.defaults.vpc_cni_enable_ipv6, false)
 }
