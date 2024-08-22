@@ -39,6 +39,20 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
   }
 
   dynamic "statement" {
+    for_each = length(var.trusted_role_arns) > 0 ? [1] : []
+
+    content {
+      effect  = "Allow"
+      actions = var.trusted_role_actions
+
+      principals {
+        type        = "AWS"
+        identifiers = var.trusted_role_arns
+      }
+    }
+  }
+
+  dynamic "statement" {
     for_each = local.urls
 
     content {

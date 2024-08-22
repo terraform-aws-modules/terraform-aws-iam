@@ -23,4 +23,6 @@ module "wrapper" {
   role_permissions_boundary_arn    = try(each.value.role_permissions_boundary_arn, var.defaults.role_permissions_boundary_arn, "")
   role_policy_arns                 = try(each.value.role_policy_arns, var.defaults.role_policy_arns, [])
   tags                             = try(each.value.tags, var.defaults.tags, {})
+  trusted_role_actions             = try(each.value.trusted_role_actions, var.defaults.trusted_role_actions, ["sts:AssumeRole", "sts:TagSession"])
+  trusted_role_arns                = try(each.value.trusted_role_arns, var.defaults.trusted_role_arns, [])
 }
