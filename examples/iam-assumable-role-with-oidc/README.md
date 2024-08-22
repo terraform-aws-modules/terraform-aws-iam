@@ -34,6 +34,8 @@ No providers.
 | <a name="module_iam_assumable_role_inline_policy"></a> [iam\_assumable\_role\_inline\_policy](#module\_iam\_assumable\_role\_inline\_policy) | ../../modules/iam-assumable-role-with-oidc | n/a |
 | <a name="module_iam_assumable_role_provider_trust_policy_conditions"></a> [iam\_assumable\_role\_provider\_trust\_policy\_conditions](#module\_iam\_assumable\_role\_provider\_trust\_policy\_conditions) | ../../modules/iam-assumable-role-with-oidc | n/a |
 | <a name="module_iam_assumable_role_self_assume"></a> [iam\_assumable\_role\_self\_assume](#module\_iam\_assumable\_role\_self\_assume) | ../../modules/iam-assumable-role-with-oidc | n/a |
+| <a name="module_iam_assumable_role_with_trusted_actions"></a> [iam\_assumable\_role\_with\_trusted\_actions](#module\_iam\_assumable\_role\_with\_trusted\_actions) | ../../modules/iam-assumable-role-with-oidc | n/a |
+| <a name="module_iam_assumable_role_with_trusted_roles"></a> [iam\_assumable\_role\_with\_trusted\_roles](#module\_iam\_assumable\_role\_with\_trusted\_roles) | ../../modules/iam-assumable-role-with-oidc | n/a |
 
 ## Resources
 

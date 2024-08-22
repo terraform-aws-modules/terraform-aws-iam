@@ -120,3 +120,57 @@ module "iam_assumable_role_provider_trust_policy_conditions" {
     }
   ]
 }
+
+#####################################
+# IAM assumable role with trusted role
+#####################################
+module "iam_assumable_role_with_trusted_roles" {
+  source = "../../modules/iam-assumable-role-with-oidc"
+
+  create_role = true
+  role_name   = "role-with-trusted-roles"
+
+  tags = {
+    Role = "role-with-trusted-roles"
+  }
+
+  provider_url                   = "oidc.circleci.com/org/<CIRCLECI_ORG_UUID>"
+  oidc_fully_qualified_audiences = ["<CIRCLECI_ORG_UUID>"]
+
+  trusted_role_arns = [
+    "arn:aws:iam::307990089504:root",
+  ]
+
+  role_policy_arns = [
+    "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPowerUser",
+  ]
+}
+
+#####################################
+# IAM assumable role with trusted role
+#####################################
+module "iam_assumable_role_with_trusted_actions" {
+  source = "../../modules/iam-assumable-role-with-oidc"
+
+  create_role = true
+  role_name   = "role-with-trusted-actions"
+
+  tags = {
+    Role = "role-with-trusted-actions"
+  }
+
+  provider_url                   = "oidc.circleci.com/org/<CIRCLECI_ORG_UUID>"
+  oidc_fully_qualified_audiences = ["<CIRCLECI_ORG_UUID>"]
+
+  trusted_role_arns = [
+    "arn:aws:iam::307990089504:root",
+  ]
+
+  trusted_role_actions = [
+    "sts:AssumeRole"
+  ]
+
+  role_policy_arns = [
+    "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPowerUser",
+  ]
+}
