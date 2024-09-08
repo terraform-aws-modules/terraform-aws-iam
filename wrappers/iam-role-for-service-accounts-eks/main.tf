@@ -3,6 +3,7 @@ module "wrapper" {
 
   for_each = var.items
 
+  additional_assumable_principal_arns                             = try(each.value.additional_assumable_principal_arns, var.defaults.additional_assumable_principal_arns, [])
   allow_self_assume_role                                          = try(each.value.allow_self_assume_role, var.defaults.allow_self_assume_role, false)
   amazon_managed_service_prometheus_workspace_arns                = try(each.value.amazon_managed_service_prometheus_workspace_arns, var.defaults.amazon_managed_service_prometheus_workspace_arns, ["*"])
   assume_role_condition_test                                      = try(each.value.assume_role_condition_test, var.defaults.assume_role_condition_test, "StringEquals")

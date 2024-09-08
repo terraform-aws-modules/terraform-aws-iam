@@ -84,8 +84,8 @@ variable "allow_self_assume_role" {
 
 variable "additional_assumable_principal_arns" {
   description = "A list of additional trusted AWS Principals (IAM roles and users) allowed to assume this role, applied only if `allow_self_assume_role` is true."
-  type = list(string)
-  default = []
+  type        = list(string)
+  default     = []
 }
 
 ################################################################################

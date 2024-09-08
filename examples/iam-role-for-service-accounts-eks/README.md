@@ -48,6 +48,7 @@ Run `terraform destroy` when you don't need these resources.
 | <a name="module_fsx_lustre_csi_irsa_role"></a> [fsx\_lustre\_csi\_irsa\_role](#module\_fsx\_lustre\_csi\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
 | <a name="module_iam_eks_role"></a> [iam\_eks\_role](#module\_iam\_eks\_role) | terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks | n/a |
 | <a name="module_iam_policy"></a> [iam\_policy](#module\_iam\_policy) | terraform-aws-modules/iam/aws//modules/iam-policy | n/a |
+| <a name="module_irsa_assumable_role_with_external_principals"></a> [irsa\_assumable\_role\_with\_external\_principals](#module\_irsa\_assumable\_role\_with\_external\_principals) | ../../modules/iam-role-for-service-accounts-eks | n/a |
 | <a name="module_irsa_role"></a> [irsa\_role](#module\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
 | <a name="module_karpenter_controller_irsa_role"></a> [karpenter\_controller\_irsa\_role](#module\_karpenter\_controller\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
 | <a name="module_load_balancer_controller_irsa_role"></a> [load\_balancer\_controller\_irsa\_role](#module\_load\_balancer\_controller\_irsa\_role) | ../../modules/iam-role-for-service-accounts-eks | n/a |
