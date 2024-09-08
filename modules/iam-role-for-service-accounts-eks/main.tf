@@ -30,7 +30,10 @@ data "aws_iam_policy_document" "this" {
       condition {
         test     = "ArnLike"
         variable = "aws:PrincipalArn"
-        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.role_path}${local.role_name_condition}"]
+        values   = concat(
+          ["arn:${local.partition}:iam::${local.account_id}:role${var.role_path}${local.role_name_condition}"],
+          var.additional_assumable_principal_arns
+        )
       }
     }
   }

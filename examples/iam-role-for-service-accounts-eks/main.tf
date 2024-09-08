@@ -54,6 +54,27 @@ module "irsa_role" {
   tags = local.tags
 }
 
+module "irsa_assumable_role_with_external_principals" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name              = local.name
+  allow_self_assume_role = true
+  additional_assumable_principal_arns = [ module.irsa_role.iam_role_arn ]
+
+  oidc_providers = {
+    first = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["default:my-app", "canary:my-app"]
+    }
+  }
+
+  role_policy_arns = {
+    additional           = aws_iam_policy.additional.arn
+  }
+
+  tags = local.tags
+}
+
 module "aws_gateway_controller_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
