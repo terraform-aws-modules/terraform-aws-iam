@@ -1401,6 +1401,7 @@ data "aws_iam_policy_document" "velero" {
       "s3:GetObject",
       "s3:DeleteObject",
       "s3:PutObject",
+      "s3:PutObjectTagging",
       "s3:AbortMultipartUpload",
       "s3:ListMultipartUploadParts",
     ]
