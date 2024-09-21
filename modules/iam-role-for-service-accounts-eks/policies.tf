@@ -447,6 +447,18 @@ data "aws_iam_policy_document" "mountpoint_s3_csi" {
     ]
     resources = var.mountpoint_s3_csi_path_arns
   }
+
+  dynamic "statement" {
+    for_each = length(var.mountpoint_s3_csi_kms_arns) > 0 ? [1] : []
+    content {
+      actions = [
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
+      ]
+
+      resources = var.mountpoint_s3_csi_kms_arns
+    }
+  }
 }
 
 resource "aws_iam_policy" "mountpoint_s3_csi" {
@@ -1464,6 +1476,21 @@ data "aws_iam_policy_document" "vpc_cni" {
         "ec2:DescribeTags",
         "ec2:DescribeNetworkInterfaces",
         "ec2:DescribeInstanceTypes",
+      ]
+      resources = ["*"]
+    }
+  }
+
+  # https://docs.aws.amazon.com/eks/latest/userguide/cni-network-policy.html#cni-network-policy-setup
+  dynamic "statement" {
+    for_each = var.vpc_cni_enable_cloudwatch_logs ? [1] : []
+    content {
+      sid = "CloudWatchLogs"
+      actions = [
+        "logs:DescribeLogGroups",
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
       ]
       resources = ["*"]
     }
