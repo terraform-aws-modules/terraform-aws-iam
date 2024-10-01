@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.44.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.44.1...v5.44.2) (2024-10-01)
+
+
+### Bug Fixes
+
+* Add required S3 PutObjectTagging permission to Velero IRSA policy ([#517](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/517)) ([f0e65a7](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/f0e65a760bf6ddac1344ead5d1f1aaf409c38d18))
+
 ## [5.44.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.44.0...v5.44.1) (2024-09-24)
 
 
