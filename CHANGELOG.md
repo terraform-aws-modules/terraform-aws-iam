@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.44.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.44.0...v5.44.1) (2024-09-24)
+
+
+### Bug Fixes
+
+* Ensure IRSA for EKS FSX can Update File Systems ([#520](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/520)) ([b84b3c2](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/b84b3c2573c3da6223dc963170eec5099e568b0d))
+
 ## [5.44.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.43.0...v5.44.0) (2024-08-08)
 
 
