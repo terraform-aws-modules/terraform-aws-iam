@@ -14,7 +14,7 @@ $ terraform apply
 
 Run `terraform destroy` when you don't need these resources.
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -61,4 +61,4 @@ No inputs.
 | <a name="output_iam_account_id"></a> [iam\_account\_id](#output\_iam\_account\_id) | IAM AWS account id (this code is managing resources in this account) |
 | <a name="output_policy_arn"></a> [policy\_arn](#output\_policy\_arn) | Assume role policy ARN for IAM group |
 | <a name="output_production_account_id"></a> [production\_account\_id](#output\_production\_account\_id) | Production AWS account id |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->

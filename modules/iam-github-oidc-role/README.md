@@ -50,7 +50,7 @@ module "iam_github_oidc_role" {
   }
 }
 ```
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -104,4 +104,4 @@ No modules.
 | <a name="output_name"></a> [name](#output\_name) | Name of IAM role |
 | <a name="output_path"></a> [path](#output\_path) | Path of IAM role |
 | <a name="output_unique_id"></a> [unique\_id](#output\_unique\_id) | Unique ID of IAM role |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->
