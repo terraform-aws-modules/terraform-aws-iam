@@ -14,6 +14,7 @@ module "wrapper" {
   permissions_boundary_arn = try(each.value.permissions_boundary_arn, var.defaults.permissions_boundary_arn, null)
   policies                 = try(each.value.policies, var.defaults.policies, {})
   provider_url             = try(each.value.provider_url, var.defaults.provider_url, "token.actions.githubusercontent.com")
+  subject_condition        = try(each.value.subject_condition, var.defaults.subject_condition, "StringLike")
   subjects                 = try(each.value.subjects, var.defaults.subjects, [])
   tags                     = try(each.value.tags, var.defaults.tags, {})
 }

@@ -68,6 +68,12 @@ variable "audience" {
   default     = "sts.amazonaws.com"
 }
 
+variable "subject_condition" {
+  description = "Condition to use for the GitHub OIDC role. Defaults to `StringLike`"
+  type        = string
+  default     = "StringLike"
+}
+
 variable "subjects" {
   description = "List of GitHub OIDC subjects that are permitted by the trust policy. You do not need to prefix with `repo:` as this is provided. Example: `['my-org/my-repo:*', 'octo-org/octo-repo:ref:refs/heads/octo-branch']`"
   type        = list(string)
