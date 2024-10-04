@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.45.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.44.2...v5.45.0) (2024-10-04)
+
+
+### Features
+
+* Allow modifying the `iam-github-oidc-role` subject condition ([#523](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/523)) ([f2ade86](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/f2ade8680465ae86a509a358051c1571805826c9))
+
 ## [5.44.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.44.1...v5.44.2) (2024-10-01)
 
 
