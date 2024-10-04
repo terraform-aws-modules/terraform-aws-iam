@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.46.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.45.0...v5.46.0) (2024-10-04)
+
+
+### Features
+
+* Update IAM policy for AWS Load Balancer Controller to support Listener Attributes ([#525](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/525)) ([966c4f8](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/966c4f8bc7f9a0742a157d6b8a4a80b4f01d6aa1))
+
 ## [5.45.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.44.2...v5.45.0) (2024-10-04)
 
 
