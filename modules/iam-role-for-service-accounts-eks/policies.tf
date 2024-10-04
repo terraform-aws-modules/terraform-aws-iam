@@ -846,7 +846,7 @@ data "aws_iam_policy_document" "load_balancer_controller" {
       "elasticloadbalancing:DescribeTargetHealth",
       "elasticloadbalancing:DescribeTags",
       "elasticloadbalancing:DescribeTrustStores",
-      "elasticloadbalancing:DescribeListenerAttributes"
+      "elasticloadbalancing:DescribeListenerAttributes",
     ]
     resources = ["*"]
   }
