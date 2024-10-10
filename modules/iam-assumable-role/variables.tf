@@ -178,3 +178,15 @@ variable "role_session_name" {
   type        = list(string)
   default     = ["$${aws:username}"]
 }
+
+variable "use_managed_policy_arns_on_iam_role" {
+  description = "Whether to attach exclusive IAM managed policy to the IAM role."
+  type        = bool
+  default     = false
+}
+
+variable "managed_policy_arns" {
+  description = "Set of exclusive IAM managed policy ARNs to attach to the IAM role. Configuring an empty set will cause Terraform to remove all managed policy attachments"
+  type        = list(string)
+  default     = []
+}
