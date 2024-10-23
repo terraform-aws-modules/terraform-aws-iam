@@ -55,6 +55,7 @@ No modules.
 | <a name="input_custom_role_trust_policy"></a> [custom\_role\_trust\_policy](#input\_custom\_role\_trust\_policy) | A custom role trust policy. (Only valid if create\_custom\_role\_trust\_policy = true) | `string` | `""` | no |
 | <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies) | Whether policies should be detached from this role when destroying | `bool` | `false` | no |
 | <a name="input_inline_policy_statements"></a> [inline\_policy\_statements](#input\_inline\_policy\_statements) | List of inline policy [statements](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#statement) to attach to IAM role as an inline policy | `any` | `[]` | no |
+| <a name="input_managed_policy_arns"></a> [managed\_policy\_arns](#input\_managed\_policy\_arns) | Set of exclusive IAM managed policy ARNs to attach to the IAM role. Configuring an empty set will cause Terraform to remove all managed policy attachments | `list(string)` | `[]` | no |
 | <a name="input_max_session_duration"></a> [max\_session\_duration](#input\_max\_session\_duration) | Maximum CLI/API session duration in seconds between 3600 and 43200 | `number` | `3600` | no |
 | <a name="input_mfa_age"></a> [mfa\_age](#input\_mfa\_age) | Max age of valid MFA (in seconds) for roles which require MFA | `number` | `86400` | no |
 | <a name="input_number_of_custom_role_policy_arns"></a> [number\_of\_custom\_role\_policy\_arns](#input\_number\_of\_custom\_role\_policy\_arns) | Number of IAM policies to attach to IAM role | `number` | `null` | no |
@@ -73,6 +74,7 @@ No modules.
 | <a name="input_trusted_role_actions"></a> [trusted\_role\_actions](#input\_trusted\_role\_actions) | Additional trusted role actions | `list(string)` | <pre>[<br/>  "sts:AssumeRole",<br/>  "sts:TagSession"<br/>]</pre> | no |
 | <a name="input_trusted_role_arns"></a> [trusted\_role\_arns](#input\_trusted\_role\_arns) | ARNs of AWS entities who can assume these roles | `list(string)` | `[]` | no |
 | <a name="input_trusted_role_services"></a> [trusted\_role\_services](#input\_trusted\_role\_services) | AWS Services that can assume these roles | `list(string)` | `[]` | no |
+| <a name="input_use_managed_policy_arns_on_iam_role"></a> [use\_managed\_policy\_arns\_on\_iam\_role](#input\_use\_managed\_policy\_arns\_on\_iam\_role) | Whether to attach exclusive IAM managed policy to the IAM role. | `bool` | `false` | no |
 
 ## Outputs
 

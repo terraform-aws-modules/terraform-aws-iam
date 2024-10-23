@@ -7,6 +7,7 @@ locals {
   role_sts_externalid                = flatten([var.role_sts_externalid])
   role_name_condition                = var.role_name != null ? var.role_name : "${var.role_name_prefix}*"
   custom_role_trust_policy_condition = var.create_custom_role_trust_policy ? var.custom_role_trust_policy : ""
+  managed_policy_arns                = var.use_managed_policy_arns_on_iam_role && length(var.managed_policy_arns) > 0 ? var.managed_policy_arns : null
 }
 
 data "aws_iam_policy_document" "assume_role" {
@@ -150,6 +151,7 @@ resource "aws_iam_role" "this" {
 
   force_detach_policies = var.force_detach_policies
   permissions_boundary  = var.role_permissions_boundary_arn
+  managed_policy_arns   = local.managed_policy_arns
 
   assume_role_policy = coalesce(
     local.custom_role_trust_policy_condition,
@@ -162,28 +164,28 @@ resource "aws_iam_role" "this" {
 }
 
 resource "aws_iam_role_policy_attachment" "custom" {
-  count = var.create_role ? coalesce(var.number_of_custom_role_policy_arns, length(var.custom_role_policy_arns)) : 0
+  count = var.create_role && local.managed_policy_arns == null ? coalesce(var.number_of_custom_role_policy_arns, length(var.custom_role_policy_arns)) : 0
 
   role       = aws_iam_role.this[0].name
   policy_arn = element(var.custom_role_policy_arns, count.index)
 }
 
 resource "aws_iam_role_policy_attachment" "admin" {
-  count = var.create_role && var.attach_admin_policy ? 1 : 0
+  count = var.create_role && var.attach_admin_policy && local.managed_policy_arns == null ? 1 : 0
 
   role       = aws_iam_role.this[0].name
   policy_arn = var.admin_role_policy_arn
 }
 
 resource "aws_iam_role_policy_attachment" "poweruser" {
-  count = var.create_role && var.attach_poweruser_policy ? 1 : 0
+  count = var.create_role && var.attach_poweruser_policy && local.managed_policy_arns == null ? 1 : 0
 
   role       = aws_iam_role.this[0].name
   policy_arn = var.poweruser_role_policy_arn
 }
 
 resource "aws_iam_role_policy_attachment" "readonly" {
-  count = var.create_role && var.attach_readonly_policy ? 1 : 0
+  count = var.create_role && var.attach_readonly_policy && local.managed_policy_arns == null ? 1 : 0
 
   role       = aws_iam_role.this[0].name
   policy_arn = var.readonly_role_policy_arn
@@ -252,7 +254,7 @@ data "aws_iam_policy_document" "inline" {
 }
 
 resource "aws_iam_role_policy" "inline" {
-  count = local.create_iam_role_inline_policy ? 1 : 0
+  count = local.create_iam_role_inline_policy && local.managed_policy_arns == null ? 1 : 0
 
   role        = aws_iam_role.this[0].name
   name_prefix = "${var.role_name}_inline_"
