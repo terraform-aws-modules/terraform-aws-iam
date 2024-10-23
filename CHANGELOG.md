@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.47.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.47.0...v5.47.1) (2024-10-22)
+
+
+### Bug Fixes
+
+* Use dynamic partition value ([#532](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/532)) ([9986b50](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/9986b5041996d33f6998349c675a262c11b7dece))
+
+## [5.47.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.46.0...v5.47.0) (2024-10-21)
+
+
+### Features
+
+* Update AWS EBS CSI Driver IAM Policy ([#530](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/530)) ([1bc058c](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/1bc058c749081f37a67a5d08d24b1fcec449e2f2))
+
+
+### Bug Fixes
+
+* Update CI workflow versions to latest ([#527](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/527)) ([15fd175](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/15fd17540b6db8be434759e684c1cabf20a5219a))
+
 ## [5.46.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.45.0...v5.46.0) (2024-10-04)
 
 
