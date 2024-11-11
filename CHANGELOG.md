@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.48.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.47.1...v5.48.0) (2024-11-11)
+
+
+### Features
+
+* Add `ec2:GetSecurityGroupsForVpc` for AWS LB Controller `v2.10.0` ([#536](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/536)) ([9cfab4a](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/9cfab4a2712523308b03acf2d370ea44128b4128))
+
 ## [5.47.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.47.0...v5.47.1) (2024-10-22)
 
 
