@@ -202,3 +202,69 @@ module "iam_policy" {
 }
 EOF
 }
+
+########################################
+# IAM assumable role service conditions
+########################################
+module "iam_assumable_role_trusted_accounts" {
+  source = "../../modules/iam-assumable-role"
+
+  trusted_role_services = [
+    "codedeploy.amazonaws.com"
+  ]
+  trusted_source_accounts = [
+    "307990089504",
+    "835367859851"
+  ]
+
+  create_role       = true
+  role_requires_mfa = false
+  role_name_prefix  = "assumable-role-policy-test-"
+}
+
+module "iam_assumable_role_trusted_arns" {
+  source = "../../modules/iam-assumable-role"
+
+  trusted_role_services = [
+    "ssm-incidents.amazonaws.com"
+  ]
+  trusted_source_arns = [
+    "arn:aws:ssm-incidents:*:307990089504:incident-record/myresponseplan/*",
+    "arn:aws:ssm-incidents:*:835367859851:incident-record/myresponseplan/*",
+  ]
+
+  create_role       = true
+  role_requires_mfa = false
+  role_name_prefix  = "assumable-role-policy-test-"
+}
+
+module "iam_assumable_role_trusted_org_ids" {
+  source = "../../modules/iam-assumable-role"
+
+  trusted_role_services = [
+    "codedeploy.amazonaws.com"
+  ]
+  trusted_source_org_ids = [
+    "o-someorgid"
+  ]
+
+  create_role       = true
+  role_requires_mfa = false
+  role_name_prefix  = "assumable-role-policy-test-"
+}
+
+module "iam_assumable_role_trusted_org_paths" {
+  source = "../../modules/iam-assumable-role"
+
+  trusted_role_services = [
+    "codedeploy.amazonaws.com"
+  ]
+
+  trusted_source_org_paths = [
+    "/some/org/path"
+  ]
+
+  create_role       = true
+  role_requires_mfa = false
+  role_name_prefix  = "assumable-role-policy-test-"
+}

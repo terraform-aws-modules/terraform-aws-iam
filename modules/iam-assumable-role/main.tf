@@ -65,6 +65,42 @@ data "aws_iam_policy_document" "assume_role" {
         values   = var.role_session_name
       }
     }
+
+    dynamic "condition" {
+      for_each = length(var.trusted_source_accounts) != 0 ? [true] : []
+      content {
+        test     = "StringEquals"
+        variable = "aws:SourceAccount"
+        values   = var.trusted_source_accounts
+      }
+    }
+
+    dynamic "condition" {
+      for_each = length(var.trusted_source_arns) != 0 ? [true] : []
+      content {
+        test     = "ArnLike"
+        variable = "aws:SourceArn"
+        values   = var.trusted_source_arns
+      }
+    }
+
+    dynamic "condition" {
+      for_each = length(var.trusted_source_org_ids) != 0 ? [true] : []
+      content {
+        test     = "StringEquals"
+        variable = "aws:SourceOrgID"
+        values   = var.trusted_source_org_ids
+      }
+    }
+
+    dynamic "condition" {
+      for_each = length(var.trusted_source_org_paths) != 0 ? [true] : []
+      content {
+        test     = "ForAnyValue:StringLike"
+        variable = "aws:SourceOrgPaths"
+        values   = var.trusted_source_org_paths
+      }
+    }
   }
 }
 

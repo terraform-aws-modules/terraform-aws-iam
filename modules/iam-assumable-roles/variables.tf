@@ -16,6 +16,30 @@ variable "trusted_role_services" {
   default     = []
 }
 
+variable "trusted_source_accounts" {
+  description = "Accounts AWS Services can assume these roles on behalf of"
+  type        = list(string)
+  default     = []
+}
+
+variable "trusted_source_arns" {
+  description = "ARNs AWS Services can assume these roles on behalf of"
+  type        = list(string)
+  default     = []
+}
+
+variable "trusted_source_org_ids" {
+  description = "Organizations AWS Services can assume these roles on behalf of"
+  type        = list(string)
+  default     = []
+}
+
+variable "trusted_source_org_paths" {
+  description = "Organization paths AWS Services can assume these roles on behalf of"
+  type        = list(string)
+  default     = []
+}
+
 variable "mfa_age" {
   description = "Max age of valid MFA (in seconds) for roles which require MFA"
   type        = number

@@ -33,4 +33,8 @@ module "wrapper" {
   trusted_role_actions              = try(each.value.trusted_role_actions, var.defaults.trusted_role_actions, ["sts:AssumeRole", "sts:TagSession"])
   trusted_role_arns                 = try(each.value.trusted_role_arns, var.defaults.trusted_role_arns, [])
   trusted_role_services             = try(each.value.trusted_role_services, var.defaults.trusted_role_services, [])
+  trusted_source_accounts           = try(each.value.trusted_source_accounts, var.defaults.trusted_source_accounts, [])
+  trusted_source_arns               = try(each.value.trusted_source_arns, var.defaults.trusted_source_arns, [])
+  trusted_source_org_ids            = try(each.value.trusted_source_org_ids, var.defaults.trusted_source_org_ids, [])
+  trusted_source_org_paths          = try(each.value.trusted_source_org_paths, var.defaults.trusted_source_org_paths, [])
 }
