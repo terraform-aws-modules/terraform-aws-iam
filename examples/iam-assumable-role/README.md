@@ -39,6 +39,10 @@ Run `terraform destroy` when you don't need these resources.
 | <a name="module_iam_assumable_role_custom_trust_policy"></a> [iam\_assumable\_role\_custom\_trust\_policy](#module\_iam\_assumable\_role\_custom\_trust\_policy) | ../../modules/iam-assumable-role | n/a |
 | <a name="module_iam_assumable_role_inline_policy"></a> [iam\_assumable\_role\_inline\_policy](#module\_iam\_assumable\_role\_inline\_policy) | ../../modules/iam-assumable-role | n/a |
 | <a name="module_iam_assumable_role_sts"></a> [iam\_assumable\_role\_sts](#module\_iam\_assumable\_role\_sts) | ../../modules/iam-assumable-role | n/a |
+| <a name="module_iam_assumable_role_trusted_accounts"></a> [iam\_assumable\_role\_trusted\_accounts](#module\_iam\_assumable\_role\_trusted\_accounts) | ../../modules/iam-assumable-role | n/a |
+| <a name="module_iam_assumable_role_trusted_arns"></a> [iam\_assumable\_role\_trusted\_arns](#module\_iam\_assumable\_role\_trusted\_arns) | ../../modules/iam-assumable-role | n/a |
+| <a name="module_iam_assumable_role_trusted_org_ids"></a> [iam\_assumable\_role\_trusted\_org\_ids](#module\_iam\_assumable\_role\_trusted\_org\_ids) | ../../modules/iam-assumable-role | n/a |
+| <a name="module_iam_assumable_role_trusted_org_paths"></a> [iam\_assumable\_role\_trusted\_org\_paths](#module\_iam\_assumable\_role\_trusted\_org\_paths) | ../../modules/iam-assumable-role | n/a |
 | <a name="module_iam_policy"></a> [iam\_policy](#module\_iam\_policy) | ../../modules/iam-policy | n/a |
 
 ## Resources

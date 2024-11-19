@@ -73,6 +73,10 @@ No modules.
 | <a name="input_trusted_role_actions"></a> [trusted\_role\_actions](#input\_trusted\_role\_actions) | Additional trusted role actions | `list(string)` | <pre>[<br/>  "sts:AssumeRole",<br/>  "sts:TagSession"<br/>]</pre> | no |
 | <a name="input_trusted_role_arns"></a> [trusted\_role\_arns](#input\_trusted\_role\_arns) | ARNs of AWS entities who can assume these roles | `list(string)` | `[]` | no |
 | <a name="input_trusted_role_services"></a> [trusted\_role\_services](#input\_trusted\_role\_services) | AWS Services that can assume these roles | `list(string)` | `[]` | no |
+| <a name="input_trusted_source_accounts"></a> [trusted\_source\_accounts](#input\_trusted\_source\_accounts) | Accounts AWS Services can assume these roles on behalf of | `list(string)` | `[]` | no |
+| <a name="input_trusted_source_arns"></a> [trusted\_source\_arns](#input\_trusted\_source\_arns) | ARNs AWS Services can assume these roles on behalf of | `list(string)` | `[]` | no |
+| <a name="input_trusted_source_org_ids"></a> [trusted\_source\_org\_ids](#input\_trusted\_source\_org\_ids) | Organizations AWS Services can assume these roles on behalf of | `list(string)` | `[]` | no |
+| <a name="input_trusted_source_org_paths"></a> [trusted\_source\_org\_paths](#input\_trusted\_source\_org\_paths) | Organization paths AWS Services can assume these roles on behalf of | `list(string)` | `[]` | no |
 
 ## Outputs
 
