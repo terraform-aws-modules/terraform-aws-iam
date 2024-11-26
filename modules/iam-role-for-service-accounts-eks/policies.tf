@@ -200,7 +200,7 @@ data "aws_iam_policy_document" "ebs_csi" {
 
   statement {
     actions   = ["ec2:CreateVolume"]
-    resources = ["*"]
+    resources = ["arn:${local.partition}:ec2:*:*:volume/*"]
 
     condition {
       test     = "StringLike"
@@ -213,7 +213,7 @@ data "aws_iam_policy_document" "ebs_csi" {
 
   statement {
     actions   = ["ec2:CreateVolume"]
-    resources = ["*"]
+    resources = ["arn:${local.partition}:ec2:*:*:volume/*"]
 
     condition {
       test     = "StringLike"
@@ -231,6 +231,11 @@ data "aws_iam_policy_document" "ebs_csi" {
       variable = "aws:RequestTag/kubernetes.io/cluster/*"
       values   = ["owned"]
     }
+  }
+
+  statement {
+    actions   = ["ec2:CreateVolume"]
+    resources = ["arn:${local.partition}:ec2:*:*:snapshot/*"]
   }
 
   statement {
@@ -835,6 +840,7 @@ data "aws_iam_policy_document" "load_balancer_controller" {
       "ec2:DescribeTags",
       "ec2:GetCoipPoolUsage",
       "ec2:DescribeCoipPools",
+      "ec2:GetSecurityGroupsForVpc",
       "elasticloadbalancing:DescribeLoadBalancers",
       "elasticloadbalancing:DescribeLoadBalancerAttributes",
       "elasticloadbalancing:DescribeListeners",
