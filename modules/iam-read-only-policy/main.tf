@@ -25,6 +25,7 @@ data "aws_iam_policy_document" "allowed_services" {
       actions = [
         "${statement.value}:List*",
         "${statement.value}:Get*",
+        "${statement.value}:BatchGet*",
         "${statement.value}:Describe*",
         "${statement.value}:View*",
       ]
