@@ -71,6 +71,12 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
         }
       }
 
+      condition {
+        test     = "ForAllValues:StringEquals"
+        variable = "${statement.value}:iss"
+        values   = ["https://${statement.value}"]
+      }
+
       dynamic "condition" {
         for_each = length(var.oidc_fully_qualified_audiences) > 0 ? local.urls : []
 
