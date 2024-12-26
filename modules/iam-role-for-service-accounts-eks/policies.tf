@@ -558,6 +558,7 @@ data "aws_iam_policy_document" "external_secrets" {
       "secretsmanager:GetSecretValue",
       "secretsmanager:DescribeSecret",
       "secretsmanager:ListSecretVersionIds",
+      "secretsmanager:BatchGetSecretValue",
     ]
     resources = var.external_secrets_secrets_manager_arns
   }
