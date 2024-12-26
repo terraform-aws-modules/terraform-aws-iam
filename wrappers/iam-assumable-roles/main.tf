@@ -28,8 +28,8 @@ module "wrapper" {
   readonly_role_policy_arns               = try(each.value.readonly_role_policy_arns, var.defaults.readonly_role_policy_arns, ["arn:aws:iam::aws:policy/ReadOnlyAccess"])
   readonly_role_requires_mfa              = try(each.value.readonly_role_requires_mfa, var.defaults.readonly_role_requires_mfa, true)
   readonly_role_tags                      = try(each.value.readonly_role_tags, var.defaults.readonly_role_tags, {})
+  trust_policy_conditions                 = try(each.value.trust_policy_conditions, var.defaults.trust_policy_conditions, [])
   trusted_role_actions                    = try(each.value.trusted_role_actions, var.defaults.trusted_role_actions, ["sts:AssumeRole", "sts:TagSession"])
   trusted_role_arns                       = try(each.value.trusted_role_arns, var.defaults.trusted_role_arns, [])
   trusted_role_services                   = try(each.value.trusted_role_services, var.defaults.trusted_role_services, [])
-  trust_policy_conditions                 = try(each.value.trust_policy_conditions, var.defaults.trust_policy_conditions, [])
 }
