@@ -114,6 +114,10 @@ variable "allow_self_assume_role" {
 
 variable "provider_trust_policy_conditions" {
   description = "[Condition constraints](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#condition) applied to the trust policy"
-  type        = any
-  default     = []
+  type = list(object({
+    test     = string
+    variable = string
+    values   = list(string)
+  }))
+  default = []
 }

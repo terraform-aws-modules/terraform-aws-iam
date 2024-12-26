@@ -33,4 +33,5 @@ module "wrapper" {
   trusted_role_actions              = try(each.value.trusted_role_actions, var.defaults.trusted_role_actions, ["sts:AssumeRole", "sts:TagSession"])
   trusted_role_arns                 = try(each.value.trusted_role_arns, var.defaults.trusted_role_arns, [])
   trusted_role_services             = try(each.value.trusted_role_services, var.defaults.trusted_role_services, [])
+  trust_policy_conditions           = try(each.value.trust_policy_conditions, var.defaults.trust_policy_conditions, [])
 }

@@ -50,6 +50,7 @@ data "aws_iam_policy_document" "assume_role" {
 
     dynamic "condition" {
       for_each = length(local.role_sts_externalid) != 0 ? [true] : []
+
       content {
         test     = "StringEquals"
         variable = "sts:ExternalId"
@@ -59,10 +60,21 @@ data "aws_iam_policy_document" "assume_role" {
 
     dynamic "condition" {
       for_each = var.role_requires_session_name ? [1] : []
+
       content {
         test     = "StringEquals"
         variable = "sts:RoleSessionName"
         values   = var.role_session_name
+      }
+    }
+
+    dynamic "condition" {
+      for_each = var.trust_policy_conditions
+
+      content {
+        test     = condition.value.test
+        variable = condition.value.variable
+        values   = condition.value.values
       }
     }
   }
@@ -121,6 +133,7 @@ data "aws_iam_policy_document" "assume_role_with_mfa" {
 
     dynamic "condition" {
       for_each = length(local.role_sts_externalid) != 0 ? [true] : []
+
       content {
         test     = "StringEquals"
         variable = "sts:ExternalId"
@@ -130,10 +143,21 @@ data "aws_iam_policy_document" "assume_role_with_mfa" {
 
     dynamic "condition" {
       for_each = var.role_requires_session_name ? [1] : []
+
       content {
         test     = "StringEquals"
         variable = "sts:RoleSessionName"
         values   = var.role_session_name
+      }
+    }
+
+    dynamic "condition" {
+      for_each = var.trust_policy_conditions
+
+      content {
+        test     = condition.value.test
+        variable = condition.value.variable
+        values   = condition.value.values
       }
     }
   }
@@ -255,6 +279,6 @@ resource "aws_iam_role_policy" "inline" {
   count = local.create_iam_role_inline_policy ? 1 : 0
 
   role        = aws_iam_role.this[0].name
-  name_prefix = "${var.role_name}_inline_"
+  name_prefix = "${try(coalesece(var.role_name, var.role_name_prefix), "")}_inline_"
   policy      = data.aws_iam_policy_document.inline[0].json
 }
