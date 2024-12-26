@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.49.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.48.0...v5.49.0) (2024-12-26)
+
+
+### Features
+
+* Update policie for External Secrets 0.12.1 ([#542](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/542)) ([b609236](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/b609236ecdbb782ed758d59dd8c306e935e4b585))
+
 ## [5.48.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.47.1...v5.48.0) (2024-11-11)
 
 
