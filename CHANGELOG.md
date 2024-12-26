@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.51.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.50.0...v5.51.0) (2024-12-26)
+
+
+### Features
+
+* Add `BatchGet*` to IAM read only policy ([#540](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/540)) ([d886f11](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/d886f11d0aa058555d9e35e195b9a263a0bf6398))
+
 ## [5.50.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.49.0...v5.50.0) (2024-12-26)
 
 
