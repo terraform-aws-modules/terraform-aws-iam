@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.50.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.49.0...v5.50.0) (2024-12-26)
+
+
+### Features
+
+* Add policies for AWS LBC v2.11.0 ([#539](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/539)) ([ca9f355](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/ca9f35596a91ec8a9d0e44a7fbeb45aea6423d48))
+
 ## [5.49.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.48.0...v5.49.0) (2024-12-26)
 
 
