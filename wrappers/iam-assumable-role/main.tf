@@ -30,6 +30,7 @@ module "wrapper" {
   role_session_name                 = try(each.value.role_session_name, var.defaults.role_session_name, ["$${aws:username}"])
   role_sts_externalid               = try(each.value.role_sts_externalid, var.defaults.role_sts_externalid, [])
   tags                              = try(each.value.tags, var.defaults.tags, {})
+  trust_policy_conditions           = try(each.value.trust_policy_conditions, var.defaults.trust_policy_conditions, [])
   trusted_role_actions              = try(each.value.trusted_role_actions, var.defaults.trusted_role_actions, ["sts:AssumeRole", "sts:TagSession"])
   trusted_role_arns                 = try(each.value.trusted_role_arns, var.defaults.trusted_role_arns, [])
   trusted_role_services             = try(each.value.trusted_role_services, var.defaults.trusted_role_services, [])

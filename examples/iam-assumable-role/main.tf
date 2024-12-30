@@ -5,6 +5,7 @@ provider "aws" {
 ###############################
 # IAM assumable role for admin
 ###############################
+
 module "iam_assumable_role_admin" {
   source = "../../modules/iam-assumable-role"
 
@@ -36,8 +37,11 @@ module "iam_assumable_role_admin" {
 ##########################################
 # IAM assumable role with custom policies
 ##########################################
+
 module "iam_assumable_role_custom" {
   source = "../../modules/iam-assumable-role"
+
+  create_role = true
 
   trusted_role_arns = [
     "arn:aws:iam::307990089504:root",
@@ -47,7 +51,13 @@ module "iam_assumable_role_custom" {
     "codedeploy.amazonaws.com"
   ]
 
-  create_role = true
+  trust_policy_conditions = [
+    {
+      test     = "StringEquals"
+      variable = "aws:PrincipalOrgID"
+      values   = ["o-someorgid"]
+    }
+  ]
 
   role_name_prefix  = "custom-"
   role_requires_mfa = false
@@ -65,6 +75,7 @@ module "iam_assumable_role_custom" {
 ##########################################
 # IAM assumable role with inline policy
 ##########################################
+
 module "iam_assumable_role_inline_policy" {
   source = "../../modules/iam-assumable-role"
 
@@ -109,6 +120,7 @@ module "iam_assumable_role_inline_policy" {
 ####################################################
 # IAM assumable role with multiple sts external ids
 ####################################################
+
 module "iam_assumable_role_sts" {
   source = "../../modules/iam-assumable-role"
 
@@ -141,6 +153,7 @@ module "iam_assumable_role_sts" {
 #########################################
 # IAM assumable role with custom trust policy
 #########################################
+
 module "iam_assumable_role_custom_trust_policy" {
   source = "../../modules/iam-assumable-role"
 
@@ -180,6 +193,7 @@ data "aws_iam_policy_document" "custom_trust_policy" {
 #########################################
 # IAM policy
 #########################################
+
 module "iam_policy" {
   source = "../../modules/iam-policy"
 

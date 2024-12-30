@@ -86,6 +86,16 @@ data "aws_iam_policy_document" "assume_role" {
       type        = "Service"
       identifiers = var.trusted_role_services
     }
+
+    dynamic "condition" {
+      for_each = var.trust_policy_conditions
+
+      content {
+        test     = condition.value.test
+        variable = condition.value.variable
+        values   = condition.value.values
+      }
+    }
   }
 }
 
@@ -180,6 +190,16 @@ data "aws_iam_policy_document" "assume_role_with_mfa" {
       test     = "NumericLessThan"
       variable = "aws:MultiFactorAuthAge"
       values   = [var.mfa_age]
+    }
+
+    dynamic "condition" {
+      for_each = var.trust_policy_conditions
+
+      content {
+        test     = condition.value.test
+        variable = condition.value.variable
+        values   = condition.value.values
+      }
     }
   }
 }
