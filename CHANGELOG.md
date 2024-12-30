@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.52.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.51.0...v5.52.0) (2024-12-30)
+
+
+### Features
+
+* Allow generic assume role conditions ([#543](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/543)) ([c3e54f2](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/c3e54f204b2f8da0f785b4097779ffca980beaaf))
+
 ## [5.51.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.50.0...v5.51.0) (2024-12-26)
 
 
