@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.52.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.52.0...v5.52.1) (2025-01-02)
+
+
+### Bug Fixes
+
+* Fix creation of inline polices ([#544](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/544)) ([9ec4679](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/9ec4679dd237b7285d1d6ae64c72a9169befce16))
+
 ## [5.52.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.51.0...v5.52.0) (2024-12-30)
 
 
