@@ -279,6 +279,6 @@ resource "aws_iam_role_policy" "inline" {
   count = local.create_iam_role_inline_policy ? 1 : 0
 
   role        = aws_iam_role.this[0].name
-  name_prefix = "${try(coalesece(var.role_name, var.role_name_prefix), "")}_inline_"
+  name_prefix = "${try(coalesce(var.role_name, var.role_name_prefix), "")}_inline_"
   policy      = data.aws_iam_policy_document.inline[0].json
 }
