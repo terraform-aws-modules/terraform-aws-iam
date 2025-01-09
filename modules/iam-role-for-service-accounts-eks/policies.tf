@@ -548,7 +548,7 @@ data "aws_iam_policy_document" "external_secrets" {
   }
 
   statement {
-    actions   = ["secretsmanager:ListSecrets"]
+    actions   = ["secretsmanager:ListSecrets", "secretsmanager:BatchGetSecretValue"]
     resources = ["*"]
   }
 
@@ -557,8 +557,7 @@ data "aws_iam_policy_document" "external_secrets" {
       "secretsmanager:GetResourcePolicy",
       "secretsmanager:GetSecretValue",
       "secretsmanager:DescribeSecret",
-      "secretsmanager:ListSecretVersionIds",
-      "secretsmanager:BatchGetSecretValue",
+      "secretsmanager:ListSecretVersionIds"
     ]
     resources = var.external_secrets_secrets_manager_arns
   }
