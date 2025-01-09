@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.52.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.52.1...v5.52.2) (2025-01-09)
+
+
+### Bug Fixes
+
+* Fix IAM policy for External Secrets ([#545](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/545)) ([883499c](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/883499c7780b09392c090d7c62160491d0575ce7))
+
 ## [5.52.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.52.0...v5.52.1) (2025-01-02)
 
 
