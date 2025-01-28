@@ -85,3 +85,13 @@ variable "provider_url" {
   type        = string
   default     = "token.actions.githubusercontent.com"
 }
+
+variable "provider_trust_policy_conditions" {
+  description = "[Condition constraints](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#condition) applied to the trust policy"
+  type = list(object({
+    test     = string
+    variable = string
+    values   = list(string)
+  }))
+  default = []
+}
