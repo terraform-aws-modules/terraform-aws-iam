@@ -46,6 +46,18 @@ module "iam_github_oidc_role" {
     "terraform-aws-modules/terraform-aws-iam:ref:refs/heads/master",
   ]
 
+  # This ensures that the OIDC token GitHub uses to assume the AWS IAM role has the correct
+  # `actor` scope. Any other GitHub OIDC claims can be used as well.
+  additional_provider_trust_policy_conditions = [
+    {
+      test     = "ForAllValues:StringEquals"
+      variable = "${module.iam_github_oidc_provider.url}:actor"
+      # This should be the list of GitHub usernames for which you want to restrict
+      # access to the role.
+      values = ["username"]
+    }
+  ]
+
   policies = {
     additional = aws_iam_policy.additional.arn
     S3ReadOnly = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
