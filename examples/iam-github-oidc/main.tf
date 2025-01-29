@@ -50,7 +50,7 @@ module "iam_github_oidc_role" {
   # `actor` scope. Any other GitHub OIDC claims can be used as well.
   additional_provider_trust_policy_conditions = [
     {
-      test     = "ForAllValues:StringEquals"
+      test     = "StringEquals"
       variable = "${module.iam_github_oidc_provider.url}:actor"
       # This should be the list of GitHub usernames for which you want to restrict
       # access to the role.
