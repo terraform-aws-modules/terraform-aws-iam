@@ -546,7 +546,7 @@ data "aws_iam_policy_document" "external_secrets" {
         "ssm:GetParameter",
         "ssm:GetParameters",
       ]
-      
+
       resources = var.external_secrets_ssm_parameter_arns
     }
   }
