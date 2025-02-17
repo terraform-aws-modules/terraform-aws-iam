@@ -54,6 +54,43 @@ module "irsa_role" {
   tags = local.tags
 }
 
+module "irsa_role_inline" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name = "${local.name}-inline"
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["default:inline"]
+    }
+  }
+
+  inline_policy_statements = [
+    {
+      sid = "AllowECRPushPull"
+      actions = [
+        "ecr:GetAuthorizationToken",
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:DescribeImages",
+        "ecr:DescribeRepositories",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:ListImages",
+        "ecr:PutImage",
+        "ecr:InitiateLayerUpload",
+        "ecr:UploadLayerPart",
+        "ecr:CompleteLayerUpload"
+      ]
+      effect    = "Allow"
+      resources = ["*"]
+    }
+  ]
+
+  tags = local.tags
+}
+
 module "aws_gateway_controller_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
