@@ -7,7 +7,7 @@ Creates an IAM role which can be assumed by AWS EKS `ServiceAccount`s with optio
 - [EBS CSI Driver](https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/example-iam-policy.json)
 - [EFS CSI Driver](https://github.com/kubernetes-sigs/aws-efs-csi-driver/blob/master/docs/iam-policy-example.json)
 - [External DNS](https://github.com/kubernetes-sigs/external-dns/blob/master/docs/tutorials/aws.md#iam-policy)
-- [External Secrets](https://github.com/external-secrets/kubernetes-external-secrets#add-a-secret)
+- [External Secrets](https://github.com/external-secrets/external-secrets#add-a-secret)
 - [FSx for Lustre CSI Driver](https://github.com/kubernetes-sigs/aws-fsx-csi-driver/blob/master/docs/README.md)
 - [Karpenter](https://github.com/aws/karpenter/blob/main/website/content/en/preview/getting-started/getting-started-with-karpenter/cloudformation.yaml)
 - [Load Balancer Controller](https://github.com/kubernetes-sigs/aws-load-balancer-controller/blob/main/docs/install/iam_policy.json)
