@@ -87,7 +87,7 @@ variable "provider_url" {
 }
 
 variable "additional_provider_trust_policy_conditions" {
-  description = "[Condition constraints](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#condition) applied to the trust policy"
+  description = "Additional conditions for the constraint to apply to the trust policy"
   type = list(object({
     test     = string
     variable = string
