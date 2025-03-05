@@ -46,8 +46,14 @@ module "iam_github_oidc_role" {
     "terraform-aws-modules/terraform-aws-iam:ref:refs/heads/master",
   ]
 
-  # This ensures that the OIDC token GitHub uses to assume the AWS IAM role has the correct
-  # `actor` scope. Any other GitHub OIDC claims can be used as well.
+  # As per the Github documentation for security hardening with OpenID Connect
+  # (https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect)
+  # This document makes many references to the fact that you can leverage any of the available
+  # OIDC claims to when configuring the cloud providers trust relation. For example in
+  # https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect#customizing-the-token-claims
+  # it is specified that granular OIDC policies can be defined using additional OIDC token claims.
+  # In this example, we ensure that the OIDC token GitHub uses to assume the AWS IAM role has the correct
+  # `actor` scope.
   additional_provider_trust_policy_conditions = [
     {
       test     = "StringEquals"
