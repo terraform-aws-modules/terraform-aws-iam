@@ -54,7 +54,7 @@ module "iam_github_oidc_role" {
   # it is specified that granular OIDC policies can be defined using additional OIDC token claims.
   # In this example, we ensure that the OIDC token GitHub uses to assume the AWS IAM role has the correct
   # `actor` scope.
-  additional_provider_trust_policy_conditions = [
+  additional_trust_policy_conditions = [
     {
       test     = "StringEquals"
       variable = "${module.iam_github_oidc_provider.url}:actor"
