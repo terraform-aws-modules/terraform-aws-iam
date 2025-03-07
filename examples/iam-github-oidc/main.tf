@@ -46,6 +46,24 @@ module "iam_github_oidc_role" {
     "terraform-aws-modules/terraform-aws-iam:ref:refs/heads/master",
   ]
 
+  # As per the Github documentation for security hardening with OpenID Connect
+  # (https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect)
+  # This document makes many references to the fact that you can leverage any of the available
+  # OIDC claims to when configuring the cloud providers trust relation. For example in
+  # https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect#customizing-the-token-claims
+  # it is specified that granular OIDC policies can be defined using additional OIDC token claims.
+  # In this example, we ensure that the OIDC token GitHub uses to assume the AWS IAM role has the correct
+  # `actor` scope.
+  additional_trust_policy_conditions = [
+    {
+      test     = "StringEquals"
+      variable = "${module.iam_github_oidc_provider.url}:actor"
+      # This should be the list of GitHub usernames for which you want to restrict
+      # access to the role.
+      values = ["username"]
+    }
+  ]
+
   policies = {
     additional = aws_iam_policy.additional.arn
     S3ReadOnly = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"

@@ -47,6 +47,16 @@ data "aws_iam_policy_document" "this" {
       # Strip `repo:` to normalize for cases where users may prepend it
       values = [for subject in var.subjects : "repo:${trimprefix(subject, "repo:")}"]
     }
+
+    dynamic "condition" {
+      for_each = var.additional_trust_policy_conditions
+
+      content {
+        test     = condition.value.test
+        values   = condition.value.values
+        variable = condition.value.variable
+      }
+    }
   }
 }
 

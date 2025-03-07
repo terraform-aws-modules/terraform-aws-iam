@@ -85,3 +85,13 @@ variable "provider_url" {
   type        = string
   default     = "token.actions.githubusercontent.com"
 }
+
+variable "additional_trust_policy_conditions" {
+  description = "Additional conditions for the constraint to apply to the trust policy"
+  type = list(object({
+    test     = string
+    variable = string
+    values   = list(string)
+  }))
+  default = []
+}
