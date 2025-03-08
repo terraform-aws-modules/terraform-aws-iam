@@ -530,7 +530,7 @@ resource "aws_iam_role_policy_attachment" "external_dns" {
 # External Secrets Policy
 ################################################################################
 
-# https://github.com/external-secrets/kubernetes-external-secrets#add-a-secret
+# https://github.com/external-secrets/external-secrets#add-a-secret
 data "aws_iam_policy_document" "external_secrets" {
   count = var.create_role && var.attach_external_secrets_policy ? 1 : 0
 
