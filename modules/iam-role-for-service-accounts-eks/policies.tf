@@ -841,6 +841,7 @@ data "aws_iam_policy_document" "load_balancer_controller" {
       "ec2:GetCoipPoolUsage",
       "ec2:DescribeCoipPools",
       "ec2:GetSecurityGroupsForVpc",
+      "ec2:DescribeIpamPools",
       "elasticloadbalancing:DescribeLoadBalancers",
       "elasticloadbalancing:DescribeLoadBalancerAttributes",
       "elasticloadbalancing:DescribeListeners",
@@ -1017,6 +1018,7 @@ data "aws_iam_policy_document" "load_balancer_controller" {
       "elasticloadbalancing:DeleteTargetGroup",
       "elasticloadbalancing:ModifyListenerAttributes",
       "elasticloadbalancing:ModifyCapacityReservation",
+      "elasticloadbalancing:ModifyIpPools"
     ]
     resources = ["*"]
 
@@ -1068,6 +1070,7 @@ data "aws_iam_policy_document" "load_balancer_controller" {
       "elasticloadbalancing:AddListenerCertificates",
       "elasticloadbalancing:RemoveListenerCertificates",
       "elasticloadbalancing:ModifyRule",
+      "elasticloadbalancing:SetRulePriorities"
     ]
     resources = ["*"]
   }
