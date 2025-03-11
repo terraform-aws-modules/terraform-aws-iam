@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.54.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.53.0...v5.54.0) (2025-03-11)
+
+
+### Features
+
+* Update IAM permissions for load balancer controller v2.12.0 ([#555](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/555)) ([d2d8ad4](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/d2d8ad46a60e968909ae07acf5c1d5ad29e83917))
+
 ## [5.53.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.52.2...v5.53.0) (2025-03-07)
 
 
