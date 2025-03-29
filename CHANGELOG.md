@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.54.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.53.0...v5.54.0) (2025-03-11)
+
+
+### Features
+
+* Update IAM permissions for load balancer controller v2.12.0 ([#555](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/555)) ([d2d8ad4](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/d2d8ad46a60e968909ae07acf5c1d5ad29e83917))
+
+## [5.53.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.52.2...v5.53.0) (2025-03-07)
+
+
+### Features
+
+* Add support for custom trust policy conditions on `iam-github-oidc-role` ([#547](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/547)) ([3eca351](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/3eca351e62774c539178e218c89d5706f44bad16))
+
 ## [5.52.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.52.1...v5.52.2) (2025-01-09)
 
 
