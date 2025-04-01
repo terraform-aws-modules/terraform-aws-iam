@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.54.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.54.0...v5.54.1) (2025-04-01)
+
+
+### Bug Fixes
+
+* IAM policy for External-DNS policy ([#561](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/561)) ([35cdb5a](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/35cdb5ac5ed979092e8234fbb084435cc797080b))
+
 ## [5.54.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.53.0...v5.54.0) (2025-03-11)
 
 
