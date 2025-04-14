@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.55.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.54.1...v5.55.0) (2025-04-14)
+
+
+### Features
+
+* Allow removing KMS and SSM permissions from EKS IRSA external secrets policy ([#550](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/550)) ([bfaa70d](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/bfaa70d9b4ed214fdec376d3d6335f2edf9c5227))
+
 ## [5.54.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.54.0...v5.54.1) (2025-04-01)
 
 
