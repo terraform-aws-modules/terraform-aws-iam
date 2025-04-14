@@ -191,26 +191,6 @@ module "external_secrets_irsa_role" {
   tags = local.tags
 }
 
-module "external_secrets_without_kms_or_ssm_irsa_role" {
-  source = "../../modules/iam-role-for-service-accounts-eks"
-
-  role_name                                          = "external-secrets"
-  attach_external_secrets_policy                     = true
-  external_secrets_ssm_parameter_arns                = []
-  external_secrets_secrets_manager_arns              = ["arn:aws:secretsmanager:*:*:secret:bar"]
-  external_secrets_kms_key_arns                      = []
-  external_secrets_secrets_manager_create_permission = false
-
-  oidc_providers = {
-    ex = {
-      provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["default:kubernetes-external-secrets"]
-    }
-  }
-
-  tags = local.tags
-}
-
 module "fsx_lustre_csi_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 

@@ -110,6 +110,7 @@ data "aws_iam_policy_document" "cluster_autoscaler" {
   dynamic "statement" {
     # TODO - remove *_ids at next breaking change
     for_each = toset(coalescelist(var.cluster_autoscaler_cluster_ids, var.cluster_autoscaler_cluster_names))
+
     content {
       actions = [
         "autoscaling:SetDesiredCapacity",
@@ -306,6 +307,7 @@ data "aws_iam_policy_document" "ebs_csi" {
 
   dynamic "statement" {
     for_each = length(var.ebs_csi_kms_cmk_ids) > 0 ? [1] : []
+
     content {
       actions = [
         "kms:CreateGrant",
@@ -325,6 +327,7 @@ data "aws_iam_policy_document" "ebs_csi" {
 
   dynamic "statement" {
     for_each = length(var.ebs_csi_kms_cmk_ids) > 0 ? [1] : []
+
     content {
       actions = [
         "kms:Encrypt",
@@ -455,6 +458,7 @@ data "aws_iam_policy_document" "mountpoint_s3_csi" {
 
   dynamic "statement" {
     for_each = length(var.mountpoint_s3_csi_kms_arns) > 0 ? [1] : []
+
     content {
       actions = [
         "kms:GenerateDataKey",
@@ -578,6 +582,7 @@ data "aws_iam_policy_document" "external_secrets" {
 
   dynamic "statement" {
     for_each = var.external_secrets_secrets_manager_create_permission ? [1] : []
+
     content {
       actions = [
         "secretsmanager:CreateSecret",
@@ -590,9 +595,11 @@ data "aws_iam_policy_document" "external_secrets" {
 
   dynamic "statement" {
     for_each = var.external_secrets_secrets_manager_create_permission ? [1] : []
+
     content {
       actions   = ["secretsmanager:DeleteSecret"]
       resources = var.external_secrets_secrets_manager_arns
+
       condition {
         test     = "StringEquals"
         variable = "secretsmanager:ResourceTag/managed-by"
@@ -640,6 +647,7 @@ data "aws_iam_policy_document" "fsx_lustre_csi" {
   statement {
     actions   = ["iam:CreateServiceLinkedRole"]
     resources = ["*"]
+
     condition {
       test     = "StringLike"
       variable = "iam:AWSServiceName"
@@ -1210,6 +1218,7 @@ data "aws_iam_policy_document" "appmesh_controller" {
       "iam:CreateServiceLinkedRole"
     ]
     resources = ["arn:${local.partition}:iam::*:role/aws-service-role/appmesh.${local.dns_suffix}/AWSServiceRoleForAppMesh"]
+
     condition {
       test     = "StringLike"
       variable = "iam:AWSServiceName"
@@ -1468,6 +1477,7 @@ data "aws_iam_policy_document" "vpc_cni" {
   # arn:${local.partition}:iam::aws:policy/AmazonEKS_CNI_Policy
   dynamic "statement" {
     for_each = var.vpc_cni_enable_ipv4 ? [1] : []
+
     content {
       sid = "IPV4"
       actions = [
@@ -1491,6 +1501,7 @@ data "aws_iam_policy_document" "vpc_cni" {
   # https://docs.aws.amazon.com/eks/latest/userguide/cni-iam-role.html#cni-iam-role-create-ipv6-policy
   dynamic "statement" {
     for_each = var.vpc_cni_enable_ipv6 ? [1] : []
+
     content {
       sid = "IPV6"
       actions = [
@@ -1507,6 +1518,7 @@ data "aws_iam_policy_document" "vpc_cni" {
   # https://docs.aws.amazon.com/eks/latest/userguide/cni-network-policy.html#cni-network-policy-setup
   dynamic "statement" {
     for_each = var.vpc_cni_enable_cloudwatch_logs ? [1] : []
+
     content {
       sid = "CloudWatchLogs"
       actions = [
