@@ -541,6 +541,7 @@ data "aws_iam_policy_document" "external_secrets" {
 
   dynamic "statement" {
     for_each = length(var.external_secrets_ssm_parameter_arns) > 0 ? [1] : []
+
     content {
       actions = [
         "ssm:GetParameter",
@@ -568,6 +569,7 @@ data "aws_iam_policy_document" "external_secrets" {
 
   dynamic "statement" {
     for_each = length(var.external_secrets_kms_key_arns) > 0 ? [1] : []
+
     content {
       actions   = ["kms:Decrypt"]
       resources = var.external_secrets_kms_key_arns
