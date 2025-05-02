@@ -5,15 +5,48 @@
 data "aws_iam_policy_document" "aws_gateway_controller" {
   count = var.create_role && var.attach_aws_gateway_controller_policy ? 1 : 0
 
-  # https://github.com/aws/aws-application-networking-k8s/blob/v0.0.11/examples/recommended-inline-policy.json
+  # https://github.com/aws/aws-application-networking-k8s/blob/v1.1.0/files/controller-installation/recommended-inline-policy.json
   statement {
     actions = [
       "vpc-lattice:*",
-      "iam:CreateServiceLinkedRole",
       "ec2:DescribeVpcs",
       "ec2:DescribeSubnets",
+      "ec2:DescribeTags",
+      "ec2:DescribeSecurityGroups",
+      "logs:CreateLogDelivery",
+      "logs:GetLogDelivery",
+      "logs:DescribeLogGroups",
+      "logs:PutResourcePolicy",
+      "logs:DescribeResourcePolicies",
+      "logs:UpdateLogDelivery",
+      "logs:DeleteLogDelivery",
+      "logs:ListLogDeliveries",
+      "tag:GetResources",
+      "firehose:TagDeliveryStream",
+      "s3:GetBucketPolicy",
+      "s3:PutBucketPolicy"
     ]
     resources = ["*"]
+  }
+
+  statement {
+    actions   = ["iam:CreateServiceLinkedRole"]
+    resources = ["arn:aws:iam::*:role/aws-service-role/vpc-lattice.amazonaws.com/AWSServiceRoleForVpcLattice"]
+    condition {
+      test     = "StringLike"
+      variable = "iam:AWSServiceName"
+      values   = ["vpc-lattice.amazonaws.com"]
+    }
+  }
+
+  statement {
+    actions   = ["iam:CreateServiceLinkedRole"]
+    resources = ["arn:aws:iam::*:role/aws-service-role/delivery.logs.amazonaws.com/AWSServiceRoleForLogDelivery"]
+    condition {
+      test     = "StringLike"
+      variable = "iam:AWSServiceName"
+      values   = ["delivery.logs.amazonaws.com"]
+    }
   }
 }
 
