@@ -214,7 +214,7 @@ module "fsx_openzfs_csi_irsa_role" {
   oidc_providers = {
     ex = {
       provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["kube-system:fsx-csi-controller-sa"]
+      namespace_service_accounts = ["kube-system:fsx-openzfs-csi-controller-sa"]
     }
   }
 }
