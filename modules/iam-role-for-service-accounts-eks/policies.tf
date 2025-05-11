@@ -749,18 +749,18 @@ data "aws_iam_policy_document" "fsx_openzfs_csi" {
 
   statement {
     actions = [
-        "fsx:CreateFileSystem",
-        "fsx:UpdateFileSystem",
-        "fsx:DeleteFileSystem",
-        "fsx:DescribeFileSystems",
-        "fsx:CreateVolume",
-        "fsx:DeleteVolume",
-        "fsx:DescribeVolumes",
-        "fsx:CreateSnapshot",
-        "fsx:DeleteSnapshot",
-        "fsx:DescribeSnapshots",
-        "fsx:TagResource",
-        "fsx:ListTagsForResource"
+      "fsx:CreateFileSystem",
+      "fsx:UpdateFileSystem",
+      "fsx:DeleteFileSystem",
+      "fsx:DescribeFileSystems",
+      "fsx:CreateVolume",
+      "fsx:DeleteVolume",
+      "fsx:DescribeVolumes",
+      "fsx:CreateSnapshot",
+      "fsx:DeleteSnapshot",
+      "fsx:DescribeSnapshots",
+      "fsx:TagResource",
+      "fsx:ListTagsForResource"
     ]
     resources = ["*"]
   }

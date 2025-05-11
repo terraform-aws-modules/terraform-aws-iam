@@ -208,7 +208,7 @@ module "fsx_lustre_csi_irsa_role" {
 module "fsx_openzfs_csi_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
-  role_name                    = "fsx-openzfs-csi"
+  role_name                     = "fsx-openzfs-csi"
   attach_fsx_openzfs_csi_policy = true
 
   oidc_providers = {

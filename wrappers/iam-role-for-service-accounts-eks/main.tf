@@ -39,6 +39,7 @@ module "wrapper" {
   external_secrets_ssm_parameter_arns                             = try(each.value.external_secrets_ssm_parameter_arns, var.defaults.external_secrets_ssm_parameter_arns, ["arn:aws:ssm:*:*:parameter/*"])
   force_detach_policies                                           = try(each.value.force_detach_policies, var.defaults.force_detach_policies, true)
   fsx_lustre_csi_service_role_arns                                = try(each.value.fsx_lustre_csi_service_role_arns, var.defaults.fsx_lustre_csi_service_role_arns, ["arn:aws:iam::*:role/aws-service-role/s3.data-source.lustre.fsx.amazonaws.com/*"])
+  fsx_openzfs_csi_service_role_arns                               = try(each.value.fsx_openzfs_csi_service_role_arns, var.defaults.fsx_openzfs_csi_service_role_arns, ["arn:aws:iam::*:role/aws-service-role/fsx.amazonaws.com/*"])
   karpenter_controller_cluster_id                                 = try(each.value.karpenter_controller_cluster_id, var.defaults.karpenter_controller_cluster_id, "*")
   karpenter_controller_cluster_name                               = try(each.value.karpenter_controller_cluster_name, var.defaults.karpenter_controller_cluster_name, "*")
   karpenter_controller_node_iam_role_arns                         = try(each.value.karpenter_controller_node_iam_role_arns, var.defaults.karpenter_controller_node_iam_role_arns, ["*"])
