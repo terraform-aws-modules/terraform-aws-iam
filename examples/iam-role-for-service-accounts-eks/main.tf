@@ -205,6 +205,20 @@ module "fsx_lustre_csi_irsa_role" {
   }
 }
 
+module "fsx_openzfs_csi_irsa_role" {
+  source = "../../modules/iam-role-for-service-accounts-eks"
+
+  role_name                    = "fsx-openzfs-csi"
+  attach_fsx_openzfs_csi_policy = true
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["kube-system:fsx-csi-controller-sa"]
+    }
+  }
+}
+
 module "karpenter_controller_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
