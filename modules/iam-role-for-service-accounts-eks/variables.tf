@@ -227,6 +227,19 @@ variable "fsx_lustre_csi_service_role_arns" {
   default     = ["arn:aws:iam::*:role/aws-service-role/s3.data-source.lustre.fsx.amazonaws.com/*"]
 }
 
+# FSx OpenZFS CSI
+variable "attach_fsx_openzfs_csi_policy" {
+  description = "Determines whether to attach the FSx for OpenZFS CSI Driver IAM policy to the role"
+  type        = bool
+  default     = false
+}
+
+variable "fsx_openzfs_csi_service_role_arns" {
+  description = "Service role ARNs to allow FSx for OpenZFS CSI create and manage FSX for openzfs service linked roles"
+  type        = list(string)
+  default     = ["arn:aws:iam::*:role/aws-service-role/fsx.amazonaws.com/*"]
+}
+
 # Karpenter controller
 variable "attach_karpenter_controller_policy" {
   description = "Determines whether to attach the Karpenter Controller policy to the role"
