@@ -27,13 +27,7 @@ data "aws_iam_policy_document" "assume_role_with_oidc" {
 
       principals {
         type        = "AWS"
-        identifiers = ["*"]
-      }
-
-      condition {
-        test     = "ArnLike"
-        variable = "aws:PrincipalArn"
-        values   = ["arn:${local.partition}:iam::${data.aws_caller_identity.current.account_id}:role${var.role_path}${local.role_name_condition}"]
+        identifiers = ["arn:${local.partition}:iam::${data.aws_caller_identity.current.account_id}:role${var.role_path}${local.role_name_condition}"]
       }
     }
   }

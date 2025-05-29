@@ -23,13 +23,7 @@ data "aws_iam_policy_document" "assume_role" {
 
       principals {
         type        = "AWS"
-        identifiers = ["*"]
-      }
-
-      condition {
-        test     = "ArnLike"
-        variable = "aws:PrincipalArn"
-        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.role_path}${local.role_name_condition}"]
+        identifiers = ["arn:${local.partition}:iam::${local.account_id}:role${var.role_path}${local.role_name_condition}"]
       }
     }
   }
@@ -94,13 +88,7 @@ data "aws_iam_policy_document" "assume_role_with_mfa" {
 
       principals {
         type        = "AWS"
-        identifiers = ["*"]
-      }
-
-      condition {
-        test     = "ArnLike"
-        variable = "aws:PrincipalArn"
-        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.role_path}${local.role_name_condition}"]
+        identifiers = ["arn:${local.partition}:iam::${local.account_id}:role${var.role_path}${local.role_name_condition}"]
       }
     }
   }
