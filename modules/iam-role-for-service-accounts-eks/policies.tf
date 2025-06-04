@@ -24,28 +24,28 @@ data "aws_iam_policy_document" "aws_gateway_controller" {
       "tag:GetResources",
       "firehose:TagDeliveryStream",
       "s3:GetBucketPolicy",
-      "s3:PutBucketPolicy"
+      "s3:PutBucketPolicy",
     ]
     resources = ["*"]
   }
 
   statement {
     actions   = ["iam:CreateServiceLinkedRole"]
-    resources = ["arn:aws:iam::*:role/aws-service-role/vpc-lattice.amazonaws.com/AWSServiceRoleForVpcLattice"]
+    resources = ["arn:${local.partition}:iam::*:role/aws-service-role/vpc-lattice.${local.dns_suffix}/AWSServiceRoleForVpcLattice"]
     condition {
       test     = "StringLike"
       variable = "iam:AWSServiceName"
-      values   = ["vpc-lattice.amazonaws.com"]
+      values   = ["vpc-lattice.${local.dns_suffix}"]
     }
   }
 
   statement {
     actions   = ["iam:CreateServiceLinkedRole"]
-    resources = ["arn:aws:iam::*:role/aws-service-role/delivery.logs.amazonaws.com/AWSServiceRoleForLogDelivery"]
+    resources = ["arn:${local.partition}:iam::*:role/aws-service-role/delivery.logs.${local.dns_suffix}/AWSServiceRoleForLogDelivery"]
     condition {
       test     = "StringLike"
       variable = "iam:AWSServiceName"
-      values   = ["delivery.logs.amazonaws.com"]
+      values   = ["delivery.logs.${local.dns_suffix}"]
     }
   }
 }
