@@ -671,7 +671,7 @@ data "aws_iam_policy_document" "fsx_lustre_csi" {
     actions = [
       "iam:CreateServiceLinkedRole",
       "iam:AttachRolePolicy",
-      "iam:PutRolePolicy"
+      "iam:PutRolePolicy",
     ]
     resources = var.fsx_lustre_csi_service_role_arns
   }
@@ -718,7 +718,6 @@ resource "aws_iam_role_policy_attachment" "fsx_lustre_csi" {
   policy_arn = aws_iam_policy.fsx_lustre_csi[0].arn
 }
 
-
 ################################################################################
 # FSx for OpenZFS CSI Driver Policy
 ################################################################################
@@ -731,7 +730,7 @@ data "aws_iam_policy_document" "fsx_openzfs_csi" {
     actions = [
       "iam:CreateServiceLinkedRole",
       "iam:AttachRolePolicy",
-      "iam:PutRolePolicy"
+      "iam:PutRolePolicy",
     ]
     resources = var.fsx_openzfs_csi_service_role_arns
   }
@@ -760,7 +759,7 @@ data "aws_iam_policy_document" "fsx_openzfs_csi" {
       "fsx:DeleteSnapshot",
       "fsx:DescribeSnapshots",
       "fsx:TagResource",
-      "fsx:ListTagsForResource"
+      "fsx:ListTagsForResource",
     ]
     resources = ["*"]
   }
