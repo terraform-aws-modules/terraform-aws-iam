@@ -671,7 +671,7 @@ data "aws_iam_policy_document" "fsx_lustre_csi" {
     actions = [
       "iam:CreateServiceLinkedRole",
       "iam:AttachRolePolicy",
-      "iam:PutRolePolicy"
+      "iam:PutRolePolicy",
     ]
     resources = var.fsx_lustre_csi_service_role_arns
   }
@@ -716,6 +716,71 @@ resource "aws_iam_role_policy_attachment" "fsx_lustre_csi" {
 
   role       = aws_iam_role.this[0].name
   policy_arn = aws_iam_policy.fsx_lustre_csi[0].arn
+}
+
+################################################################################
+# FSx for OpenZFS CSI Driver Policy
+################################################################################
+
+# https://github.com/kubernetes-sigs/aws-fsx-openzfs-csi-driver/blob/main/docs/install.md
+data "aws_iam_policy_document" "fsx_openzfs_csi" {
+  count = var.create_role && var.attach_fsx_openzfs_csi_policy ? 1 : 0
+
+  statement {
+    actions = [
+      "iam:CreateServiceLinkedRole",
+      "iam:AttachRolePolicy",
+      "iam:PutRolePolicy",
+    ]
+    resources = var.fsx_openzfs_csi_service_role_arns
+  }
+
+  statement {
+    actions   = ["iam:CreateServiceLinkedRole"]
+    resources = ["*"]
+
+    condition {
+      test     = "StringLike"
+      variable = "iam:AWSServiceName"
+      values   = ["fsx.${local.dns_suffix}"]
+    }
+  }
+
+  statement {
+    actions = [
+      "fsx:CreateFileSystem",
+      "fsx:UpdateFileSystem",
+      "fsx:DeleteFileSystem",
+      "fsx:DescribeFileSystems",
+      "fsx:CreateVolume",
+      "fsx:DeleteVolume",
+      "fsx:DescribeVolumes",
+      "fsx:CreateSnapshot",
+      "fsx:DeleteSnapshot",
+      "fsx:DescribeSnapshots",
+      "fsx:TagResource",
+      "fsx:ListTagsForResource",
+    ]
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_policy" "fsx_openzfs_csi" {
+  count = var.create_role && var.attach_fsx_openzfs_csi_policy ? 1 : 0
+
+  name_prefix = "${var.policy_name_prefix}FSx_OpenZFS_CSI_Policy-"
+  path        = var.role_path
+  description = "Provides permissions to manage FSx OpenZFS volumes via the container storage interface driver"
+  policy      = data.aws_iam_policy_document.fsx_openzfs_csi[0].json
+
+  tags = var.tags
+}
+
+resource "aws_iam_role_policy_attachment" "fsx_openzfs_csi" {
+  count = var.create_role && var.attach_fsx_openzfs_csi_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.fsx_openzfs_csi[0].arn
 }
 
 ################################################################################
