@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.58.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.57.0...v5.58.0) (2025-06-04)
+
+
+### Features
+
+* Add FSx OpenZFS IRSA  ([#565](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/565)) ([51c9e96](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/51c9e9615b3aa56acacba7efccb14efec23afcc6))
+
 ## [5.57.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.56.0...v5.57.0) (2025-06-04)
 
 
