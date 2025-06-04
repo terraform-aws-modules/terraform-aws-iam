@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.57.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.56.0...v5.57.0) (2025-06-04)
+
+
+### Features
+
+* Update IAM policy for AWS Gateway Controller ([#563](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/563)) ([343e5fe](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/343e5fe756d2e9778d3107c798abf58e7d81230f))
+
 ## [5.56.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.55.0...v5.56.0) (2025-06-04)
 
 
