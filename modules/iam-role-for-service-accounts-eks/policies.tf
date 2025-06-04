@@ -50,7 +50,6 @@ data "aws_iam_policy_document" "aws_gateway_controller" {
   }
 }
 
-
 resource "aws_iam_policy" "aws_gateway_controller" {
   count = var.create_role && var.attach_aws_gateway_controller_policy ? 1 : 0
 
@@ -892,6 +891,7 @@ data "aws_iam_policy_document" "load_balancer_controller" {
       "ec2:DescribeCoipPools",
       "ec2:GetSecurityGroupsForVpc",
       "ec2:DescribeIpamPools",
+      "ec2:DescribeRouteTables",
       "elasticloadbalancing:DescribeLoadBalancers",
       "elasticloadbalancing:DescribeLoadBalancerAttributes",
       "elasticloadbalancing:DescribeListeners",
@@ -936,6 +936,12 @@ data "aws_iam_policy_document" "load_balancer_controller" {
     actions = [
       "ec2:AuthorizeSecurityGroupIngress",
       "ec2:RevokeSecurityGroupIngress",
+    ]
+    resources = ["*"]
+  }
+
+  statement {
+    actions = [
       "ec2:CreateSecurityGroup",
     ]
     resources = ["*"]
@@ -995,7 +1001,6 @@ data "aws_iam_policy_document" "load_balancer_controller" {
 
   statement {
     actions = [
-      "elasticloadbalancing:AddTags",
       "elasticloadbalancing:CreateLoadBalancer",
       "elasticloadbalancing:CreateTargetGroup",
     ]
@@ -1010,7 +1015,6 @@ data "aws_iam_policy_document" "load_balancer_controller" {
 
   statement {
     actions = [
-      "elasticloadbalancing:AddTags",
       "elasticloadbalancing:CreateListener",
       "elasticloadbalancing:DeleteListener",
       "elasticloadbalancing:CreateRule",

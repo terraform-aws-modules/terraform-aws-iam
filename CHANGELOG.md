@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.56.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.55.0...v5.56.0) (2025-06-04)
+
+
+### Features
+
+* Update AWS Load Balancer controller policy to match v2.13 of the upstream project ([#573](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/573)) ([4ce604e](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/4ce604eb558f98df943862818a156af65e5ceca6))
+
 ## [5.55.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.54.1...v5.55.0) (2025-04-14)
 
 
