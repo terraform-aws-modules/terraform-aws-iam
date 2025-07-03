@@ -217,7 +217,7 @@ data "aws_iam_policy_document" "ebs_csi" {
       variable = "ec2:CreateAction"
       values = [
         "CreateVolume",
-        "CreateSnapshot",
+        "CreateSnapshot"
       ]
     }
   }
