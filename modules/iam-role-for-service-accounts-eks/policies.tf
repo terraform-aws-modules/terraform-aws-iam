@@ -211,15 +211,6 @@ data "aws_iam_policy_document" "ebs_csi" {
       "arn:${local.partition}:ec2:*:*:volume/*",
       "arn:${local.partition}:ec2:*:*:snapshot/*",
     ]
-
-    condition {
-      test     = "StringEquals"
-      variable = "ec2:CreateAction"
-      values = [
-        "CreateVolume",
-        "CreateSnapshot"
-      ]
-    }
   }
 
   statement {
