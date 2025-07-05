@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.59.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.58.0...v5.59.0) (2025-07-05)
+
+
+### Features
+
+* Update EBS CSI IAM policy to match current upstream project ([#575](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/575)) ([49efa8c](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/49efa8cfe2d5af39c6c090450da4a667fe020630))
+
 ## [5.58.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.57.0...v5.58.0) (2025-06-04)
 
 
