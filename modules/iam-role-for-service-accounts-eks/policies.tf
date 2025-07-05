@@ -188,25 +188,49 @@ data "aws_iam_policy_document" "ebs_csi" {
 
   statement {
     actions = [
-      "ec2:CreateSnapshot",
-      "ec2:AttachVolume",
-      "ec2:DetachVolume",
-      "ec2:ModifyVolume",
       "ec2:DescribeAvailabilityZones",
       "ec2:DescribeInstances",
       "ec2:DescribeSnapshots",
       "ec2:DescribeTags",
       "ec2:DescribeVolumes",
       "ec2:DescribeVolumesModifications",
-      "ec2:EnableFastSnapshotRestores"
     ]
 
     resources = ["*"]
   }
 
   statement {
-    actions = ["ec2:CreateTags"]
+    actions = [
+      "ec2:CreateSnapshot",
+      "ec2:ModifyVolume",
+    ]
 
+    resources = ["arn:${local.partition}:ec2:*:*:volume/*"]
+  }
+
+  statement {
+    actions = [
+      "ec2:AttachVolume",
+      "ec2:DetachVolume",
+    ]
+
+    resources = [
+      "arn:${local.partition}:ec2:*:*:volume/*",
+      "arn:${local.partition}:ec2:*:*:instance/*",
+    ]
+  }
+
+  statement {
+    actions = [
+      "ec2:CreateVolume",
+      "ec2:EnableFastSnapshotRestores",
+    ]
+
+    resources = ["arn:${local.partition}:ec2:*:*:snapshot/*"]
+  }
+
+  statement {
+    actions = ["ec2:CreateTags"]
     resources = [
       "arn:${local.partition}:ec2:*:*:volume/*",
       "arn:${local.partition}:ec2:*:*:snapshot/*",
@@ -224,7 +248,6 @@ data "aws_iam_policy_document" "ebs_csi" {
 
   statement {
     actions = ["ec2:DeleteTags"]
-
     resources = [
       "arn:${local.partition}:ec2:*:*:volume/*",
       "arn:${local.partition}:ec2:*:*:snapshot/*",
@@ -238,9 +261,7 @@ data "aws_iam_policy_document" "ebs_csi" {
     condition {
       test     = "StringLike"
       variable = "aws:RequestTag/ebs.csi.aws.com/cluster"
-      values = [
-        true
-      ]
+      values   = ["true"]
     }
   }
 
@@ -256,57 +277,30 @@ data "aws_iam_policy_document" "ebs_csi" {
   }
 
   statement {
-    actions   = ["ec2:CreateVolume"]
-    resources = ["*"]
-
-    condition {
-      test     = "StringLike"
-      variable = "aws:RequestTag/kubernetes.io/cluster/*"
-      values   = ["owned"]
-    }
-  }
-
-  statement {
-    actions   = ["ec2:CreateVolume"]
-    resources = ["arn:${local.partition}:ec2:*:*:snapshot/*"]
-  }
-
-  statement {
     actions   = ["ec2:DeleteVolume"]
-    resources = ["*"]
+    resources = ["arn:${local.partition}:ec2:*:*:volume/*"]
 
     condition {
       test     = "StringLike"
-      variable = "ec2:ResourceTag/ebs.csi.aws.com/cluster"
-      values   = [true]
+      variable = "aws:ResourceTag/ebs.csi.aws.com/cluster"
+      values   = ["true"]
     }
   }
 
   statement {
     actions   = ["ec2:DeleteVolume"]
-    resources = ["*"]
+    resources = ["arn:${local.partition}:ec2:*:*:volume/*"]
 
     condition {
       test     = "StringLike"
-      variable = "ec2:ResourceTag/CSIVolumeName"
+      variable = "aws:ResourceTag/CSIVolumeName"
       values   = ["*"]
     }
   }
 
   statement {
     actions   = ["ec2:DeleteVolume"]
-    resources = ["*"]
-
-    condition {
-      test     = "StringLike"
-      variable = "ec2:ResourceTag/kubernetes.io/cluster/*"
-      values   = ["owned"]
-    }
-  }
-
-  statement {
-    actions   = ["ec2:DeleteVolume"]
-    resources = ["*"]
+    resources = ["arn:${local.partition}:ec2:*:*:volume/*"]
 
     condition {
       test     = "StringLike"
@@ -316,24 +310,46 @@ data "aws_iam_policy_document" "ebs_csi" {
   }
 
   statement {
-    actions   = ["ec2:DeleteSnapshot"]
-    resources = ["*"]
+    actions   = ["ec2:CreateSnapshot"]
+    resources = ["arn:${local.partition}:ec2:*:*:snapshot/*"]
 
     condition {
       test     = "StringLike"
-      variable = "ec2:ResourceTag/CSIVolumeSnapshotName"
+      variable = "aws:RequestTag/CSIVolumeSnapshotName"
+      values   = ["*"]
+    }
+  }
+
+  statement {
+    actions   = ["ec2:CreateSnapshot"]
+    resources = ["arn:${local.partition}:ec2:*:*:snapshot/*"]
+
+    condition {
+      test     = "StringLike"
+      variable = "aws:RequestTag/ebs.csi.aws.com/cluster"
+      values   = ["true"]
+    }
+  }
+
+  statement {
+    actions   = ["ec2:DeleteSnapshot"]
+    resources = ["arn:${local.partition}:ec2:*:*:snapshot/*"]
+
+    condition {
+      test     = "StringLike"
+      variable = "aws:ResourceTag/CSIVolumeSnapshotName"
       values   = ["*"]
     }
   }
 
   statement {
     actions   = ["ec2:DeleteSnapshot"]
-    resources = ["*"]
+    resources = ["arn:${local.partition}:ec2:*:*:snapshot/*"]
 
     condition {
       test     = "StringLike"
-      variable = "ec2:ResourceTag/ebs.csi.aws.com/cluster"
-      values   = [true]
+      variable = "aws:ResourceTag/ebs.csi.aws.com/cluster"
+      values   = ["true"]
     }
   }
 
