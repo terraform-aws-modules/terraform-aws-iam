@@ -337,9 +337,10 @@ module "node_termination_handler_irsa_role" {
 module "velero_irsa_role" {
   source = "../../modules/iam-role-for-service-accounts-eks"
 
-  role_name             = "velero"
-  attach_velero_policy  = true
-  velero_s3_bucket_arns = ["arn:aws:s3:::velero-backups"]
+  role_name              = "velero"
+  attach_velero_policy   = true
+  velero_s3_bucket_arns  = ["arn:aws:s3:::velero-backups"]
+  velero_s3_kms_key_arns = ["arn:aws:kms:eu-west-1:123456789012:key/abcd1234-12ab-34cd-56ef-1234567890ab"]
 
   oidc_providers = {
     ex = {
