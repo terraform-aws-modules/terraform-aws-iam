@@ -357,6 +357,12 @@ variable "velero_s3_bucket_arns" {
   default     = ["*"]
 }
 
+variable "velero_s3_kms_key_arns" {
+  description = "List of KMS Key ARNs that Velero needs access to in order to encrypt backups"
+  type        = list(string)
+  default     = []
+}
+
 # VPC CNI
 variable "attach_vpc_cni_policy" {
   description = "Determines whether to attach the VPC CNI IAM policy to the role"

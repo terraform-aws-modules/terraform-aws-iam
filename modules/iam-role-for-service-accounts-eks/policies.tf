@@ -1565,6 +1565,22 @@ data "aws_iam_policy_document" "velero" {
     ]
     resources = var.velero_s3_bucket_arns
   }
+
+  dynamic "statement" {
+    for_each = length(var.velero_s3_kms_key_arns) > 0 ? [1] : []
+
+    content {
+      sid = "KMSReadWrite"
+      actions = [
+        "kms:Encrypt",
+        "kms:Decrypt",
+        "kms:ReEncrypt*",
+        "kms:GenerateDataKey*",
+        "kms:DescribeKey"
+      ]
+      resources = var.velero_kms_key_arns
+    }
+  }
 }
 
 resource "aws_iam_policy" "velero" {
