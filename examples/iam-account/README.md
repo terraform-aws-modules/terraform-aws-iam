@@ -1,4 +1,4 @@
-# IAM account example
+# AWS IAM Account Example
 
 Configuration in this directory sets [AWS account alias](https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html) (also known as Console Account alias) and configures password policy.
 

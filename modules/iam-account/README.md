@@ -1,12 +1,31 @@
-# iam-account
+# AWS IAM Account Terraform Module
 
-Manage IAM account alias and password policy.
+Creates an account policy and account alias. Module instantiation is once per account.
+
+## Usage
+
+```hcl
+module "iam_account" {
+  source  = "terraform-aws-modules/iam/aws//modules/iam-account"
+
+  account_alias = "awesome-company"
+
+  max_password_age               = 90
+  minimum_password_length        = 24
+  require_uppercase_characters   = true
+  require_lowercase_characters   = true
+  require_numbers                = true
+  require_symbols                = true
+  password_reuse_prevention      = 3
+  allow_users_to_change_password = true
+}
+```
 
 ## Notes
 
-* If IAM account alias was previously set (either via AWS console or during the creation of an account from AWS Organizations) you will see this error:
+If IAM account alias was previously set (either via AWS console or during the creation of an account from AWS Organizations) you will see this error:
 ```
-* aws_iam_account_alias.this: Error creating account alias with name my-account-alias
+aws_iam_account_alias.this: Error creating account alias with name my-account-alias
 ```
 
 If you want to manage IAM alias using Terraform (otherwise why are you reading this?) you need to import this resource like this:
@@ -73,3 +92,7 @@ No modules.
 | <a name="output_caller_identity_user_id"></a> [caller\_identity\_user\_id](#output\_caller\_identity\_user\_id) | The unique identifier of the calling entity |
 | <a name="output_iam_account_password_policy_expire_passwords"></a> [iam\_account\_password\_policy\_expire\_passwords](#output\_iam\_account\_password\_policy\_expire\_passwords) | Indicates whether passwords in the account expire. Returns true if max\_password\_age contains a value greater than 0. Returns false if it is 0 or not present. |
 <!-- END_TF_DOCS -->
+
+## License
+
+Apache-2.0 Licensed. See [LICENSE](https://github.com/terraform-aws-modules/terraform-aws-iam/blob/master/LICENSE).
