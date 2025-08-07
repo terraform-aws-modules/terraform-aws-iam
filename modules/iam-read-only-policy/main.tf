@@ -5,12 +5,11 @@
 resource "aws_iam_policy" "policy" {
   count = var.create && var.create_policy ? 1 : 0
 
-  name        = var.name
-  name_prefix = var.name_prefix
+  name        = var.use_name_prefix ? null : var.name
+  name_prefix = var.use_name_prefix ? "${var.name}-" : null
   path        = var.path
   description = var.description
-
-  policy = data.aws_iam_policy_document.this[0].json
+  policy      = data.aws_iam_policy_document.this[0].json
 
   tags = var.tags
 }

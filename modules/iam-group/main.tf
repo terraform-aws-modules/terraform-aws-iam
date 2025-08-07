@@ -1,11 +1,16 @@
-data "aws_partition" "current" {}
-data "aws_caller_identity" "current" {}
+data "aws_partition" "current" {
+  count = var.create ? 1 : 0
+}
+data "aws_caller_identity" "current" {
+  count = var.create ? 1 : 0
+}
 
 locals {
-  users_account_id = coalesce(var.users_account_id, data.aws_caller_identity.current.account_id)
+  partition        = try(data.aws_partition.current[0].partition, "")
+  users_account_id = try(coalesce(var.users_account_id, data.aws_caller_identity.current[0].account_id), "")
 
   user_resources = [for pattern in ["user/$${aws:username}", "user/*/$${aws:username}"] :
-    "arn:${data.aws_partition.current.partition}:iam::${local.users_account_id}:${pattern}"
+    "arn:${local.partition}:iam::${local.users_account_id}:${pattern}"
   ]
 }
 
@@ -34,6 +39,8 @@ resource "aws_iam_group_membership" "this" {
 
 locals {
   create_policy = var.create && var.create_policy && (var.enable_self_management_permissions || length(var.permission_statements) > 0)
+
+  policy_name = try(coalesce(var.policy_name, var.name), "")
 }
 
 # Allows MFA-authenticated IAM users to manage their own credentials on the My security credentials page
@@ -135,7 +142,7 @@ data "aws_iam_policy_document" "this" {
     content {
       sid       = "ManageOwnVirtualMFADevice"
       actions   = ["iam:CreateVirtualMFADevice"]
-      resources = ["arn:${data.aws_partition.current.partition}:iam::${local.users_account_id}:mfa/*"]
+      resources = ["arn:${local.partition}:iam::${local.users_account_id}:mfa/*"]
     }
   }
 
@@ -180,18 +187,18 @@ data "aws_iam_policy_document" "this" {
   }
 
   dynamic "statement" {
-    for_each = var.permission_statements
+    for_each = var.permission_statements != null ? var.permission_statements : []
 
     content {
-      sid           = try(statement.value.sid, null)
-      actions       = try(statement.value.actions, null)
-      not_actions   = try(statement.value.not_actions, null)
-      effect        = try(statement.value.effect, null)
-      resources     = try(statement.value.resources, null)
-      not_resources = try(statement.value.not_resources, null)
+      sid           = statement.value.sid
+      actions       = statement.value.actions
+      not_actions   = statement.value.not_actions
+      effect        = statement.value.effect
+      resources     = statement.value.resources
+      not_resources = statement.value.not_resources
 
       dynamic "principals" {
-        for_each = try(statement.value.principals, [])
+        for_each = statement.value.principals != null ? statement.value.principals : []
 
         content {
           type        = principals.value.type
@@ -200,7 +207,7 @@ data "aws_iam_policy_document" "this" {
       }
 
       dynamic "not_principals" {
-        for_each = try(statement.value.not_principals, [])
+        for_each = statement.value.not_principals != null ? statement.value.not_principals : []
 
         content {
           type        = not_principals.value.type
@@ -209,7 +216,7 @@ data "aws_iam_policy_document" "this" {
       }
 
       dynamic "condition" {
-        for_each = try(statement.value.conditions, [])
+        for_each = statement.value.condition != null ? statement.value.condition : []
 
         content {
           test     = condition.value.test
@@ -224,8 +231,9 @@ data "aws_iam_policy_document" "this" {
 resource "aws_iam_policy" "this" {
   count = local.create_policy ? 1 : 0
 
-  name_prefix = try(coalesce(var.policy_name_prefix, "${var.name}-"), null)
   description = var.policy_description
+  name        = var.policy_use_name_prefix ? null : local.policy_name
+  name_prefix = var.policy_use_name_prefix ? "${local.policy_name}-" : null
   path        = coalesce(var.policy_path, var.path, "/")
   policy      = data.aws_iam_policy_document.this[0].json
 

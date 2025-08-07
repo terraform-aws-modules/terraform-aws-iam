@@ -12,8 +12,8 @@ module "wrapper" {
   create_policy                = try(each.value.create_policy, var.defaults.create_policy, true)
   description                  = try(each.value.description, var.defaults.description, "IAM Policy")
   name                         = try(each.value.name, var.defaults.name, null)
-  name_prefix                  = try(each.value.name_prefix, var.defaults.name_prefix, null)
   path                         = try(each.value.path, var.defaults.path, "/")
   tags                         = try(each.value.tags, var.defaults.tags, {})
+  use_name_prefix              = try(each.value.use_name_prefix, var.defaults.use_name_prefix, true)
   web_console_services         = try(each.value.web_console_services, var.defaults.web_console_services, ["resource-groups", "tag", "health", "ce"])
 }

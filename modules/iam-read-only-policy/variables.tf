@@ -26,10 +26,10 @@ variable "name" {
   default     = null
 }
 
-variable "name_prefix" {
-  description = "Name prefix to use on IAM policy created"
-  type        = string
-  default     = null
+variable "use_name_prefix" {
+  description = "Determines whether the IAM policy name (`name`) is used as a prefix"
+  type        = bool
+  default     = true
 }
 
 variable "path" {

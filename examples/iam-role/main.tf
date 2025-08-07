@@ -23,8 +23,6 @@ module "iam_role_instance_profile" {
 
   name = "${local.name}-instance-profile"
 
-  # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
-  allow_self_assume_role  = true
   create_instance_profile = true
 
   assume_role_policy_statements = [

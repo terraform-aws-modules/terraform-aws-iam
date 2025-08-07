@@ -1,38 +1,9 @@
-data "aws_caller_identity" "current" {}
-data "aws_partition" "current" {}
-
-locals {
-  name_condition = var.name != null ? var.name : "${var.name_prefix}*"
-}
-
 ################################################################################
 # IAM Role
 ################################################################################
 
 data "aws_iam_policy_document" "this" {
   count = var.create ? 1 : 0
-
-  dynamic "statement" {
-    # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
-    for_each = var.allow_self_assume_role ? [1] : []
-
-    content {
-      sid     = "ExplicitSelfRoleAssumption"
-      effect  = "Allow"
-      actions = ["sts:AssumeRole"]
-
-      principals {
-        type        = "AWS"
-        identifiers = ["*"]
-      }
-
-      condition {
-        test     = "ArnLike"
-        variable = "aws:PrincipalArn"
-        values   = ["arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:role${var.path}${local.name_condition}"]
-      }
-    }
-  }
 
   statement {
     effect  = "Allow"
@@ -51,18 +22,18 @@ data "aws_iam_policy_document" "this" {
   }
 
   dynamic "statement" {
-    for_each = var.assume_role_policy_statements
+    for_each = var.assume_role_policy_statements != null ? var.assume_role_policy_statements : []
 
     content {
-      sid           = try(statement.value.sid, null)
-      actions       = try(statement.value.actions, ["sts:AssumeRole"])
-      not_actions   = try(statement.value.not_actions, null)
-      effect        = try(statement.value.effect, null)
-      resources     = try(statement.value.resources, null)
-      not_resources = try(statement.value.not_resources, null)
+      sid           = statement.value.sid
+      actions       = statement.value.actions
+      not_actions   = statement.value.not_actions
+      effect        = statement.value.effect
+      resources     = statement.value.resources
+      not_resources = statement.value.not_resources
 
       dynamic "principals" {
-        for_each = try(statement.value.principals, [])
+        for_each = statement.value.principals != null ? statement.value.principals : []
 
         content {
           type        = principals.value.type
@@ -71,7 +42,7 @@ data "aws_iam_policy_document" "this" {
       }
 
       dynamic "not_principals" {
-        for_each = try(statement.value.not_principals, [])
+        for_each = statement.value.not_principals != null ? statement.value.not_principals : []
 
         content {
           type        = not_principals.value.type
@@ -80,7 +51,7 @@ data "aws_iam_policy_document" "this" {
       }
 
       dynamic "condition" {
-        for_each = try(statement.value.conditions, [])
+        for_each = statement.value.condition != null ? statement.value.condition : []
 
         content {
           test     = condition.value.test
@@ -95,8 +66,8 @@ data "aws_iam_policy_document" "this" {
 resource "aws_iam_role" "this" {
   count = var.create ? 1 : 0
 
-  name        = var.name
-  name_prefix = var.name_prefix
+  name        = var.use_name_prefix ? null : var.name
+  name_prefix = var.use_name_prefix ? "${var.name}-" : null
   path        = var.path
   description = var.description
 

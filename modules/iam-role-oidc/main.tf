@@ -1,15 +1,17 @@
-data "aws_caller_identity" "current" {}
-data "aws_partition" "current" {}
+data "aws_caller_identity" "current" {
+  count = var.create ? 1 : 0
+}
+data "aws_partition" "current" {
+  count = var.create ? 1 : 0
+}
 
 locals {
-  account_id = data.aws_caller_identity.current.account_id
-  partition  = data.aws_partition.current.partition
+  account_id = try(data.aws_caller_identity.current[0].account_id, "")
+  partition  = try(data.aws_partition.current[0].partition, "")
 
   oidc_providers     = [for url in var.oidc_provider_urls : replace(url, "https://", "")]
   github_provider    = coalesce(one(local.oidc_providers), "token.actions.githubusercontent.com")
   bitbucket_provider = one(local.oidc_providers)
-
-  name_condition = var.name != null ? var.name : "${var.name_prefix}*"
 }
 
 ################################################################################
@@ -18,28 +20,6 @@ locals {
 
 data "aws_iam_policy_document" "this" {
   count = var.create ? 1 : 0
-
-  dynamic "statement" {
-    # https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/
-    for_each = var.allow_self_assume_role ? [1] : []
-
-    content {
-      sid     = "ExplicitSelfRoleAssumption"
-      effect  = "Allow"
-      actions = ["sts:AssumeRole"]
-
-      principals {
-        type        = "AWS"
-        identifiers = ["*"]
-      }
-
-      condition {
-        test     = "ArnLike"
-        variable = "aws:PrincipalArn"
-        values   = ["arn:${local.partition}:iam::${local.account_id}:role${var.path}${local.name_condition}"]
-      }
-    }
-  }
 
   # Generic OIDC
   dynamic "statement" {
@@ -156,18 +136,18 @@ data "aws_iam_policy_document" "this" {
 
   # Generic statements
   dynamic "statement" {
-    for_each = var.assume_role_policy_statements
+    for_each = var.assume_role_policy_statements != null ? var.assume_role_policy_statements : []
 
     content {
-      sid           = try(statement.value.sid, null)
-      actions       = try(statement.value.actions, ["sts:AssumeRole"])
-      not_actions   = try(statement.value.not_actions, null)
-      effect        = try(statement.value.effect, null)
-      resources     = try(statement.value.resources, null)
-      not_resources = try(statement.value.not_resources, null)
+      sid           = statement.value.sid
+      actions       = statement.value.actions
+      not_actions   = statement.value.not_actions
+      effect        = statement.value.effect
+      resources     = statement.value.resources
+      not_resources = statement.value.not_resources
 
       dynamic "principals" {
-        for_each = try(statement.value.principals, [])
+        for_each = statement.value.principals != null ? statement.value.principals : []
 
         content {
           type        = principals.value.type
@@ -176,7 +156,7 @@ data "aws_iam_policy_document" "this" {
       }
 
       dynamic "not_principals" {
-        for_each = try(statement.value.not_principals, [])
+        for_each = statement.value.not_principals != null ? statement.value.not_principals : []
 
         content {
           type        = not_principals.value.type
@@ -185,7 +165,7 @@ data "aws_iam_policy_document" "this" {
       }
 
       dynamic "condition" {
-        for_each = try(statement.value.conditions, [])
+        for_each = statement.value.condition != null ? statement.value.condition : []
 
         content {
           test     = condition.value.test
@@ -200,8 +180,8 @@ data "aws_iam_policy_document" "this" {
 resource "aws_iam_role" "this" {
   count = var.create ? 1 : 0
 
-  name        = var.name
-  name_prefix = var.name_prefix
+  name        = var.use_name_prefix ? null : var.name
+  name_prefix = var.use_name_prefix ? "${var.name}-" : null
   path        = var.path
   description = var.description
 

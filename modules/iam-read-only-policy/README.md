@@ -61,9 +61,9 @@ No modules.
 | <a name="input_create_policy"></a> [create\_policy](#input\_create\_policy) | Controls if IAM policy should be created. Set to `false` to generate the policy JSON without creating the policy itself | `bool` | `true` | no |
 | <a name="input_description"></a> [description](#input\_description) | The description of the policy | `string` | `"IAM Policy"` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name to use on IAM policy created | `string` | `null` | no |
-| <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | Name prefix to use on IAM policy created | `string` | `null` | no |
 | <a name="input_path"></a> [path](#input\_path) | Path of IAM policy | `string` | `"/"` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to all resources | `map(string)` | `{}` | no |
+| <a name="input_use_name_prefix"></a> [use\_name\_prefix](#input\_use\_name\_prefix) | Determines whether the IAM policy name (`name`) is used as a prefix | `bool` | `true` | no |
 | <a name="input_web_console_services"></a> [web\_console\_services](#input\_web\_console\_services) | List of web console services to allow | `list(string)` | <pre>[<br/>  "resource-groups",<br/>  "tag",<br/>  "health",<br/>  "ce"<br/>]</pre> | no |
 
 ## Outputs

@@ -20,10 +20,10 @@ variable "name" {
   default     = null
 }
 
-variable "name_prefix" {
-  description = "Name prefix to use on IAM role created"
-  type        = string
-  default     = null
+variable "use_name_prefix" {
+  description = "Determines whether the IAM role name (`name`) is used as a prefix"
+  type        = bool
+  default     = true
 }
 
 variable "path" {
@@ -50,16 +50,30 @@ variable "permissions_boundary" {
   default     = null
 }
 
-variable "allow_self_assume_role" {
-  description = "Determines whether to allow the role to be [assume itself](https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/)"
-  type        = bool
-  default     = false
-}
-
 variable "assume_role_policy_statements" {
   description = "List of IAM policy [statements](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#statement) for for trusted assume role policy"
-  type        = any
-  default     = []
+  type = list(object({
+    sid           = optional(string)
+    actions       = optional(list(string))
+    not_actions   = optional(list(string))
+    effect        = optional(string)
+    resources     = optional(list(string))
+    not_resources = optional(list(string))
+    principals = optional(list(object({
+      type        = string
+      identifiers = list(string)
+    })))
+    not_principals = optional(list(object({
+      type        = string
+      identifiers = list(string)
+    })))
+    condition = optional(list(object({
+      test     = string
+      values   = list(string)
+      variable = string
+    })))
+  }))
+  default = null
 }
 
 variable "policies" {

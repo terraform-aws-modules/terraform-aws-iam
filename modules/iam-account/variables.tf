@@ -1,13 +1,21 @@
-variable "get_caller_identity" {
-  description = "Whether to get AWS account ID, User ID, and ARN in which Terraform is authorized"
+variable "create" {
+  description = "Determines whether resources will be created (affects all resources)"
   type        = bool
   default     = true
 }
+
+################################################################################
+# Alias
+################################################################################
 
 variable "account_alias" {
   description = "AWS IAM account alias for this account"
   type        = string
 }
+
+################################################################################
+# Password Policy
+################################################################################
 
 variable "create_account_password_policy" {
   description = "Whether to create AWS IAM account password policy"
@@ -16,7 +24,7 @@ variable "create_account_password_policy" {
 }
 
 variable "max_password_age" {
-  description = "The number of days that an user password is valid."
+  description = "The number of days that an user password is valid"
   type        = number
   default     = 0
 }

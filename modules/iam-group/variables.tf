@@ -56,14 +56,40 @@ variable "enable_mfa_enforcment" {
 
 variable "permission_statements" {
   description = "List of IAM policy [statements](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#statement) for the policy"
-  type        = any
-  default     = []
+  type = list(object({
+    sid           = optional(string)
+    actions       = optional(list(string))
+    not_actions   = optional(list(string))
+    effect        = optional(string)
+    resources     = optional(list(string))
+    not_resources = optional(list(string))
+    principals = optional(list(object({
+      type        = string
+      identifiers = list(string)
+    })))
+    not_principals = optional(list(object({
+      type        = string
+      identifiers = list(string)
+    })))
+    condition = optional(list(object({
+      test     = string
+      values   = list(string)
+      variable = string
+    })))
+  }))
+  default = null
 }
 
-variable "policy_name_prefix" {
-  description = "Name prefix for IAM policy"
+variable "policy_name" {
+  description = "Name to use on IAM policy created"
   type        = string
   default     = null
+}
+
+variable "policy_use_name_prefix" {
+  description = "Determines whether the IAM policy name (`policy_name`) is used as a prefix"
+  type        = bool
+  default     = true
 }
 
 variable "policy_description" {
