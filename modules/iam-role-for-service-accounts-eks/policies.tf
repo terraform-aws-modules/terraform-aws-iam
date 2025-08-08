@@ -598,6 +598,7 @@ data "aws_iam_policy_document" "external_secrets" {
       actions = [
         "ssm:GetParameter",
         "ssm:GetParameters",
+        "ssm:GetParametersByPath"
       ]
 
       resources = var.external_secrets_ssm_parameter_arns
