@@ -18,7 +18,7 @@ resource "aws_iam_group_membership" "this" {
 }
 
 ################################
-# IAM group policy attachements
+# IAM group policy attachments
 ################################
 resource "aws_iam_group_policy_attachment" "iam_self_management" {
   count = var.attach_iam_self_management_policy ? 1 : 0

@@ -209,7 +209,7 @@ variable "external_secrets_kms_key_arns" {
 }
 
 variable "external_secrets_secrets_manager_create_permission" {
-  description = "Determins whether External Secrets may use secretsmanager:CreateSecret"
+  description = "Determines whether External Secrets may use secretsmanager:CreateSecret"
   type        = bool
   default     = false
 }
