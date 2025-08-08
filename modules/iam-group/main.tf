@@ -1,6 +1,7 @@
 data "aws_partition" "current" {
   count = var.create ? 1 : 0
 }
+
 data "aws_caller_identity" "current" {
   count = var.create ? 1 : 0
 }
@@ -187,10 +188,10 @@ data "aws_iam_policy_document" "this" {
   }
 
   dynamic "statement" {
-    for_each = var.permission_statements != null ? var.permission_statements : []
+    for_each = var.permission_statements != null ? var.permission_statements : {}
 
     content {
-      sid           = statement.value.sid
+      sid           = try(coalesce(statement.value.sid, statement.key))
       actions       = statement.value.actions
       not_actions   = statement.value.not_actions
       effect        = statement.value.effect

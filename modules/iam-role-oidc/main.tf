@@ -136,10 +136,10 @@ data "aws_iam_policy_document" "this" {
 
   # Generic statements
   dynamic "statement" {
-    for_each = var.assume_role_policy_statements != null ? var.assume_role_policy_statements : []
+    for_each = var.assume_role_policy_statements != null ? var.assume_role_policy_statements : {}
 
     content {
-      sid           = statement.value.sid
+      sid           = try(coalesce(statement.value.sid, statement.key))
       actions       = statement.value.actions
       not_actions   = statement.value.not_actions
       effect        = statement.value.effect

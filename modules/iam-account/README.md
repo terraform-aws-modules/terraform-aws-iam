@@ -88,9 +88,6 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_caller_identity_account_id"></a> [caller\_identity\_account\_id](#output\_caller\_identity\_account\_id) | The AWS Account ID number of the account that owns or contains the calling entity |
-| <a name="output_caller_identity_arn"></a> [caller\_identity\_arn](#output\_caller\_identity\_arn) | The AWS ARN associated with the calling entity |
-| <a name="output_caller_identity_user_id"></a> [caller\_identity\_user\_id](#output\_caller\_identity\_user\_id) | The unique identifier of the calling entity |
 | <a name="output_iam_account_password_policy_expire_passwords"></a> [iam\_account\_password\_policy\_expire\_passwords](#output\_iam\_account\_password\_policy\_expire\_passwords) | Indicates whether passwords in the account expire. Returns true if max\_password\_age contains a value greater than 0. Returns false if it is 0 or not present |
 <!-- END_TF_DOCS -->
 

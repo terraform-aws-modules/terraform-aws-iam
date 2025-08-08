@@ -38,40 +38,40 @@ output "instance_profile_iam_instance_profile_unique_id" {
 }
 
 ################################################################################
-# IAM Role - Conditions
+# IAM Role - Condition
 ################################################################################
 
-output "conditions_iam_role_name" {
+output "condition_iam_role_name" {
   description = "The name of the IAM role"
-  value       = module.iam_role_conditions.name
+  value       = module.iam_role_condition.name
 }
 
-output "conditions_iam_role_arn" {
+output "condition_iam_role_arn" {
   description = "The Amazon Resource Name (ARN) specifying the IAM role"
-  value       = module.iam_role_conditions.arn
+  value       = module.iam_role_condition.arn
 }
 
-output "conditions_iam_role_unique_id" {
+output "condition_iam_role_unique_id" {
   description = "Stable and unique string identifying the IAM role"
-  value       = module.iam_role_conditions.unique_id
+  value       = module.iam_role_condition.unique_id
 }
 
-output "conditions_iam_instance_profile_arn" {
+output "condition_iam_instance_profile_arn" {
   description = "ARN assigned by AWS to the instance profile"
-  value       = module.iam_role_conditions.instance_profile_arn
+  value       = module.iam_role_condition.instance_profile_arn
 }
 
-output "conditions_iam_instance_profile_id" {
+output "condition_iam_instance_profile_id" {
   description = "Instance profile's ID"
-  value       = module.iam_role_conditions.instance_profile_id
+  value       = module.iam_role_condition.instance_profile_id
 }
 
-output "conditions_iam_instance_profile_name" {
+output "condition_iam_instance_profile_name" {
   description = "Name of IAM instance profile"
-  value       = module.iam_role_conditions.instance_profile_name
+  value       = module.iam_role_condition.instance_profile_name
 }
 
-output "conditions_iam_instance_profile_unique_id" {
+output "condition_iam_instance_profile_unique_id" {
   description = "Stable and unique string identifying the IAM instance profile"
-  value       = module.iam_role_conditions.instance_profile_unique_id
+  value       = module.iam_role_condition.instance_profile_unique_id
 }

@@ -51,12 +51,12 @@ variable "permissions_boundary" {
 }
 
 variable "assume_role_policy_statements" {
-  description = "List of IAM policy [statements](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#statement) for for trusted assume role policy"
-  type = list(object({
+  description = "A map of IAM policy [statements](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#statement) for custom permission usage"
+  type = map(object({
     sid           = optional(string)
     actions       = optional(list(string))
     not_actions   = optional(list(string))
-    effect        = optional(string)
+    effect        = optional(string, "Allow")
     resources     = optional(list(string))
     not_resources = optional(list(string))
     principals = optional(list(object({
@@ -69,8 +69,8 @@ variable "assume_role_policy_statements" {
     })))
     condition = optional(list(object({
       test     = string
-      values   = list(string)
       variable = string
+      values   = list(string)
     })))
   }))
   default = null

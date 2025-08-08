@@ -41,7 +41,7 @@ Run `terraform destroy` when you don't need these resources.
 | <a name="module_ebs_csi_irsa"></a> [ebs\_csi\_irsa](#module\_ebs\_csi\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_ebs_csi_irsa_v2"></a> [ebs\_csi\_irsa\_v2](#module\_ebs\_csi\_irsa\_v2) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_efs_csi_irsa"></a> [efs\_csi\_irsa](#module\_efs\_csi\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
-| <a name="module_eks"></a> [eks](#module\_eks) | terraform-aws-modules/eks/aws | ~> 19.10 |
+| <a name="module_eks"></a> [eks](#module\_eks) | terraform-aws-modules/eks/aws | ~> 21.0 |
 | <a name="module_external_dns_irsa"></a> [external\_dns\_irsa](#module\_external\_dns\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_external_secrets_irsa"></a> [external\_secrets\_irsa](#module\_external\_secrets\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_fsx_lustre_csi_irsa"></a> [fsx\_lustre\_csi\_irsa](#module\_fsx\_lustre\_csi\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
@@ -53,7 +53,7 @@ Run `terraform destroy` when you don't need these resources.
 | <a name="module_load_balancer_controller_targetgroup_binding_only_irsa"></a> [load\_balancer\_controller\_targetgroup\_binding\_only\_irsa](#module\_load\_balancer\_controller\_targetgroup\_binding\_only\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_node_termination_handler_irsa"></a> [node\_termination\_handler\_irsa](#module\_node\_termination\_handler\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_velero_irsa"></a> [velero\_irsa](#module\_velero\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
-| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 3.0 |
+| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 6.0 |
 | <a name="module_vpc_cni_ipv4_irsa"></a> [vpc\_cni\_ipv4\_irsa](#module\_vpc\_cni\_ipv4\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_vpc_cni_ipv6_irsa"></a> [vpc\_cni\_ipv6\_irsa](#module\_vpc\_cni\_ipv6\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
 

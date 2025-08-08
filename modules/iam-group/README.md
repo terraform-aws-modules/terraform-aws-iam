@@ -17,13 +17,12 @@ module "iam_group" {
   ]
 
   enable_self_management_permissions = true
-  permission_statements = [
-    {
-      sid       = "AssumeRole"
+  permission_statements = {
+    AssumeRole = {
       actions   = ["sts:AssumeRole"]
       resources = ["arn:aws:iam::111111111111:role/admin"]
     }
-  ]
+  }
 
   policies = {
     AdministratorAccess = "arn:aws:iam::aws:policy/AdministratorAccess",
@@ -77,7 +76,7 @@ No modules.
 | <a name="input_enable_self_management_permissions"></a> [enable\_self\_management\_permissions](#input\_enable\_self\_management\_permissions) | Determines whether permissions are added to the policy which allow the groups IAM users to manage their credentials and MFA | `bool` | `true` | no |
 | <a name="input_name"></a> [name](#input\_name) | The group's name. The name must consist of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: `=,.@-_.` | `string` | `""` | no |
 | <a name="input_path"></a> [path](#input\_path) | Path in which to create the group | `string` | `null` | no |
-| <a name="input_permission_statements"></a> [permission\_statements](#input\_permission\_statements) | List of IAM policy [statements](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#statement) for the policy | <pre>list(object({<br/>    sid           = optional(string)<br/>    actions       = optional(list(string))<br/>    not_actions   = optional(list(string))<br/>    effect        = optional(string)<br/>    resources     = optional(list(string))<br/>    not_resources = optional(list(string))<br/>    principals = optional(list(object({<br/>      type        = string<br/>      identifiers = list(string)<br/>    })))<br/>    not_principals = optional(list(object({<br/>      type        = string<br/>      identifiers = list(string)<br/>    })))<br/>    condition = optional(list(object({<br/>      test     = string<br/>      values   = list(string)<br/>      variable = string<br/>    })))<br/>  }))</pre> | `null` | no |
+| <a name="input_permission_statements"></a> [permission\_statements](#input\_permission\_statements) | A map of IAM policy [statements](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#statement) for custom permission usage | <pre>map(object({<br/>    sid           = optional(string)<br/>    actions       = optional(list(string))<br/>    not_actions   = optional(list(string))<br/>    effect        = optional(string, "Allow")<br/>    resources     = optional(list(string))<br/>    not_resources = optional(list(string))<br/>    principals = optional(list(object({<br/>      type        = string<br/>      identifiers = list(string)<br/>    })))<br/>    not_principals = optional(list(object({<br/>      type        = string<br/>      identifiers = list(string)<br/>    })))<br/>    condition = optional(list(object({<br/>      test     = string<br/>      variable = string<br/>      values   = list(string)<br/>    })))<br/>  }))</pre> | `null` | no |
 | <a name="input_policies"></a> [policies](#input\_policies) | Policies to attach to the IAM role in `{'static_name' = 'policy_arn'}` format | `map(string)` | `{}` | no |
 | <a name="input_policy_description"></a> [policy\_description](#input\_policy\_description) | Description of the IAM policy | `string` | `null` | no |
 | <a name="input_policy_name"></a> [policy\_name](#input\_policy\_name) | Name to use on IAM policy created | `string` | `null` | no |

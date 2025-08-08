@@ -48,14 +48,13 @@ module "irsa_v2_custom_policy" {
   name = "${local.name}-custom-name"
 
   enable_irsa_v2 = true
-  policy_statements = [
-    {
-      sid       = "DescribeEc2"
+  policy_statements = {
+    DescribeEc2 = {
       actions   = ["ec2:Describe*"]
       effect    = "Allow"
       resources = ["*"]
     }
-  ]
+  }
 
   tags = local.tags
 }
@@ -399,7 +398,7 @@ module "vpc_cni_ipv6_irsa" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 3.0"
+  version = "~> 6.0"
 
   name = local.name
   cidr = local.vpc_cidr
@@ -408,9 +407,8 @@ module "vpc" {
   private_subnets = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 4, k)]
   public_subnets  = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 48)]
 
-  enable_nat_gateway   = true
-  single_nat_gateway   = true
-  enable_dns_hostnames = true
+  enable_nat_gateway = true
+  single_nat_gateway = true
 
   public_subnet_tags = {
     "kubernetes.io/role/elb" = 1
@@ -425,16 +423,31 @@ module "vpc" {
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 19.10"
+  version = "~> 21.0"
 
-  cluster_name    = local.name
-  cluster_version = "1.25"
+  name               = local.name
+  kubernetes_version = "1.33"
 
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
 
+  addons = {
+    coredns    = {}
+    kube-proxy = {}
+    vpc-cni = {
+      before_compute = true
+    }
+  }
+
   eks_managed_node_groups = {
-    default = {}
+    example = {
+      ami_type       = "AL2023_x86_64_STANDARD"
+      instance_types = ["m5.xlarge"]
+
+      min_size     = 1
+      max_size     = 2
+      desired_size = 1
+    }
   }
 
   tags = local.tags

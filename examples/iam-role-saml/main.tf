@@ -45,11 +45,13 @@ module "iam_roles" {
       }
     }
     poweruser = {
-      PowerUserAccess = "arn:aws:iam::aws:policy/PowerUserAccess"
+      policies = {
+        PowerUserAccess = "arn:aws:iam::aws:policy/PowerUserAccess"
+      }
     }
   }
 
-  name_prefix = "${each.key}-"
+  name = each.key
 
   saml_provider_ids = [aws_iam_saml_provider.this.id]
   policies          = each.value.policies

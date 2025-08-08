@@ -25,9 +25,8 @@ module "iam_role_instance_profile" {
 
   create_instance_profile = true
 
-  assume_role_policy_statements = [
-    {
-      sid = "TrustRoleAndServiceToAssume"
+  assume_role_policy_statements = {
+    TrustRoleAndServiceToAssume = {
       principals = [
         {
           type = "AWS"
@@ -44,7 +43,7 @@ module "iam_role_instance_profile" {
         }
       ]
     }
-  ]
+  }
 
   policies = {
     ReadOnlyAccess = "arn:aws:iam::aws:policy/ReadOnlyAccess"
@@ -53,27 +52,26 @@ module "iam_role_instance_profile" {
   tags = local.tags
 }
 
-module "iam_role_conditions" {
+module "iam_role_condition" {
   source = "../../modules/iam-role"
 
-  name_prefix = "conditions-"
+  name = "condition"
 
-  assume_role_policy_statements = [
-    {
-      sid = "TrustRoleAndServiceToAssume"
+  assume_role_policy_statements = {
+    TrustRoleAndServiceToAssume = {
       principals = [{
         type = "AWS"
         identifiers = [
           "arn:aws:iam::835367859851:user/anton",
         ]
       }]
-      conditions = [{
+      condition = [{
         test     = "StringEquals"
         variable = "sts:ExternalId"
         values   = ["some-secret-id"]
       }]
     }
-  ]
+  }
 
   policies = {
     AmazonCognitoReadOnly      = "arn:aws:iam::aws:policy/AmazonCognitoReadOnly"
@@ -101,22 +99,23 @@ module "iam_roles" {
       }
     }
     poweruser = {
-      trusted_arns    = [data.aws_caller_identity.current.arn]
-      PowerUserAccess = "arn:aws:iam::aws:policy/PowerUserAccess"
+      trusted_arns = [data.aws_caller_identity.current.arn]
+      policies = {
+        PowerUserAccess = "arn:aws:iam::aws:policy/PowerUserAccess"
+      }
     }
   }
 
-  name_prefix = "${each.key}-"
+  name = each.key
 
-  assume_role_policy_statements = [
-    {
-      sid = "TrustRoleAndServiceToAssume"
+  assume_role_policy_statements = {
+    TrustRoleAndServiceToAssume = {
       principals = [{
         type        = "AWS"
         identifiers = each.value.trusted_arns
       }]
 
-      conditions = [
+      condition = [
         {
           test     = "Bool"
           variable = "aws:MultiFactorAuthPresent"
@@ -129,7 +128,7 @@ module "iam_roles" {
         }
       ]
     }
-  ]
+  }
 
   policies = each.value.policies
 
