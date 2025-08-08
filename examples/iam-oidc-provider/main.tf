@@ -30,11 +30,11 @@ module "oidc_iam_provider_disabled" {
 }
 
 ################################################################################
-# OIDC IAM Role
+# GitHub OIDC IAM Role
 ################################################################################
 
 module "github_oidc_iam_role" {
-  source = "../../modules/iam-role-oidc"
+  source = "../../modules/iam-role"
 
   name = local.name
 
@@ -52,10 +52,4 @@ module "github_oidc_iam_role" {
   }
 
   tags = local.tags
-}
-
-module "oidc_iam_role_disabled" {
-  source = "../../modules/iam-role-oidc"
-
-  create = false
 }

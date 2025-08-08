@@ -32,9 +32,10 @@ Run `terraform destroy` when you don't need these resources.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_iam_role_condition"></a> [iam\_role\_condition](#module\_iam\_role\_condition) | ../../modules/iam-role | n/a |
 | <a name="module_iam_role_disabled"></a> [iam\_role\_disabled](#module\_iam\_role\_disabled) | ../../modules/iam-role | n/a |
+| <a name="module_iam_role_github_oidc"></a> [iam\_role\_github\_oidc](#module\_iam\_role\_github\_oidc) | ../../modules/iam-role | n/a |
 | <a name="module_iam_role_instance_profile"></a> [iam\_role\_instance\_profile](#module\_iam\_role\_instance\_profile) | ../../modules/iam-role | n/a |
+| <a name="module_iam_role_saml"></a> [iam\_role\_saml](#module\_iam\_role\_saml) | ../../modules/iam-role | n/a |
 | <a name="module_iam_roles"></a> [iam\_roles](#module\_iam\_roles) | ../../modules/iam-role | n/a |
 
 ## Resources
@@ -42,6 +43,7 @@ Run `terraform destroy` when you don't need these resources.
 | Name | Type |
 |------|------|
 | [aws_iam_policy.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
+| [aws_iam_saml_provider.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_saml_provider) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 
 ## Inputs

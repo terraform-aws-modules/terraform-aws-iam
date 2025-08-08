@@ -82,6 +82,78 @@ variable "policies" {
   default     = {}
 }
 
+variable "enable_oidc" {
+  description = "Enable OIDC provider trust for the role"
+  type        = bool
+  default     = false
+}
+
+variable "oidc_account_id" {
+  description = "An overriding AWS account ID where the OIDC provider lives; leave empty to use the current account ID for the AWS provider"
+  type        = string
+  default     = null
+}
+
+variable "oidc_provider_urls" {
+  description = "List of URLs of the OIDC Providers"
+  type        = list(string)
+  default     = []
+}
+
+variable "oidc_subjects" {
+  description = "The fully qualified OIDC subjects to be added to the role policy"
+  type        = set(string)
+  default     = []
+}
+
+variable "oidc_wildcard_subjects" {
+  description = "The OIDC subject using wildcards to be added to the role policy"
+  type        = set(string)
+  default     = []
+}
+
+variable "oidc_audiences" {
+  description = "The audience to be added to the role policy. Set to sts.amazonaws.com for cross-account assumable role. Leave empty otherwise."
+  type        = set(string)
+  default     = []
+}
+
+variable "enable_github_oidc" {
+  description = "Enable GitHub OIDC provider trust for the role"
+  type        = bool
+  default     = false
+}
+
+variable "enable_bitbucket_oidc" {
+  description = "Enable Bitbucket OIDC provider trust for the role"
+  type        = bool
+  default     = false
+}
+
+variable "enable_saml" {
+  description = "Enable SAML provider trust for the role"
+  type        = bool
+  default     = false
+}
+
+variable "saml_provider_ids" {
+  description = "List of SAML provider IDs"
+  type        = list(string)
+  default     = []
+}
+
+variable "saml_endpoints" {
+  description = "List of AWS SAML endpoints"
+  type        = list(string)
+  default     = ["https://signin.aws.amazon.com/saml"]
+}
+
+variable "saml_trust_actions" {
+  description = "Additional assume role trust actions for the SAML federated statement"
+  type        = list(string)
+  default     = []
+}
+
 ################################################################################
 # IAM Instance Profile
 ################################################################################

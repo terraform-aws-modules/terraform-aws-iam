@@ -7,14 +7,14 @@ If you find a bug, please open an issue with supporting configuration to reprodu
 ## List of backwards incompatible changes
 
 - `iam-assumable-role` has been renamed to `iam-role`
-- `iam-assumable-role-with-oidc` has been renamed to `iam-role-oidc`
-- `iam-assumable-role-with-saml` has been renamed to `iam-role-saml`
+- `iam-assumable-role-with-oidc` has been merged into `iam-role`
+- `iam-assumable-role-with-saml` has been merged into `iam-role`
 - `iam-assumable-roles` has been removed; `iam-role` should be used instead. See the [`iam-role` example](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-role) that shows an example replacement implementation.
-- `iam-assumable-roles-with-saml` has been removed; `iam-role-saml` should be used instead. See the [`iam-role-saml` example](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-role-saml) that shows an example replacement implementation.
+- `iam-assumable-roles-with-saml` has been removed; `iam-role` should be used instead. See the [`iam-role` example](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-role-saml) that shows an example replacement implementation.
 - `iam-github-oidc-provider` has been renamed to `iam-oidc-provider`
-- `iam-github-oidc-role` has been removed; `iam-role-oidc` should be used instead. See the [`iam-oidc-provider` example](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-oidc-provider)
+- `iam-github-oidc-role` has been merged into `iam-role`. See the [`iam-oidc-provider` example](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-oidc-provider)
 - `iam-group-with-assumable-roles-policy` has been removed; the renamed `iam-group` (was `iam-group-with-policies`) should be used instead
-- `iam-eks-role` has been removed; `iam-role-for-service-accounts-eks` should be used instead
+- `iam-eks-role` has been removed; `iam-role-for-service-accounts` should be used instead
 - `iam-policy` has been removed; the `aws_iam_policy` resource should be used directly instead
 
 ## Additional changes
@@ -24,14 +24,6 @@ If you find a bug, please open an issue with supporting configuration to reprodu
 - `iam-role`
     - The use of individual variables to control/manipulate the assume role trust policy have been replaced by a generic `assume_role_policy_statements` variable. This allows for any number of custom statements to be added to the role's trust policy.
     - `custom_role_policy_arns` has been renamed to `policies` and now accepts a map of `name`: `policy-arn` pairs; this allows for both existing policies and policies that will get created at the same time as the role. This also replaces the admin, readonly, and poweruser policy ARN variables and their associated `attach_*_policy` variables.
-    - Default create conditional is now `true` instead of `false`
-    - `force_detach_policies` has been removed; this is now always `true`
-- `iam-role-oidc`
-    - `custom_role_policy_arns` has been renamed to `policies` and now accepts a map of `name`: `policy-arn` pairs; this allows for both existing policies and policies that will get created at the same time as the role.
-    - Default create conditional is now `true` instead of `false`
-    - `force_detach_policies` has been removed; this is now always `true`
-- `iam-role-saml`
-    - `custom_role_policy_arns` has been renamed to `policies` and now accepts a map of `name`: `policy-arn` pairs; this allows for both existing policies and policies that will get created at the same time as the role.
     - Default create conditional is now `true` instead of `false`
     - `force_detach_policies` has been removed; this is now always `true`
 - `iam-group`
@@ -56,12 +48,6 @@ If you find a bug, please open an issue with supporting configuration to reprodu
         - `readonly_role_policy_arn` & `attach_readonly_policy`
         - `force_detach_policies`
         - `role_sts_externalid`
-    - `iam-role-oidc`
-        - `force_detach_policies`
-        - `number_of_custom_role_policy_arns`
-    - `iam-role-saml`
-        - `force_detach_policies`
-        - `number_of_custom_role_policy_arns`
     - `iam-group`
         - `custom_group_policies`
         - `assumable_roles`
@@ -76,24 +62,6 @@ If you find a bug, please open an issue with supporting configuration to reprodu
         - `role_path` -> `path`
         - `role_permissions_boundary_arn` -> `permissions_boundary_arn`
         - `custom_role_policy_arns` -> `policies`
-    - `iam-role-oidc`
-        - `create_role` -> `create`
-        - `role_name` -> `name`
-        - `role_name_prefix` -> `name_prefix`
-        - `role_description` -> `description`
-        - `role_path` -> `path`
-        - `role_permissions_boundary_arn` -> `permissions_boundary_arn`
-        - `custom_role_policy_arns` -> `policies`
-    - `iam-role-saml`
-        - `create_role` -> `create`
-        - `role_name` -> `name`
-        - `role_name_prefix` -> `name_prefix`
-        - `role_description` -> `description`
-        - `role_path` -> `path`
-        - `role_permissions_boundary_arn` -> `permissions_boundary_arn`
-        - `custom_role_policy_arns` -> `policies`
-        - `aws_saml_endpoint` -> `saml_endpoints`
-        - `trusted_role_actions` -> `saml_trust_actions`
     - `iam-group`
         - `create_group` -> `create`
         - `group_users` -> `group`
@@ -105,10 +73,6 @@ If you find a bug, please open an issue with supporting configuration to reprodu
 3. Added variables:
 
     - `iam-role`
-        - `assume_role_policy_statements` which allows for any number of custom statements to be added to the role's trust policy. This covers the majority of the variables that were removed
-    - `iam-role-oidc`
-        - `assume_role_policy_statements` which allows for any number of custom statements to be added to the role's trust policy. This covers the majority of the variables that were removed
-    - `iam-role-saml`
         - `assume_role_policy_statements` which allows for any number of custom statements to be added to the role's trust policy. This covers the majority of the variables that were removed
     - `iam-group`
         - `permission_statements` which allows for any number of custom statements to be added to the role's trust policy. This covers the majority of the variables that were removed
@@ -123,12 +87,6 @@ If you find a bug, please open an issue with supporting configuration to reprodu
         - `role_requires_mfa`
         - `iam_instance_profile_path`
         - `role_sts_externalid`
-    - `iam-role-oidc`
-        - `iam_role_path`
-        - `provider_url` (use `oidc_provider_urls` instead)
-    - `iam-role-saml`
-        - `iam_role_path`
-        - `provider_id` (use `saml_provider_ids` instead)
     - `iam-group`
         - `assumable_roles`
         - `aws_account_id`
@@ -143,18 +101,6 @@ If you find a bug, please open an issue with supporting configuration to reprodu
         - `iam_instance_profile_id` -> `instance_profile_id`
         - `iam_instance_profile_name` -> `instance_profile_name`
         - `iam_instance_profile_unique_id` -> `instance_profile_unique_id`
-    - `iam-role-oidc`
-        - `iam_role_arn` -> `arn`
-        - `iam_role_name` -> `name`
-        - `iam_role_unique_id` -> `unique_id`
-        - `aws_account_id` -> `oidc_account_id`
-        - `provider_urls` -> `oidc_provider_urls`
-    - `iam-role-oidc`
-        - `iam_role_arn` -> `arn`
-        - `iam_role_name` -> `name`
-        - `iam_role_unique_id` -> `unique_id`
-        - `aws_account_id` -> `oidc_account_id`
-        - `provider_ids` -> `saml_provider_ids`
     - `iam-group`
         - `group_id` -> `id`
         - `group_name` -> `name`

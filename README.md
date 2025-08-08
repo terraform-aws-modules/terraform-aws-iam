@@ -2,8 +2,6 @@
 
 Terraform module which creates AWS IAM resources.
 
-### ⚠️ JUST FOR TESTING - DO NOT RELY ON THIS ⚠️
-
 [![SWUbanner](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
 
 ## Usage
@@ -47,13 +45,12 @@ module "iam_group" {
   ]
 
   enable_self_management_permissions = true
-  permission_statements = [
-    {
-      sid       = "AssumeRole"
+  permission_statements = {
+    AssumeRole = {
       actions   = ["sts:AssumeRole"]
       resources = ["arn:aws:iam::111111111111:role/admin"]
     }
-  ]
+  }
 
   policies = {
     AdministratorAccess = "arn:aws:iam::aws:policy/AdministratorAccess",
@@ -106,24 +103,36 @@ module "iam_read_only_policy" {
 }
 ```
 
-### IAM Role for Service Accounts (IRSA)
+### IAM Role
 
-Creates an IAM role that is suitable for EKS IAM role for service accounts (IRSA) with a set of pre-defined policies for common EKS addons.
+Creates an IAM role with a trust policy and (optional) IAM instance profile. Useful for service roles such as EC2, ECS, etc., or roles assumed across AWS accounts.
 
 ```hcl
-module "vpc_cni_irsa" {
-  source      = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
+module "iam_role" {
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role"
 
-  name   = "vpc-cni"
+  name = "example"
 
-  attach_vpc_cni_policy = true
-  vpc_cni_enable_ipv4   = true
-
-  oidc_providers = {
-    this = {
-      provider_arn               = "arn:aws:iam::012345678901:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/5C54DDF35ER19312844C7333374CC09D"
-      namespace_service_accounts = ["kube-system:aws-node"]
+  assume_role_policy_statements = {
+    TrustRoleAndServiceToAssume = {
+      principals = [{
+        type = "AWS"
+        identifiers = [
+          "arn:aws:iam::835367859851:user/anton",
+        ]
+      }]
+      conditions = [{
+        test     = "StringEquals"
+        variable = "sts:ExternalId"
+        values   = ["some-secret-id"]
+      }]
     }
+  }
+
+  policies = {
+    AmazonCognitoReadOnly      = "arn:aws:iam::aws:policy/AmazonCognitoReadOnly"
+    AlexaForBusinessFullAccess = "arn:aws:iam::aws:policy/AlexaForBusinessFullAccess"
+    custom                     = aws_iam_policy.this.arn
   }
 
   tags = {
@@ -133,13 +142,13 @@ module "vpc_cni_irsa" {
 }
 ```
 
-### OIDC IAM Role
+### IAM Role - GitHub OIDC
 
 Creates an IAM role that trusts an OpenID connect provider. Useful for trusting external identity providers such as GitHub, Bitbucket, etc.
 
 ```hcl
-module "iam_oidc_role" {
-  source    = "terraform-aws-modules/iam/aws//modules/iam-oidc-role"
+module "iam_role_github_oidc" {
+  source    = "terraform-aws-modules/iam/aws//modules/iam-role"
 
   enable_github_oidc = true
 
@@ -157,16 +166,17 @@ module "iam_oidc_role" {
 }
 ```
 
-### SAML IAM Role
+### IAM Role - SAML 2.0
 
 Creates an IAM role that trusts a SAML provider. Useful for trusting external identity providers such as Okta, OneLogin, etc.
 
 ```hcl
 module "iam_role_saml" {
-  source  = "terraform-aws-modules/iam/aws//modules/iam-role-saml"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role"
 
   name = "example"
 
+  enable_saml       = true
   saml_provider_ids = ["arn:aws:iam::235367859851:saml-provider/idp_saml"]
 
   policies = {
@@ -180,37 +190,24 @@ module "iam_role_saml" {
 }
 ```
 
-### IAM Role
+### IAM Role for EKS Service Accounts (IRSA)
 
-Creates an IAM role with a trust policy and (optional) IAM instance profile. Useful for service roles such as EC2, ECS, etc., or roles assumed across AWS accounts.
+Creates an IAM role that is suitable for EKS IAM role for service accounts (IRSA) with a set of pre-defined policies for common EKS addons.
 
 ```hcl
-module "iam_role" {
-  source  = "terraform-aws-modules/iam/aws//modules/iam-role"
+module "vpc_cni_irsa" {
+  source      = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
 
-  name = "example"
+  name   = "vpc-cni"
 
-  assume_role_policy_statements = [
-    {
-      sid = "TrustRoleAndServiceToAssume"
-      principals = [{
-        type = "AWS"
-        identifiers = [
-          "arn:aws:iam::835367859851:user/anton",
-        ]
-      }]
-      conditions = [{
-        test     = "StringEquals"
-        variable = "sts:ExternalId"
-        values   = ["some-secret-id"]
-      }]
+  attach_vpc_cni_policy = true
+  vpc_cni_enable_ipv4   = true
+
+  oidc_providers = {
+    this = {
+      provider_arn               = "arn:aws:iam::012345678901:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/5C54DDF35ER19312844C7333374CC09D"
+      namespace_service_accounts = ["kube-system:aws-node"]
     }
-  ]
-
-  policies = {
-    AmazonCognitoReadOnly      = "arn:aws:iam::aws:policy/AmazonCognitoReadOnly"
-    AlexaForBusinessFullAccess = "arn:aws:iam::aws:policy/AlexaForBusinessFullAccess"
-    custom                     = aws_iam_policy.this.arn
   }
 
   tags = {
@@ -249,7 +246,6 @@ module "iam_user" {
 - [iam-read-only-policy](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-read-only-policy) - Create IAM read-only policy
 - [iam-role](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-role) - Create individual IAM role which can be assumed from specified ARNs (AWS accounts, IAM users, etc)
 - [iam-role-for-service-accounts](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-role-for-service-accounts) - Create IAM role for service accounts (IRSA) for use within EKS clusters
-- [iam-role-saml](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-role-saml) - Create individual IAM role which can be assumed by users with a SAML Identity Provider
 - [iam-user](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-user) - Add IAM user, login profile and access keys (with PGP enabled or disabled)
 
 ## Authors

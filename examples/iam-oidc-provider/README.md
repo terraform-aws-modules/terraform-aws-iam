@@ -34,9 +34,8 @@ No providers.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_github_oidc_iam_provider"></a> [github\_oidc\_iam\_provider](#module\_github\_oidc\_iam\_provider) | ../../modules/iam-oidc-provider | n/a |
-| <a name="module_github_oidc_iam_role"></a> [github\_oidc\_iam\_role](#module\_github\_oidc\_iam\_role) | ../../modules/iam-role-oidc | n/a |
+| <a name="module_github_oidc_iam_role"></a> [github\_oidc\_iam\_role](#module\_github\_oidc\_iam\_role) | ../../modules/iam-role | n/a |
 | <a name="module_oidc_iam_provider_disabled"></a> [oidc\_iam\_provider\_disabled](#module\_oidc\_iam\_provider\_disabled) | ../../modules/iam-oidc-provider | n/a |
-| <a name="module_oidc_iam_role_disabled"></a> [oidc\_iam\_role\_disabled](#module\_oidc\_iam\_role\_disabled) | ../../modules/iam-role-oidc | n/a |
 
 ## Resources
 
