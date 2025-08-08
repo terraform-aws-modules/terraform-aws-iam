@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.60.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.59.0...v5.60.0) (2025-08-08)
+
+
+### Features
+
+* Add `ssm:GetParametersByPath` for external secrets ([#583](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/583)) ([8e4541d](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/8e4541de5995a98781e4b44c8bad3103ec77be62))
+
 ## [5.59.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.58.0...v5.59.0) (2025-07-05)
 
 
