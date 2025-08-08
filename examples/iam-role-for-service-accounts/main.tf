@@ -163,6 +163,25 @@ module "efs_csi_irsa" {
   tags = local.tags
 }
 
+module "mountpoint_s3_csi_irsa" {
+  source = "../../modules/iam-role-for-service-accounts"
+
+  name = "mountpoint-s3-csi"
+
+  attach_mountpoint_s3_csi_policy = true
+  mountpoint_s3_csi_bucket_arns   = ["arn:aws:s3:::mountpoint-s3-csi-bucket"]
+  mountpoint_s3_csi_path_arns     = ["arn:aws:s3:::mountpoint-s3-csi-bucket/example/*"]
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["kube-system:s3-csi-driver-sa"]
+    }
+  }
+
+  tags = local.tags
+}
+
 module "external_dns_irsa" {
   source = "../../modules/iam-role-for-service-accounts"
 
@@ -217,19 +236,17 @@ module "fsx_lustre_csi_irsa" {
   tags = local.tags
 }
 
-module "karpenter_irsa" {
+module "fsx_openzfs_csi_irsa" {
   source = "../../modules/iam-role-for-service-accounts"
 
-  name = "karpenter"
+  name = "fsx-openzfs-csi"
 
-  attach_karpenter_policy      = true
-  karpenter_cluster_name       = module.eks.cluster_name
-  karpenter_node_iam_role_arns = [module.eks.eks_managed_node_groups["default"].iam_role_arn]
+  attach_fsx_openzfs_csi_policy = true
 
   oidc_providers = {
-    this = {
+    ex = {
       provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["karpenter:karpenter"]
+      namespace_service_accounts = ["kube-system:fsx-openzfs-csi-controller-sa"]
     }
   }
 
@@ -264,40 +281,6 @@ module "load_balancer_controller_targetgroup_binding_only_irsa" {
     this = {
       provider_arn               = module.eks.oidc_provider_arn
       namespace_service_accounts = ["kube-system:aws-load-balancer-controller"]
-    }
-  }
-
-  tags = local.tags
-}
-
-module "appmesh_controller_irsa" {
-  source = "../../modules/iam-role-for-service-accounts"
-
-  name = "appmesh-controller"
-
-  attach_appmesh_controller_policy = true
-
-  oidc_providers = {
-    this = {
-      provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["appmesh-system:appmesh-controller"]
-    }
-  }
-
-  tags = local.tags
-}
-
-module "appmesh_envoy_proxy_irsa" {
-  source = "../../modules/iam-role-for-service-accounts"
-
-  name = "appmesh-envoy-proxy"
-
-  attach_appmesh_envoy_proxy_policy = true
-
-  oidc_providers = {
-    this = {
-      provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["appmesh-system:appmesh-envoy-proxy"]
     }
   }
 
@@ -386,6 +369,23 @@ module "vpc_cni_ipv6_irsa" {
     this = {
       provider_arn               = module.eks.oidc_provider_arn
       namespace_service_accounts = ["kube-system:aws-node"]
+    }
+  }
+
+  tags = local.tags
+}
+
+module "cloudwatch_observability_irsa" {
+  source = "../../modules/iam-role-for-service-accounts"
+
+  name = "cloudwatch-observability"
+
+  attach_cloudwatch_observability_policy = true
+
+  oidc_providers = {
+    ex = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["amazon-cloudwatch:cloudwatch-agent"]
     }
   }
 

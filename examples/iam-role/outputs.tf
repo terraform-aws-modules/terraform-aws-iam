@@ -38,40 +38,79 @@ output "instance_profile_iam_instance_profile_unique_id" {
 }
 
 ################################################################################
-# IAM Role - Condition
+# IAM Role - GitHub OIDC
 ################################################################################
 
-output "condition_iam_role_name" {
+output "github_oidc_iam_role_name" {
   description = "The name of the IAM role"
-  value       = module.iam_role_condition.name
+  value       = module.iam_role_github_oidc.name
 }
 
-output "condition_iam_role_arn" {
+output "github_oidc_iam_role_arn" {
   description = "The Amazon Resource Name (ARN) specifying the IAM role"
-  value       = module.iam_role_condition.arn
+  value       = module.iam_role_github_oidc.arn
 }
 
-output "condition_iam_role_unique_id" {
+output "github_oidc_iam_role_unique_id" {
   description = "Stable and unique string identifying the IAM role"
-  value       = module.iam_role_condition.unique_id
+  value       = module.iam_role_github_oidc.unique_id
 }
 
-output "condition_iam_instance_profile_arn" {
+output "github_oidc_iam_instance_profile_arn" {
   description = "ARN assigned by AWS to the instance profile"
-  value       = module.iam_role_condition.instance_profile_arn
+  value       = module.iam_role_github_oidc.instance_profile_arn
 }
 
-output "condition_iam_instance_profile_id" {
+output "github_oidc_iam_instance_profile_id" {
   description = "Instance profile's ID"
-  value       = module.iam_role_condition.instance_profile_id
+  value       = module.iam_role_github_oidc.instance_profile_id
 }
 
-output "condition_iam_instance_profile_name" {
+output "github_oidc_iam_instance_profile_name" {
   description = "Name of IAM instance profile"
-  value       = module.iam_role_condition.instance_profile_name
+  value       = module.iam_role_github_oidc.instance_profile_name
 }
 
-output "condition_iam_instance_profile_unique_id" {
+output "github_oidc_iam_instance_profile_unique_id" {
   description = "Stable and unique string identifying the IAM instance profile"
-  value       = module.iam_role_condition.instance_profile_unique_id
+  value       = module.iam_role_github_oidc.instance_profile_unique_id
+}
+
+################################################################################
+# IAM Role - SAML 2.0
+################################################################################
+
+output "saml_iam_role_name" {
+  description = "The name of the IAM role"
+  value       = module.iam_role_saml.name
+}
+
+output "saml_iam_role_arn" {
+  description = "The Amazon Resource Name (ARN) specifying the IAM role"
+  value       = module.iam_role_saml.arn
+}
+
+output "saml_iam_role_unique_id" {
+  description = "Stable and unique string identifying the IAM role"
+  value       = module.iam_role_saml.unique_id
+}
+
+output "saml_iam_instance_profile_arn" {
+  description = "ARN assigned by AWS to the instance profile"
+  value       = module.iam_role_saml.instance_profile_arn
+}
+
+output "saml_iam_instance_profile_id" {
+  description = "Instance profile's ID"
+  value       = module.iam_role_saml.instance_profile_id
+}
+
+output "saml_iam_instance_profile_name" {
+  description = "Name of IAM instance profile"
+  value       = module.iam_role_saml.instance_profile_name
+}
+
+output "saml_iam_instance_profile_unique_id" {
+  description = "Stable and unique string identifying the IAM instance profile"
+  value       = module.iam_role_saml.instance_profile_unique_id
 }

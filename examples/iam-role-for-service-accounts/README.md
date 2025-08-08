@@ -33,9 +33,8 @@ Run `terraform destroy` when you don't need these resources.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_amazon_managed_service_prometheus_irsa"></a> [amazon\_managed\_service\_prometheus\_irsa](#module\_amazon\_managed\_service\_prometheus\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
-| <a name="module_appmesh_controller_irsa"></a> [appmesh\_controller\_irsa](#module\_appmesh\_controller\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
-| <a name="module_appmesh_envoy_proxy_irsa"></a> [appmesh\_envoy\_proxy\_irsa](#module\_appmesh\_envoy\_proxy\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_cert_manager_irsa"></a> [cert\_manager\_irsa](#module\_cert\_manager\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
+| <a name="module_cloudwatch_observability_irsa"></a> [cloudwatch\_observability\_irsa](#module\_cloudwatch\_observability\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_cluster_autoscaler_irsa"></a> [cluster\_autoscaler\_irsa](#module\_cluster\_autoscaler\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_disabled"></a> [disabled](#module\_disabled) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_ebs_csi_irsa"></a> [ebs\_csi\_irsa](#module\_ebs\_csi\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
@@ -45,12 +44,13 @@ Run `terraform destroy` when you don't need these resources.
 | <a name="module_external_dns_irsa"></a> [external\_dns\_irsa](#module\_external\_dns\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_external_secrets_irsa"></a> [external\_secrets\_irsa](#module\_external\_secrets\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_fsx_lustre_csi_irsa"></a> [fsx\_lustre\_csi\_irsa](#module\_fsx\_lustre\_csi\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
+| <a name="module_fsx_openzfs_csi_irsa"></a> [fsx\_openzfs\_csi\_irsa](#module\_fsx\_openzfs\_csi\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_irsa"></a> [irsa](#module\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_irsa_v2_custom_policy"></a> [irsa\_v2\_custom\_policy](#module\_irsa\_v2\_custom\_policy) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_irsa_v2_empty"></a> [irsa\_v2\_empty](#module\_irsa\_v2\_empty) | ../../modules/iam-role-for-service-accounts | n/a |
-| <a name="module_karpenter_irsa"></a> [karpenter\_irsa](#module\_karpenter\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_load_balancer_controller_irsa"></a> [load\_balancer\_controller\_irsa](#module\_load\_balancer\_controller\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_load_balancer_controller_targetgroup_binding_only_irsa"></a> [load\_balancer\_controller\_targetgroup\_binding\_only\_irsa](#module\_load\_balancer\_controller\_targetgroup\_binding\_only\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
+| <a name="module_mountpoint_s3_csi_irsa"></a> [mountpoint\_s3\_csi\_irsa](#module\_mountpoint\_s3\_csi\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_node_termination_handler_irsa"></a> [node\_termination\_handler\_irsa](#module\_node\_termination\_handler\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_velero_irsa"></a> [velero\_irsa](#module\_velero\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 6.0 |
