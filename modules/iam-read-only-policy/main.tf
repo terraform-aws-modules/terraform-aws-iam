@@ -28,6 +28,7 @@ data "aws_iam_policy_document" "this" {
       actions = [
         "${statement.value}:List*",
         "${statement.value}:Get*",
+        "${statement.value}:BatchGet*",
         "${statement.value}:Describe*",
         "${statement.value}:View*",
       ]
@@ -44,6 +45,7 @@ data "aws_iam_policy_document" "this" {
       actions = [
         "${statement.value}:List*",
         "${statement.value}:Get*",
+        "${statement.value}:BatchGet*",
         "${statement.value}:Describe*",
         "${statement.value}:View*",
       ]

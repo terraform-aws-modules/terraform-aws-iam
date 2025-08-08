@@ -76,6 +76,16 @@ variable "assume_role_policy_statements" {
   default = null
 }
 
+variable "condition" {
+  description = "[Condition constraints](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#condition) applied to the trust policy(s) enabled"
+  type = list(object({
+    test     = string
+    variable = string
+    values   = list(string)
+  }))
+  default = []
+}
+
 variable "policies" {
   description = "Policies to attach to the IAM role in `{'static_name' = 'policy_arn'}` format"
   type        = map(string)
@@ -124,6 +134,12 @@ variable "enable_github_oidc" {
   default     = false
 }
 
+variable "github_provider" {
+  description = "The GitHub OIDC provider URL *without the `https://` prefix"
+  type        = string
+  default     = "token.actions.githubusercontent.com"
+}
+
 variable "enable_bitbucket_oidc" {
   description = "Enable Bitbucket OIDC provider trust for the role"
   type        = bool
@@ -152,6 +168,36 @@ variable "saml_trust_actions" {
   description = "Additional assume role trust actions for the SAML federated statement"
   type        = list(string)
   default     = []
+}
+
+################################################################################
+# IAM Role Inline policy
+################################################################################
+
+variable "inline_policy_statements" {
+  description = "A map of IAM policy [statements](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#statement) for inline policy permissions"
+  type = map(object({
+    sid           = optional(string)
+    actions       = optional(list(string))
+    not_actions   = optional(list(string))
+    effect        = optional(string, "Allow")
+    resources     = optional(list(string))
+    not_resources = optional(list(string))
+    principals = optional(list(object({
+      type        = string
+      identifiers = list(string)
+    })))
+    not_principals = optional(list(object({
+      type        = string
+      identifiers = list(string)
+    })))
+    condition = optional(list(object({
+      test     = string
+      variable = string
+      values   = list(string)
+    })))
+  }))
+  default = null
 }
 
 ################################################################################

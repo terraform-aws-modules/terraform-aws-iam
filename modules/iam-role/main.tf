@@ -10,7 +10,6 @@ locals {
   partition  = try(data.aws_partition.current[0].partition, "")
 
   oidc_providers     = [for url in var.oidc_provider_urls : replace(url, "https://", "")]
-  github_provider    = coalesce(one(local.oidc_providers), "token.actions.githubusercontent.com")
   bitbucket_provider = one(local.oidc_providers)
 }
 
@@ -26,8 +25,11 @@ data "aws_iam_policy_document" "this" {
     for_each = var.enable_oidc ? local.oidc_providers : []
 
     content {
-      effect  = "Allow"
-      actions = ["sts:AssumeRoleWithWebIdentity"]
+      effect = "Allow"
+      actions = [
+        "sts:TagSession",
+        "sts:AssumeRoleWithWebIdentity",
+      ]
 
       principals {
         type = "Federated"
@@ -59,9 +61,20 @@ data "aws_iam_policy_document" "this" {
         for_each = length(var.oidc_audiences) > 0 ? local.oidc_providers : []
 
         content {
-          test     = "StringLike"
+          test     = "StringEquals"
           variable = "${statement.value}:aud"
           values   = var.oidc_audiences
+        }
+      }
+
+      # Generic conditions
+      dynamic "condition" {
+        for_each = var.condition
+
+        content {
+          test     = condition.value.test
+          variable = condition.value.variable
+          values   = condition.value.values
         }
       }
     }
@@ -75,31 +88,57 @@ data "aws_iam_policy_document" "this" {
       sid = "GithubOidcAuth"
       actions = [
         "sts:TagSession",
-        "sts:AssumeRoleWithWebIdentity"
+        "sts:AssumeRoleWithWebIdentity",
       ]
 
       principals {
         type        = "Federated"
-        identifiers = ["arn:${local.partition}:iam::${local.account_id}:oidc-provider/${local.github_provider}"]
+        identifiers = ["arn:${local.partition}:iam::${local.account_id}:oidc-provider/${var.github_provider}"]
       }
 
       condition {
         test     = "ForAllValues:StringEquals"
-        variable = "token.actions.githubusercontent.com:iss"
-        values   = ["http://token.actions.githubusercontent.com"]
+        variable = "${var.github_provider}:iss"
+        values   = ["https://${var.github_provider}"]
       }
 
       condition {
         test     = "ForAllValues:StringEquals"
-        variable = "${local.github_provider}:aud"
+        variable = "${var.github_provider}:aud"
         values   = coalescelist(var.oidc_audiences, ["sts.amazonaws.com"])
       }
 
-      condition {
-        test     = "StringLike"
-        variable = "${local.github_provider}:sub"
-        # Strip `repo:` to normalize for cases where users may prepend it
-        values = [for subject in var.oidc_subjects : "repo:${trimprefix(subject, "repo:")}"]
+      dynamic "condition" {
+        for_each = length(var.oidc_subjects) > 0 ? [1] : []
+
+        content {
+          test     = "StringEquals"
+          variable = "${var.github_provider}:sub"
+          # Strip `repo:` to normalize for cases where users may prepend it
+          values = [for subject in var.oidc_subjects : "repo:${trimprefix(subject, "repo:")}"]
+        }
+      }
+
+      dynamic "condition" {
+        for_each = length(var.oidc_wildcard_subjects) > 0 ? [1] : []
+
+        content {
+          test     = "StringLike"
+          variable = "${var.github_provider}:sub"
+          # Strip `repo:` to normalize for cases where users may prepend it
+          values = [for subject in var.oidc_wildcard_subjects : "repo:${trimprefix(subject, "repo:")}"]
+        }
+      }
+
+      # Generic conditions
+      dynamic "condition" {
+        for_each = var.condition
+
+        content {
+          test     = condition.value.test
+          variable = condition.value.variable
+          values   = condition.value.values
+        }
       }
     }
   }
@@ -112,7 +151,7 @@ data "aws_iam_policy_document" "this" {
       sid = "BitbucketOidcAuth"
       actions = [
         "sts:TagSession",
-        "sts:AssumeRoleWithWebIdentity"
+        "sts:AssumeRoleWithWebIdentity",
       ]
 
       principals {
@@ -126,10 +165,35 @@ data "aws_iam_policy_document" "this" {
         values   = coalescelist(var.oidc_audiences, ["sts.amazonaws.com"])
       }
 
-      condition {
-        test     = "StringLike"
-        variable = "${local.bitbucket_provider}:sub"
-        values   = var.oidc_subjects
+      dynamic "condition" {
+        for_each = length(var.oidc_subjects) > 0 ? [1] : []
+
+        content {
+          test     = "StringEquals"
+          variable = "${local.bitbucket_provider}:sub"
+          values   = var.oidc_subjects
+        }
+      }
+
+      dynamic "condition" {
+        for_each = length(var.oidc_wildcard_subjects) > 0 ? [1] : []
+
+        content {
+          test     = "StringLike"
+          variable = "${local.bitbucket_provider}:sub"
+          values   = var.oidc_wildcard_subjects
+        }
+      }
+
+      # Generic conditions
+      dynamic "condition" {
+        for_each = var.condition
+
+        content {
+          test     = condition.value.test
+          variable = condition.value.variable
+          values   = condition.value.values
+        }
       }
     }
   }
@@ -139,8 +203,13 @@ data "aws_iam_policy_document" "this" {
     for_each = var.enable_saml ? [1] : []
 
     content {
-      effect  = "Allow"
-      actions = compact(distinct(concat(["sts:AssumeRoleWithSAML"], var.saml_trust_actions)))
+      effect = "Allow"
+      actions = compact(distinct(concat(
+        [
+          "sts:TagSession",
+          "sts:AssumeRoleWithSAML",
+        ],
+      var.saml_trust_actions)))
 
       principals {
         type        = "Federated"
@@ -151,6 +220,17 @@ data "aws_iam_policy_document" "this" {
         test     = "StringEquals"
         variable = "SAML:aud"
         values   = var.saml_endpoints
+      }
+
+      # Generic conditions
+      dynamic "condition" {
+        for_each = var.condition
+
+        content {
+          test     = condition.value.test
+          variable = condition.value.variable
+          values   = condition.value.values
+        }
       }
     }
   }
@@ -219,6 +299,68 @@ resource "aws_iam_role_policy_attachment" "this" {
 
   policy_arn = each.value
   role       = aws_iam_role.this[0].name
+}
+
+################################################################################
+# IAM Role Inline policy
+################################################################################
+
+locals {
+  create_iam_role_inline_policy = var.create && length(var.inline_policy_statements) > 0
+}
+
+data "aws_iam_policy_document" "inline" {
+  count = local.create_iam_role_inline_policy ? 1 : 0
+
+  dynamic "statement" {
+    for_each = var.inline_policy_statements != null ? var.inline_policy_statements : {}
+
+    content {
+      sid           = try(coalesce(statement.value.sid, statement.key))
+      actions       = statement.value.actions
+      not_actions   = statement.value.not_actions
+      effect        = statement.value.effect
+      resources     = statement.value.resources
+      not_resources = statement.value.not_resources
+
+      dynamic "principals" {
+        for_each = statement.value.principals != null ? statement.value.principals : []
+
+        content {
+          type        = principals.value.type
+          identifiers = principals.value.identifiers
+        }
+      }
+
+      dynamic "not_principals" {
+        for_each = statement.value.not_principals != null ? statement.value.not_principals : []
+
+        content {
+          type        = not_principals.value.type
+          identifiers = not_principals.value.identifiers
+        }
+      }
+
+      dynamic "condition" {
+        for_each = statement.value.condition != null ? statement.value.condition : []
+
+        content {
+          test     = condition.value.test
+          values   = condition.value.values
+          variable = condition.value.variable
+        }
+      }
+    }
+  }
+}
+
+resource "aws_iam_role_policy" "inline" {
+  count = local.create_iam_role_inline_policy ? 1 : 0
+
+  role        = aws_iam_role.this[0].name
+  name        = var.use_name_prefix ? null : var.name
+  name_prefix = var.use_name_prefix ? "${var.name}-" : null
+  policy      = data.aws_iam_policy_document.inline[0].json
 }
 
 ################################################################################

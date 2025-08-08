@@ -55,8 +55,10 @@ data "aws_iam_policy_document" "this" {
     content {
       sid = "ViewAccountInfo"
       actions = [
+        "iam:GetAccountSummary",
         "iam:GetAccountPasswordPolicy",
-        "iam:ListVirtualMFADevices"
+        "iam:ListAccountAliases",
+        "iam:ListVirtualMFADevices",
       ]
       resources = ["*"]
     }
@@ -69,7 +71,9 @@ data "aws_iam_policy_document" "this" {
       sid = "ManageOwnPasswords"
       actions = [
         "iam:ChangePassword",
-        "iam:GetUser"
+        "iam:GetLoginProfile",
+        "iam:GetUser",
+        "iam:UpdateLoginProfile",
       ]
       resources = local.user_resources
     }
@@ -84,7 +88,11 @@ data "aws_iam_policy_document" "this" {
         "iam:CreateAccessKey",
         "iam:DeleteAccessKey",
         "iam:ListAccessKeys",
-        "iam:UpdateAccessKey"
+        "iam:UpdateAccessKey",
+        "iam:GetAccessKeyLastUsed",
+        "iam:TagUser",
+        "iam:ListUserTags",
+        "iam:UntagUser",
       ]
       resources = local.user_resources
     }
@@ -168,14 +176,15 @@ data "aws_iam_policy_document" "this" {
     content {
       sid = "DenyAllExceptListedIfNoMFA"
       not_actions = [
-        "iam:ChangePassword",
         "iam:CreateVirtualMFADevice",
         "iam:EnableMFADevice",
         "iam:GetUser",
+        "iam:GetMFADevice",
         "iam:ListMFADevices",
         "iam:ListVirtualMFADevices",
         "iam:ResyncMFADevice",
-        "sts:GetSessionToken"
+        "sts:GetSessionToken",
+        "iam:ChangePassword",
       ]
       resources = ["*"]
 
