@@ -9,13 +9,47 @@ If you find a bug, please open an issue with supporting configuration to reprodu
 - `iam-assumable-role` has been renamed to `iam-role`
 - `iam-assumable-role-with-oidc` has been merged into `iam-role`
 - `iam-assumable-role-with-saml` has been merged into `iam-role`
-- `iam-assumable-roles` has been removed; `iam-role` should be used instead. See the [`iam-role` example](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-role) that shows an example replacement implementation.
-- `iam-assumable-roles-with-saml` has been removed; `iam-role` should be used instead. See the [`iam-role` example](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-role-saml) that shows an example replacement implementation.
+- `iam-assumable-roles` has been removed; `iam-role` should be used instead
+- `iam-assumable-roles-with-saml` has been removed; `iam-role` should be used instead
 - `iam-github-oidc-provider` has been renamed to `iam-oidc-provider`
-- `iam-github-oidc-role` has been merged into `iam-role`. See the [`iam-oidc-provider` example](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-oidc-provider)
-- `iam-group-with-assumable-roles-policy` has been removed; the renamed `iam-group` (was `iam-group-with-policies`) should be used instead
-- `iam-eks-role` has been removed; `iam-role-for-service-accounts` should be used instead
+- `iam-github-oidc-role` has been merged into `iam-role`
+- `iam-group-with-policies` has been renamed to `iam-group`
+- `iam-group-with-assumable-roles-policy` has been merged into `iam-group`
+- `iam-eks-role` has been removed; `iam-role-for-service-accounts` or [`eks-pod-identity`](https://github.com/terraform-aws-modules/terraform-aws-eks-pod-identity) should be used instead
 - `iam-policy` has been removed; the `aws_iam_policy` resource should be used directly instead
+
+```mermaid
+stateDiagram
+    direction LR
+
+    # Old
+    assumeRole: iam-assumable-role
+    assumeRoleOIDC: iam-assumable-role-with-oidc
+    assumeRoleSAML: iam-assumable-role-with-saml
+    assumeRoles: iam-assumable-roles
+    assumeRolesSAML: iam-assumable-roles-with-saml
+    githubOIDCProvider: iam-github-oidc-provider
+    githubOIDCRole: iam-github-oidc-role
+    groupWithAssumablePolicy: iam-group-with-assumable-roles-policy
+    groupWithPolicies: iam-group-with-policies
+
+    # New
+    group: iam-group
+    oidcProvider: iam-oidc-provider
+    role: iam-role
+
+    assumeRole --> role
+    assumeRoleOIDC --> role
+    assumeRoleSAML --> role
+    assumeRoles --> role
+    assumeRolesSAML --> role
+    githubOIDCRole --> role
+
+    groupWithAssumablePolicy --> group
+    groupWithPolicies --> group
+
+    githubOIDCProvider --> oidcProvider
+```
 
 ## Additional changes
 
