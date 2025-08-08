@@ -6,7 +6,7 @@ Creates IAM user, IAM login profile, IAM access key and uploads IAM SSH user pub
 
 **If possible, always use PGP encryption to prevent Terraform from keeping unencrypted password and access secret key in state file.**
 
-### Keybase pre-requisits
+### Keybase pre-requisites
 
 When `pgp_key` is specified as `keybase:username`, make sure that that user has already uploaded public key to keybase.io. For example, user with username `test` has done it properly and you can [verify it here](https://keybase.io/test/pgp_keys.asc).
 
