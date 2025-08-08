@@ -18,48 +18,6 @@ locals {
 }
 
 ################################################################################
-# IRSAv2 Roles
-################################################################################
-
-module "irsa_v2_empty" {
-  source = "../../modules/iam-role-for-service-accounts"
-
-  name = "${local.name}-v2"
-
-  enable_irsa_v2 = true
-
-  tags = local.tags
-}
-
-module "ebs_csi_irsa_v2" {
-  source = "../../modules/iam-role-for-service-accounts"
-
-  name = "ebs-csi-v2"
-
-  enable_irsa_v2        = true
-  attach_ebs_csi_policy = true
-
-  tags = local.tags
-}
-
-module "irsa_v2_custom_policy" {
-  source = "../../modules/iam-role-for-service-accounts"
-
-  name = "${local.name}-custom-name"
-
-  enable_irsa_v2 = true
-  policy_statements = {
-    DescribeEc2 = {
-      actions   = ["ec2:Describe*"]
-      effect    = "Allow"
-      resources = ["*"]
-    }
-  }
-
-  tags = local.tags
-}
-
-################################################################################
 # IRSA Roles
 ################################################################################
 
