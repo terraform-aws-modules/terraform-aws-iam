@@ -13,6 +13,13 @@ resource "aws_iam_user" "this" {
   tags = var.tags
 }
 
+resource "aws_iam_role_policy_attachment" "additional" {
+  for_each = { for k, v in var.policies : k => v if var.create }
+
+  role       = aws_iam_user.this[0].name
+  policy_arn = each.value
+}
+
 ################################################################################
 # User Login Profile
 ################################################################################

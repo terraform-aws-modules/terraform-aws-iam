@@ -1,4 +1,4 @@
-### AWS IAM ReadOnly Policy Terraform Module
+# AWS IAM ReadOnly Policy Terraform Module
 
 Creates an IAM policy that allows read-only access to the list of AWS services provided.
 

@@ -15,6 +15,7 @@ module "wrapper" {
   path                    = try(each.value.path, var.defaults.path, "/")
   permissions_boundary    = try(each.value.permissions_boundary, var.defaults.permissions_boundary, null)
   pgp_key                 = try(each.value.pgp_key, var.defaults.pgp_key, null)
+  policies                = try(each.value.policies, var.defaults.policies, {})
   ssh_key_encoding        = try(each.value.ssh_key_encoding, var.defaults.ssh_key_encoding, "SSH")
   ssh_public_key          = try(each.value.ssh_public_key, var.defaults.ssh_public_key, "")
   tags                    = try(each.value.tags, var.defaults.tags, {})

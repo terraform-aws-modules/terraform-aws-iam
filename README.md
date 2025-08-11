@@ -192,6 +192,10 @@ module "iam_role_saml" {
 
 ### IAM Role for EKS Service Accounts (IRSA)
 
+> [!TIP]
+> Upgrade to use EKS Pod Identity instead of IRSA
+> A similar module for EKS Pod Identity is available [here](https://github.com/terraform-aws-modules/terraform-aws-eks-pod-identity).
+
 Creates an IAM role that is suitable for EKS IAM role for service accounts (IRSA) with a set of pre-defined policies for common EKS addons.
 
 ```hcl

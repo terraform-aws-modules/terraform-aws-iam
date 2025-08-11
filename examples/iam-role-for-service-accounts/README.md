@@ -1,5 +1,9 @@
 # AWS IAM Role for Service Accounts in EKS
 
+> [!TIP]
+> Upgrade to use EKS Pod Identity instead of IRSA
+> A similar module for EKS Pod Identity is available [here](https://github.com/terraform-aws-modules/terraform-aws-eks-pod-identity).
+
 Configuration in this directory creates IAM roles that can be assumed by multiple EKS `ServiceAccount`s for various tasks.
 
 # Usage

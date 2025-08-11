@@ -38,6 +38,12 @@ variable "force_destroy" {
   default     = false
 }
 
+variable "policies" {
+  description = "Policies to attach to the IAM user in `{'static_name' = 'policy_arn'}` format"
+  type        = map(string)
+  default     = {}
+}
+
 ################################################################################
 # User Login Profile
 ################################################################################
