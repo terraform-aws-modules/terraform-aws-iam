@@ -1567,7 +1567,7 @@ data "aws_iam_policy_document" "velero" {
   }
 
   dynamic "statement" {
-    for_each = toset(var.velero_s3_kms_key_arns)
+    for_each = var.velero_s3_kms_key_arns
 
     content {
       actions = [
