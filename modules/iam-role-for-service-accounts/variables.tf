@@ -377,3 +377,33 @@ variable "attach_cloudwatch_observability_policy" {
   type        = bool
   default     = false
 }
+
+################################################################################
+# IAM Role Inline policy
+################################################################################
+
+variable "inline_policy_statements" {
+  description = "A map of IAM policy [statements](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#statement) for inline policy permissions"
+  type = map(object({
+    sid           = optional(string)
+    actions       = optional(list(string))
+    not_actions   = optional(list(string))
+    effect        = optional(string, "Allow")
+    resources     = optional(list(string))
+    not_resources = optional(list(string))
+    principals = optional(list(object({
+      type        = string
+      identifiers = list(string)
+    })))
+    not_principals = optional(list(object({
+      type        = string
+      identifiers = list(string)
+    })))
+    condition = optional(list(object({
+      test     = string
+      variable = string
+      values   = list(string)
+    })))
+  }))
+  default = null
+}

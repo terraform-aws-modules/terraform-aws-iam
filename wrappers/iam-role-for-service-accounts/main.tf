@@ -35,6 +35,7 @@ module "wrapper" {
   external_secrets_ssm_parameter_arns                             = try(each.value.external_secrets_ssm_parameter_arns, var.defaults.external_secrets_ssm_parameter_arns, [])
   fsx_lustre_csi_service_role_arns                                = try(each.value.fsx_lustre_csi_service_role_arns, var.defaults.fsx_lustre_csi_service_role_arns, ["arn:aws:iam::*:role/aws-service-role/s3.data-source.lustre.fsx.amazonaws.com/*"])
   fsx_openzfs_csi_service_role_arns                               = try(each.value.fsx_openzfs_csi_service_role_arns, var.defaults.fsx_openzfs_csi_service_role_arns, ["arn:aws:iam::*:role/aws-service-role/fsx.amazonaws.com/*"])
+  inline_policy_statements                                        = try(each.value.inline_policy_statements, var.defaults.inline_policy_statements, null)
   load_balancer_controller_targetgroup_arns                       = try(each.value.load_balancer_controller_targetgroup_arns, var.defaults.load_balancer_controller_targetgroup_arns, [])
   max_session_duration                                            = try(each.value.max_session_duration, var.defaults.max_session_duration, null)
   mountpoint_s3_csi_bucket_arns                                   = try(each.value.mountpoint_s3_csi_bucket_arns, var.defaults.mountpoint_s3_csi_bucket_arns, [])

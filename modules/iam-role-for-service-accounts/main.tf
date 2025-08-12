@@ -163,3 +163,65 @@ resource "aws_iam_role_policy_attachment" "this" {
   role       = aws_iam_role.this[0].name
   policy_arn = aws_iam_policy.this[0].arn
 }
+
+################################################################################
+# IAM Role Inline policy
+################################################################################
+
+locals {
+  create_iam_role_inline_policy = var.create && length(var.inline_policy_statements) > 0
+}
+
+data "aws_iam_policy_document" "inline" {
+  count = local.create_iam_role_inline_policy ? 1 : 0
+
+  dynamic "statement" {
+    for_each = var.inline_policy_statements != null ? var.inline_policy_statements : {}
+
+    content {
+      sid           = try(coalesce(statement.value.sid, statement.key))
+      actions       = statement.value.actions
+      not_actions   = statement.value.not_actions
+      effect        = statement.value.effect
+      resources     = statement.value.resources
+      not_resources = statement.value.not_resources
+
+      dynamic "principals" {
+        for_each = statement.value.principals != null ? statement.value.principals : []
+
+        content {
+          type        = principals.value.type
+          identifiers = principals.value.identifiers
+        }
+      }
+
+      dynamic "not_principals" {
+        for_each = statement.value.not_principals != null ? statement.value.not_principals : []
+
+        content {
+          type        = not_principals.value.type
+          identifiers = not_principals.value.identifiers
+        }
+      }
+
+      dynamic "condition" {
+        for_each = statement.value.condition != null ? statement.value.condition : []
+
+        content {
+          test     = condition.value.test
+          values   = condition.value.values
+          variable = condition.value.variable
+        }
+      }
+    }
+  }
+}
+
+resource "aws_iam_role_policy" "inline" {
+  count = local.create_iam_role_inline_policy ? 1 : 0
+
+  role        = aws_iam_role.this[0].name
+  name        = var.use_name_prefix ? null : var.name
+  name_prefix = var.use_name_prefix ? "${var.name}-" : null
+  policy      = data.aws_iam_policy_document.inline[0].json
+}
