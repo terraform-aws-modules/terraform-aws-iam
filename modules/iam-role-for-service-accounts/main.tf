@@ -169,7 +169,7 @@ resource "aws_iam_role_policy_attachment" "this" {
 ################################################################################
 
 locals {
-  create_iam_role_inline_policy = var.create && length(var.inline_policy_statements) > 0
+  create_iam_role_inline_policy = var.create && var.inline_policy_statements
 }
 
 data "aws_iam_policy_document" "inline" {

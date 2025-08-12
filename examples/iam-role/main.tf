@@ -141,6 +141,26 @@ module "iam_role_github_oidc" {
 }
 
 ################################################################################
+# IAM Role - CircleCI OIDC
+################################################################################
+
+module "iam_role_github_oidc" {
+  source = "../../modules/iam-role"
+
+  name = local.name
+
+  enable_oidc        = true
+  oidc_provider_urls = ["oidc.circleci.com/org/<CIRCLECI_ORG_UUID>"]
+  oidc_audiences     = ["<CIRCLECI_ORG_UUID>"]
+
+  policies = {
+    AmazonEC2ContainerRegistryPowerUser = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPowerUser"
+  }
+
+  tags = local.tags
+}
+
+################################################################################
 # IAM Role - SAML 2.0
 ################################################################################
 

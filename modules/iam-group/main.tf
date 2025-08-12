@@ -39,7 +39,7 @@ resource "aws_iam_group_membership" "this" {
 ################################################################################
 
 locals {
-  create_policy = var.create && var.create_policy && (var.enable_self_management_permissions || length(var.permission_statements) > 0)
+  create_policy = var.create && var.create_policy && (var.enable_self_management_permissions || var.permission_statements != null)
 
   policy_name = try(coalesce(var.policy_name, var.name), "")
 }
@@ -174,7 +174,8 @@ data "aws_iam_policy_document" "this" {
     for_each = var.enable_self_management_permissions && var.enable_mfa_enforcment ? [1] : []
 
     content {
-      sid = "DenyAllExceptListedIfNoMFA"
+      sid    = "DenyAllExceptListedIfNoMFA"
+      effect = "Deny"
       not_actions = [
         "iam:CreateVirtualMFADevice",
         "iam:EnableMFADevice",

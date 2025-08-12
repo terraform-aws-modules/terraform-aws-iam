@@ -112,19 +112,19 @@ variable "oidc_provider_urls" {
 
 variable "oidc_subjects" {
   description = "The fully qualified OIDC subjects to be added to the role policy"
-  type        = set(string)
+  type        = list(string)
   default     = []
 }
 
 variable "oidc_wildcard_subjects" {
   description = "The OIDC subject using wildcards to be added to the role policy"
-  type        = set(string)
+  type        = list(string)
   default     = []
 }
 
 variable "oidc_audiences" {
   description = "The audience to be added to the role policy. Set to sts.amazonaws.com for cross-account assumable role. Leave empty otherwise."
-  type        = set(string)
+  type        = list(string)
   default     = []
 }
 
