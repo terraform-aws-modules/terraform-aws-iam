@@ -1567,10 +1567,9 @@ data "aws_iam_policy_document" "velero" {
   }
 
   dynamic "statement" {
-    for_each = length(var.velero_s3_kms_key_arns) > 0 ? [1] : []
+    for_each = toset(var.velero_s3_kms_key_arns)
 
     content {
-      sid = "KMSReadWrite"
       actions = [
         "kms:Encrypt",
         "kms:Decrypt",
@@ -1578,7 +1577,7 @@ data "aws_iam_policy_document" "velero" {
         "kms:GenerateDataKey*",
         "kms:DescribeKey"
       ]
-      resources = var.velero_s3_kms_key_arns
+      resources = [statement.value]
     }
   }
 }
