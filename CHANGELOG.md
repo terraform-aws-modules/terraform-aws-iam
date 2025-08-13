@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.0.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.60.0...v6.0.0) (2025-08-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* Upgrade AWS provider and min required Terraform version to `6.0` and `1.5.7` respectively (#585)
+
+### Features
+
+* Upgrade AWS provider and min required Terraform version to `6.0` and `1.5.7` respectively ([#585](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/585)) ([31b31d7](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/31b31d77fcd898118c1f0d6c24dc2609a893c523))
+
 ## [5.60.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.59.0...v5.60.0) (2025-08-08)
 
 
