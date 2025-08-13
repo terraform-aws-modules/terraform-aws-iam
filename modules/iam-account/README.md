@@ -32,7 +32,7 @@ aws_iam_account_alias.this: Error creating account alias with name my-account-al
 If you want to manage IAM alias using Terraform (otherwise why are you reading this?) you need to import this resource like this:
 
 ```sh
-$ terraform import module.iam_account.aws_iam_account_alias.this this
+$ terraform import "module.iam_account.aws_iam_account_alias.this[0]" this
 
 module.iam_account.aws_iam_account_alias.this: Importing from ID "this"...
 module.iam_account.aws_iam_account_alias.this: Import complete!

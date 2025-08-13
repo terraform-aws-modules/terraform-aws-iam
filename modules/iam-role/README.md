@@ -10,7 +10,7 @@ The defaults provided by the module are suitable for GitHub Free, Pro, & Team, i
 
 ```hcl
 module "iam_oidc_role" {
-  source    = "terraform-aws-modules/iam/aws//modules/iam-oidc-role"
+  source = "terraform-aws-modules/iam/aws//modules/iam-oidc-role"
 
   enable_github_oidc = true
 
@@ -33,7 +33,7 @@ For GitHub Enterprise Server, users will need to provide value for the `oidc_aud
 
 ```hcl
 module "iam_oidc_role" {
-  source    = "terraform-aws-modules/iam/aws//modules/iam-oidc-role"
+  source = "terraform-aws-modules/iam/aws//modules/iam-oidc-role"
 
   enable_github_oidc = true
 

@@ -12,7 +12,7 @@ See more details [here](https://docs.github.com/en/actions/deployment/security-h
 
 ```hcl
 module "iam_oidc_provider" {
-  source    = "terraform-aws-modules/iam/aws//modules/iam-oidc-provider"
+  source = "terraform-aws-modules/iam/aws//modules/iam-oidc-provider"
 
   url = "https://token.actions.githubusercontent.com"
 
@@ -28,7 +28,7 @@ See more details [here](https://support.atlassian.com/bitbucket-cloud/docs/integ
 
 ```hcl
 module "iam_oidc_provider" {
-  source    = "terraform-aws-modules/iam/aws//modules/iam-oidc-provider"
+  source = "terraform-aws-modules/iam/aws//modules/iam-oidc-provider"
 
   url = "https://api.bitbucket.org/2.0/workspaces/example-workspace/pipelines-config/identity/oidc"
 

@@ -18,7 +18,7 @@ output "group_name" {
 }
 
 output "group_unique_id" {
-  description = " The unique ID assigned by AWS"
+  description = "The unique ID assigned by AWS"
   value       = module.iam_group.unique_id
 }
 
