@@ -1,4 +1,4 @@
-variable "create_policy" {
+variable "create" {
   description = "Whether to create the IAM policy"
   type        = bool
   default     = true
@@ -19,13 +19,13 @@ variable "name_prefix" {
 variable "path" {
   description = "The path of the policy in IAM"
   type        = string
-  default     = "/"
+  default     = null
 }
 
 variable "description" {
   description = "The description of the policy"
   type        = string
-  default     = "IAM Policy"
+  default     = null
 }
 
 variable "policy" {

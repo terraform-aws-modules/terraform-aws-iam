@@ -1,13 +1,19 @@
-data "aws_caller_identity" "this" {
-  count = var.get_caller_identity ? 1 : 0
-}
+################################################################################
+# Alias
+################################################################################
 
 resource "aws_iam_account_alias" "this" {
+  count = var.create ? 1 : 0
+
   account_alias = var.account_alias
 }
 
+################################################################################
+# Password Policy
+################################################################################
+
 resource "aws_iam_account_password_policy" "this" {
-  count = var.create_account_password_policy ? 1 : 0
+  count = var.create && var.create_account_password_policy ? 1 : 0
 
   max_password_age               = var.max_password_age
   minimum_password_length        = var.minimum_password_length

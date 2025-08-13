@@ -2,17 +2,20 @@ provider "aws" {
   region = "eu-west-1"
 }
 
-data "aws_iam_policy_document" "bucket_policy" {
-  statement {
-    sid       = "AllowFullS3Access"
-    actions   = ["s3:ListAllMyBuckets"]
-    resources = ["*"]
+locals {
+  name = "ex-${basename(path.cwd)}"
+
+  tags = {
+    Example    = local.name
+    GithubRepo = "terraform-aws-iam"
+    GithubOrg  = "terraform-aws-modules"
   }
 }
 
-#########################################
-# IAM policy
-#########################################
+################################################################################
+# IAM Policy
+################################################################################
+
 module "iam_policy" {
   source = "../../modules/iam-policy"
 
@@ -20,24 +23,22 @@ module "iam_policy" {
   path        = "/"
   description = "My example policy"
 
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
+  policy = <<-EOF
     {
-      "Action": [
-        "ec2:Describe*"
-      ],
-      "Effect": "Allow",
-      "Resource": "*"
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Action": [
+            "ec2:Describe*"
+          ],
+          "Effect": "Allow",
+          "Resource": "*"
+        }
+      ]
     }
-  ]
-}
-EOF
+  EOF
 
-  tags = {
-    PolicyDescription = "Policy created using heredoc policy"
-  }
+  tags = local.tags
 }
 
 module "iam_policy_from_data_source" {
@@ -49,13 +50,23 @@ module "iam_policy_from_data_source" {
 
   policy = data.aws_iam_policy_document.bucket_policy.json
 
-  tags = {
-    PolicyDescription = "Policy created using example from data source"
-  }
+  tags = local.tags
 }
 
-module "iam_policy_optional" {
+module "iam_policy_disabled" {
   source = "../../modules/iam-policy"
 
-  create_policy = false
+  create = false
+}
+
+################################################################################
+# Supporting resources
+################################################################################
+
+data "aws_iam_policy_document" "bucket_policy" {
+  statement {
+    sid       = "AllowFullS3Access"
+    actions   = ["s3:ListAllMyBuckets"]
+    resources = ["*"]
+  }
 }

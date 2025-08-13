@@ -1,0 +1,35 @@
+module "wrapper" {
+  source = "../../modules/iam-role"
+
+  for_each = var.items
+
+  create                           = try(each.value.create, var.defaults.create, true)
+  create_inline_policy             = try(each.value.create_inline_policy, var.defaults.create_inline_policy, false)
+  create_instance_profile          = try(each.value.create_instance_profile, var.defaults.create_instance_profile, false)
+  description                      = try(each.value.description, var.defaults.description, null)
+  enable_bitbucket_oidc            = try(each.value.enable_bitbucket_oidc, var.defaults.enable_bitbucket_oidc, false)
+  enable_github_oidc               = try(each.value.enable_github_oidc, var.defaults.enable_github_oidc, false)
+  enable_oidc                      = try(each.value.enable_oidc, var.defaults.enable_oidc, false)
+  enable_saml                      = try(each.value.enable_saml, var.defaults.enable_saml, false)
+  github_provider                  = try(each.value.github_provider, var.defaults.github_provider, "token.actions.githubusercontent.com")
+  inline_policy_permissions        = try(each.value.inline_policy_permissions, var.defaults.inline_policy_permissions, null)
+  max_session_duration             = try(each.value.max_session_duration, var.defaults.max_session_duration, null)
+  name                             = try(each.value.name, var.defaults.name, null)
+  oidc_account_id                  = try(each.value.oidc_account_id, var.defaults.oidc_account_id, null)
+  oidc_audiences                   = try(each.value.oidc_audiences, var.defaults.oidc_audiences, [])
+  oidc_provider_urls               = try(each.value.oidc_provider_urls, var.defaults.oidc_provider_urls, [])
+  oidc_subjects                    = try(each.value.oidc_subjects, var.defaults.oidc_subjects, [])
+  oidc_wildcard_subjects           = try(each.value.oidc_wildcard_subjects, var.defaults.oidc_wildcard_subjects, [])
+  override_inline_policy_documents = try(each.value.override_inline_policy_documents, var.defaults.override_inline_policy_documents, [])
+  path                             = try(each.value.path, var.defaults.path, null)
+  permissions_boundary             = try(each.value.permissions_boundary, var.defaults.permissions_boundary, null)
+  policies                         = try(each.value.policies, var.defaults.policies, {})
+  saml_endpoints                   = try(each.value.saml_endpoints, var.defaults.saml_endpoints, ["https://signin.aws.amazon.com/saml"])
+  saml_provider_ids                = try(each.value.saml_provider_ids, var.defaults.saml_provider_ids, [])
+  saml_trust_actions               = try(each.value.saml_trust_actions, var.defaults.saml_trust_actions, [])
+  source_inline_policy_documents   = try(each.value.source_inline_policy_documents, var.defaults.source_inline_policy_documents, [])
+  tags                             = try(each.value.tags, var.defaults.tags, {})
+  trust_policy_conditions          = try(each.value.trust_policy_conditions, var.defaults.trust_policy_conditions, [])
+  trust_policy_permissions         = try(each.value.trust_policy_permissions, var.defaults.trust_policy_permissions, null)
+  use_name_prefix                  = try(each.value.use_name_prefix, var.defaults.use_name_prefix, true)
+}

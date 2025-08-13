@@ -1,5 +1,9 @@
+################################################################################
+# IAM Policy
+################################################################################
+
 output "id" {
-  description = "The policy ID"
+  description = "The policy's ID"
   value       = module.read_only_iam_policy.id
 }
 
@@ -8,22 +12,17 @@ output "arn" {
   value       = module.read_only_iam_policy.arn
 }
 
-output "description" {
-  description = "The description of the policy"
-  value       = module.read_only_iam_policy.description
-}
-
 output "name" {
   description = "The name of the policy"
   value       = module.read_only_iam_policy.name
 }
 
-output "path" {
-  description = "The path of the policy in IAM"
-  value       = module.read_only_iam_policy.path
-}
-
 output "policy" {
   description = "The policy document"
   value       = module.read_only_iam_policy.policy
+}
+
+output "policy_json" {
+  description = "Policy document JSON"
+  value       = module.read_only_iam_policy.policy_json
 }

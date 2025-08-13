@@ -1,4 +1,4 @@
-# IAM user example
+# IAM Policy Example
 
 Configuration in this directory creates IAM policies.
 
@@ -19,22 +19,22 @@ Run `terraform destroy` when you don't need these resources.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.7 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_iam_policy"></a> [iam\_policy](#module\_iam\_policy) | ../../modules/iam-policy | n/a |
+| <a name="module_iam_policy_disabled"></a> [iam\_policy\_disabled](#module\_iam\_policy\_disabled) | ../../modules/iam-policy | n/a |
 | <a name="module_iam_policy_from_data_source"></a> [iam\_policy\_from\_data\_source](#module\_iam\_policy\_from\_data\_source) | ../../modules/iam-policy | n/a |
-| <a name="module_iam_policy_optional"></a> [iam\_policy\_optional](#module\_iam\_policy\_optional) | ../../modules/iam-policy | n/a |
 
 ## Resources
 
@@ -51,9 +51,7 @@ No inputs.
 | Name | Description |
 |------|-------------|
 | <a name="output_arn"></a> [arn](#output\_arn) | The ARN assigned by AWS to this policy |
-| <a name="output_description"></a> [description](#output\_description) | The description of the policy |
 | <a name="output_id"></a> [id](#output\_id) | The policy ID |
 | <a name="output_name"></a> [name](#output\_name) | The name of the policy |
-| <a name="output_path"></a> [path](#output\_path) | The path of the policy in IAM |
 | <a name="output_policy"></a> [policy](#output\_policy) | The policy document |
 <!-- END_TF_DOCS -->

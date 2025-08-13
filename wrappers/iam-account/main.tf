@@ -5,8 +5,8 @@ module "wrapper" {
 
   account_alias                  = try(each.value.account_alias, var.defaults.account_alias)
   allow_users_to_change_password = try(each.value.allow_users_to_change_password, var.defaults.allow_users_to_change_password, true)
+  create                         = try(each.value.create, var.defaults.create, true)
   create_account_password_policy = try(each.value.create_account_password_policy, var.defaults.create_account_password_policy, true)
-  get_caller_identity            = try(each.value.get_caller_identity, var.defaults.get_caller_identity, true)
   hard_expiry                    = try(each.value.hard_expiry, var.defaults.hard_expiry, false)
   max_password_age               = try(each.value.max_password_age, var.defaults.max_password_age, 0)
   minimum_password_length        = try(each.value.minimum_password_length, var.defaults.minimum_password_length, 8)
