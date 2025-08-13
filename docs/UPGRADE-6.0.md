@@ -364,13 +364,16 @@ module "iam_role" {
 
 ##### State Changes
 
+Remove all prior policy attachments (that are marked for deletion in `terraform plan`).
+Policies will stay attached to the role but new attachment IDs will be created on next apply
+
 ```sh
-terraform state mv "module.iam_role.aws_iam_role_policy_attachment.admin[0]" 'module.iam_role.aws_iam_role_policy_attachment.this["AdministratorAccess"]'
+terraform state rm "module.iam_role.aws_iam_role_policy_attachment.admin[0]"
 
 # One move command for each ARN in prior custom_role_policy_arns
-terraform state mv "module.iam_role.aws_iam_role_policy_attachment.custom[0]" 'module.iam_role.aws_iam_role_policy_attachment.this["AmazonCognitoReadOnly"]'
-terraform state mv "module.iam_role.aws_iam_role_policy_attachment.custom[1]" 'module.iam_role.aws_iam_role_policy_attachment.this["AlexaForBusinessFullAccess"]'
-terraform state mv "module.iam_role.aws_iam_role_policy_attachment.custom[2]" 'module.iam_role.aws_iam_role_policy_attachment.this["custom"]'
+terraform state rm "module.iam_role.aws_iam_role_policy_attachment.custom[0]"
+terraform state rm "module.iam_role.aws_iam_role_policy_attachment.custom[1]"
+terraform state rm "module.iam_role.aws_iam_role_policy_attachment.custom[2]"
 ```
 
 #### `iam-assumable-role-with-oidc` -> `iam-role`
@@ -410,9 +413,12 @@ module "iam_role" {
 
 ##### State Changes
 
+Remove all prior policy attachments (that are marked for deletion in `terraform plan`).
+Policies will stay attached to the role but new attachment IDs will be created on next apply
+
 ```sh
 # One move command for each ARN in prior custom_role_policy_arns
-terraform state mv "module.iam_role.aws_iam_role_policy_attachment.custom[0]" 'module.iam_role.aws_iam_role_policy_attachment.this["AmazonEC2ContainerRegistryPowerUser"]'
+terraform state rm "module.iam_role.aws_iam_role_policy_attachment.custom[0]"
 ```
 
 #### `iam-assumable-role-with-saml` -> `iam-role`
@@ -453,9 +459,12 @@ resource "aws_iam_saml_provider" "second_idp_saml" {
 
 ##### State Changes
 
+Remove all prior policy attachments (that are marked for deletion in `terraform plan`).
+Policies will stay attached to the role but new attachment IDs will be created on next apply
+
 ```sh
 # One move command for each ARN in prior custom_role_policy_arns
-terraform state mv "module.iam_role.aws_iam_role_policy_attachment.custom[0]" 'module.iam_role.aws_iam_role_policy_attachment.this["ReadOnlyAccess"]'
+terraform state rm "module.iam_role.aws_iam_role_policy_attachment.custom[0]"
 ```
 
 #### `iam-assumable-roles` -> `iam-role`
@@ -563,14 +572,17 @@ module "iam_role_poweruser" {
 
 ##### State Changes
 
+Remove all prior policy attachments (that are marked for deletion in `terraform plan`).
+Policies will stay attached to the role but new attachment IDs will be created on next apply
+
 ```sh
 terraform state mv "module.iam_assumable_roles.aws_iam_role.admin[0]" "module.iam_role_admin.aws_iam_role.this[0]"
-terraform state mv "module.iam_assumable_roles.aws_iam_role_policy_attachment.admin[0]" 'module.iam_role_admin.aws_iam_role_policy_attachment.this["AdministratorAccess"]'
+terraform state rm "module.iam_assumable_roles.aws_iam_role_policy_attachment.admin[0]"
 
 terraform state mv "module.iam_assumable_roles.aws_iam_role.poweruser[0]" "module.iam_role_poweruser.aws_iam_role.this[0]"
 # One move command for each ARN in prior `poweruser_role_policy_arns`
-terraform state mv "module.iam_assumable_roles.aws_iam_role_policy_attachment.poweruser[0]" 'module.iam_role_poweruser.aws_iam_role_policy_attachment.this["Billing"]'
-terraform state mv "module.iam_assumable_roles.aws_iam_role_policy_attachment.poweruser[1]" 'module.iam_role_poweruser.aws_iam_role_policy_attachment.this["AWSSupportAccess"]'
+terraform state rm "module.iam_assumable_roles.aws_iam_role_policy_attachment.poweruser[0]"
+terraform state rm "module.iam_assumable_roles.aws_iam_role_policy_attachment.poweruser[1]"
 ```
 
 #### `iam-assumable-roles-with-saml` -> `iam-role`
@@ -644,12 +656,15 @@ module "iam_role_poweruser" {
 
 ##### State Changes
 
+Remove all prior policy attachments (that are marked for deletion in `terraform plan`).
+Policies will stay attached to the role but new attachment IDs will be created on next apply
+
 ```sh
 terraform state mv "module.iam_assumable_roles.aws_iam_role.admin[0]" "module.iam_role_admin.aws_iam_role.this[0]"
-terraform state mv "module.iam_assumable_roles.aws_iam_role_policy_attachment.admin[0]" 'module.iam_role_admin.aws_iam_role_policy_attachment.this["AdministratorAccess"]'
+terraform state rm "module.iam_assumable_roles.aws_iam_role_policy_attachment.admin[0]"
 
 terraform state mv "module.iam_assumable_roles.aws_iam_role.poweruser[0]" "module.iam_role_poweruser.aws_iam_role.this[0]"
-terraform state mv "module.iam_assumable_roles.aws_iam_role_policy_attachment.poweruser[0]" 'module.iam_role_poweruser.aws_iam_role_policy_attachment.this["PowerUserAccess"]'
+terraform state rm "module.iam_assumable_roles.aws_iam_role_policy_attachment.poweruser[0]"
 ```
 
 #### `iam-eks-role` -> `iam-role-for-service-accounts`
@@ -789,9 +804,12 @@ module "iam_user" {
 
 ##### State Changes
 
+Remove all prior policy attachments (that are marked for deletion in `terraform plan`).
+Policies will stay attached to the role but new attachment IDs will be created on next apply
+
 ```sh
 # One move command for each ARN in prior `custom_group_policy_arns`
-terraform state mv "module.iam_group.aws_iam_group_policy_attachment.custom_arns[0]" 'module.iam_group.aws_iam_group_policy_attachment.additional["AmazonS3FullAccess"]'
+terraform state rm "module.iam_group.aws_iam_group_policy_attachment.custom_arns[0]"
 ```
 
 #### `iam-policy`
@@ -823,6 +841,9 @@ module "iam_user" {
 
 ##### State Changes
 
+Remove all prior policy attachments (that are marked for deletion in `terraform plan`).
+Policies will stay attached to the role but new attachment IDs will be created on next apply
+
 ```sh
-terraform state mv "module.iam_user[0].aws_iam_user_policy_attachment.this[0]" "module.iam_user[0].aws_iam_user_policy_attachment.this["S3ReadOnly"]"
+terraform state rm "module.iam_user[0].aws_iam_user_policy_attachment.this[0]"
 ```
