@@ -83,6 +83,40 @@ module "iam_oidc_provider" {
 }
 ```
 
+### IAM Policy
+
+Creates an IAM policy.
+
+```hcl
+module "iam_policy" {
+  source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
+
+  name        = "example"
+  path        = "/"
+  description = "My example policy"
+
+  policy = <<-EOF
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Action": [
+            "ec2:Describe*"
+          ],
+          "Effect": "Allow",
+          "Resource": "*"
+        }
+      ]
+    }
+  EOF
+
+  tags = {
+    Terraform   = "true"
+    Environment = "dev"
+  }
+}
+```
+
 ### IAM ReadOnly Policy
 
 Creates an IAM policy that allows read-only access to the list of AWS services provided.
@@ -248,6 +282,7 @@ module "iam_user" {
 - [iam-account](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-account) - Set AWS account alias and password policy
 - [iam-group](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-group) - IAM group with users who are allowed to assume IAM roles in another AWS account and have access to specified IAM policies
 - [iam-oidc-provider](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-oidc-provider) - Create an OpenID connect provider and IAM role which can be assumed from specified subjects federated from the OIDC provider
+- [iam-policy](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-policy) - Create an IAM policy
 - [iam-read-only-policy](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-read-only-policy) - Create IAM read-only policy
 - [iam-role](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-role) - Create individual IAM role which can be assumed from specified ARNs (AWS accounts, IAM users, etc)
 - [iam-role-for-service-accounts](https://github.com/terraform-aws-modules/terraform-aws-iam/tree/master/examples/iam-role-for-service-accounts) - Create IAM role for service accounts (IRSA) for use within EKS clusters

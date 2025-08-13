@@ -22,7 +22,6 @@ If you find a bug, please open an issue with supporting configuration to reprodu
 - `iam-group-with-policies` has been renamed to `iam-group`
 - `iam-group-with-assumable-roles-policy` has been merged into `iam-group`
 - `iam-eks-role` has been removed; `iam-role-for-service-accounts` or [`eks-pod-identity`](https://github.com/terraform-aws-modules/terraform-aws-eks-pod-identity) should be used instead
-- `iam-policy` has been removed; the `aws_iam_policy` resource should be used directly instead
 - `iam-role-for-service-accounts-eks` has been renamed to `iam-role-for-service-accounts`
     - Individual policy creation and attachment has been consolidated under one policy creation and attachment
     - Default values that enable permissive permissions have been removed; users will need to be explicit about the scope of access (i.e. ARNs) they provide when enabling permissions
@@ -93,6 +92,8 @@ stateDiagram
         - `assumable_roles`
     - `iam-oidc-provider`
         - `additional_thumbprints` - no longer required by GitHub
+    - `iam-policy`
+        - None
     - `iam-read-only-policy`
         - `additional_policy_json` - use `source_inline_policy_documents` or `override_inline_policy_documents` instead
     - `iam-role`
@@ -140,6 +141,8 @@ stateDiagram
         - `aws_account_id` -> `users_account_id`
     - `iam-oidc-provider`
         - None
+    - `iam-policy`
+        - `create_policy` -> `create`
     - `iam-read-only-policy`
         - `name_prefix` (string) -> `use_name_prefix` (bool)
     - `iam-role`
@@ -179,6 +182,8 @@ stateDiagram
         - `enable_mfa_enforcment`
     - `iam-oidc-provider`
         - None
+    - `iam-policy`
+        - None
     - `iam-read-only-policy`
         - `create`
         - `source_policy_documents`
@@ -215,6 +220,9 @@ stateDiagram
         - `aws_account_id`
     - `iam-oidc-provider`
         - None
+    - `iam-policy`
+        - `description`
+        - `path`
     - `iam-read-only-policy`
         - `description`
         - `path`
@@ -245,6 +253,8 @@ stateDiagram
         - `group_arn` -> `arn`
         - `group_users` -> `users`
     - `iam-oidc-provider`
+        - None
+    - `iam-policy`
         - None
     - `iam-read-only-policy`
         - None
@@ -786,64 +796,7 @@ terraform state mv "module.iam_group.aws_iam_group_policy_attachment.custom_arns
 
 #### `iam-policy`
 
-##### Before `v5.60`
-
-```hcl
-module "iam_policy" {
-  source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
-  version = "~> 5.60"
-
-  name_prefix = "example-"
-  path        = "/"
-  description = "My example policy"
-
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": [
-        "ec2:Describe*"
-      ],
-      "Effect": "Allow",
-      "Resource": "*"
-    }
-  ]
-}
-EOF
-}
-```
-
-##### After `v6.0`
-
-```hcl
-resource "aws_iam_policy" "example" {
-  name_prefix = "example-"
-  path        = "/"
-  description = "My example policy"
-
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": [
-        "ec2:Describe*"
-      ],
-      "Effect": "Allow",
-      "Resource": "*"
-    }
-  ]
-}
-EOF
-}
-```
-
-##### State Changes
-
-```sh
-terraform state mv "module.iam_policy.aws_iam_policy.policy[0]" aws_iam_policy.example
-```
+None
 
 #### `iam-read-only-policy`
 
