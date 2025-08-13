@@ -368,12 +368,8 @@ Remove all prior policy attachments (that are marked for deletion in `terraform 
 Policies will stay attached to the role but new attachment IDs will be created on next apply
 
 ```sh
-terraform state rm "module.iam_role.aws_iam_role_policy_attachment.admin[0]"
-
-# One move command for each ARN in prior custom_role_policy_arns
-terraform state rm "module.iam_role.aws_iam_role_policy_attachment.custom[0]"
-terraform state rm "module.iam_role.aws_iam_role_policy_attachment.custom[1]"
-terraform state rm "module.iam_role.aws_iam_role_policy_attachment.custom[2]"
+terraform state rm module.iam_role.aws_iam_role_policy_attachment.admin
+terraform state rm module.iam_role.aws_iam_role_policy_attachment.custom
 ```
 
 #### `iam-assumable-role-with-oidc` -> `iam-role`
@@ -417,8 +413,7 @@ Remove all prior policy attachments (that are marked for deletion in `terraform 
 Policies will stay attached to the role but new attachment IDs will be created on next apply
 
 ```sh
-# One move command for each ARN in prior custom_role_policy_arns
-terraform state rm "module.iam_role.aws_iam_role_policy_attachment.custom[0]"
+terraform state rm module.iam_role.aws_iam_role_policy_attachment.custom
 ```
 
 #### `iam-assumable-role-with-saml` -> `iam-role`
@@ -463,8 +458,7 @@ Remove all prior policy attachments (that are marked for deletion in `terraform 
 Policies will stay attached to the role but new attachment IDs will be created on next apply
 
 ```sh
-# One move command for each ARN in prior custom_role_policy_arns
-terraform state rm "module.iam_role.aws_iam_role_policy_attachment.custom[0]"
+terraform state rm module.iam_role.aws_iam_role_policy_attachment.custom
 ```
 
 #### `iam-assumable-roles` -> `iam-role`
@@ -577,12 +571,10 @@ Policies will stay attached to the role but new attachment IDs will be created o
 
 ```sh
 terraform state mv "module.iam_assumable_roles.aws_iam_role.admin[0]" "module.iam_role_admin.aws_iam_role.this[0]"
-terraform state rm "module.iam_assumable_roles.aws_iam_role_policy_attachment.admin[0]"
+terraform state rm module.iam_assumable_roles.aws_iam_role_policy_attachment.admin
 
 terraform state mv "module.iam_assumable_roles.aws_iam_role.poweruser[0]" "module.iam_role_poweruser.aws_iam_role.this[0]"
-# One move command for each ARN in prior `poweruser_role_policy_arns`
-terraform state rm "module.iam_assumable_roles.aws_iam_role_policy_attachment.poweruser[0]"
-terraform state rm "module.iam_assumable_roles.aws_iam_role_policy_attachment.poweruser[1]"
+terraform state rm module.iam_assumable_roles.aws_iam_role_policy_attachment.poweruser
 ```
 
 #### `iam-assumable-roles-with-saml` -> `iam-role`
@@ -661,10 +653,10 @@ Policies will stay attached to the role but new attachment IDs will be created o
 
 ```sh
 terraform state mv "module.iam_assumable_roles.aws_iam_role.admin[0]" "module.iam_role_admin.aws_iam_role.this[0]"
-terraform state rm "module.iam_assumable_roles.aws_iam_role_policy_attachment.admin[0]"
+terraform state rm module.iam_assumable_roles.aws_iam_role_policy_attachment.admin
 
 terraform state mv "module.iam_assumable_roles.aws_iam_role.poweruser[0]" "module.iam_role_poweruser.aws_iam_role.this[0]"
-terraform state rm "module.iam_assumable_roles.aws_iam_role_policy_attachment.poweruser[0]"
+terraform state rm module.iam_assumable_roles.aws_iam_role_policy_attachment.poweruser
 ```
 
 #### `iam-eks-role` -> `iam-role-for-service-accounts`
@@ -808,8 +800,7 @@ Remove all prior policy attachments (that are marked for deletion in `terraform 
 Policies will stay attached to the role but new attachment IDs will be created on next apply
 
 ```sh
-# One move command for each ARN in prior `custom_group_policy_arns`
-terraform state rm "module.iam_group.aws_iam_group_policy_attachment.custom_arns[0]"
+terraform state rm module.iam_group.aws_iam_group_policy_attachment.custom_arns
 ```
 
 #### `iam-policy`
@@ -845,5 +836,5 @@ Remove all prior policy attachments (that are marked for deletion in `terraform 
 Policies will stay attached to the role but new attachment IDs will be created on next apply
 
 ```sh
-terraform state rm "module.iam_user[0].aws_iam_user_policy_attachment.this[0]"
+terraform state rm module.iam_user[0].aws_iam_user_policy_attachment.this
 ```
