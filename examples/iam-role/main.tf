@@ -44,7 +44,7 @@ module "iam_roles" {
 
   name = each.key
 
-  assume_role_policy_statements = {
+  trust_policy_permissions = {
     TrustRoleAndServiceToAssume = {
       principals = [{
         type        = "AWS"
@@ -88,7 +88,7 @@ module "iam_role_instance_profile" {
 
   create_instance_profile = true
 
-  assume_role_policy_statements = {
+  trust_policy_permissions = {
     TrustRoleAndServiceToAssume = {
       principals = [
         {

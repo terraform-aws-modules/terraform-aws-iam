@@ -45,7 +45,7 @@ module "iam_group" {
   ]
 
   enable_self_management_permissions = true
-  permission_statements = {
+  permissions = {
     AssumeRole = {
       actions   = ["sts:AssumeRole"]
       resources = ["arn:aws:iam::111111111111:role/admin"]
@@ -67,7 +67,8 @@ module "iam_group" {
 
 Creates an OpenID connect provider. Useful for trusting external identity providers such as GitHub, Bitbucket, etc.
 
-⚠️ An IAM provider is 1 per account per given URL. This module would be provisioned once per AWS account, and then one or more roles can be created with this provider as the trusted identity.
+> [!TIP]
+> An IAM provider is 1 per account per given URL. This module would be provisioned once per AWS account, and then one or more roles can be created with this provider as the trusted identity.
 
 ```hcl
 module "iam_oidc_provider" {
@@ -113,7 +114,7 @@ module "iam_role" {
 
   name = "example"
 
-  assume_role_policy_statements = {
+  trust_policy_permissions = {
     TrustRoleAndServiceToAssume = {
       principals = [{
         type = "AWS"
@@ -121,7 +122,7 @@ module "iam_role" {
           "arn:aws:iam::835367859851:user/anton",
         ]
       }]
-      conditions = [{
+      condition = [{
         test     = "StringEquals"
         variable = "sts:ExternalId"
         values   = ["some-secret-id"]
@@ -153,7 +154,7 @@ module "iam_role_github_oidc" {
   enable_github_oidc = true
 
   # This should be updated to suit your organization, repository, references/branches, etc.
-  oidc_subjects = ["terraform-aws-modules/terraform-aws-iam:*"]
+  oidc_wildcard_subjects = ["terraform-aws-modules/terraform-aws-iam:*"]
 
   policies = {
     S3ReadOnly = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
@@ -200,7 +201,7 @@ Creates an IAM role that is suitable for EKS IAM role for service accounts (IRSA
 
 ```hcl
 module "vpc_cni_irsa" {
-  source      = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
+  source = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
 
   name   = "vpc-cni"
 

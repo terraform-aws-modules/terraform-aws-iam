@@ -6,7 +6,7 @@ Creates an account policy and account alias. Module instantiation is once per ac
 
 ```hcl
 module "iam_account" {
-  source  = "terraform-aws-modules/iam/aws//modules/iam-account"
+  source = "terraform-aws-modules/iam/aws//modules/iam-account"
 
   account_alias = "awesome-company"
 

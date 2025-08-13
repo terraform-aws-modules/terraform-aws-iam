@@ -9,7 +9,7 @@ module "wrapper" {
   enable_self_management_permissions = try(each.value.enable_self_management_permissions, var.defaults.enable_self_management_permissions, true)
   name                               = try(each.value.name, var.defaults.name, "")
   path                               = try(each.value.path, var.defaults.path, null)
-  permission_statements              = try(each.value.permission_statements, var.defaults.permission_statements, null)
+  permissions                        = try(each.value.permissions, var.defaults.permissions, null)
   policies                           = try(each.value.policies, var.defaults.policies, {})
   policy_description                 = try(each.value.policy_description, var.defaults.policy_description, null)
   policy_name                        = try(each.value.policy_name, var.defaults.policy_name, null)

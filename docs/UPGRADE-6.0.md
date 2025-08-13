@@ -6,6 +6,8 @@ If you find a bug, please open an issue with supporting configuration to reprodu
 
 ## List of backwards incompatible changes
 
+- Terraform `v1.5.7` is now minimum supported version
+- AWS provider `v6.0.0` is now minimum supported version
 - The ability to allow roles to assume their own roles has been removed. This was previously added as part of helping users mitigate https://aws.amazon.com/blogs/security/announcing-an-update-to-iam-role-trust-policy-behavior/. Going forward, users will need to mitigate this on the application side (i.e. - do not have a role assume itself), or update the trust policy in their implementation to continue using this behavior. It is strongly recommended to mitigate this by not having the role assume itself.
 
 - `iam-account`:
@@ -21,10 +23,12 @@ If you find a bug, please open an issue with supporting configuration to reprodu
 - `iam-group-with-assumable-roles-policy` has been merged into `iam-group`
 - `iam-eks-role` has been removed; `iam-role-for-service-accounts` or [`eks-pod-identity`](https://github.com/terraform-aws-modules/terraform-aws-eks-pod-identity) should be used instead
 - `iam-policy` has been removed; the `aws_iam_policy` resource should be used directly instead
-- `iam-role-for-service-accounts`:
+- `iam-role-for-service-accounts-eks` has been renamed to `iam-role-for-service-accounts`
     - Individual policy creation and attachment has been consolidated under one policy creation and attachment
     - Default values that enable permissive permissions have been removed; users will need to be explicit about the scope of access (i.e. ARNs) they provide when enabling permissions
     - AppMesh policy support has been removed due to service reaching end of support
+
+### Module Consolidation Map
 
 ```mermaid
 stateDiagram
@@ -63,15 +67,20 @@ stateDiagram
 
 ### Modified
 
+- Variable definitions now contain detailed `object` types in place of the previously used any type
+
 - `iam-group`
     - Policy management has been updated to support extending the policy created by the sub-module, as well as adding additional policies that will be attached to the group
-    - The role assumption permissions has been removed from the policy; users can extend the policy to add this if needed via `permission_statements`
+    - The role assumption permissions has been removed from the policy; users can extend the policy to add this if needed via `permissions`
     - Default create conditional is now `true` instead of `false`
 - `iam-role`
-    - The use of individual variables to control/manipulate the assume role trust policy have been replaced by a generic `assume_role_policy_statements` variable. This allows for any number of custom statements to be added to the role's trust policy.
+    - The use of individual variables to control/manipulate the assume role trust policy have been replaced by a generic `trust_policy_permissions` variable. This allows for any number of custom statements to be added to the role's trust policy.
     - `custom_role_policy_arns` has been renamed to `policies` and now accepts a map of `name`: `policy-arn` pairs; this allows for both existing policies and policies that will get created at the same time as the role. This also replaces the admin, readonly, and poweruser policy ARN variables and their associated `attach_*_policy` variables.
     - Default create conditional is now `true` instead of `false`
     - `force_detach_policies` has been removed; this is now always `true`
+    - Support for inline policies has been added
+- `iam-role-for-service-accounts`
+    - Support for inline policies has been added
 
 ### Variable and output changes
 
@@ -85,7 +94,7 @@ stateDiagram
     - `iam-oidc-provider`
         - `additional_thumbprints` - no longer required by GitHub
     - `iam-read-only-policy`
-        - None
+        - `additional_policy_json` - use `source_inline_policy_documents` or `override_inline_policy_documents` instead
     - `iam-role`
         - `trusted_role_actions`
         - `trusted_role_arns`
@@ -150,6 +159,7 @@ stateDiagram
         - `role_description` -> `description`
         - `role_policy_arns` -> `policies`
         - `ebs_csi_kms_cmk_ids` -> `ebs_csi_kms_cmk_arns`
+        - `assume_role_condition_test` -> `trust_condition_test`
     - `iam-user`
         - `create_user` -> `create`
         - `create_iam_user_login_profile` -> `create_login_profile`
@@ -163,7 +173,7 @@ stateDiagram
     - `iam-account`
         - `create`
     - `iam-group`
-        - `permission_statements` which allows for any number of custom statements to be added to the role's trust policy. This covers the majority of the variables that were removed
+        - `permissions` which allows for any number of custom statements to be added to the role's trust policy. This covers the majority of the variables that were removed
         - `path`/`policy_path`
         - `create_policy`
         - `enable_mfa_enforcment`
@@ -171,15 +181,26 @@ stateDiagram
         - None
     - `iam-read-only-policy`
         - `create`
+        - `source_policy_documents`
+        - `override_policy_documents`
     - `iam-role`
-        - `assume_role_policy_statements` which allows for any number of custom statements to be added to the role's trust policy. This covers the majority of the variables that were removed
+        - `trust_policy_permissions` which allows for any number of custom statements to be added to the role's trust policy. This covers the majority of the variables that were removed
+        - `trust_policy_conditions`
+        - `create_inline_policy`
+        - `source_inline_policy_documents`
+        - `override_inline_policy_documents`
+        - `inline_policy_permissions`
     - `iam-role-for-service-accounts`
         - `create_policy`
         - `source_policy_documents`
         - `override_policy_documents`
-        - `policy_statements`
+        - `permissions`
         - `policy_name`
         - `policy_description`
+        - `create_inline_policy`
+        - `source_inline_policy_documents`
+        - `override_inline_policy_documents`
+        - `inline_policy_permissions`
     - `iam-user`
         - None
 
@@ -289,7 +310,7 @@ module "iam_role" {
 -    "codedeploy.amazonaws.com"
 -  ]
 -  role_sts_externalid = ["some-id-goes-here"]
-+  assume_role_policy_statements = {
++  trust_policy_permissions = {
 +    TrustRoleAndServiceToAssume = {
 +      actions = [
 +        "sts:AssumeRole",
@@ -367,7 +388,7 @@ module "iam_role" {
 +  }
 
 -  provider_trust_policy_conditions = [
-+  condition = [
++  trust_policy_conditions = [
     {
       test     = "StringLike"
       variable = "aws:RequestTag/Environment"
@@ -467,7 +488,7 @@ module "iam_role_admin" {
 
   name = "admin"
 
-  assume_role_policy_statements = {
+  trust_policy_permissions = {
     TrustRoleAndServiceToAssume = {
       actions = [
         "sts:AssumeRole",
@@ -500,7 +521,7 @@ module "iam_role_poweruser" {
 
   name = "Billing-And-Support-Access"
 
-  assume_role_policy_statements = {
+  trust_policy_permissions = {
     TrustRoleAndServiceToAssume = {
       actions = [
         "sts:AssumeRole",
@@ -668,7 +689,7 @@ module "iam_role" {
   ]
 
 -  additional_trust_policy_conditions = [
-+  condition = [
++  trust_policy_conditions = [
     {
       test     = "StringEquals"
       variable = "token.actions.githubusercontent.com:actor"
@@ -697,7 +718,7 @@ module "iam_group" {
   enable_self_management_permissions = false
 
 -  assumable_roles = ["arn:aws:iam::111111111111:role/admin"]
-+  permission_statements = {
++  permissions = {
 +    AssumeRole = {
 +      effect    = "Allow"
 +      actions   = ["sts:AssumeRole"]

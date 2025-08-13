@@ -17,7 +17,8 @@ resource "aws_iam_policy" "policy" {
 data "aws_iam_policy_document" "this" {
   count = var.create ? 1 : 0
 
-  source_policy_documents = [var.additional_policy_json]
+  source_policy_documents   = var.source_inline_policy_documents
+  override_policy_documents = var.override_inline_policy_documents
 
   dynamic "statement" {
     for_each = toset(distinct(var.allowed_services))

@@ -12,7 +12,7 @@ module "wrapper" {
   name                    = try(each.value.name, var.defaults.name, "")
   password_length         = try(each.value.password_length, var.defaults.password_length, null)
   password_reset_required = try(each.value.password_reset_required, var.defaults.password_reset_required, true)
-  path                    = try(each.value.path, var.defaults.path, "/")
+  path                    = try(each.value.path, var.defaults.path, null)
   permissions_boundary    = try(each.value.permissions_boundary, var.defaults.permissions_boundary, null)
   pgp_key                 = try(each.value.pgp_key, var.defaults.pgp_key, null)
   policies                = try(each.value.policies, var.defaults.policies, {})

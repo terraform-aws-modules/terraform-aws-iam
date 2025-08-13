@@ -23,7 +23,7 @@ variable "name" {
 variable "path" {
   description = "Desired path for the IAM user"
   type        = string
-  default     = "/"
+  default     = null
 }
 
 variable "permissions_boundary" {

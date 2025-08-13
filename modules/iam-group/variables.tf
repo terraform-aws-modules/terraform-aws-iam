@@ -54,8 +54,8 @@ variable "enable_mfa_enforcment" {
   default     = true
 }
 
-variable "permission_statements" {
-  description = "A map of IAM policy [statements](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#statement) for custom permission usage"
+variable "permissions" {
+  description = "A map of IAM policy [statements](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#statement) for custom permissions"
   type = map(object({
     sid           = optional(string)
     actions       = optional(list(string))

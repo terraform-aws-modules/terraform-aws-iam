@@ -50,7 +50,7 @@ variable "permissions_boundary" {
   default     = null
 }
 
-variable "assume_role_condition_test" {
+variable "trust_condition_test" {
   description = "Name of the [IAM condition operator](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html) to evaluate when assuming the role"
   type        = string
   default     = "StringEquals"
@@ -90,7 +90,7 @@ variable "override_policy_documents" {
   default     = []
 }
 
-variable "policy_statements" {
+variable "permissions" {
   description = "A map of IAM policy [statements](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#statement) for custom permission usage"
   type = map(object({
     sid           = optional(string)
@@ -382,7 +382,25 @@ variable "attach_cloudwatch_observability_policy" {
 # IAM Role Inline policy
 ################################################################################
 
-variable "inline_policy_statements" {
+variable "create_inline_policy" {
+  description = "Determines whether to create an inline policy"
+  type        = bool
+  default     = false
+}
+
+variable "source_inline_policy_documents" {
+  description = "List of IAM policy documents that are merged together into the exported document. Statements must have unique `sid`s"
+  type        = list(string)
+  default     = []
+}
+
+variable "override_inline_policy_documents" {
+  description = "List of IAM policy documents that are merged together into the exported document. In merging, statements with non-blank `sid`s will override statements with the same `sid`"
+  type        = list(string)
+  default     = []
+}
+
+variable "inline_policy_permissions" {
   description = "A map of IAM policy [statements](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#statement) for inline policy permissions"
   type = map(object({
     sid           = optional(string)

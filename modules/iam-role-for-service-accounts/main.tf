@@ -27,14 +27,14 @@ data "aws_iam_policy_document" "assume" {
       }
 
       condition {
-        test     = var.assume_role_condition_test
+        test     = var.trust_condition_test
         variable = "${replace(statement.value.provider_arn, "/^(.*provider/)/", "")}:sub"
         values   = [for sa in statement.value.namespace_service_accounts : "system:serviceaccount:${sa}"]
       }
 
       # https://aws.amazon.com/premiumsupport/knowledge-center/eks-troubleshoot-oidc-and-irsa/?nc1=h_ls
       condition {
-        test     = var.assume_role_condition_test
+        test     = var.trust_condition_test
         variable = "${replace(statement.value.provider_arn, "/^(.*provider/)/", "")}:aud"
         values   = ["sts.amazonaws.com"]
       }
@@ -100,7 +100,7 @@ data "aws_iam_policy_document" "this" {
   override_policy_documents = var.override_policy_documents
 
   dynamic "statement" {
-    for_each = var.policy_statements != null ? var.policy_statements : {}
+    for_each = var.permissions != null ? var.permissions : {}
 
     content {
       sid           = try(coalesce(statement.value.sid, statement.key))
@@ -169,14 +169,17 @@ resource "aws_iam_role_policy_attachment" "this" {
 ################################################################################
 
 locals {
-  create_iam_role_inline_policy = var.create && var.inline_policy_statements != null
+  create_iam_role_inline_policy = var.create && var.create_inline_policy
 }
 
 data "aws_iam_policy_document" "inline" {
   count = local.create_iam_role_inline_policy ? 1 : 0
 
+  source_policy_documents   = var.source_inline_policy_documents
+  override_policy_documents = var.override_inline_policy_documents
+
   dynamic "statement" {
-    for_each = var.inline_policy_statements != null ? var.inline_policy_statements : {}
+    for_each = var.inline_policy_permissions != null ? var.inline_policy_permissions : {}
 
     content {
       sid           = try(coalesce(statement.value.sid, statement.key))

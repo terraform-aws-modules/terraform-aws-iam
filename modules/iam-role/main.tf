@@ -69,7 +69,7 @@ data "aws_iam_policy_document" "this" {
 
       # Generic conditions
       dynamic "condition" {
-        for_each = var.condition
+        for_each = var.trust_policy_conditions
 
         content {
           test     = condition.value.test
@@ -132,7 +132,7 @@ data "aws_iam_policy_document" "this" {
 
       # Generic conditions
       dynamic "condition" {
-        for_each = var.condition
+        for_each = var.trust_policy_conditions
 
         content {
           test     = condition.value.test
@@ -187,7 +187,7 @@ data "aws_iam_policy_document" "this" {
 
       # Generic conditions
       dynamic "condition" {
-        for_each = var.condition
+        for_each = var.trust_policy_conditions
 
         content {
           test     = condition.value.test
@@ -224,7 +224,7 @@ data "aws_iam_policy_document" "this" {
 
       # Generic conditions
       dynamic "condition" {
-        for_each = var.condition
+        for_each = var.trust_policy_conditions
 
         content {
           test     = condition.value.test
@@ -237,7 +237,7 @@ data "aws_iam_policy_document" "this" {
 
   # Generic statements
   dynamic "statement" {
-    for_each = var.assume_role_policy_statements != null ? var.assume_role_policy_statements : {}
+    for_each = var.trust_policy_permissions != null ? var.trust_policy_permissions : {}
 
     content {
       sid           = try(coalesce(statement.value.sid, statement.key))
@@ -306,14 +306,17 @@ resource "aws_iam_role_policy_attachment" "this" {
 ################################################################################
 
 locals {
-  create_iam_role_inline_policy = var.create && var.inline_policy_statements != null
+  create_iam_role_inline_policy = var.create && var.create_inline_policy
 }
 
 data "aws_iam_policy_document" "inline" {
   count = local.create_iam_role_inline_policy ? 1 : 0
 
+  source_policy_documents   = var.source_inline_policy_documents
+  override_policy_documents = var.override_inline_policy_documents
+
   dynamic "statement" {
-    for_each = var.inline_policy_statements != null ? var.inline_policy_statements : {}
+    for_each = var.inline_policy_permissions != null ? var.inline_policy_permissions : {}
 
     content {
       sid           = try(coalesce(statement.value.sid, statement.key))

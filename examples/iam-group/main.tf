@@ -26,7 +26,7 @@ module "iam_group" {
     module.iam_user2.name,
   ]
 
-  permission_statements = {
+  permissions = {
     AssumeRole = {
       actions   = ["sts:AssumeRole"]
       resources = ["arn:aws:iam::111111111111:role/admin"]

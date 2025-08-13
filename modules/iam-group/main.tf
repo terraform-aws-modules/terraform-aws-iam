@@ -39,7 +39,7 @@ resource "aws_iam_group_membership" "this" {
 ################################################################################
 
 locals {
-  create_policy = var.create && var.create_policy && (var.enable_self_management_permissions || var.permission_statements != null)
+  create_policy = var.create && var.create_policy && (var.enable_self_management_permissions || var.permissions != null)
 
   policy_name = try(coalesce(var.policy_name, var.name), "")
 }
@@ -198,7 +198,7 @@ data "aws_iam_policy_document" "this" {
   }
 
   dynamic "statement" {
-    for_each = var.permission_statements != null ? var.permission_statements : {}
+    for_each = var.permissions != null ? var.permissions : {}
 
     content {
       sid           = try(coalesce(statement.value.sid, statement.key))

@@ -68,7 +68,7 @@ No modules.
 | <a name="input_name"></a> [name](#input\_name) | Desired name for the IAM user | `string` | `""` | no |
 | <a name="input_password_length"></a> [password\_length](#input\_password\_length) | The length of the generated password | `number` | `null` | no |
 | <a name="input_password_reset_required"></a> [password\_reset\_required](#input\_password\_reset\_required) | Whether the user should be forced to reset the generated password on first login | `bool` | `true` | no |
-| <a name="input_path"></a> [path](#input\_path) | Desired path for the IAM user | `string` | `"/"` | no |
+| <a name="input_path"></a> [path](#input\_path) | Desired path for the IAM user | `string` | `null` | no |
 | <a name="input_permissions_boundary"></a> [permissions\_boundary](#input\_permissions\_boundary) | The ARN of the policy that is used to set the permissions boundary for the user | `string` | `null` | no |
 | <a name="input_pgp_key"></a> [pgp\_key](#input\_pgp\_key) | Either a base-64 encoded PGP public key, or a keybase username in the form `keybase:username`. Used to encrypt password and access key | `string` | `null` | no |
 | <a name="input_policies"></a> [policies](#input\_policies) | Policies to attach to the IAM user in `{'static_name' = 'policy_arn'}` format | `map(string)` | `{}` | no |

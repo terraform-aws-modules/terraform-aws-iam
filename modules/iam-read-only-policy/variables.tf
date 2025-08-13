@@ -35,13 +35,13 @@ variable "use_name_prefix" {
 variable "path" {
   description = "Path of IAM policy"
   type        = string
-  default     = "/"
+  default     = null
 }
 
 variable "description" {
   description = "The description of the policy"
   type        = string
-  default     = "IAM Policy"
+  default     = null
 }
 
 variable "allowed_services" {
@@ -50,10 +50,16 @@ variable "allowed_services" {
   default     = []
 }
 
-variable "additional_policy_json" {
-  description = "JSON policy document if you want to add custom actions"
-  type        = string
-  default     = ""
+variable "source_inline_policy_documents" {
+  description = "List of IAM policy documents that are merged together into the exported document. Statements must have unique `sid`s"
+  type        = list(string)
+  default     = []
+}
+
+variable "override_inline_policy_documents" {
+  description = "List of IAM policy documents that are merged together into the exported document. In merging, statements with non-blank `sid`s will override statements with the same `sid`"
+  type        = list(string)
+  default     = []
 }
 
 variable "allow_cloudwatch_logs_query" {

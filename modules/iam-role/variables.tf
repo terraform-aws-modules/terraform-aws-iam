@@ -29,7 +29,7 @@ variable "use_name_prefix" {
 variable "path" {
   description = "Path of IAM role"
   type        = string
-  default     = "/"
+  default     = null
 }
 
 variable "description" {
@@ -50,8 +50,8 @@ variable "permissions_boundary" {
   default     = null
 }
 
-variable "assume_role_policy_statements" {
-  description = "A map of IAM policy [statements](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#statement) for custom permission usage"
+variable "trust_policy_permissions" {
+  description = "A map of IAM policy [statements](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#statement) for custom trust policy permissions"
   type = map(object({
     sid           = optional(string)
     actions       = optional(list(string))
@@ -76,7 +76,7 @@ variable "assume_role_policy_statements" {
   default = null
 }
 
-variable "condition" {
+variable "trust_policy_conditions" {
   description = "[Condition constraints](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#condition) applied to the trust policy(s) enabled"
   type = list(object({
     test     = string
@@ -174,7 +174,25 @@ variable "saml_trust_actions" {
 # IAM Role Inline policy
 ################################################################################
 
-variable "inline_policy_statements" {
+variable "create_inline_policy" {
+  description = "Determines whether to create an inline policy"
+  type        = bool
+  default     = false
+}
+
+variable "source_inline_policy_documents" {
+  description = "List of IAM policy documents that are merged together into the exported document. Statements must have unique `sid`s"
+  type        = list(string)
+  default     = []
+}
+
+variable "override_inline_policy_documents" {
+  description = "List of IAM policy documents that are merged together into the exported document. In merging, statements with non-blank `sid`s will override statements with the same `sid`"
+  type        = list(string)
+  default     = []
+}
+
+variable "inline_policy_permissions" {
   description = "A map of IAM policy [statements](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#statement) for inline policy permissions"
   type = map(object({
     sid           = optional(string)
