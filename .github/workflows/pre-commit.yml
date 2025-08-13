@@ -32,13 +32,8 @@ jobs:
       matrix:
         directory: ${{ fromJson(needs.collectInputs.outputs.directories) }}
     steps:
-      # https://github.com/orgs/community/discussions/25678#discussioncomment-5242449
-      - name: Delete huge unnecessary tools folder
-        run: |
-          rm -rf /opt/hostedtoolcache/CodeQL
-          rm -rf /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk
-          rm -rf /opt/hostedtoolcache/Ruby
-          rm -rf /opt/hostedtoolcache/go
+      - name: Delete unnecessary files
+        uses: xd009642/ci-hoover@0.1.1
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -72,30 +67,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: collectInputs
     steps:
-      # https://github.com/orgs/community/discussions/25678#discussioncomment-5242449
-      - name: Delete huge unnecessary tools folder
-        run: |
-          df -h
-          rm -rf /opt/hostedtoolcache/CodeQL
-          rm -rf /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk
-          rm -rf /opt/hostedtoolcache/Ruby
-          rm -rf /opt/hostedtoolcache/go
-          # And a little bit more
-          sudo apt-get -qq remove -y 'azure-.*'
-          sudo apt-get -qq remove -y 'cpp-.*'
-          sudo apt-get -qq remove -y 'dotnet-runtime-.*'
-          sudo apt-get -qq remove -y 'google-.*'
-          sudo apt-get -qq remove -y 'libclang-.*'
-          sudo apt-get -qq remove -y 'libllvm.*'
-          sudo apt-get -qq remove -y 'llvm-.*'
-          sudo apt-get -qq remove -y 'mysql-.*'
-          sudo apt-get -qq remove -y 'postgresql-.*'
-          sudo apt-get -qq remove -y 'php.*'
-          sudo apt-get -qq remove -y 'temurin-.*'
-          sudo apt-get -qq remove -y kubectl firefox mono-devel
-          sudo apt-get -qq autoremove -y
-          sudo apt-get -qq clean
-          df -h
+      - name: Delete unnecessary files
+        uses: xd009642/ci-hoover@0.1.1
 
       - name: Checkout
         uses: actions/checkout@v4
