@@ -77,6 +77,45 @@ output "github_oidc_iam_instance_profile_unique_id" {
 }
 
 ################################################################################
+# IAM Role - CircleCI OIDC
+################################################################################
+
+output "circleci_oidc_iam_role_name" {
+  description = "The name of the IAM role"
+  value       = module.iam_role_circleci_oidc.name
+}
+
+output "circleci_oidc_iam_role_arn" {
+  description = "The Amazon Resource Name (ARN) specifying the IAM role"
+  value       = module.iam_role_circleci_oidc.arn
+}
+
+output "circleci_oidc_iam_role_unique_id" {
+  description = "Stable and unique string identifying the IAM role"
+  value       = module.iam_role_circleci_oidc.unique_id
+}
+
+output "circleci_oidc_iam_instance_profile_arn" {
+  description = "ARN assigned by AWS to the instance profile"
+  value       = module.iam_role_circleci_oidc.instance_profile_arn
+}
+
+output "circleci_oidc_iam_instance_profile_id" {
+  description = "Instance profile's ID"
+  value       = module.iam_role_circleci_oidc.instance_profile_id
+}
+
+output "circleci_oidc_iam_instance_profile_name" {
+  description = "Name of IAM instance profile"
+  value       = module.iam_role_circleci_oidc.instance_profile_name
+}
+
+output "circleci_oidc_iam_instance_profile_unique_id" {
+  description = "Stable and unique string identifying the IAM instance profile"
+  value       = module.iam_role_circleci_oidc.instance_profile_unique_id
+}
+
+################################################################################
 # IAM Role - SAML 2.0
 ################################################################################
 

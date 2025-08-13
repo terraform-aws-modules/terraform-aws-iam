@@ -144,7 +144,7 @@ module "iam_role_github_oidc" {
 # IAM Role - CircleCI OIDC
 ################################################################################
 
-module "iam_role_github_oidc" {
+module "iam_role_circleci_oidc" {
   source = "../../modules/iam-role"
 
   name = local.name
