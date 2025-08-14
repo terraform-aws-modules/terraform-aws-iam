@@ -813,7 +813,7 @@ None
 
 #### `iam-role-for-service-accounts`
 
-None
+TODO - coming soon after `v6.0.1` patch release
 
 #### `iam-user`
 

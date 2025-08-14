@@ -5,6 +5,26 @@ data "aws_partition" "current" {
 locals {
   partition  = try(data.aws_partition.current[0].partition, "")
   dns_suffix = try(data.aws_partition.current[0].dns_suffix, "")
+
+  policy_description = try(coalesce(
+    var.policy_description,
+    var.attach_aws_gateway_controller_policy ? "Provides permissions for the AWS Gateway Controller" : null,
+    var.attach_cert_manager_policy ? "Cert Manager policy to allow management of Route53 hosted zone records" : null,
+    var.attach_cluster_autoscaler_policy ? "Cluster autoscaler policy to allow examination and modification of EC2 Auto Scaling Groups" : null,
+    var.attach_ebs_csi_policy ? "Provides permissions to manage EBS volumes via the container storage interface driver" : null,
+    var.attach_efs_csi_policy ? "Provides permissions to manage EFS volumes via the container storage interface driver" : null,
+    var.attach_mountpoint_s3_csi_policy ? "Mountpoint S3 CSI driver policy to allow management of S3" : null,
+    var.attach_external_dns_policy ? "External DNS policy to allow management of Route53 hosted zone records" : null,
+    var.attach_external_secrets_policy ? "Provides permissions to for External Secrets to retrieve secrets from AWS SSM and AWS Secrets Manager" : null,
+    var.attach_fsx_lustre_csi_policy ? "Provides permissions to manage FSx Lustre volumes via the container storage interface driver" : null,
+    var.attach_fsx_openzfs_csi_policy ? "Provides permissions to manage FSx OpenZFS volumes via the container storage interface driver" : null,
+    var.attach_load_balancer_controller_policy ? "Provides permissions for AWS Load Balancer Controller addon" : null,
+    var.attach_load_balancer_controller_targetgroup_binding_only_policy ? "Provides permissions for AWS Load Balancer Controller addon in TargetGroup binding only scenario" : null,
+    var.attach_amazon_managed_service_prometheus_policy ? "Provides permissions to for Amazon Managed Service for Prometheus" : null,
+    var.attach_node_termination_handler_policy ? "Provides permissions to handle node termination events via the Node Termination Handler" : null,
+    var.attach_velero_policy ? "Provides Velero permissions to backup and restore cluster resources" : null,
+    var.attach_vpc_cni_policy ? "Provides the Amazon VPC CNI Plugin (amazon-vpc-cni-k8s) the permissions it requires to modify the IPv4/IPv6 address configuration on your EKS worker nodes" : null,
+  ), null)
 }
 
 ################################################################################
@@ -70,7 +90,7 @@ resource "aws_iam_role_policy_attachment" "additional" {
 ################################################################################
 
 locals {
-  create_policy = var.create && var.create_policy
+  create_policy = var.create && var.create_policy && (length(local.source_policy_documents) > 0 || length(var.override_policy_documents) > 0 || var.permissions != null)
 
   source_policy_documents = flatten(concat(
     data.aws_iam_policy_document.aws_gateway_controller[*].json,
@@ -151,7 +171,7 @@ resource "aws_iam_policy" "this" {
   name        = var.use_name_prefix ? null : local.policy_name
   name_prefix = var.use_name_prefix ? "${local.policy_name}-" : null
   path        = coalesce(var.policy_path, var.path)
-  description = try(coalesce(var.policy_description, var.description), null)
+  description = try(coalesce(var.policy_description, local.policy_description), null)
   policy      = data.aws_iam_policy_document.this[0].json
 
   tags = var.tags

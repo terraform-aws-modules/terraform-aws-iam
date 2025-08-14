@@ -41,7 +41,7 @@ module "wrapper" {
   mountpoint_s3_csi_bucket_arns                                   = try(each.value.mountpoint_s3_csi_bucket_arns, var.defaults.mountpoint_s3_csi_bucket_arns, [])
   mountpoint_s3_csi_kms_arns                                      = try(each.value.mountpoint_s3_csi_kms_arns, var.defaults.mountpoint_s3_csi_kms_arns, [])
   mountpoint_s3_csi_path_arns                                     = try(each.value.mountpoint_s3_csi_path_arns, var.defaults.mountpoint_s3_csi_path_arns, [])
-  name                                                            = try(each.value.name, var.defaults.name, null)
+  name                                                            = try(each.value.name, var.defaults.name, "")
   node_termination_handler_sqs_queue_arns                         = try(each.value.node_termination_handler_sqs_queue_arns, var.defaults.node_termination_handler_sqs_queue_arns, [])
   oidc_providers                                                  = try(each.value.oidc_providers, var.defaults.oidc_providers, {})
   override_inline_policy_documents                                = try(each.value.override_inline_policy_documents, var.defaults.override_inline_policy_documents, [])
