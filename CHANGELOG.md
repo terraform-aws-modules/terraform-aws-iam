@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.1.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.0.1...v6.1.0) (2025-08-14)
+
+
+### Features
+
+* Add default IRSA policy name, fix incorrect policy attachment for `iam-user` ([#594](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/594)) ([f111832](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/f1118320f700c6679fa392013b0a29441cbf6b5e))
+
 ## [6.0.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.0.0...v6.0.1) (2025-08-14)
 
 
