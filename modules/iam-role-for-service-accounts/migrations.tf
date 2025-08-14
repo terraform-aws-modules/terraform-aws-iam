@@ -10,7 +10,7 @@ moved {
 
 moved {
   from = aws_iam_role_policy_attachment.aws_gateway_controller
-  to   = aws_iam_policy.this
+  to   = aws_iam_role_policy_attachment.this
 }
 
 # Cert Manager
@@ -21,7 +21,7 @@ moved {
 
 moved {
   from = aws_iam_role_policy_attachment.cert_manager
-  to   = aws_iam_policy.this
+  to   = aws_iam_role_policy_attachment.this
 }
 
 # Cluster Autoscaler
@@ -32,7 +32,7 @@ moved {
 
 moved {
   from = aws_iam_role_policy_attachment.cluster_autoscaler
-  to   = aws_iam_policy.this
+  to   = aws_iam_role_policy_attachment.this
 }
 
 # EBS CSI
@@ -43,7 +43,7 @@ moved {
 
 moved {
   from = aws_iam_role_policy_attachment.ebs_csi
-  to   = aws_iam_policy.this
+  to   = aws_iam_role_policy_attachment.this
 }
 
 # EFS CSI
@@ -54,7 +54,7 @@ moved {
 
 moved {
   from = aws_iam_role_policy_attachment.efs_csi
-  to   = aws_iam_policy.this
+  to   = aws_iam_role_policy_attachment.this
 }
 
 # Mountpoint S3 CSI
@@ -65,7 +65,7 @@ moved {
 
 moved {
   from = aws_iam_role_policy_attachment.mountpoint_s3_csi
-  to   = aws_iam_policy.this
+  to   = aws_iam_role_policy_attachment.this
 }
 
 # External DNS
@@ -76,7 +76,7 @@ moved {
 
 moved {
   from = aws_iam_role_policy_attachment.external_dns
-  to   = aws_iam_policy.this
+  to   = aws_iam_role_policy_attachment.this
 }
 
 # External Secrets
@@ -87,7 +87,7 @@ moved {
 
 moved {
   from = aws_iam_role_policy_attachment.external_secrets
-  to   = aws_iam_policy.this
+  to   = aws_iam_role_policy_attachment.this
 }
 
 # FSx OpenZFS CSI
@@ -98,7 +98,7 @@ moved {
 
 moved {
   from = aws_iam_role_policy_attachment.fsx_openzfs_csi
-  to   = aws_iam_policy.this
+  to   = aws_iam_role_policy_attachment.this
 }
 
 # AWS Load Balancer Controller
@@ -109,7 +109,7 @@ moved {
 
 moved {
   from = aws_iam_role_policy_attachment.load_balancer_controller
-  to   = aws_iam_policy.this
+  to   = aws_iam_role_policy_attachment.this
 }
 
 # AWS Load Balancer Controller - Target Group Binding Only
@@ -120,7 +120,7 @@ moved {
 
 moved {
   from = aws_iam_role_policy_attachment.load_balancer_controller_targetgroup_only
-  to   = aws_iam_policy.this
+  to   = aws_iam_role_policy_attachment.this
 }
 
 # Amazon Managed Service for Prometheus
@@ -131,7 +131,7 @@ moved {
 
 moved {
   from = aws_iam_role_policy_attachment.amazon_managed_service_prometheus
-  to   = aws_iam_policy.this
+  to   = aws_iam_role_policy_attachment.this
 }
 
 # Node Termination Handler
@@ -142,7 +142,7 @@ moved {
 
 moved {
   from = aws_iam_role_policy_attachment.node_termination_handler
-  to   = aws_iam_policy.this
+  to   = aws_iam_role_policy_attachment.this
 }
 
 # Velero
@@ -153,7 +153,7 @@ moved {
 
 moved {
   from = aws_iam_role_policy_attachment.velero
-  to   = aws_iam_policy.this
+  to   = aws_iam_role_policy_attachment.this
 }
 
 # VPC CNI
@@ -164,5 +164,5 @@ moved {
 
 moved {
   from = aws_iam_role_policy_attachment.vpc_cni
-  to   = aws_iam_policy.this
+  to   = aws_iam_role_policy_attachment.this
 }
