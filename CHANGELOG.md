@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.0.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.0.0...v6.0.1) (2025-08-14)
+
+
+### Bug Fixes
+
+* Remove broken IRSA `migrations.tf`; add default IRSA policy descriptions for backwards compat ([#592](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/592)) ([e56f84d](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/e56f84df62ac76a4bd310b9d7c38a177d641c9c7))
+
 ## [6.0.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v5.60.0...v6.0.0) (2025-08-13)
 
 
