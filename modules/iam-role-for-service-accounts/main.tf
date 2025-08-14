@@ -25,6 +25,28 @@ locals {
     var.attach_velero_policy ? "Provides Velero permissions to backup and restore cluster resources" : null,
     var.attach_vpc_cni_policy ? "Provides the Amazon VPC CNI Plugin (amazon-vpc-cni-k8s) the permissions it requires to modify the IPv4/IPv6 address configuration on your EKS worker nodes" : null,
   ), null)
+
+  policy_name = try(coalesce(
+    var.policy_name,
+    var.attach_aws_gateway_controller_policy ? "AWS_Gateway_Controller" : null,
+    var.attach_cert_manager_policy ? "Cert_Manager" : null,
+    var.attach_cluster_autoscaler_policy ? "Cluster_Autoscaler" : null,
+    var.attach_ebs_csi_policy ? "EBS_CSI" : null,
+    var.attach_efs_csi_policy ? "EFS_CSI" : null,
+    var.attach_mountpoint_s3_csi_policy ? "Mountpoint_S3_CSI" : null,
+    var.attach_external_dns_policy ? "External_DNS" : null,
+    var.attach_external_secrets_policy ? "External_Secrets" : null,
+    var.attach_fsx_lustre_csi_policy ? "FSX_Lustre_CSI" : null,
+    var.attach_fsx_openzfs_csi_policy ? "FSX_OpenZFS_CSI" : null,
+    var.attach_load_balancer_controller_policy ? "AWS_Load_Balancer_Controller" : null,
+    var.attach_load_balancer_controller_targetgroup_binding_only_policy ? "AWS_LBC_TargetGroup_Binding_Only" : null,
+    var.attach_amazon_managed_service_prometheus_policy ? "Amazon_Managed_Service_Prometheus" : null,
+    var.attach_node_termination_handler_policy ? "Node_Termination_Handler" : null,
+    var.attach_velero_policy ? "Velero" : null,
+    var.attach_vpc_cni_policy ? "VPC_CNI_${var.vpc_cni_enable_ipv4 ? "IPv4" : "IPv6"}" : null,
+    var.name,
+    "default"
+  ))
 }
 
 ################################################################################
@@ -159,10 +181,6 @@ data "aws_iam_policy_document" "this" {
       }
     }
   }
-}
-
-locals {
-  policy_name = try(coalesce(var.policy_name, var.name), "")
 }
 
 resource "aws_iam_policy" "this" {
