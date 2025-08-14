@@ -17,7 +17,7 @@ variable "tags" {
 variable "name" {
   description = "Name to use on IAM role created"
   type        = string
-  default     = null
+  default     = ""
 }
 
 variable "use_name_prefix" {

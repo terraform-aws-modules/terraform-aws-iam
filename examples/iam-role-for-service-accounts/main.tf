@@ -231,9 +231,10 @@ module "load_balancer_controller_irsa" {
 module "load_balancer_controller_targetgroup_binding_only_irsa" {
   source = "../../modules/iam-role-for-service-accounts"
 
-  name = "load-balancer-controller-targetgroup-binding-only"
+  name = "lbc-targetgroup-binding-only"
 
   attach_load_balancer_controller_targetgroup_binding_only_policy = true
+  load_balancer_controller_targetgroup_arns                       = ["arn:aws:elasticloadbalancing:eu-west-1:012345678901:targetgroup/my-target-group"]
 
   oidc_providers = {
     this = {
@@ -250,7 +251,8 @@ module "amazon_managed_service_prometheus_irsa" {
 
   name = "amazon-managed-service-prometheus"
 
-  attach_amazon_managed_service_prometheus_policy = true
+  attach_amazon_managed_service_prometheus_policy  = true
+  amazon_managed_service_prometheus_workspace_arns = ["arn:aws:prometheus:eu-west-1:012345678901:workspace/12345678-1234-1234-1234-123456789012"]
 
   oidc_providers = {
     this = {
@@ -267,7 +269,8 @@ module "node_termination_handler_irsa" {
 
   name = "node-termination-handler"
 
-  attach_node_termination_handler_policy = true
+  attach_node_termination_handler_policy  = true
+  node_termination_handler_sqs_queue_arns = ["arn:aws:sqs:eu-west-1:012345678901:node-termination-handler"]
 
   oidc_providers = {
     this = {
