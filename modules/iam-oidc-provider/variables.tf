@@ -15,7 +15,7 @@ variable "tags" {
 ################################################################################
 
 variable "client_id_list" {
-  description = "List of client IDs (also known as audiences) for the IAM OIDC provider. Defaults to STS service if not values are provided"
+  description = "List of client IDs (also known as audiences) for the IAM OIDC provider. Defaults to STS service if no values are provided"
   type        = list(string)
   default     = []
 }
