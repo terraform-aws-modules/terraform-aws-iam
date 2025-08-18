@@ -483,14 +483,19 @@ data "aws_iam_policy_document" "external_secrets" {
     resources = ["*"]
   }
 
-  statement {
-    actions = [
-      "secretsmanager:GetResourcePolicy",
-      "secretsmanager:GetSecretValue",
-      "secretsmanager:DescribeSecret",
-      "secretsmanager:ListSecretVersionIds"
-    ]
-    resources = var.external_secrets_secrets_manager_arns
+  dynamic "statement" {
+    for_each = length(var.external_secrets_secrets_manager_arns) > 0 ? [1] : []
+
+    content {
+      actions = [
+        "secretsmanager:GetResourcePolicy",
+        "secretsmanager:GetSecretValue",
+        "secretsmanager:DescribeSecret",
+        "secretsmanager:ListSecretVersionIds"
+      ]
+
+      resources = var.external_secrets_secrets_manager_arns
+    }
   }
 
   dynamic "statement" {
