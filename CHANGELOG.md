@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.1.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.1.0...v6.1.1) (2025-08-18)
+
+
+### Bug Fixes
+
+* Remove any `secretsmanager:*` permissions if no secret ARNs are provided to IRSA external-secrets permissions ([#599](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/599)) ([d610954](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/d6109548613e91516a2385599e11888649ed248c))
+
 ## [6.1.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.0.1...v6.1.0) (2025-08-14)
 
 
