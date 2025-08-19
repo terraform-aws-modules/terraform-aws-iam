@@ -10,7 +10,7 @@ locals {
   partition  = try(data.aws_partition.current[0].partition, "")
 
   oidc_providers     = [for url in var.oidc_provider_urls : replace(url, "https://", "")]
-  bitbucket_provider = one(local.oidc_providers)
+  bitbucket_provider = var.enable_bitbucket_oidc ? one(local.oidc_providers) : null
 }
 
 ################################################################################
