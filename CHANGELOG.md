@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.1.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.1.1...v6.1.2) (2025-08-19)
+
+
+### Bug Fixes
+
+* Modify BitBucket provider URL extraction to be more robust when none or multiple URLs are provided ([#605](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/605)) ([e3e724d](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/e3e724d96037391812bd9b326ead73a1b45612bc))
+
 ## [6.1.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.1.0...v6.1.1) (2025-08-18)
 
 
