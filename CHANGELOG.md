@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.2.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.1.2...v6.2.0) (2025-08-22)
+
+
+### Features
+
+* Implement user inline policy for iam-user ([#607](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/607)) ([1c2dfd7](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/1c2dfd77fa1515d1c9e45ee60202d5633de82d28))
+
 ## [6.1.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.1.1...v6.1.2) (2025-08-19)
 
 
