@@ -109,3 +109,51 @@ variable "ssh_public_key" {
   type        = string
   default     = ""
 }
+
+################################################################################
+# IAM User Inline policy
+################################################################################
+
+variable "create_inline_policy" {
+  description = "Determines whether to create an inline policy"
+  type        = bool
+  default     = false
+}
+
+variable "source_inline_policy_documents" {
+  description = "List of IAM policy documents that are merged together into the exported document. Statements must have unique `sid`s"
+  type        = list(string)
+  default     = []
+}
+
+variable "override_inline_policy_documents" {
+  description = "List of IAM policy documents that are merged together into the exported document. In merging, statements with non-blank `sid`s will override statements with the same `sid`"
+  type        = list(string)
+  default     = []
+}
+
+variable "inline_policy_permissions" {
+  description = "A map of IAM policy [statements](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document#statement) for inline policy permissions"
+  type = map(object({
+    sid           = optional(string)
+    actions       = optional(list(string))
+    not_actions   = optional(list(string))
+    effect        = optional(string, "Allow")
+    resources     = optional(list(string))
+    not_resources = optional(list(string))
+    principals = optional(list(object({
+      type        = string
+      identifiers = list(string)
+    })))
+    not_principals = optional(list(object({
+      type        = string
+      identifiers = list(string)
+    })))
+    condition = optional(list(object({
+      test     = string
+      variable = string
+      values   = list(string)
+    })))
+  }))
+  default = null
+}

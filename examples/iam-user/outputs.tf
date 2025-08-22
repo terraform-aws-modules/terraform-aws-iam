@@ -243,3 +243,22 @@ output "iam_user3_ssh_key_fingerprint" {
   description = "The MD5 message digest of the SSH public key"
   value       = module.iam_user3.ssh_key_fingerprint
 }
+
+################################################################################
+# IAM User with Inline Policy
+################################################################################
+
+output "iam_user_with_inline_policy_arn" {
+  description = "The ARN assigned by AWS for this user"
+  value       = module.iam_user_with_inline_policy.arn
+}
+
+output "iam_user_with_inline_policy_name" {
+  description = "The user's name"
+  value       = module.iam_user_with_inline_policy.name
+}
+
+output "iam_user_with_inline_policy_unique_id" {
+  description = "The unique ID assigned by AWS"
+  value       = module.iam_user_with_inline_policy.unique_id
+}

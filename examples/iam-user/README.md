@@ -1,6 +1,6 @@
 # AWS IAM User Example
 
-Configuration in this directory creates an IAM user with a random password, a pair of IAM access/secret keys and uploads IAM SSH public key.
+Configuration in this directory creates an IAM user with a random password, a pair of IAM access/secret keys, uploads IAM SSH public key, and demonstrates inline policy creation.
 User password and secret key is encrypted using public key of keybase.io user named `test`.
 
 # Usage
@@ -35,6 +35,7 @@ No providers.
 | <a name="module_iam_user2"></a> [iam\_user2](#module\_iam\_user2) | ../../modules/iam-user | n/a |
 | <a name="module_iam_user3"></a> [iam\_user3](#module\_iam\_user3) | ../../modules/iam-user | n/a |
 | <a name="module_iam_user_disabled"></a> [iam\_user\_disabled](#module\_iam\_user\_disabled) | ../../modules/iam-user | n/a |
+| <a name="module_iam_user_with_inline_policy"></a> [iam\_user\_with\_inline\_policy](#module\_iam\_user\_with\_inline\_policy) | ../../modules/iam-user | n/a |
 
 ## Resources
 
@@ -93,4 +94,7 @@ No inputs.
 | <a name="output_iam_user_ssh_key_fingerprint"></a> [iam\_user\_ssh\_key\_fingerprint](#output\_iam\_user\_ssh\_key\_fingerprint) | The MD5 message digest of the SSH public key |
 | <a name="output_iam_user_ssh_key_public_key_id"></a> [iam\_user\_ssh\_key\_public\_key\_id](#output\_iam\_user\_ssh\_key\_public\_key\_id) | The unique identifier for the SSH public key |
 | <a name="output_iam_user_unique_id"></a> [iam\_user\_unique\_id](#output\_iam\_user\_unique\_id) | The unique ID assigned by AWS |
+| <a name="output_iam_user_with_inline_policy_arn"></a> [iam\_user\_with\_inline\_policy\_arn](#output\_iam\_user\_with\_inline\_policy\_arn) | The ARN assigned by AWS for this user |
+| <a name="output_iam_user_with_inline_policy_name"></a> [iam\_user\_with\_inline\_policy\_name](#output\_iam\_user\_with\_inline\_policy\_name) | The user's name |
+| <a name="output_iam_user_with_inline_policy_unique_id"></a> [iam\_user\_with\_inline\_policy\_unique\_id](#output\_iam\_user\_with\_inline\_policy\_unique\_id) | The unique ID assigned by AWS |
 <!-- END_TF_DOCS -->

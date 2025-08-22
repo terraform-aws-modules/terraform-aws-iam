@@ -71,3 +71,43 @@ module "iam_user_disabled" {
 
   tags = local.tags
 }
+
+################################################################################
+# IAM user with inline policy
+################################################################################
+
+module "iam_user_with_inline_policy" {
+  source = "../../modules/iam-user"
+
+  name          = "vasya.pupkin6"
+  force_destroy = true
+
+  # Enable inline policy
+  create_inline_policy = true
+
+  # Define inline policy permissions
+  inline_policy_permissions = {
+    s3_read_access = {
+      effect = "Allow"
+      actions = [
+        "s3:GetObject",
+        "s3:ListBucket"
+      ]
+      resources = [
+        "arn:aws:s3:::example-bucket",
+        "arn:aws:s3:::example-bucket/*"
+      ]
+    }
+    cloudwatch_logs = {
+      effect = "Allow"
+      actions = [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ]
+      resources = ["*"]
+    }
+  }
+
+  tags = local.tags
+}
