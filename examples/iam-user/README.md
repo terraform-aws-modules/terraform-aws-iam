@@ -1,6 +1,6 @@
 # AWS IAM User Example
 
-Configuration in this directory creates an IAM user with a random password, a pair of IAM access/secret keys and uploads IAM SSH public key.
+Configuration in this directory creates an IAM user with a random password, a pair of IAM access/secret keys, uploads IAM SSH public key, and demonstrates inline policy creation.
 User password and secret key is encrypted using public key of keybase.io user named `test`.
 
 # Usage

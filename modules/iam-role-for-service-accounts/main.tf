@@ -207,11 +207,11 @@ resource "aws_iam_role_policy_attachment" "this" {
 ################################################################################
 
 locals {
-  create_iam_role_inline_policy = var.create && var.create_inline_policy
+  create_inline_policy = var.create && var.create_inline_policy
 }
 
 data "aws_iam_policy_document" "inline" {
-  count = local.create_iam_role_inline_policy ? 1 : 0
+  count = local.create_inline_policy ? 1 : 0
 
   source_policy_documents   = var.source_inline_policy_documents
   override_policy_documents = var.override_inline_policy_documents
@@ -259,7 +259,7 @@ data "aws_iam_policy_document" "inline" {
 }
 
 resource "aws_iam_role_policy" "inline" {
-  count = local.create_iam_role_inline_policy ? 1 : 0
+  count = local.create_inline_policy ? 1 : 0
 
   role        = aws_iam_role.this[0].name
   name        = var.use_name_prefix ? null : var.name

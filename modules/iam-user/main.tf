@@ -21,6 +21,70 @@ resource "aws_iam_user_policy_attachment" "additional" {
 }
 
 ################################################################################
+# IAM User Inline policy
+################################################################################
+
+locals {
+  create_inline_policy = var.create && var.create_inline_policy
+}
+
+data "aws_iam_policy_document" "inline" {
+  count = local.create_inline_policy ? 1 : 0
+
+  source_policy_documents   = var.source_inline_policy_documents
+  override_policy_documents = var.override_inline_policy_documents
+
+  dynamic "statement" {
+    for_each = var.inline_policy_permissions != null ? var.inline_policy_permissions : {}
+
+    content {
+      sid           = try(coalesce(statement.value.sid, statement.key))
+      actions       = statement.value.actions
+      not_actions   = statement.value.not_actions
+      effect        = statement.value.effect
+      resources     = statement.value.resources
+      not_resources = statement.value.not_resources
+
+      dynamic "principals" {
+        for_each = statement.value.principals != null ? statement.value.principals : []
+
+        content {
+          type        = principals.value.type
+          identifiers = principals.value.identifiers
+        }
+      }
+
+      dynamic "not_principals" {
+        for_each = statement.value.not_principals != null ? statement.value.not_principals : []
+
+        content {
+          type        = not_principals.value.type
+          identifiers = not_principals.value.identifiers
+        }
+      }
+
+      dynamic "condition" {
+        for_each = statement.value.condition != null ? statement.value.condition : []
+
+        content {
+          test     = condition.value.test
+          values   = condition.value.values
+          variable = condition.value.variable
+        }
+      }
+    }
+  }
+}
+
+resource "aws_iam_user_policy" "inline" {
+  count = local.create_inline_policy ? 1 : 0
+
+  user   = aws_iam_user.this[0].name
+  name   = var.name
+  policy = data.aws_iam_policy_document.inline[0].json
+}
+
+################################################################################
 # User Login Profile
 ################################################################################
 
