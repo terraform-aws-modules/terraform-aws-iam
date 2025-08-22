@@ -21,45 +21,6 @@ module "iam_user" {
 }
 ```
 
-### Inline Policies
-
-You can also create inline policies for the IAM user:
-
-```hcl
-module "iam_user_with_inline_policy" {
-  source = "terraform-aws-modules/iam/aws//modules/iam-user"
-
-  name = "example-user"
-
-  # Enable inline policy
-  create_inline_policy = true
-
-  # Define inline policy permissions
-  inline_policy_permissions = {
-    s3_access = {
-      effect = "Allow"
-      actions = [
-        "s3:GetObject",
-        "s3:ListBucket"
-      ]
-      resources = [
-        "arn:aws:s3:::example-bucket",
-        "arn:aws:s3:::example-bucket/*"
-      ]
-    }
-    cloudwatch_logs = {
-      effect = "Allow"
-      actions = [
-        "logs:CreateLogGroup",
-        "logs:CreateLogStream",
-        "logs:PutLogEvents"
-      ]
-      resources = ["*"]
-    }
-  }
-}
-```
-
 ### Keybase
 
 If possible, always use PGP encryption to prevent Terraform from keeping unencrypted password and access secret key in state file.

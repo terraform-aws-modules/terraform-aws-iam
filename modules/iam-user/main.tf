@@ -1,12 +1,4 @@
 ################################################################################
-# Locals
-################################################################################
-
-locals {
-  create_iam_user_inline_policy = var.create && var.create_inline_policy
-}
-
-################################################################################
 # User
 ################################################################################
 
@@ -32,8 +24,12 @@ resource "aws_iam_user_policy_attachment" "additional" {
 # IAM User Inline policy
 ################################################################################
 
+locals {
+  create_inline_policy = var.create && var.create_inline_policy
+}
+
 data "aws_iam_policy_document" "inline" {
-  count = local.create_iam_user_inline_policy ? 1 : 0
+  count = local.create_inline_policy ? 1 : 0
 
   source_policy_documents   = var.source_inline_policy_documents
   override_policy_documents = var.override_inline_policy_documents
@@ -81,7 +77,7 @@ data "aws_iam_policy_document" "inline" {
 }
 
 resource "aws_iam_user_policy" "inline" {
-  count = local.create_iam_user_inline_policy ? 1 : 0
+  count = local.create_inline_policy ? 1 : 0
 
   user   = aws_iam_user.this[0].name
   name   = var.name
