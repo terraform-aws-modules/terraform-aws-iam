@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.2.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.2.0...v6.2.1) (2025-08-26)
+
+
+### Bug Fixes
+
+* Correct `iam-group` variable name mis-spelling ([#610](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/610)) ([cf4e77b](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/cf4e77b417b939a2ab76c5ee9cf7ba4c92a16c2a))
+
 ## [6.2.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.1.2...v6.2.0) (2025-08-22)
 
 
