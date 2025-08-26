@@ -5,7 +5,7 @@ module "wrapper" {
 
   create                             = try(each.value.create, var.defaults.create, true)
   create_policy                      = try(each.value.create_policy, var.defaults.create_policy, true)
-  enable_mfa_enforcment              = try(each.value.enable_mfa_enforcment, var.defaults.enable_mfa_enforcment, true)
+  enable_mfa_enforcement             = try(each.value.enable_mfa_enforcement, var.defaults.enable_mfa_enforcement, true)
   enable_self_management_permissions = try(each.value.enable_self_management_permissions, var.defaults.enable_self_management_permissions, true)
   name                               = try(each.value.name, var.defaults.name, "")
   path                               = try(each.value.path, var.defaults.path, null)

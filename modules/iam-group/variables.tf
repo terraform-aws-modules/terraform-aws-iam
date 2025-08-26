@@ -48,7 +48,7 @@ variable "enable_self_management_permissions" {
   default     = true
 }
 
-variable "enable_mfa_enforcment" {
+variable "enable_mfa_enforcement" {
   description = "Determines whether permissions are added to the policy which requires the groups IAM users to use MFA"
   type        = bool
   default     = true

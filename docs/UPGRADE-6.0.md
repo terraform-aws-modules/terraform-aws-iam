@@ -134,7 +134,7 @@ stateDiagram
         - None
     - `iam-group`
         - `create_group` -> `create`
-        - `group_users` -> `group`
+        - `group_users` -> `users`
         - `custom_group_policy_arns` -> `policies`
         - `attach_iam_self_management_policy` -> `create_policy`
         - `iam_self_management_policy_name_prefix` -> `policy_name_prefix`
