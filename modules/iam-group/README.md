@@ -72,7 +72,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_create"></a> [create](#input\_create) | Controls if resources should be created (affects all resources) | `bool` | `true` | no |
 | <a name="input_create_policy"></a> [create\_policy](#input\_create\_policy) | Whether to create IAM policy for IAM group | `bool` | `true` | no |
-| <a name="input_enable_mfa_enforcment"></a> [enable\_mfa\_enforcment](#input\_enable\_mfa\_enforcment) | Determines whether permissions are added to the policy which requires the groups IAM users to use MFA | `bool` | `true` | no |
+| <a name="input_enable_mfa_enforcement"></a> [enable\_mfa\_enforcement](#input\_enable\_mfa\_enforcement) | Determines whether permissions are added to the policy which requires the groups IAM users to use MFA | `bool` | `true` | no |
 | <a name="input_enable_self_management_permissions"></a> [enable\_self\_management\_permissions](#input\_enable\_self\_management\_permissions) | Determines whether permissions are added to the policy which allow the groups IAM users to manage their credentials and MFA | `bool` | `true` | no |
 | <a name="input_name"></a> [name](#input\_name) | The group's name. The name must consist of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: `=,.@-_.` | `string` | `""` | no |
 | <a name="input_path"></a> [path](#input\_path) | Path in which to create the group | `string` | `null` | no |
