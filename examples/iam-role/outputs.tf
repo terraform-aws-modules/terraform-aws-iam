@@ -153,3 +153,42 @@ output "saml_iam_instance_profile_unique_id" {
   description = "Stable and unique string identifying the IAM instance profile"
   value       = module.iam_role_saml.instance_profile_unique_id
 }
+
+################################################################################
+# IAM Role - Inline Policy
+################################################################################
+
+output "inline_policy_iam_role_name" {
+  description = "The name of the IAM role"
+  value       = module.iam_role_inline_policy.name
+}
+
+output "inline_policy_iam_role_arn" {
+  description = "The Amazon Resource Name (ARN) specifying the IAM role"
+  value       = module.iam_role_inline_policy.arn
+}
+
+output "inline_policy_iam_role_unique_id" {
+  description = "Stable and unique string identifying the IAM role"
+  value       = module.iam_role_inline_policy.unique_id
+}
+
+output "inline_policy_iam_instance_profile_arn" {
+  description = "ARN assigned by AWS to the instance profile"
+  value       = module.iam_role_inline_policy.instance_profile_arn
+}
+
+output "inline_policy_iam_instance_profile_id" {
+  description = "Instance profile's ID"
+  value       = module.iam_role_inline_policy.instance_profile_id
+}
+
+output "inline_policy_iam_instance_profile_name" {
+  description = "Name of IAM instance profile"
+  value       = module.iam_role_inline_policy.instance_profile_name
+}
+
+output "inline_policy_iam_instance_profile_unique_id" {
+  description = "Stable and unique string identifying the IAM instance profile"
+  value       = module.iam_role_inline_policy.instance_profile_unique_id
+}

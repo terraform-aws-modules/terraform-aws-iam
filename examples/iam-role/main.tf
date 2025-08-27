@@ -196,8 +196,7 @@ module "iam_role_inline_policy" {
 
   name = "${local.name}-inline-policy"
 
-  create               = true
-  create_inline_policy = true
+  create_instance_profile = true
 
   trust_policy_permissions = {
     ec2 = {
@@ -212,6 +211,7 @@ module "iam_role_inline_policy" {
     }
   }
 
+  create_inline_policy = true
   inline_policy_permissions = {
     S3ReadAccess = {
       effect = "Allow"

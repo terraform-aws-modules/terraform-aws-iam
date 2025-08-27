@@ -70,6 +70,13 @@ No inputs.
 | <a name="output_github_oidc_iam_role_arn"></a> [github\_oidc\_iam\_role\_arn](#output\_github\_oidc\_iam\_role\_arn) | The Amazon Resource Name (ARN) specifying the IAM role |
 | <a name="output_github_oidc_iam_role_name"></a> [github\_oidc\_iam\_role\_name](#output\_github\_oidc\_iam\_role\_name) | The name of the IAM role |
 | <a name="output_github_oidc_iam_role_unique_id"></a> [github\_oidc\_iam\_role\_unique\_id](#output\_github\_oidc\_iam\_role\_unique\_id) | Stable and unique string identifying the IAM role |
+| <a name="output_inline_policy_iam_instance_profile_arn"></a> [inline\_policy\_iam\_instance\_profile\_arn](#output\_inline\_policy\_iam\_instance\_profile\_arn) | ARN assigned by AWS to the instance profile |
+| <a name="output_inline_policy_iam_instance_profile_id"></a> [inline\_policy\_iam\_instance\_profile\_id](#output\_inline\_policy\_iam\_instance\_profile\_id) | Instance profile's ID |
+| <a name="output_inline_policy_iam_instance_profile_name"></a> [inline\_policy\_iam\_instance\_profile\_name](#output\_inline\_policy\_iam\_instance\_profile\_name) | Name of IAM instance profile |
+| <a name="output_inline_policy_iam_instance_profile_unique_id"></a> [inline\_policy\_iam\_instance\_profile\_unique\_id](#output\_inline\_policy\_iam\_instance\_profile\_unique\_id) | Stable and unique string identifying the IAM instance profile |
+| <a name="output_inline_policy_iam_role_arn"></a> [inline\_policy\_iam\_role\_arn](#output\_inline\_policy\_iam\_role\_arn) | The Amazon Resource Name (ARN) specifying the IAM role |
+| <a name="output_inline_policy_iam_role_name"></a> [inline\_policy\_iam\_role\_name](#output\_inline\_policy\_iam\_role\_name) | The name of the IAM role |
+| <a name="output_inline_policy_iam_role_unique_id"></a> [inline\_policy\_iam\_role\_unique\_id](#output\_inline\_policy\_iam\_role\_unique\_id) | Stable and unique string identifying the IAM role |
 | <a name="output_instance_profile_iam_instance_profile_arn"></a> [instance\_profile\_iam\_instance\_profile\_arn](#output\_instance\_profile\_iam\_instance\_profile\_arn) | ARN assigned by AWS to the instance profile |
 | <a name="output_instance_profile_iam_instance_profile_id"></a> [instance\_profile\_iam\_instance\_profile\_id](#output\_instance\_profile\_iam\_instance\_profile\_id) | Instance profile's ID |
 | <a name="output_instance_profile_iam_instance_profile_name"></a> [instance\_profile\_iam\_instance\_profile\_name](#output\_instance\_profile\_iam\_instance\_profile\_name) | Name of IAM instance profile |
