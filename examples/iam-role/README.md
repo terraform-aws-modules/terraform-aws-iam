@@ -35,6 +35,7 @@ Run `terraform destroy` when you don't need these resources.
 | <a name="module_iam_role_circleci_oidc"></a> [iam\_role\_circleci\_oidc](#module\_iam\_role\_circleci\_oidc) | ../../modules/iam-role | n/a |
 | <a name="module_iam_role_disabled"></a> [iam\_role\_disabled](#module\_iam\_role\_disabled) | ../../modules/iam-role | n/a |
 | <a name="module_iam_role_github_oidc"></a> [iam\_role\_github\_oidc](#module\_iam\_role\_github\_oidc) | ../../modules/iam-role | n/a |
+| <a name="module_iam_role_inline_policy"></a> [iam\_role\_inline\_policy](#module\_iam\_role\_inline\_policy) | ../../modules/iam-role | n/a |
 | <a name="module_iam_role_instance_profile"></a> [iam\_role\_instance\_profile](#module\_iam\_role\_instance\_profile) | ../../modules/iam-role | n/a |
 | <a name="module_iam_role_saml"></a> [iam\_role\_saml](#module\_iam\_role\_saml) | ../../modules/iam-role | n/a |
 | <a name="module_iam_roles"></a> [iam\_roles](#module\_iam\_roles) | ../../modules/iam-role | n/a |
