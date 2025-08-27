@@ -47,7 +47,7 @@ module "iam_user2" {
 
   create_inline_policy = true
   inline_policy_permissions = {
-    s3_read_access = {
+    S3ReadAccess = {
       effect = "Allow"
       actions = [
         "s3:GetObject",
@@ -58,7 +58,7 @@ module "iam_user2" {
         "arn:aws:s3:::example-bucket/*"
       ]
     }
-    cloudwatch_logs = {
+    CloudwatchLogs = {
       effect = "Allow"
       actions = [
         "logs:CreateLogGroup",

@@ -46,6 +46,10 @@ module "iam_roles" {
 
   trust_policy_permissions = {
     TrustRoleAndServiceToAssume = {
+      actions = [
+        "sts:AssumeRole",
+        "sts:TagSession",
+      ]
       principals = [{
         type        = "AWS"
         identifiers = each.value.trusted_arns
@@ -90,6 +94,10 @@ module "iam_role_instance_profile" {
 
   trust_policy_permissions = {
     TrustRoleAndServiceToAssume = {
+      actions = [
+        "sts:AssumeRole",
+        "sts:TagSession",
+      ]
       principals = [
         {
           type = "AWS"
