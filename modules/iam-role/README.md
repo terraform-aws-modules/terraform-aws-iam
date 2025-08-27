@@ -63,6 +63,10 @@ module "iam_role" {
 
   trust_policy_permissions = {
     TrustRoleAndServiceToAssume = {
+      actions = [
+        "sts:AssumeRole",
+        "sts:TagSession",
+      ]
       principals = [{
         type = "AWS"
         identifiers = [
