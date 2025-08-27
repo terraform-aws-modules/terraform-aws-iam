@@ -188,6 +188,48 @@ module "iam_role_saml" {
 }
 
 ################################################################################
+# IAM Role - Inline Policy
+################################################################################
+
+module "iam_role_inline_policy" {
+  source = "../../modules/iam-role"
+
+  name = "${local.name}-inline-policy"
+
+  create_instance_profile = true
+
+  trust_policy_permissions = {
+    ec2 = {
+      effect = "Allow"
+      actions = [
+        "sts:AssumeRole"
+      ]
+      principals = [{
+        type        = "Service"
+        identifiers = ["ec2.amazonaws.com"]
+      }]
+    }
+  }
+
+  create_inline_policy = true
+  inline_policy_permissions = {
+    S3ReadAccess = {
+      effect = "Allow"
+      actions = [
+        "s3:GetObject",
+        "s3:ListBucket"
+      ]
+      resources = [
+        "arn:aws:s3:::example-bucket",
+        "arn:aws:s3:::example-bucket/*"
+      ]
+    }
+  }
+
+  tags = local.tags
+}
+
+################################################################################
 # Supporting resources
 ################################################################################
 
