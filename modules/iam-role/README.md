@@ -37,7 +37,7 @@ module "iam_oidc_role" {
 
   enable_github_oidc = true
 
-  oidc_audience     = "https://mygithub.com/<GITHUB_ORG>"
+  oidc_audiences     = ["https://mygithub.com/<GITHUB_ORG>"]
   oidc_provider_urls = ["mygithub.com/_services/token"]
 
   # This should be updated to suit your organization, repository, references/branches, etc.
