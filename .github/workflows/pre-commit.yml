@@ -32,7 +32,7 @@ jobs:
       matrix:
         directory: ${{ fromJson(needs.collectInputs.outputs.directories) }}
     steps:
-      - name: Install the latest wrpc version
+      - name: Install rmz
         uses: jaxxstorm/action-install-gh-release@v2.1.0
         with:
           repo: SUPERCILEX/fuc
@@ -44,6 +44,16 @@ jobs:
       # https://github.com/orgs/community/discussions/25678#discussioncomment-5242449
       - name: Delete unnecessary files
         run: |
+          formatByteCount() { echo $(numfmt --to=iec-i --suffix=B --padding=7 $1'000'); }
+          getAvailableSpace() { echo $(df -a $1 | awk 'NR > 1 {avail+=$4} END {print avail}'); }
+
+          BEFORE=$(getAvailableSpace)
+
+          sudo du -sh /usr/local/lib/android
+          sudo du -sh /usr/share/dotnet
+          sudo du -sh /opt/ghc || true
+          sudo du -sh /usr/local/.ghcup || true
+
           ln -s /opt/hostedtoolcache/SUPERCILEX/x86_64-unknown-linux-gnu-rmz/latest/linux-x64/rmz /usr/local/bin/rmz
           rmz -f /opt/hostedtoolcache/CodeQL &
           rmz -f /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk &
@@ -54,8 +64,11 @@ jobs:
           sudo rmz -f /usr/share/dotnet &
           sudo rmz -f /opt/ghc &
           sudo rmz -f /usr/local/.ghcup &
-          sudo docker image prune --all --force || true &
           wait
+
+          AFTER=$(getAvailableSpace)
+          SAVED=$((AFTER-BEFORE))
+          echo "=> Saved $(formatByteCount $SAVED)"
 
       - name: Checkout
         uses: actions/checkout@v5
@@ -89,7 +102,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: collectInputs
     steps:
-      - name: Install the latest wrpc version
+      - name: Install rmz
         uses: jaxxstorm/action-install-gh-release@v2.1.0
         with:
           repo: SUPERCILEX/fuc
@@ -101,6 +114,16 @@ jobs:
       # https://github.com/orgs/community/discussions/25678#discussioncomment-5242449
       - name: Delete unnecessary files
         run: |
+          formatByteCount() { echo $(numfmt --to=iec-i --suffix=B --padding=7 $1'000'); }
+          getAvailableSpace() { echo $(df -a $1 | awk 'NR > 1 {avail+=$4} END {print avail}'); }
+
+          BEFORE=$(getAvailableSpace)
+
+          sudo du -sh /usr/local/lib/android
+          sudo du -sh /usr/share/dotnet
+          sudo du -sh /opt/ghc || true
+          sudo du -sh /usr/local/.ghcup || true
+
           ln -s /opt/hostedtoolcache/SUPERCILEX/x86_64-unknown-linux-gnu-rmz/latest/linux-x64/rmz /usr/local/bin/rmz
           rmz -f /opt/hostedtoolcache/CodeQL &
           rmz -f /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk &
@@ -111,8 +134,11 @@ jobs:
           sudo rmz -f /usr/share/dotnet &
           sudo rmz -f /opt/ghc &
           sudo rmz -f /usr/local/.ghcup &
-          sudo docker image prune --all --force || true &
           wait
+
+          AFTER=$(getAvailableSpace)
+          SAVED=$((AFTER-BEFORE))
+          echo "=> Saved $(formatByteCount $SAVED)"
 
       - name: Checkout
         uses: actions/checkout@v5
