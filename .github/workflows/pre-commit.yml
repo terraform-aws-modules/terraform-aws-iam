@@ -32,27 +32,24 @@ jobs:
       matrix:
         directory: ${{ fromJson(needs.collectInputs.outputs.directories) }}
     steps:
+      - name: Install rmz
+        uses: jaxxstorm/action-install-gh-release@v2.1.0
+        with:
+          repo: SUPERCILEX/fuc
+          asset-name: rmz
+
       # https://github.com/orgs/community/discussions/25678#discussioncomment-5242449
       - name: Delete unnecessary files
         run: |
-          curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
-          cargo binstall -y rmz
-          ln -s ~/.cargo/bin/rmz /usr/local/bin/rmz
           # Start deleting!
           ls -la /opt/hostedtoolcache
 
-          sudo rmz /opt/hostedtoolcache
-          sudo rmz /usr/local/lib/android
-          sudo rmz /usr/share/dotnet
-          sudo rmz /opt/ghc
-          sudo rmz /usr/local/.ghcup
+          sudo rmz -f /opt/hostedtoolcache
+          sudo rmz -f /usr/local/lib/android
+          sudo rmz -f /usr/share/dotnet
+          sudo rmz -f /opt/ghc
+          sudo rmz -f /usr/local/.ghcup
           sudo docker image prune --all --force || true
-
-          sudo apt-get remove -y azure-cli google-chrome-stable firefox powershell mono-devel libgl1-mesa-dri --fix-missing || echo "::warning::The command [sudo apt-get remove -y azure-cli google-chrome-stable firefox powershell mono-devel libgl1-mesa-dri --fix-missing] failed to complete successfully. Proceeding..."
-          sudo apt-get remove -y google-cloud-sdk --fix-missing || echo "::debug::The command [sudo apt-get remove -y google-cloud-sdk --fix-missing] failed to complete successfully. Proceeding..."
-          sudo apt-get remove -y google-cloud-cli --fix-missing || echo "::debug::The command [sudo apt-get remove -y google-cloud-cli --fix-missing] failed to complete successfully. Proceeding..."
-          sudo apt-get autoremove -y || echo "::warning::The command [sudo apt-get autoremove -y] failed to complete successfully. Proceeding..."
-          sudo apt-get clean || echo "::warning::The command [sudo apt-get clean] failed to complete successfully. Proceeding..."
 
       - name: Checkout
         uses: actions/checkout@v5
@@ -86,27 +83,24 @@ jobs:
     runs-on: ubuntu-latest
     needs: collectInputs
     steps:
+      - name: Install rmz
+        uses: jaxxstorm/action-install-gh-release@v2.1.0
+        with:
+          repo: SUPERCILEX/fuc
+          asset-name: rmz
+
       # https://github.com/orgs/community/discussions/25678#discussioncomment-5242449
       - name: Delete unnecessary files
         run: |
-          curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
-          cargo binstall -y rmz
-          ln -s ~/.cargo/bin/rmz /usr/local/bin/rmz
           # Start deleting!
           ls -la /opt/hostedtoolcache
 
-          sudo rmz /opt/hostedtoolcache
-          sudo rmz /usr/local/lib/android
-          sudo rmz /usr/share/dotnet
-          sudo rmz /opt/ghc
-          sudo rmz /usr/local/.ghcup
+          sudo rmz -f /opt/hostedtoolcache
+          sudo rmz -f /usr/local/lib/android
+          sudo rmz -f /usr/share/dotnet
+          sudo rmz -f /opt/ghc
+          sudo rmz -f /usr/local/.ghcup
           sudo docker image prune --all --force || true
-
-          sudo apt-get remove -y azure-cli google-chrome-stable firefox powershell mono-devel libgl1-mesa-dri --fix-missing || echo "::warning::The command [sudo apt-get remove -y azure-cli google-chrome-stable firefox powershell mono-devel libgl1-mesa-dri --fix-missing] failed to complete successfully. Proceeding..."
-          sudo apt-get remove -y google-cloud-sdk --fix-missing || echo "::debug::The command [sudo apt-get remove -y google-cloud-sdk --fix-missing] failed to complete successfully. Proceeding..."
-          sudo apt-get remove -y google-cloud-cli --fix-missing || echo "::debug::The command [sudo apt-get remove -y google-cloud-cli --fix-missing] failed to complete successfully. Proceeding..."
-          sudo apt-get autoremove -y || echo "::warning::The command [sudo apt-get autoremove -y] failed to complete successfully. Proceeding..."
-          sudo apt-get clean || echo "::warning::The command [sudo apt-get clean] failed to complete successfully. Proceeding..."
 
       - name: Checkout
         uses: actions/checkout@v5
