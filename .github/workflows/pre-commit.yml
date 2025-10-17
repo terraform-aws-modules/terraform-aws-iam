@@ -33,13 +33,26 @@ jobs:
         directory: ${{ fromJson(needs.collectInputs.outputs.directories) }}
     steps:
       # https://github.com/orgs/community/discussions/25678#discussioncomment-5242449
-      - name: Install ci-hoover
-        uses: jaxxstorm/action-install-gh-release@v2.1.0
-        with: # Grab the latest version
-          repo: xd009642/ci-hoover
+      - name: Delete unnecessary files
+        run: |
+          curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
+          cargo binstall -y rmz
+          ln -s ~/.cargo/bin/rmz /usr/local/bin/rmz
+          # Start deleting!
+          ls -la /opt/hostedtoolcache
 
-      - name: Run ci-hoover
-        run: ci-hoover
+          sudo rmz /opt/hostedtoolcache
+          sudo rmz /usr/local/lib/android
+          sudo rmz /usr/share/dotnet
+          sudo rmz /opt/ghc
+          sudo rmz /usr/local/.ghcup
+          sudo docker image prune --all --force || true
+
+          sudo apt-get remove -y azure-cli google-chrome-stable firefox powershell mono-devel libgl1-mesa-dri --fix-missing || echo "::warning::The command [sudo apt-get remove -y azure-cli google-chrome-stable firefox powershell mono-devel libgl1-mesa-dri --fix-missing] failed to complete successfully. Proceeding..."
+          sudo apt-get remove -y google-cloud-sdk --fix-missing || echo "::debug::The command [sudo apt-get remove -y google-cloud-sdk --fix-missing] failed to complete successfully. Proceeding..."
+          sudo apt-get remove -y google-cloud-cli --fix-missing || echo "::debug::The command [sudo apt-get remove -y google-cloud-cli --fix-missing] failed to complete successfully. Proceeding..."
+          sudo apt-get autoremove -y || echo "::warning::The command [sudo apt-get autoremove -y] failed to complete successfully. Proceeding..."
+          sudo apt-get clean || echo "::warning::The command [sudo apt-get clean] failed to complete successfully. Proceeding..."
 
       - name: Checkout
         uses: actions/checkout@v5
@@ -74,13 +87,26 @@ jobs:
     needs: collectInputs
     steps:
       # https://github.com/orgs/community/discussions/25678#discussioncomment-5242449
-      - name: Install ci-hoover
-        uses: jaxxstorm/action-install-gh-release@v2.1.0
-        with: # Grab the latest version
-          repo: xd009642/ci-hoover
+      - name: Delete unnecessary files
+        run: |
+          curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
+          cargo binstall -y rmz
+          ln -s ~/.cargo/bin/rmz /usr/local/bin/rmz
+          # Start deleting!
+          ls -la /opt/hostedtoolcache
 
-      - name: Run ci-hoover
-        run: ci-hoover
+          sudo rmz /opt/hostedtoolcache
+          sudo rmz /usr/local/lib/android
+          sudo rmz /usr/share/dotnet
+          sudo rmz /opt/ghc
+          sudo rmz /usr/local/.ghcup
+          sudo docker image prune --all --force || true
+
+          sudo apt-get remove -y azure-cli google-chrome-stable firefox powershell mono-devel libgl1-mesa-dri --fix-missing || echo "::warning::The command [sudo apt-get remove -y azure-cli google-chrome-stable firefox powershell mono-devel libgl1-mesa-dri --fix-missing] failed to complete successfully. Proceeding..."
+          sudo apt-get remove -y google-cloud-sdk --fix-missing || echo "::debug::The command [sudo apt-get remove -y google-cloud-sdk --fix-missing] failed to complete successfully. Proceeding..."
+          sudo apt-get remove -y google-cloud-cli --fix-missing || echo "::debug::The command [sudo apt-get remove -y google-cloud-cli --fix-missing] failed to complete successfully. Proceeding..."
+          sudo apt-get autoremove -y || echo "::warning::The command [sudo apt-get autoremove -y] failed to complete successfully. Proceeding..."
+          sudo apt-get clean || echo "::warning::The command [sudo apt-get clean] failed to complete successfully. Proceeding..."
 
       - name: Checkout
         uses: actions/checkout@v5
