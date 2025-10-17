@@ -22,7 +22,7 @@ jobs:
 
       - name: Get root directories
         id: dirs
-        uses: clowdhaus/terraform-composite-actions/directories@v1.13.0
+        uses: clowdhaus/terraform-composite-actions/directories@v1.14.0
 
   preCommitMinVersions:
     name: Min TF pre-commit
@@ -50,13 +50,14 @@ jobs:
           BEFORE=$(getAvailableSpace)
 
           ln -s /opt/hostedtoolcache/SUPERCILEX/x86_64-unknown-linux-gnu-rmz/latest/linux-x64/rmz /usr/local/bin/rmz
-          sudo rmz -f /usr/share/dotnet \
-            /usr/local/.ghcup \
-            /opt/hostedtoolcache/CodeQL \
-            /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk \
-            /opt/hostedtoolcache/PyPy \
-            /opt/hostedtoolcache/Ruby \
-            /opt/hostedtoolcache/go
+          sudo rmz -f /usr/share/dotnet &
+          sudo rmz -f /usr/local/.ghcup &
+          rmz -f /opt/hostedtoolcache/CodeQL &
+          rmz -f /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk &
+          rmz -f /opt/hostedtoolcache/PyPy &
+          rmz -f /opt/hostedtoolcache/Ruby &
+          rmz -f /opt/hostedtoolcache/go &
+          wait
 
           AFTER=$(getAvailableSpace)
           SAVED=$((AFTER-BEFORE))
@@ -74,7 +75,7 @@ jobs:
       - name: Pre-commit Terraform ${{ steps.minMax.outputs.minVersion }}
         # Run only validate pre-commit check on min version supported
         if: ${{ matrix.directory !=  '.' }}
-        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.13.0
+        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.14.0
         with:
           terraform-version: ${{ steps.minMax.outputs.minVersion }}
           tflint-version: ${{ env.TFLINT_VERSION }}
@@ -83,7 +84,7 @@ jobs:
       - name: Pre-commit Terraform ${{ steps.minMax.outputs.minVersion }}
         # Run only validate pre-commit check on min version supported
         if: ${{ matrix.directory ==  '.' }}
-        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.13.0
+        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.14.0
         with:
           terraform-version: ${{ steps.minMax.outputs.minVersion }}
           tflint-version: ${{ env.TFLINT_VERSION }}
@@ -112,13 +113,14 @@ jobs:
           BEFORE=$(getAvailableSpace)
 
           ln -s /opt/hostedtoolcache/SUPERCILEX/x86_64-unknown-linux-gnu-rmz/latest/linux-x64/rmz /usr/local/bin/rmz
-          sudo rmz -f /usr/share/dotnet \
-            /usr/local/.ghcup \
-            /opt/hostedtoolcache/CodeQL \
-            /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk \
-            /opt/hostedtoolcache/PyPy \
-            /opt/hostedtoolcache/Ruby \
-            /opt/hostedtoolcache/go
+          sudo rmz -f /usr/share/dotnet &
+          sudo rmz -f /usr/local/.ghcup &
+          rmz -f /opt/hostedtoolcache/CodeQL &
+          rmz -f /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk &
+          rmz -f /opt/hostedtoolcache/PyPy &
+          rmz -f /opt/hostedtoolcache/Ruby &
+          rmz -f /opt/hostedtoolcache/go &
+          wait
 
           AFTER=$(getAvailableSpace)
           SAVED=$((AFTER-BEFORE))
@@ -135,7 +137,7 @@ jobs:
         uses: clowdhaus/terraform-min-max@v2.1.0
 
       - name: Pre-commit Terraform ${{ steps.minMax.outputs.maxVersion }}
-        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.13.0
+        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.14.0
         with:
           terraform-version: ${{ steps.minMax.outputs.maxVersion }}
           tflint-version: ${{ env.TFLINT_VERSION }}
