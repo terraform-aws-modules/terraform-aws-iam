@@ -50,6 +50,11 @@ jobs:
           rmz -f /opt/hostedtoolcache/PyPy &
           rmz -f /opt/hostedtoolcache/Ruby &
           rmz -f /opt/hostedtoolcache/go &
+          sudo rmz -f /usr/local/lib/android &
+          sudo rmz -f /usr/share/dotnet &
+          sudo rmz -f /opt/ghc &
+          sudo rmz -f /usr/local/.ghcup &
+          sudo docker image prune --all --force || true &
           wait
 
       - name: Checkout
@@ -102,6 +107,11 @@ jobs:
           rmz -f /opt/hostedtoolcache/PyPy &
           rmz -f /opt/hostedtoolcache/Ruby &
           rmz -f /opt/hostedtoolcache/go &
+          sudo rmz -f /usr/local/lib/android &
+          sudo rmz -f /usr/share/dotnet &
+          sudo rmz -f /opt/ghc &
+          sudo rmz -f /usr/local/.ghcup &
+          sudo docker image prune --all --force || true &
           wait
 
       - name: Checkout
