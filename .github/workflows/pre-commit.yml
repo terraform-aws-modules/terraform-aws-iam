@@ -45,16 +45,16 @@ jobs:
       - name: Delete unnecessary files
         run: |
           ln -s /opt/hostedtoolcache/SUPERCILEX/x86_64-unknown-linux-gnu-rmz/latest/linux-x64/rmz /usr/local/bin/rmz
-
-          # Start deleting!
-          ls -la /opt/hostedtoolcache
-
-          sudo rmz -f /opt/hostedtoolcache
-          sudo rmz -f /usr/local/lib/android
-          sudo rmz -f /usr/share/dotnet
-          sudo rmz -f /opt/ghc
-          sudo rmz -f /usr/local/.ghcup
-          sudo docker image prune --all --force || true
+          rmz -f /opt/hostedtoolcache/CodeQL
+          rmz -f /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk
+          rmz -f /opt/hostedtoolcache/PyPy
+          rmz -f /opt/hostedtoolcache/Ruby
+          rmz -f /opt/hostedtoolcache/go
+          rmz -f /usr/local/lib/android
+          rmz -f /usr/share/dotnet
+          rmz -f /opt/ghc
+          rmz -f /usr/local/.ghcup
+          docker image prune --all --force || true
 
       - name: Checkout
         uses: actions/checkout@v5
@@ -100,15 +100,17 @@ jobs:
       # https://github.com/orgs/community/discussions/25678#discussioncomment-5242449
       - name: Delete unnecessary files
         run: |
-          # Start deleting!
-          ls -la /opt/hostedtoolcache
-
-          sudo rmz -f /opt/hostedtoolcache
-          sudo rmz -f /usr/local/lib/android
-          sudo rmz -f /usr/share/dotnet
-          sudo rmz -f /opt/ghc
-          sudo rmz -f /usr/local/.ghcup
-          sudo docker image prune --all --force || true
+          ln -s /opt/hostedtoolcache/SUPERCILEX/x86_64-unknown-linux-gnu-rmz/latest/linux-x64/rmz /usr/local/bin/rmz
+          rmz -f /opt/hostedtoolcache/CodeQL
+          rmz -f /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk
+          rmz -f /opt/hostedtoolcache/PyPy
+          rmz -f /opt/hostedtoolcache/Ruby
+          rmz -f /opt/hostedtoolcache/go
+          rmz -f /usr/local/lib/android
+          rmz -f /usr/share/dotnet
+          rmz -f /opt/ghc
+          rmz -f /usr/local/.ghcup
+          docker image prune --all --force || true
 
       - name: Checkout
         uses: actions/checkout@v5
