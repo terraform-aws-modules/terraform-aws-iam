@@ -41,7 +41,34 @@ jobs:
           chmod: 0755
           extension-matching: disable
 
-      # https://github.com/orgs/community/discussions/25678#discussioncomment-5242449
+      # # https://github.com/orgs/community/discussions/25678#discussioncomment-5242449
+      # - name: Delete unnecessary files
+      #   run: |
+      #     formatByteCount() { echo $(numfmt --to=iec-i --suffix=B --padding=7 $1'000'); }
+      #     getAvailableSpace() { echo $(df -a $1 | awk 'NR > 1 {avail+=$4} END {print avail}'); }
+
+      #     BEFORE=$(getAvailableSpace)
+
+      #     du -sh /opt/hostedtoolcache
+      #     sudo du -sh /usr/local/lib/android
+      #     sudo du -sh /usr/share/dotnet
+      #     sudo du -sh /usr/local/.ghcup
+
+      #     ln -s /opt/hostedtoolcache/SUPERCILEX/x86_64-unknown-linux-gnu-rmz/latest/linux-x64/rmz /usr/local/bin/rmz
+      #     sudo rmz -f /usr/local/lib/android &
+      #     sudo rmz -f /usr/share/dotnet &
+      #     sudo rmz -f /usr/local/.ghcup &
+      #     rmz -f /opt/hostedtoolcache/CodeQL &
+      #     rmz -f /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk &
+      #     rmz -f /opt/hostedtoolcache/PyPy &
+      #     rmz -f /opt/hostedtoolcache/Ruby &
+      #     rmz -f /opt/hostedtoolcache/go &
+      #     wait
+
+      #     AFTER=$(getAvailableSpace)
+      #     SAVED=$((AFTER-BEFORE))
+      #     echo "=> Saved $(formatByteCount $SAVED)"
+            # https://github.com/orgs/community/discussions/25678#discussioncomment-5242449
       - name: Delete unnecessary files
         run: |
           formatByteCount() { echo $(numfmt --to=iec-i --suffix=B --padding=7 $1'000'); }
@@ -55,15 +82,14 @@ jobs:
           sudo du -sh /usr/local/.ghcup
 
           ln -s /opt/hostedtoolcache/SUPERCILEX/x86_64-unknown-linux-gnu-rmz/latest/linux-x64/rmz /usr/local/bin/rmz
-          sudo rmz -f /usr/local/lib/android &
-          sudo rmz -f /usr/share/dotnet &
-          sudo rmz -f /usr/local/.ghcup &
-          rmz -f /opt/hostedtoolcache/CodeQL &
-          rmz -f /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk &
-          rmz -f /opt/hostedtoolcache/PyPy &
-          rmz -f /opt/hostedtoolcache/Ruby &
-          rmz -f /opt/hostedtoolcache/go &
-          wait
+          time sudo rmz -f /usr/local/lib/android
+          time sudo rmz -f /usr/share/dotnet
+          time sudo rmz -f /usr/local/.ghcup
+          time rmz -f /opt/hostedtoolcache/CodeQL
+          time rmz -f /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk
+          time rmz -f /opt/hostedtoolcache/PyPy
+          time rmz -f /opt/hostedtoolcache/Ruby
+          time rmz -f /opt/hostedtoolcache/go
 
           AFTER=$(getAvailableSpace)
           SAVED=$((AFTER-BEFORE))
@@ -110,7 +136,34 @@ jobs:
           chmod: 0755
           extension-matching: disable
 
-      # https://github.com/orgs/community/discussions/25678#discussioncomment-5242449
+      # # https://github.com/orgs/community/discussions/25678#discussioncomment-5242449
+      # - name: Delete unnecessary files
+      #   run: |
+      #     formatByteCount() { echo $(numfmt --to=iec-i --suffix=B --padding=7 $1'000'); }
+      #     getAvailableSpace() { echo $(df -a $1 | awk 'NR > 1 {avail+=$4} END {print avail}'); }
+
+      #     BEFORE=$(getAvailableSpace)
+
+      #     du -sh /opt/hostedtoolcache
+      #     sudo du -sh /usr/local/lib/android
+      #     sudo du -sh /usr/share/dotnet
+      #     sudo du -sh /usr/local/.ghcup
+
+      #     ln -s /opt/hostedtoolcache/SUPERCILEX/x86_64-unknown-linux-gnu-rmz/latest/linux-x64/rmz /usr/local/bin/rmz
+      #     sudo rmz -f /usr/local/lib/android &
+      #     sudo rmz -f /usr/share/dotnet &
+      #     sudo rmz -f /usr/local/.ghcup &
+      #     rmz -f /opt/hostedtoolcache/CodeQL &
+      #     rmz -f /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk &
+      #     rmz -f /opt/hostedtoolcache/PyPy &
+      #     rmz -f /opt/hostedtoolcache/Ruby &
+      #     rmz -f /opt/hostedtoolcache/go &
+      #     wait
+
+      #     AFTER=$(getAvailableSpace)
+      #     SAVED=$((AFTER-BEFORE))
+      #     echo "=> Saved $(formatByteCount $SAVED)"
+            # https://github.com/orgs/community/discussions/25678#discussioncomment-5242449
       - name: Delete unnecessary files
         run: |
           formatByteCount() { echo $(numfmt --to=iec-i --suffix=B --padding=7 $1'000'); }
@@ -124,15 +177,14 @@ jobs:
           sudo du -sh /usr/local/.ghcup
 
           ln -s /opt/hostedtoolcache/SUPERCILEX/x86_64-unknown-linux-gnu-rmz/latest/linux-x64/rmz /usr/local/bin/rmz
-          sudo rmz -f /usr/local/lib/android &
-          sudo rmz -f /usr/share/dotnet &
-          sudo rmz -f /usr/local/.ghcup &
-          rmz -f /opt/hostedtoolcache/CodeQL &
-          rmz -f /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk &
-          rmz -f /opt/hostedtoolcache/PyPy &
-          rmz -f /opt/hostedtoolcache/Ruby &
-          rmz -f /opt/hostedtoolcache/go &
-          wait
+          time sudo rmz -f /usr/local/lib/android
+          time sudo rmz -f /usr/share/dotnet
+          time sudo rmz -f /usr/local/.ghcup
+          time rmz -f /opt/hostedtoolcache/CodeQL
+          time rmz -f /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk
+          time rmz -f /opt/hostedtoolcache/PyPy
+          time rmz -f /opt/hostedtoolcache/Ruby
+          time rmz -f /opt/hostedtoolcache/go
 
           AFTER=$(getAvailableSpace)
           SAVED=$((AFTER-BEFORE))
