@@ -33,8 +33,13 @@ jobs:
         directory: ${{ fromJson(needs.collectInputs.outputs.directories) }}
     steps:
       # https://github.com/orgs/community/discussions/25678#discussioncomment-5242449
-      - name: Delete unnecessary files
-        uses: xd009642/ci-hoover@0.1.1
+      - name: Install ci-hoover
+        uses: jaxxstorm/action-install-gh-release@v2.1.0
+        with: # Grab the latest version
+          repo: xd009642/ci-hoover
+
+      - name: Run ci-hoover
+        run: ci-hoover
 
       - name: Checkout
         uses: actions/checkout@v5
@@ -69,8 +74,13 @@ jobs:
     needs: collectInputs
     steps:
       # https://github.com/orgs/community/discussions/25678#discussioncomment-5242449
-      - name: Delete unnecessary files
-        uses: xd009642/ci-hoover@0.1.1
+      - name: Install ci-hoover
+        uses: jaxxstorm/action-install-gh-release@v2.1.0
+        with: # Grab the latest version
+          repo: xd009642/ci-hoover
+
+      - name: Run ci-hoover
+        run: ci-hoover
 
       - name: Checkout
         uses: actions/checkout@v5
