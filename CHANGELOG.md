@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.2.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.2.1...v6.2.2) (2025-10-21)
+
+### Bug Fixes
+
+* Update CI workflow versions to latest ([#626](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/626)) ([45cc1f8](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/45cc1f82b8c6a3ddd3545e95161bfdf51206c213))
+
 ## [6.2.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.2.0...v6.2.1) (2025-08-26)
 
 
