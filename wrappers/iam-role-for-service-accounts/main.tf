@@ -53,6 +53,7 @@ module "wrapper" {
   policy_description                                              = try(each.value.policy_description, var.defaults.policy_description, null)
   policy_name                                                     = try(each.value.policy_name, var.defaults.policy_name, null)
   policy_path                                                     = try(each.value.policy_path, var.defaults.policy_path, null)
+  region                                                          = try(each.value.region, var.defaults.region, null)
   source_inline_policy_documents                                  = try(each.value.source_inline_policy_documents, var.defaults.source_inline_policy_documents, [])
   source_policy_documents                                         = try(each.value.source_policy_documents, var.defaults.source_policy_documents, [])
   tags                                                            = try(each.value.tags, var.defaults.tags, {})

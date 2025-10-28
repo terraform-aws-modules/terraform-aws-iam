@@ -1,3 +1,38 @@
+data "aws_partition" "current" {
+  count = var.create ? 1 : 0
+}
+
+locals {
+  partition = try(data.aws_partition.current[0].partition, "")
+}
+
+data "aws_service_principal" "elasticloadbalancing" {
+  count = var.create && var.attach_load_balancer_controller_policy ? 1 : 0
+
+  service_name = "elasticloadbalancing"
+  region       = var.region
+}
+
+data "aws_service_principal" "fsx" {
+  count = var.create && (var.attach_fsx_lustre_csi_policy || var.attach_fsx_openzfs_csi_policy) ? 1 : 0
+
+  service_name = "fsx"
+  region       = var.region
+}
+
+data "aws_service_principal" "vpc_lattice" {
+  count = var.create && var.attach_aws_gateway_controller_policy ? 1 : 0
+
+  service_name = "vpc-lattice"
+  region       = var.region
+}
+
+data "aws_service_principal" "delivery_logs" {
+  count = var.create && var.attach_aws_gateway_controller_policy ? 1 : 0
+
+  service_name = "delivery.logs"
+  region       = var.region
+}
 ################################################################################
 # AWS Gateway Controller Policy
 ################################################################################
@@ -31,21 +66,21 @@ data "aws_iam_policy_document" "aws_gateway_controller" {
 
   statement {
     actions   = ["iam:CreateServiceLinkedRole"]
-    resources = ["arn:${local.partition}:iam::*:role/aws-service-role/vpc-lattice.${local.dns_suffix}/AWSServiceRoleForVpcLattice"]
+    resources = ["arn:${local.partition}:iam::*:role/aws-service-role/${data.aws_service_principal.vpc_lattice[0].name}/AWSServiceRoleForVpcLattice"]
     condition {
       test     = "StringLike"
       variable = "iam:AWSServiceName"
-      values   = ["vpc-lattice.${local.dns_suffix}"]
+      values   = [data.aws_service_principal.vpc_lattice[0].name]
     }
   }
 
   statement {
     actions   = ["iam:CreateServiceLinkedRole"]
-    resources = ["arn:${local.partition}:iam::*:role/aws-service-role/delivery.logs.${local.dns_suffix}/AWSServiceRoleForLogDelivery"]
+    resources = ["arn:${local.partition}:iam::*:role/aws-service-role/${data.aws_service_principal.delivery_logs[0].name}/AWSServiceRoleForLogDelivery"]
     condition {
       test     = "StringLike"
       variable = "iam:AWSServiceName"
-      values   = ["delivery.logs.${local.dns_suffix}"]
+      values   = [data.aws_service_principal.delivery_logs[0].name]
     }
   }
 }
@@ -560,7 +595,7 @@ data "aws_iam_policy_document" "fsx_lustre_csi" {
     condition {
       test     = "StringLike"
       variable = "iam:AWSServiceName"
-      values   = ["fsx.${local.dns_suffix}"]
+      values   = [data.aws_service_principal.fsx[0].name]
     }
   }
 
@@ -601,7 +636,7 @@ data "aws_iam_policy_document" "fsx_openzfs_csi" {
     condition {
       test     = "StringLike"
       variable = "iam:AWSServiceName"
-      values   = ["fsx.${local.dns_suffix}"]
+      values   = [data.aws_service_principal.fsx[0].name]
     }
   }
 
@@ -639,7 +674,7 @@ data "aws_iam_policy_document" "load_balancer_controller" {
     condition {
       test     = "StringEquals"
       variable = "iam:AWSServiceName"
-      values   = ["elasticloadbalancing.${local.dns_suffix}"]
+      values   = [data.aws_service_principal.elasticloadbalancing[0].name]
     }
   }
 
