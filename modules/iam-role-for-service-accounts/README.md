@@ -8,6 +8,7 @@
 > The [karpenter](https://github.com/terraform-aws-modules/terraform-aws-eks/tree/master/modules/karpenter) sub-module contains the necessary AWS resources for running Karpenter, including the Karpenter controller IAM role & policy
 
 Creates an IAM role which can be assumed by AWS EKS `ServiceAccount`s with optional policies for commonly used controllers/custom resources within EKS. The optional policies supported include:
+
 - [Cert-Manager](https://cert-manager.io/docs/configuration/acme/dns01/route53/#set-up-an-iam-role)
 - [Cluster Autoscaler](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/aws/README.md)
 - [EBS CSI Driver](https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/example-iam-policy.json)

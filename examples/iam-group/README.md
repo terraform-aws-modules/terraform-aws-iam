@@ -2,14 +2,14 @@
 
 Configuration in this directory creates IAM group with users who are allowed to assume IAM roles and extended with IAM policies.
 
-# Usage
+## Usage
 
 To run this example you need to execute:
 
 ```bash
-$ terraform init
-$ terraform plan
-$ terraform apply
+terraform init
+terraform plan
+terraform apply
 ```
 
 Run `terraform destroy` when you don't need these resources.

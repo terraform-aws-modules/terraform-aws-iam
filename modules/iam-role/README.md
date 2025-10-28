@@ -1,15 +1,15 @@
-# AWS IAM OIDC Role Terraform Module
+# AWS IAM Role Terraform Module
 
-Creates a single IAM role which can be assumed by trusted resources using OpenID connect federation.
+Creates a single IAM role which can be assumed by trusted resources.
 
 ## Usage
 
-### [GitHub Free, Pro, & Team](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services)
+### [IAM Role - GitHub Free, Pro, & Team OIDC](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services)
 
 The defaults provided by the module are suitable for GitHub Free, Pro, & Team, including use with the official [AWS GitHub action](https://github.com/aws-actions/configure-aws-credentials).
 
 ```hcl
-module "iam_oidc_role" {
+module "iam_role" {
   source = "terraform-aws-modules/iam/aws//modules/iam-role"
 
   enable_github_oidc = true
@@ -27,12 +27,12 @@ module "iam_oidc_role" {
 }
 ```
 
-### [GitHub Enterprise Server](https://docs.github.com/en/enterprise-server@3.7/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services)
+### [IAM Role - GitHub Enterprise Server OIDC](https://docs.github.com/en/enterprise-server@3.7/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services)
 
 For GitHub Enterprise Server, users will need to provide value for the `oidc_audience` and `provider_urls` to suit their `<GITHUB_ORG>` installation:
 
 ```hcl
-module "iam_oidc_role" {
+module "iam_role" {
   source = "terraform-aws-modules/iam/aws//modules/iam-role"
 
   enable_github_oidc = true
@@ -53,7 +53,7 @@ module "iam_oidc_role" {
 }
 ```
 
-### Something
+### IAM Role - User assume
 
 ```hcl
 module "iam_role" {
@@ -94,7 +94,7 @@ module "iam_role" {
 }
 ```
 
-### SAML 2.0
+### IAM Role - SAML 2.0
 
 Creates an IAM role that trusts a SAML provider. Useful for trusting external identity providers such as Okta, OneLogin, etc.
 
@@ -102,7 +102,7 @@ Creates an IAM role that trusts a SAML provider. Useful for trusting external id
 [Enabling SAML 2.0 Federated Users to Access the AWS Management Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-saml.html)
 
 ```hcl
-module "iam_role_saml" {
+module "iam_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role"
 
   name = "example"

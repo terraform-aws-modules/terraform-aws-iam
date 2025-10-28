@@ -2,17 +2,19 @@
 
 - Creates an IAM identity provider for GitHub OIDC
 - Creates an IAM role that trust the IAM GitHub OIDC provider
-  - GitHub reference: https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
-  - AWS IAM role reference: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create_GitHub
+  - GitHub reference: <https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services>
+  - AWS IAM role reference: <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create_GitHub>
 
 Note: an IAM provider is 1 per account per given URL. This module would be provisioned once per AWS account, and multiple roles created with this provider as the trusted identity (typically 1 role per GitHub repository).
+
+## Usage
 
 To run this example you need to execute:
 
 ```bash
-$ terraform init
-$ terraform plan
-$ terraform apply
+terraform init
+terraform plan
+terraform apply
 ```
 
 Run `terraform destroy` when you don't need these resources.
