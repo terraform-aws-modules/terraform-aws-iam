@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.2.3](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.2.2...v6.2.3) (2025-10-29)
+
+### Bug Fixes
+
+* Use the `aws_service_principal` data source to retrieve the correct service principal for IRSA policies ([#628](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/628)) ([673fb44](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/673fb442b1186470784570e10e6988136dd052dc))
+
 ## [6.2.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.2.1...v6.2.2) (2025-10-21)
 
 ### Bug Fixes
