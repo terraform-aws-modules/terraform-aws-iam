@@ -1,11 +1,4 @@
-data "aws_partition" "current" {
-  count = var.create ? 1 : 0
-}
-
 locals {
-  partition  = try(data.aws_partition.current[0].partition, "")
-  dns_suffix = try(data.aws_partition.current[0].dns_suffix, "")
-
   policy_description = try(coalesce(
     var.policy_description,
     var.attach_aws_gateway_controller_policy ? "Provides permissions for the AWS Gateway Controller" : null,

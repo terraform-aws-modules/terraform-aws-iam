@@ -2,14 +2,14 @@
 
 Configuration in this directory creates a read-only IAM policy and attaches it to an AWS SSO permission set.
 
-# Usage
+## Usage
 
 To run this example you need to execute:
 
 ```bash
-$ terraform init
-$ terraform plan
-$ terraform apply
+terraform init
+terraform plan
+terraform apply
 ```
 
 Run `terraform destroy` when you don't need these resources.

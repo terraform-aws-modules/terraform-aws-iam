@@ -3,14 +3,14 @@
 Configuration in this directory creates an IAM user with a random password, a pair of IAM access/secret keys, uploads IAM SSH public key, and demonstrates inline policy creation.
 User password and secret key is encrypted using public key of keybase.io user named `test`.
 
-# Usage
+## Usage
 
 To run this example you need to execute:
 
 ```bash
-$ terraform init
-$ terraform plan
-$ terraform apply
+terraform init
+terraform plan
+terraform apply
 ```
 
 Run `terraform destroy` when you don't need these resources.
