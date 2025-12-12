@@ -30,10 +30,7 @@ Run `terraform destroy` when you don't need these resources.
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.0 |
-| <a name="provider_tls"></a> [tls](#provider\_tls) | >= 3.0 |
+No providers.
 
 ## Modules
 
