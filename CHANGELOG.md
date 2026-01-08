@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.3.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.2.3...v6.3.0) (2026-01-08)
+
+### Features
+
+* Add provider meta user-agent ([#632](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/632)) ([6af220e](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/6af220e9f5d52c502d8f0866892ada877cb2b509))
+
 ## [6.2.3](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.2.2...v6.2.3) (2025-10-29)
 
 ### Bug Fixes
