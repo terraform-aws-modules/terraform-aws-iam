@@ -40,7 +40,7 @@ data "aws_service_principal" "delivery_logs" {
 data "aws_iam_policy_document" "aws_gateway_controller" {
   count = var.create && var.attach_aws_gateway_controller_policy ? 1 : 0
 
-  # https://github.com/aws/aws-application-networking-k8s/blob/v1.1.0/files/controller-installation/recommended-inline-policy.json
+  # https://github.com/aws/aws-application-networking-k8s/blob/v2.0.0/files/controller-installation/recommended-inline-policy.json
   statement {
     actions = [
       "vpc-lattice:*",
@@ -60,6 +60,8 @@ data "aws_iam_policy_document" "aws_gateway_controller" {
       "firehose:TagDeliveryStream",
       "s3:GetBucketPolicy",
       "s3:PutBucketPolicy",
+      "tag:TagResources",
+      "tag:UntagResources"
     ]
     resources = ["*"]
   }
