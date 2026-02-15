@@ -20,6 +20,12 @@ variable "client_id_list" {
   default     = []
 }
 
+variable "thumbprint_list" {
+  description = "A list of server certificate thumbprints (max 5) for the OpenID Connect (OIDC) identity provider’s server certificates"
+  type        = list(string)
+  default     = []
+}
+
 variable "url" {
   description = "The URL of the identity provider. Corresponds to the iss claim"
   type        = string
