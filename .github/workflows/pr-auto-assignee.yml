@@ -1,0 +1,13 @@
+name: Auto Assign PRs
+
+on:
+  pull_request:
+    types: [opened, reopened]
+  workflow_dispatch:
+jobs:
+  assignee:
+    uses: clouddrove/github-shared-workflows/.github/workflows/pr-auto-assignee.yml@master
+    secrets:
+      GITHUB: ${{ secrets.GITHUB_TOKEN }}
+    with:
+      assignees: 'clouddrove-ci'
