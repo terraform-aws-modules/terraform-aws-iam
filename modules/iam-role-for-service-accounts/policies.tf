@@ -164,211 +164,37 @@ data "aws_iam_policy_document" "cluster_autoscaler" {
 # EBS CSI Policy
 ################################################################################
 
-# https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/example-iam-policy.json
-data "aws_iam_policy_document" "ebs_csi" {
-  count = var.create && var.attach_ebs_csi_policy ? 1 : 0
+# EC2 permissions for the EBS CSI driver come from the AWS-managed `AmazonEBSCSIDriverPolicy`, attached separately in main.tf.
+# This document only carries the KMS statements needed for encrypted volumes, which the managed policy does not include.
+data "aws_iam_policy_document" "ebs_csi_kms" {
+  count = var.create && var.attach_ebs_csi_policy && length(var.ebs_csi_kms_cmk_arns) > 0 ? 1 : 0
 
   statement {
     actions = [
-      "ec2:DescribeAvailabilityZones",
-      "ec2:DescribeInstances",
-      "ec2:DescribeSnapshots",
-      "ec2:DescribeTags",
-      "ec2:DescribeVolumes",
-      "ec2:DescribeVolumesModifications",
+      "kms:CreateGrant",
+      "kms:ListGrants",
+      "kms:RevokeGrant",
     ]
 
-    resources = ["*"]
-  }
+    resources = var.ebs_csi_kms_cmk_arns
 
-  statement {
-    actions = [
-      "ec2:CreateSnapshot",
-      "ec2:ModifyVolume",
-    ]
-
-    resources = ["arn:${local.partition}:ec2:*:*:volume/*"]
+    condition {
+      test     = "Bool"
+      variable = "kms:GrantIsForAWSResource"
+      values   = [true]
+    }
   }
 
   statement {
     actions = [
-      "ec2:AttachVolume",
-      "ec2:DetachVolume",
+      "kms:Encrypt",
+      "kms:Decrypt",
+      "kms:ReEncrypt*",
+      "kms:GenerateDataKey*",
+      "kms:DescribeKey",
     ]
 
-    resources = [
-      "arn:${local.partition}:ec2:*:*:volume/*",
-      "arn:${local.partition}:ec2:*:*:instance/*",
-    ]
-  }
-
-  statement {
-    actions = [
-      "ec2:CreateVolume",
-      "ec2:EnableFastSnapshotRestores",
-    ]
-
-    resources = ["arn:${local.partition}:ec2:*:*:snapshot/*"]
-  }
-
-  statement {
-    actions = ["ec2:CreateTags"]
-    resources = [
-      "arn:${local.partition}:ec2:*:*:volume/*",
-      "arn:${local.partition}:ec2:*:*:snapshot/*",
-    ]
-
-    condition {
-      test     = "StringEquals"
-      variable = "ec2:CreateAction"
-      values = [
-        "CreateVolume",
-        "CreateSnapshot",
-      ]
-    }
-  }
-
-  statement {
-    actions = ["ec2:DeleteTags"]
-    resources = [
-      "arn:${local.partition}:ec2:*:*:volume/*",
-      "arn:${local.partition}:ec2:*:*:snapshot/*",
-    ]
-  }
-
-  statement {
-    actions   = ["ec2:CreateVolume"]
-    resources = ["arn:${local.partition}:ec2:*:*:volume/*"]
-
-    condition {
-      test     = "StringLike"
-      variable = "aws:RequestTag/ebs.csi.aws.com/cluster"
-      values   = ["true"]
-    }
-  }
-
-  statement {
-    actions   = ["ec2:CreateVolume"]
-    resources = ["arn:${local.partition}:ec2:*:*:volume/*"]
-
-    condition {
-      test     = "StringLike"
-      variable = "aws:RequestTag/CSIVolumeName"
-      values   = ["*"]
-    }
-  }
-
-  statement {
-    actions   = ["ec2:DeleteVolume"]
-    resources = ["arn:${local.partition}:ec2:*:*:volume/*"]
-
-    condition {
-      test     = "StringLike"
-      variable = "aws:ResourceTag/ebs.csi.aws.com/cluster"
-      values   = ["true"]
-    }
-  }
-
-  statement {
-    actions   = ["ec2:DeleteVolume"]
-    resources = ["arn:${local.partition}:ec2:*:*:volume/*"]
-
-    condition {
-      test     = "StringLike"
-      variable = "aws:ResourceTag/CSIVolumeName"
-      values   = ["*"]
-    }
-  }
-
-  statement {
-    actions   = ["ec2:DeleteVolume"]
-    resources = ["arn:${local.partition}:ec2:*:*:volume/*"]
-
-    condition {
-      test     = "StringLike"
-      variable = "ec2:ResourceTag/kubernetes.io/created-for/pvc/name"
-      values   = ["*"]
-    }
-  }
-
-  statement {
-    actions   = ["ec2:CreateSnapshot"]
-    resources = ["arn:${local.partition}:ec2:*:*:snapshot/*"]
-
-    condition {
-      test     = "StringLike"
-      variable = "aws:RequestTag/CSIVolumeSnapshotName"
-      values   = ["*"]
-    }
-  }
-
-  statement {
-    actions   = ["ec2:CreateSnapshot"]
-    resources = ["arn:${local.partition}:ec2:*:*:snapshot/*"]
-
-    condition {
-      test     = "StringLike"
-      variable = "aws:RequestTag/ebs.csi.aws.com/cluster"
-      values   = ["true"]
-    }
-  }
-
-  statement {
-    actions   = ["ec2:DeleteSnapshot"]
-    resources = ["arn:${local.partition}:ec2:*:*:snapshot/*"]
-
-    condition {
-      test     = "StringLike"
-      variable = "aws:ResourceTag/CSIVolumeSnapshotName"
-      values   = ["*"]
-    }
-  }
-
-  statement {
-    actions   = ["ec2:DeleteSnapshot"]
-    resources = ["arn:${local.partition}:ec2:*:*:snapshot/*"]
-
-    condition {
-      test     = "StringLike"
-      variable = "aws:ResourceTag/ebs.csi.aws.com/cluster"
-      values   = ["true"]
-    }
-  }
-
-  dynamic "statement" {
-    for_each = length(var.ebs_csi_kms_cmk_arns) > 0 ? [1] : []
-
-    content {
-      actions = [
-        "kms:CreateGrant",
-        "kms:ListGrants",
-        "kms:RevokeGrant",
-      ]
-
-      resources = var.ebs_csi_kms_cmk_arns
-
-      condition {
-        test     = "Bool"
-        variable = "kms:GrantIsForAWSResource"
-        values   = [true]
-      }
-    }
-  }
-
-  dynamic "statement" {
-    for_each = length(var.ebs_csi_kms_cmk_arns) > 0 ? [1] : []
-
-    content {
-      actions = [
-        "kms:Encrypt",
-        "kms:Decrypt",
-        "kms:ReEncrypt*",
-        "kms:GenerateDataKey*",
-        "kms:DescribeKey",
-      ]
-
-      resources = var.ebs_csi_kms_cmk_arns
-    }
+    resources = var.ebs_csi_kms_cmk_arns
   }
 }
 

@@ -4,7 +4,7 @@ locals {
     var.attach_aws_gateway_controller_policy ? "Provides permissions for the AWS Gateway Controller" : null,
     var.attach_cert_manager_policy ? "Cert Manager policy to allow management of Route53 hosted zone records" : null,
     var.attach_cluster_autoscaler_policy ? "Cluster autoscaler policy to allow examination and modification of EC2 Auto Scaling Groups" : null,
-    var.attach_ebs_csi_policy ? "Provides permissions to manage EBS volumes via the container storage interface driver" : null,
+    var.attach_ebs_csi_policy && length(var.ebs_csi_kms_cmk_arns) > 0 ? "Provides KMS permissions to manage encrypted EBS volumes via the container storage interface driver" : null,
     var.attach_efs_csi_policy ? "Provides permissions to manage EFS volumes via the container storage interface driver" : null,
     var.attach_mountpoint_s3_csi_policy ? "Mountpoint S3 CSI driver policy to allow management of S3" : null,
     var.attach_external_dns_policy ? "External DNS policy to allow management of Route53 hosted zone records" : null,
@@ -24,7 +24,7 @@ locals {
     var.attach_aws_gateway_controller_policy ? "AWS_Gateway_Controller" : null,
     var.attach_cert_manager_policy ? "Cert_Manager" : null,
     var.attach_cluster_autoscaler_policy ? "Cluster_Autoscaler" : null,
-    var.attach_ebs_csi_policy ? "EBS_CSI" : null,
+    var.attach_ebs_csi_policy && length(var.ebs_csi_kms_cmk_arns) > 0 ? "EBS_CSI" : null,
     var.attach_efs_csi_policy ? "EFS_CSI" : null,
     var.attach_mountpoint_s3_csi_policy ? "Mountpoint_S3_CSI" : null,
     var.attach_external_dns_policy ? "External_DNS" : null,
@@ -100,6 +100,13 @@ resource "aws_iam_role_policy_attachment" "additional" {
   policy_arn = each.value
 }
 
+resource "aws_iam_role_policy_attachment" "ebs_csi" {
+  count = var.create && var.attach_ebs_csi_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = "arn:${local.partition}:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
+}
+
 ################################################################################
 # IAM Policy
 ################################################################################
@@ -111,7 +118,7 @@ locals {
     data.aws_iam_policy_document.aws_gateway_controller[*].json,
     data.aws_iam_policy_document.cert_manager[*].json,
     data.aws_iam_policy_document.cluster_autoscaler[*].json,
-    data.aws_iam_policy_document.ebs_csi[*].json,
+    data.aws_iam_policy_document.ebs_csi_kms[*].json,
     data.aws_iam_policy_document.efs_csi[*].json,
     data.aws_iam_policy_document.mountpoint_s3_csi[*].json,
     data.aws_iam_policy_document.external_dns[*].json,
