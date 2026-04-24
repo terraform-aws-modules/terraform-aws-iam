@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.5.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.4.0...v6.5.0) (2026-04-24)
+
+### Features
+
+* Add `ec2:DescribeInstanceTypes` to EBS CSI driver policy ([#641](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/641)) ([6d1fa27](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/6d1fa277408157be2a335db43765d7567713bc9c))
+
 ## [6.4.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.3.0...v6.4.0) (2026-01-23)
 
 ### Features
