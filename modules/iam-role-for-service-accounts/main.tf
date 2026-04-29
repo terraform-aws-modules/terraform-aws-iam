@@ -49,6 +49,9 @@ locals {
 data "aws_iam_policy_document" "assume" {
   count = var.create ? 1 : 0
 
+  source_policy_documents   = var.source_trust_policy_documents
+  override_policy_documents = var.override_trust_policy_documents
+
   dynamic "statement" {
     for_each = var.oidc_providers
 
