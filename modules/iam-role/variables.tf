@@ -86,6 +86,18 @@ variable "trust_policy_conditions" {
   default = []
 }
 
+variable "source_trust_policy_documents" {
+  description = "List of IAM policy documents that are merged together into the trust policy. Statements must have unique `sid`s"
+  type        = list(string)
+  default     = []
+}
+
+variable "override_trust_policy_documents" {
+  description = "List of IAM policy documents that are merged together into the trust policy. In merging, statements with non-blank `sid`s will override statements with the same `sid`"
+  type        = list(string)
+  default     = []
+}
+
 variable "policies" {
   description = "Policies to attach to the IAM role in `{'static_name' = 'policy_arn'}` format"
   type        = map(string)
