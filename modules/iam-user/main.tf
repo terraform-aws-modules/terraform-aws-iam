@@ -101,12 +101,20 @@ resource "aws_iam_user_login_profile" "this" {
 # Access Key
 ################################################################################
 
+resource "time_rotating" "rotate_access_key" {
+  count = var.rotate_access_key ? 1 : 0
+
+  rotation_days = var.rotate_access_key_period
+}
+
 resource "aws_iam_access_key" "this" {
   count = var.create && var.create_access_key ? 1 : 0
 
   user    = aws_iam_user.this[0].name
   pgp_key = var.pgp_key
   status  = var.access_key_status
+
+  depends_on = [time_rotating.rotate_access_key] # This should work with count = 0
 }
 
 ################################################################################

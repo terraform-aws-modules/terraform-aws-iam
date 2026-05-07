@@ -6,6 +6,11 @@ terraform {
       source  = "hashicorp/aws"
       version = ">= 6.28"
     }
+
+    time = {
+      source  = "hashicorp/time"
+      version = "~> 0.13.1" # Breaking changes can happen before v1.0
+    }
   }
 
   provider_meta "aws" {

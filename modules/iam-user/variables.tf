@@ -88,6 +88,18 @@ variable "access_key_status" {
   default     = null
 }
 
+variable "rotate_access_key" {
+  description = "Whether to rotate the IAM access key periodically"
+  type        = bool
+  default     = false # Maintains consistency with origin documentation
+}
+
+variable "rotate_access_key_period" {
+  description = "How many days should pass before the access key is rotated"
+  type        = number
+  default     = null # Maintains consistency with origin documentation
+}
+
 ################################################################################
 # SSH Key
 ################################################################################
