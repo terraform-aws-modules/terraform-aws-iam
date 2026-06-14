@@ -35,3 +35,27 @@ output "iam_policy" {
   description = "The policy document"
   value       = try(aws_iam_policy.this[0].policy, null)
 }
+
+################################################################################
+# EFS CSI Driver Roles (v3 split)
+################################################################################
+
+output "efs_csi_controller_iam_role_arn" {
+  description = "ARN of the EFS CSI controller IAM role"
+  value       = try(aws_iam_role.efs_csi_controller[0].arn, null)
+}
+
+output "efs_csi_controller_iam_role_name" {
+  description = "Name of the EFS CSI controller IAM role"
+  value       = try(aws_iam_role.efs_csi_controller[0].name, null)
+}
+
+output "efs_csi_node_iam_role_arn" {
+  description = "ARN of the EFS CSI node IAM role"
+  value       = try(aws_iam_role.efs_csi_node[0].arn, null)
+}
+
+output "efs_csi_node_iam_role_name" {
+  description = "Name of the EFS CSI node IAM role"
+  value       = try(aws_iam_role.efs_csi_node[0].name, null)
+}

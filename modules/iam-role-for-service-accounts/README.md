@@ -134,10 +134,14 @@ No modules.
 | Name | Type |
 |------|------|
 | [aws_iam_policy.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
+| [aws_iam_role.efs_csi_controller](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role.efs_csi_node](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy.inline](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
 | [aws_iam_role_policy_attachment.additional](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.amazon_cloudwatch_observability](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role_policy_attachment.efs_csi_controller](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role_policy_attachment.efs_csi_node](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_policy_document.amazon_managed_service_prometheus](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.assume](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
@@ -146,6 +150,7 @@ No modules.
 | [aws_iam_policy_document.cluster_autoscaler](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.ebs_csi](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.efs_csi](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.efs_csi_assume](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.external_dns](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.external_secrets](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.fsx_lustre_csi](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
@@ -175,7 +180,7 @@ No modules.
 | <a name="input_attach_cloudwatch_observability_policy"></a> [attach\_cloudwatch\_observability\_policy](#input\_attach\_cloudwatch\_observability\_policy) | Determines whether to attach the Amazon CloudWatch Observability IAM policies to the role | `bool` | `false` | no |
 | <a name="input_attach_cluster_autoscaler_policy"></a> [attach\_cluster\_autoscaler\_policy](#input\_attach\_cluster\_autoscaler\_policy) | Determines whether to attach the Cluster Autoscaler IAM policy to the role | `bool` | `false` | no |
 | <a name="input_attach_ebs_csi_policy"></a> [attach\_ebs\_csi\_policy](#input\_attach\_ebs\_csi\_policy) | Determines whether to attach the EBS CSI IAM policy to the role | `bool` | `false` | no |
-| <a name="input_attach_efs_csi_policy"></a> [attach\_efs\_csi\_policy](#input\_attach\_efs\_csi\_policy) | Determines whether to attach the EFS CSI IAM policy to the role | `bool` | `false` | no |
+| <a name="input_attach_efs_csi_policy"></a> [attach\_efs\_csi\_policy](#input\_attach\_efs\_csi\_policy) | Determines whether to attach the EFS CSI IAM policy to the role. | `bool` | `false` | no |
 | <a name="input_attach_external_dns_policy"></a> [attach\_external\_dns\_policy](#input\_attach\_external\_dns\_policy) | Determines whether to attach the External DNS IAM policy to the role | `bool` | `false` | no |
 | <a name="input_attach_external_secrets_policy"></a> [attach\_external\_secrets\_policy](#input\_attach\_external\_secrets\_policy) | Determines whether to attach the External Secrets policy to the role | `bool` | `false` | no |
 | <a name="input_attach_fsx_lustre_csi_policy"></a> [attach\_fsx\_lustre\_csi\_policy](#input\_attach\_fsx\_lustre\_csi\_policy) | Determines whether to attach the FSx for Lustre CSI Driver IAM policy to the role | `bool` | `false` | no |
@@ -193,6 +198,7 @@ No modules.
 | <a name="input_create_policy"></a> [create\_policy](#input\_create\_policy) | Whether to create an IAM policy that is attached to the IAM role created | `bool` | `true` | no |
 | <a name="input_description"></a> [description](#input\_description) | Description of the role | `string` | `null` | no |
 | <a name="input_ebs_csi_kms_cmk_arns"></a> [ebs\_csi\_kms\_cmk\_arns](#input\_ebs\_csi\_kms\_cmk\_arns) | KMS CMK ARNs to allow EBS CSI to manage encrypted volumes | `list(string)` | `[]` | no |
+| <a name="input_enable_efs_split_roles"></a> [enable\_efs\_split\_roles](#input\_enable\_efs\_split\_roles) | Determines whether to create dedicated EFS CSI controller and node IAM roles with the upstream AWS managed policies attached (v3 driver split) | `bool` | `false` | no |
 | <a name="input_external_dns_hosted_zone_arns"></a> [external\_dns\_hosted\_zone\_arns](#input\_external\_dns\_hosted\_zone\_arns) | Route53 hosted zone ARNs to allow External DNS to manage records | `list(string)` | `[]` | no |
 | <a name="input_external_secrets_kms_key_arns"></a> [external\_secrets\_kms\_key\_arns](#input\_external\_secrets\_kms\_key\_arns) | List of KMS Key ARNs that are used by Secrets Manager that contain secrets to mount using External Secrets | `list(string)` | `[]` | no |
 | <a name="input_external_secrets_secrets_manager_arns"></a> [external\_secrets\_secrets\_manager\_arns](#input\_external\_secrets\_secrets\_manager\_arns) | List of Secrets Manager ARNs that contain secrets to mount using External Secrets | `list(string)` | `[]` | no |
@@ -236,6 +242,10 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_arn"></a> [arn](#output\_arn) | ARN of IAM role |
+| <a name="output_efs_csi_controller_iam_role_arn"></a> [efs\_csi\_controller\_iam\_role\_arn](#output\_efs\_csi\_controller\_iam\_role\_arn) | ARN of the EFS CSI controller IAM role |
+| <a name="output_efs_csi_controller_iam_role_name"></a> [efs\_csi\_controller\_iam\_role\_name](#output\_efs\_csi\_controller\_iam\_role\_name) | Name of the EFS CSI controller IAM role |
+| <a name="output_efs_csi_node_iam_role_arn"></a> [efs\_csi\_node\_iam\_role\_arn](#output\_efs\_csi\_node\_iam\_role\_arn) | ARN of the EFS CSI node IAM role |
+| <a name="output_efs_csi_node_iam_role_name"></a> [efs\_csi\_node\_iam\_role\_name](#output\_efs\_csi\_node\_iam\_role\_name) | Name of the EFS CSI node IAM role |
 | <a name="output_iam_policy"></a> [iam\_policy](#output\_iam\_policy) | The policy document |
 | <a name="output_iam_policy_arn"></a> [iam\_policy\_arn](#output\_iam\_policy\_arn) | The ARN assigned by AWS to this policy |
 | <a name="output_name"></a> [name](#output\_name) | Name of IAM role |

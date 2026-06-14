@@ -229,7 +229,13 @@ variable "mountpoint_s3_csi_path_arns" {
 
 # EFS CSI
 variable "attach_efs_csi_policy" {
-  description = "Determines whether to attach the EFS CSI IAM policy to the role"
+  description = "Determines whether to attach the EFS CSI IAM policy to the role."
+  type        = bool
+  default     = false
+}
+
+variable "enable_efs_split_roles" {
+  description = "Determines whether to create dedicated EFS CSI controller and node IAM roles with the upstream AWS managed policies attached (v3 driver split)"
   type        = bool
   default     = false
 }

@@ -109,14 +109,12 @@ module "efs_csi_irsa" {
 
   name = "efs-csi"
 
-  attach_efs_csi_policy = true
-
-  oidc_providers = {
-    this = {
-      provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["kube-system:efs-csi-controller-sa"]
-    }
-  }
+  # Creates dedicated `${name}-controller` and `${name}-node` IAM roles with the
+  # upstream AWS managed policies attached. Trust is pinned to the standard install
+  # SAs (`kube-system:efs-csi-controller-sa` / `kube-system:efs-csi-node-sa`).
+  # Consume `efs_csi_controller_iam_role_arn` and `efs_csi_node_iam_role_arn`
+  # outputs to annotate the EFS CSI Helm chart's ServiceAccounts.
+  enable_efs_split_roles = true
 
   tags = local.tags
 }

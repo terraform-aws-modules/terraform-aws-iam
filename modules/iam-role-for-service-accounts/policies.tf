@@ -374,9 +374,8 @@ data "aws_iam_policy_document" "ebs_csi" {
 }
 
 ################################################################################
-# EFS CSI Driver Policy
+# EFS CSI Driver Policy - v2 and below
 ################################################################################
-
 # https://github.com/kubernetes-sigs/aws-efs-csi-driver/blob/master/docs/iam-policy-example.json
 data "aws_iam_policy_document" "efs_csi" {
   count = var.create && var.attach_efs_csi_policy ? 1 : 0
@@ -424,6 +423,35 @@ data "aws_iam_policy_document" "efs_csi" {
       values   = ["true"]
     }
   }
+}
+
+################################################################################
+# EFS CSI Driver SA Policies - v3 driver split with dedicated controller and node IAM roles, each with the upstream AWS managed policies attached.
+################################################################################
+
+# https://github.com/kubernetes-sigs/aws-efs-csi-driver/blob/master/docs/iam-policy-create.md
+# v3 driver split: dedicated controller and node IAM roles, each with the
+# upstream AWS managed policies attached. Trust policies pin to the standard
+# install SAs (`efs-csi-controller-sa` / `efs-csi-node-sa` in `kube-system`).
+
+resource "aws_iam_role_policy_attachment" "efs_csi_controller" {
+  for_each = { for k, v in {
+    AmazonEFSCSIDriverPolicy     = "arn:${local.partition}:iam::aws:policy/service-role/AmazonEFSCSIDriverPolicy"
+    AmazonS3FilesCSIDriverPolicy = "arn:${local.partition}:iam::aws:policy/service-role/AmazonS3FilesCSIDriverPolicy"
+  } : k => v if var.create && var.enable_efs_split_roles }
+
+  role       = aws_iam_role.efs_csi_controller[0].name
+  policy_arn = each.value
+}
+
+resource "aws_iam_role_policy_attachment" "efs_csi_node" {
+  for_each = { for k, v in {
+    AmazonS3ReadOnlyAccess        = "arn:${local.partition}:iam::aws:policy/AmazonS3ReadOnlyAccess"
+    AmazonElasticFileSystemsUtils = "arn:${local.partition}:iam::aws:policy/AmazonElasticFileSystemsUtils"
+  } : k => v if var.create && var.enable_efs_split_roles }
+
+  role       = aws_iam_role.efs_csi_node[0].name
+  policy_arn = each.value
 }
 
 ################################################################################

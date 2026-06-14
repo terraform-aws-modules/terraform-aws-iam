@@ -262,3 +262,55 @@ resource "aws_iam_role_policy" "inline" {
   name_prefix = var.use_name_prefix ? "${var.name}-" : null
   policy      = data.aws_iam_policy_document.inline[0].json
 }
+
+################################################################################
+# IAM Role for EFS CSI Driver Split Roles
+################################################################################
+data "aws_iam_policy_document" "efs_csi_assume" {
+  count = var.create && var.enable_efs_split_roles ? 1 : 0
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "sts:AssumeRole",
+      "sts:TagSession"
+    ]
+
+    principals {
+      type        = "Service"
+      identifiers = ["pods.eks.amazonaws.com"]
+    }
+  }
+}
+
+resource "aws_iam_role" "efs_csi_controller" {
+  count = var.create && var.enable_efs_split_roles ? 1 : 0
+
+  name        = var.use_name_prefix ? null : "${var.name}-controller"
+  name_prefix = var.use_name_prefix ? "${var.name}-controller-" : null
+  path        = var.path
+  description = "EFS CSI controller IAM role"
+
+  assume_role_policy    = data.aws_iam_policy_document.efs_csi_assume[0].json
+  max_session_duration  = var.max_session_duration
+  permissions_boundary  = var.permissions_boundary
+  force_detach_policies = true
+
+  tags = var.tags
+}
+
+resource "aws_iam_role" "efs_csi_node" {
+  count = var.create && var.enable_efs_split_roles ? 1 : 0
+
+  name        = var.use_name_prefix ? null : "${var.name}-node"
+  name_prefix = var.use_name_prefix ? "${var.name}-node-" : null
+  path        = var.path
+  description = "EFS CSI node IAM role"
+
+  assume_role_policy    = data.aws_iam_policy_document.efs_csi_assume[0].json
+  max_session_duration  = var.max_session_duration
+  permissions_boundary  = var.permissions_boundary
+  force_detach_policies = true
+
+  tags = var.tags
+}
