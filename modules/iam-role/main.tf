@@ -11,6 +11,7 @@ locals {
 
   oidc_providers     = [for url in var.oidc_provider_urls : replace(url, "https://", "")]
   bitbucket_provider = try(element(local.oidc_providers, 0), null)
+  name_prefix        = var.name != null ? "${var.name}-" : null
 }
 
 ################################################################################
@@ -285,7 +286,7 @@ resource "aws_iam_role" "this" {
   count = var.create ? 1 : 0
 
   name        = var.use_name_prefix ? null : var.name
-  name_prefix = var.use_name_prefix ? "${var.name}-" : null
+  name_prefix = var.use_name_prefix ? local.name_prefix : null
   path        = var.path
   description = var.description
 
@@ -365,7 +366,7 @@ resource "aws_iam_role_policy" "inline" {
 
   role        = aws_iam_role.this[0].name
   name        = var.use_name_prefix ? null : var.name
-  name_prefix = var.use_name_prefix ? "${var.name}-" : null
+  name_prefix = var.use_name_prefix ? local.name_prefix : null
   policy      = data.aws_iam_policy_document.inline[0].json
 }
 
@@ -379,7 +380,7 @@ resource "aws_iam_instance_profile" "this" {
   role = aws_iam_role.this[0].name
 
   name        = var.use_name_prefix ? null : var.name
-  name_prefix = var.use_name_prefix ? "${var.name}-" : null
+  name_prefix = var.use_name_prefix ? local.name_prefix : null
   path        = var.path
 
   tags = var.tags
