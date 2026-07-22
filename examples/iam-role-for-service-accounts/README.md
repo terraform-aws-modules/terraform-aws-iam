@@ -49,6 +49,7 @@ Run `terraform destroy` when you don't need these resources.
 | <a name="module_fsx_lustre_csi_irsa"></a> [fsx\_lustre\_csi\_irsa](#module\_fsx\_lustre\_csi\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_fsx_openzfs_csi_irsa"></a> [fsx\_openzfs\_csi\_irsa](#module\_fsx\_openzfs\_csi\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_irsa"></a> [irsa](#module\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
+| <a name="module_load_balancer_controller_aga_irsa"></a> [load\_balancer\_controller\_aga\_irsa](#module\_load\_balancer\_controller\_aga\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_load_balancer_controller_irsa"></a> [load\_balancer\_controller\_irsa](#module\_load\_balancer\_controller\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_load_balancer_controller_targetgroup_binding_only_irsa"></a> [load\_balancer\_controller\_targetgroup\_binding\_only\_irsa](#module\_load\_balancer\_controller\_targetgroup\_binding\_only\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
 | <a name="module_mountpoint_s3_csi_irsa"></a> [mountpoint\_s3\_csi\_irsa](#module\_mountpoint\_s3\_csi\_irsa) | ../../modules/iam-role-for-service-accounts | n/a |
