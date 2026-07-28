@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.8.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.7.0...v6.8.0) (2026-07-28)
+
+### Features
+
+* Add DescribeSubnets and DescribeSecurityGroups permissions to VPC CNI IPv6 IAM policy ([#652](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/652)) ([2e7eca6](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/2e7eca66030a966071a469a80db492c4cb6ae885))
+
 ## [6.7.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.6.1...v6.7.0) (2026-07-28)
 
 ### Features
