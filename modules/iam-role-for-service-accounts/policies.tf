@@ -1265,6 +1265,8 @@ data "aws_iam_policy_document" "vpc_cni" {
         "ec2:DescribeTags",
         "ec2:DescribeNetworkInterfaces",
         "ec2:DescribeInstanceTypes",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups",
       ]
       resources = ["*"]
     }
