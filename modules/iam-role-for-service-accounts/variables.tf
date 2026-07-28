@@ -331,6 +331,13 @@ variable "load_balancer_controller_targetgroup_arns" {
   default     = []
 }
 
+# https://kubernetes-sigs.github.io/aws-load-balancer-controller/v3.4/install/aga_controller_iam_policy.json
+variable "attach_load_balancer_controller_aga_policy" {
+  description = "Determines whether to attach the Load Balancer Controller policy for AWS Global Accelerator (AGA) support"
+  type        = bool
+  default     = false
+}
+
 # Amazon Managed Service for Prometheus
 variable "attach_amazon_managed_service_prometheus_policy" {
   description = "Determines whether to attach the Amazon Managed Service for Prometheus IAM policy to the role"

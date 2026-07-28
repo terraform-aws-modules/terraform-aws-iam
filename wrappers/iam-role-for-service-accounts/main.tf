@@ -15,6 +15,7 @@ module "wrapper" {
   attach_external_secrets_policy                                  = try(each.value.attach_external_secrets_policy, var.defaults.attach_external_secrets_policy, false)
   attach_fsx_lustre_csi_policy                                    = try(each.value.attach_fsx_lustre_csi_policy, var.defaults.attach_fsx_lustre_csi_policy, false)
   attach_fsx_openzfs_csi_policy                                   = try(each.value.attach_fsx_openzfs_csi_policy, var.defaults.attach_fsx_openzfs_csi_policy, false)
+  attach_load_balancer_controller_aga_policy                      = try(each.value.attach_load_balancer_controller_aga_policy, var.defaults.attach_load_balancer_controller_aga_policy, false)
   attach_load_balancer_controller_policy                          = try(each.value.attach_load_balancer_controller_policy, var.defaults.attach_load_balancer_controller_policy, false)
   attach_load_balancer_controller_targetgroup_binding_only_policy = try(each.value.attach_load_balancer_controller_targetgroup_binding_only_policy, var.defaults.attach_load_balancer_controller_targetgroup_binding_only_policy, false)
   attach_mountpoint_s3_csi_policy                                 = try(each.value.attach_mountpoint_s3_csi_policy, var.defaults.attach_mountpoint_s3_csi_policy, false)
