@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.7.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.6.1...v6.7.0) (2026-07-28)
+
+### Features
+
+* Add AWS Load Balancer Controller AGA policy for v3.4 ([#653](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/653)) ([2a12e1d](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/2a12e1da98b40fa366e65d15cadbd4a10e5f402b))
+
 ## [6.6.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.6.0...v6.6.1) (2026-05-28)
 
 ### Bug Fixes
