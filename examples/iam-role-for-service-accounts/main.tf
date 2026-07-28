@@ -246,6 +246,23 @@ module "load_balancer_controller_targetgroup_binding_only_irsa" {
   tags = local.tags
 }
 
+module "load_balancer_controller_aga_irsa" {
+  source = "../../modules/iam-role-for-service-accounts"
+
+  name = "load-balancer-controller-aga"
+
+  attach_load_balancer_controller_aga_policy = true
+
+  oidc_providers = {
+    this = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["kube-system:aws-load-balancer-controller"]
+    }
+  }
+
+  tags = local.tags
+}
+
 module "amazon_managed_service_prometheus_irsa" {
   source = "../../modules/iam-role-for-service-accounts"
 
