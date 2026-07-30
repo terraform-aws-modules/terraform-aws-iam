@@ -13,7 +13,6 @@ locals {
     var.attach_fsx_openzfs_csi_policy ? "Provides permissions to manage FSx OpenZFS volumes via the container storage interface driver" : null,
     var.attach_load_balancer_controller_policy ? "Provides permissions for AWS Load Balancer Controller addon" : null,
     var.attach_load_balancer_controller_targetgroup_binding_only_policy ? "Provides permissions for AWS Load Balancer Controller addon in TargetGroup binding only scenario" : null,
-    var.attach_load_balancer_controller_aga_policy ? "Provides permissions for AWS Load Balancer Controller with AWS Global Accelerator (AGA) support" : null,
     var.attach_amazon_managed_service_prometheus_policy ? "Provides permissions to for Amazon Managed Service for Prometheus" : null,
     var.attach_node_termination_handler_policy ? "Provides permissions to handle node termination events via the Node Termination Handler" : null,
     var.attach_velero_policy ? "Provides Velero permissions to backup and restore cluster resources" : null,
@@ -34,7 +33,6 @@ locals {
     var.attach_fsx_openzfs_csi_policy ? "FSX_OpenZFS_CSI" : null,
     var.attach_load_balancer_controller_policy ? "AWS_Load_Balancer_Controller" : null,
     var.attach_load_balancer_controller_targetgroup_binding_only_policy ? "AWS_LBC_TargetGroup_Binding_Only" : null,
-    var.attach_load_balancer_controller_aga_policy ? "AWS_LBC_Global_Accelerator" : null,
     var.attach_amazon_managed_service_prometheus_policy ? "Amazon_Managed_Service_Prometheus" : null,
     var.attach_node_termination_handler_policy ? "Node_Termination_Handler" : null,
     var.attach_velero_policy ? "Velero" : null,
@@ -125,7 +123,6 @@ locals {
     data.aws_iam_policy_document.fsx_openzfs_csi[*].json,
     data.aws_iam_policy_document.load_balancer_controller[*].json,
     data.aws_iam_policy_document.load_balancer_controller_targetgroup_only[*].json,
-    data.aws_iam_policy_document.load_balancer_controller_aga[*].json,
     data.aws_iam_policy_document.amazon_managed_service_prometheus[*].json,
     data.aws_iam_policy_document.node_termination_handler[*].json,
     data.aws_iam_policy_document.velero[*].json,
@@ -199,6 +196,33 @@ resource "aws_iam_role_policy_attachment" "this" {
 
   role       = aws_iam_role.this[0].name
   policy_arn = aws_iam_policy.this[0].arn
+}
+
+################################################################################
+# AWS Load Balancer Controller Global Accelerator (AGA) Policy
+#
+# Kept as a standalone policy (instead of merging into the policy above)
+# because combining it with the Load Balancer Controller policy can exceed
+# the 6,144 character quota for a customer managed IAM policy.
+################################################################################
+
+resource "aws_iam_policy" "load_balancer_controller_aga" {
+  count = var.create && var.attach_load_balancer_controller_aga_policy ? 1 : 0
+
+  name        = var.use_name_prefix ? null : "AWS_LBC_Global_Accelerator"
+  name_prefix = var.use_name_prefix ? "AWS_LBC_Global_Accelerator-" : null
+  path        = coalesce(var.policy_path, var.path)
+  description = "Provides permissions for AWS Load Balancer Controller with AWS Global Accelerator (AGA) support"
+  policy      = data.aws_iam_policy_document.load_balancer_controller_aga[0].json
+
+  tags = var.tags
+}
+
+resource "aws_iam_role_policy_attachment" "load_balancer_controller_aga" {
+  count = var.create && var.attach_load_balancer_controller_aga_policy ? 1 : 0
+
+  role       = aws_iam_role.this[0].name
+  policy_arn = aws_iam_policy.load_balancer_controller_aga[0].arn
 }
 
 ################################################################################
