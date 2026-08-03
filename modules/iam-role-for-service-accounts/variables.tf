@@ -332,6 +332,18 @@ variable "attach_load_balancer_controller_aga_policy" {
   default     = false
 }
 
+variable "load_balancer_controller_aga_policy_name" {
+  description = "Name to use on the Load Balancer Controller AGA IAM policy created"
+  type        = string
+  default     = null
+}
+
+variable "load_balancer_controller_aga_policy_description" {
+  description = "Description to use on the Load Balancer Controller AGA IAM policy created"
+  type        = string
+  default     = null
+}
+
 # Amazon Managed Service for Prometheus
 variable "attach_amazon_managed_service_prometheus_policy" {
   description = "Determines whether to attach the Amazon Managed Service for Prometheus IAM policy to the role"
