@@ -239,3 +239,9 @@ variable "create_instance_profile" {
   type        = bool
   default     = false
 }
+
+variable "instance_profile_name" {
+  description = "Custom name for the IAM Instance Profile. If null, the role name will be used."
+  type        = string
+  default     = null
+}

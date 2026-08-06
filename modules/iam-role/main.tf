@@ -378,7 +378,7 @@ resource "aws_iam_instance_profile" "this" {
 
   role = aws_iam_role.this[0].name
 
-  name        = var.use_name_prefix ? null : var.name
+  name        = var.use_name_prefix ? null : coalesce(var.instance_profile_name,var.name)
   name_prefix = var.use_name_prefix ? "${var.name}-" : null
   path        = var.path
 
