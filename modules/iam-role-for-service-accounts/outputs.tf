@@ -5,11 +5,23 @@
 output "arn" {
   description = "ARN of IAM role"
   value       = try(aws_iam_role.this[0].arn, null)
+
+  depends_on = [
+    aws_iam_role_policy_attachment.this,
+    aws_iam_role_policy_attachment.additional,
+    aws_iam_role_policy.inline,
+  ]
 }
 
 output "name" {
   description = "Name of IAM role"
   value       = try(aws_iam_role.this[0].name, null)
+
+  depends_on = [
+    aws_iam_role_policy_attachment.this,
+    aws_iam_role_policy_attachment.additional,
+    aws_iam_role_policy.inline,
+  ]
 }
 
 output "path" {
@@ -20,6 +32,12 @@ output "path" {
 output "unique_id" {
   description = "Unique ID of IAM role"
   value       = try(aws_iam_role.this[0].unique_id, null)
+
+  depends_on = [
+    aws_iam_role_policy_attachment.this,
+    aws_iam_role_policy_attachment.additional,
+    aws_iam_role_policy.inline,
+  ]
 }
 
 ################################################################################

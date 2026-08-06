@@ -5,16 +5,31 @@
 output "name" {
   description = "The name of the IAM role"
   value       = try(aws_iam_role.this[0].name, null)
+
+  depends_on = [
+    aws_iam_role_policy_attachment.this,
+    aws_iam_role_policy.inline,
+  ]
 }
 
 output "arn" {
   description = "The Amazon Resource Name (ARN) specifying the IAM role"
   value       = try(aws_iam_role.this[0].arn, null)
+
+  depends_on = [
+    aws_iam_role_policy_attachment.this,
+    aws_iam_role_policy.inline,
+  ]
 }
 
 output "unique_id" {
   description = "Stable and unique string identifying the IAM role"
   value       = try(aws_iam_role.this[0].unique_id, null)
+
+  depends_on = [
+    aws_iam_role_policy_attachment.this,
+    aws_iam_role_policy.inline,
+  ]
 }
 
 ################################################################################
