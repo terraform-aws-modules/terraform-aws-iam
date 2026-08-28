@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.8.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.8.0...v6.8.1) (2026-08-28)
+
+### Bug Fixes
+
+* Split LBC AGA policy into its own managed policy ([#654](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/654)) ([b653d77](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/b653d7727a6dc4ad8ba822952bccb7ee812cd4ef))
+* Update GitHub Actions and pre-commit hook versions ([#655](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/655)) ([e99ede9](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/e99ede9b75b834a0279839250f111aecc7b664a6))
+
 ## [6.8.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.7.0...v6.8.0) (2026-07-28)
 
 ### Features
