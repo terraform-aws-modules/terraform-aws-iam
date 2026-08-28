@@ -40,16 +40,6 @@ locals {
     var.name,
     "default"
   ))
-
-  load_balancer_controller_aga_policy_name = coalesce(
-    var.load_balancer_controller_aga_policy_name,
-    "AWS_LBC_Global_Accelerator"
-  )
-
-  load_balancer_controller_aga_policy_description = coalesce(
-    var.load_balancer_controller_aga_policy_description,
-    "Provides permissions for AWS Load Balancer Controller with AWS Global Accelerator (AGA) support"
-  )
 }
 
 ################################################################################
@@ -219,10 +209,10 @@ resource "aws_iam_role_policy_attachment" "this" {
 resource "aws_iam_policy" "load_balancer_controller_aga" {
   count = var.create && var.attach_load_balancer_controller_aga_policy ? 1 : 0
 
-  name        = var.use_name_prefix ? null : local.load_balancer_controller_aga_policy_name
-  name_prefix = var.use_name_prefix ? "${local.load_balancer_controller_aga_policy_name}-" : null
+  name        = var.use_name_prefix ? null : var.load_balancer_controller_aga_policy_name
+  name_prefix = var.use_name_prefix ? "${var.load_balancer_controller_aga_policy_name}-" : null
   path        = coalesce(var.policy_path, var.path)
-  description = local.load_balancer_controller_aga_policy_description
+  description = var.load_balancer_controller_aga_policy_description
   policy      = data.aws_iam_policy_document.load_balancer_controller_aga[0].json
 
   tags = var.tags
