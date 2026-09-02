@@ -29,6 +29,7 @@ module "wrapper" {
   create_policy                                                   = try(each.value.create_policy, var.defaults.create_policy, true)
   description                                                     = try(each.value.description, var.defaults.description, null)
   ebs_csi_kms_cmk_arns                                            = try(each.value.ebs_csi_kms_cmk_arns, var.defaults.ebs_csi_kms_cmk_arns, [])
+  ebs_csi_volume_tagging                                          = try(each.value.ebs_csi_volume_tagging, var.defaults.ebs_csi_volume_tagging, false)
   external_dns_hosted_zone_arns                                   = try(each.value.external_dns_hosted_zone_arns, var.defaults.external_dns_hosted_zone_arns, [])
   external_secrets_kms_key_arns                                   = try(each.value.external_secrets_kms_key_arns, var.defaults.external_secrets_kms_key_arns, [])
   external_secrets_secrets_manager_arns                           = try(each.value.external_secrets_secrets_manager_arns, var.defaults.external_secrets_secrets_manager_arns, [])
