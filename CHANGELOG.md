@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.8.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.8.1...v6.8.2) (2026-09-18)
+
+### Bug Fixes
+
+* Document known Terraform/OpenTofu limitations in README ([#660](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/660)) ([da6d842](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/da6d842f962b5ccd83af945cf78220f8663cbb99))
+
 ## [6.8.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.8.0...v6.8.1) (2026-08-28)
 
 ### Bug Fixes
