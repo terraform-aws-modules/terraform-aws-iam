@@ -202,10 +202,10 @@ variable "ebs_csi_kms_cmk_arns" {
   default     = []
 }
 
-variable "ebs_csi_volume_tagging" {
-  description = "Determines whether to allow the EBS CSI driver to tag existing volumes/snapshots by removing the `ec2:CreateAction` condition on `ec2:CreateTags`. Required for `VolumeAttributesClass` tag modifications; disabled by default as it broadens tagging permissions"
+variable "ebs_csi_restrict_tagging_to_create" {
+  description = "Determines whether to limit `ec2:CreateTags` for the EBS CSI driver to volume/snapshot creation (the `ec2:CreateAction` condition); set to `false` to allow the driver to tag existing volumes and snapshots, e.g. for `VolumeAttributesClass` tag modifications"
   type        = bool
-  default     = false
+  default     = true
 }
 
 # S3 CSI

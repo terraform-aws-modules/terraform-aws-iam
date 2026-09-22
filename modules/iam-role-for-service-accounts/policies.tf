@@ -227,7 +227,7 @@ data "aws_iam_policy_document" "ebs_csi" {
     ]
 
     dynamic "condition" {
-      for_each = var.ebs_csi_volume_tagging ? [] : [1]
+      for_each = var.ebs_csi_restrict_tagging_to_create ? [1] : []
 
       content {
         test     = "StringEquals"
