@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.8.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.8.1...v6.8.2) (2026-09-18)
+
+### Bug Fixes
+
+* Document known Terraform/OpenTofu limitations in README ([#660](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/660)) ([da6d842](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/da6d842f962b5ccd83af945cf78220f8663cbb99))
+
+## [6.8.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.8.0...v6.8.1) (2026-08-28)
+
+### Bug Fixes
+
+* Split LBC AGA policy into its own managed policy ([#654](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/654)) ([b653d77](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/b653d7727a6dc4ad8ba822952bccb7ee812cd4ef))
+* Update GitHub Actions and pre-commit hook versions ([#655](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/655)) ([e99ede9](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/e99ede9b75b834a0279839250f111aecc7b664a6))
+
+## [6.8.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.7.0...v6.8.0) (2026-07-28)
+
+### Features
+
+* Add DescribeSubnets and DescribeSecurityGroups permissions to VPC CNI IPv6 IAM policy ([#652](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/652)) ([2e7eca6](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/2e7eca66030a966071a469a80db492c4cb6ae885))
+
 ## [6.7.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.6.1...v6.7.0) (2026-07-28)
 
 ### Features

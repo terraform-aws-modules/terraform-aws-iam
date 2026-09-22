@@ -19,7 +19,7 @@ Run `terraform destroy` when you don't need these resources.
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.7 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.28 |
 
@@ -30,7 +30,7 @@ No providers.
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_iam_user"></a> [iam\_user](#module\_iam\_user) | ../../modules/iam-user | n/a |
 | <a name="module_iam_user2"></a> [iam\_user2](#module\_iam\_user2) | ../../modules/iam-user | n/a |
 | <a name="module_iam_user3"></a> [iam\_user3](#module\_iam\_user3) | ../../modules/iam-user | n/a |
@@ -47,7 +47,7 @@ No inputs.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_iam_user2_access_key_encrypted_secret"></a> [iam\_user2\_access\_key\_encrypted\_secret](#output\_iam\_user2\_access\_key\_encrypted\_secret) | The encrypted secret, base64 encoded |
 | <a name="output_iam_user2_access_key_encrypted_ses_smtp_password_v4"></a> [iam\_user2\_access\_key\_encrypted\_ses\_smtp\_password\_v4](#output\_iam\_user2\_access\_key\_encrypted\_ses\_smtp\_password\_v4) | The encrypted secret access key converted into an SES SMTP password by applying AWS's Sigv4 conversion algorithm |
 | <a name="output_iam_user2_access_key_fingerprint"></a> [iam\_user2\_access\_key\_fingerprint](#output\_iam\_user2\_access\_key\_fingerprint) | The fingerprint of the PGP key used to encrypt the secret |

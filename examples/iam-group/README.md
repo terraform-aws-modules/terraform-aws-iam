@@ -18,20 +18,20 @@ Run `terraform destroy` when you don't need these resources.
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.7 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.28 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.28 |
 
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_iam_group"></a> [iam\_group](#module\_iam\_group) | ../../modules/iam-group | n/a |
 | <a name="module_iam_group_disabled"></a> [iam\_group\_disabled](#module\_iam\_group\_disabled) | ../../modules/iam-group | n/a |
 | <a name="module_iam_user1"></a> [iam\_user1](#module\_iam\_user1) | ../../modules/iam-user | n/a |
@@ -40,7 +40,7 @@ Run `terraform destroy` when you don't need these resources.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_iam_policy.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 
 ## Inputs
@@ -50,7 +50,7 @@ No inputs.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_group_arn"></a> [group\_arn](#output\_group\_arn) | The ARN assigned by AWS for this group |
 | <a name="output_group_id"></a> [group\_id](#output\_group\_id) | The group's ID |
 | <a name="output_group_name"></a> [group\_name](#output\_group\_name) | The group's name |

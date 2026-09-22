@@ -251,6 +251,7 @@ module "load_balancer_controller_aga_irsa" {
 
   name = "load-balancer-controller-aga"
 
+  attach_load_balancer_controller_policy     = true
   attach_load_balancer_controller_aga_policy = true
 
   oidc_providers = {
