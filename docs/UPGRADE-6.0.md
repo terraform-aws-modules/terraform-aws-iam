@@ -813,7 +813,39 @@ None
 
 #### `iam-role-for-service-accounts`
 
-TODO - coming soon after `v6.0.1` patch release
+This module was renamed from `iam-role-for-service-accounts-eks`. The variable interface is unchanged — only the module source path has changed.
+
+```diff
+module "irsa" {
+-  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
++  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
+-  version = "~> 5.60"
++  version = "~> 6.0"
+
+   # All other arguments remain the same
+   role_name = "example"
+
+   oidc_providers = {
+     example = {
+       provider_arn               = module.eks.oidc_provider_arn
+       namespace_service_accounts = ["default:my-app"]
+     }
+   }
+
+-  role_policy_arns = {
++  policies = {
+     AmazonEKS_CNI_Policy = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+   }
+}
+```
+
+##### State Changes
+
+No state migration is required for the module rename itself. However, the `role_policy_arns` to `policies` rename requires removing prior policy attachments:
+
+```sh
+terraform state rm module.irsa.aws_iam_role_policy_attachment.custom
+```
 
 #### `iam-user`
 
