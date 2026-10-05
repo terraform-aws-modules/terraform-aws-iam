@@ -202,6 +202,12 @@ variable "ebs_csi_kms_cmk_arns" {
   default     = []
 }
 
+variable "ebs_csi_restrict_tagging_to_create" {
+  description = "Determines whether to limit `ec2:CreateTags` for the EBS CSI driver to volume/snapshot creation (the `ec2:CreateAction` condition); set to `false` to allow the driver to tag existing volumes and snapshots, e.g. for `VolumeAttributesClass` tag modifications"
+  type        = bool
+  default     = true
+}
+
 # S3 CSI
 variable "attach_mountpoint_s3_csi_policy" {
   description = "Determines whether to attach the Mountpoint S3 CSI IAM policy to the role"

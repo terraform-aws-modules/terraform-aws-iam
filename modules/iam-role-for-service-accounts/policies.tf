@@ -226,13 +226,17 @@ data "aws_iam_policy_document" "ebs_csi" {
       "arn:${local.partition}:ec2:*:*:snapshot/*",
     ]
 
-    condition {
-      test     = "StringEquals"
-      variable = "ec2:CreateAction"
-      values = [
-        "CreateVolume",
-        "CreateSnapshot",
-      ]
+    dynamic "condition" {
+      for_each = var.ebs_csi_restrict_tagging_to_create ? [1] : []
+
+      content {
+        test     = "StringEquals"
+        variable = "ec2:CreateAction"
+        values = [
+          "CreateVolume",
+          "CreateSnapshot",
+        ]
+      }
     }
   }
 
