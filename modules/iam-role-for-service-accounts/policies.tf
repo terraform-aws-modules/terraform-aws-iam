@@ -394,13 +394,18 @@ data "aws_iam_policy_document" "efs_csi" {
       "elasticfilesystem:DescribeAccessPoints",
       "elasticfilesystem:DescribeFileSystems",
       "elasticfilesystem:DescribeMountTargets",
+      "s3files:ListAccessPoints",
+      "s3files:ListFileSystems",
     ]
 
     resources = ["*"]
   }
 
   statement {
-    actions   = ["elasticfilesystem:CreateAccessPoint"]
+    actions = [
+      "elasticfilesystem:CreateAccessPoint",
+      "s3files:CreateAccessPoint",
+    ]
     resources = ["*"]
 
     condition {
@@ -411,7 +416,10 @@ data "aws_iam_policy_document" "efs_csi" {
   }
 
   statement {
-    actions   = ["elasticfilesystem:TagResource"]
+    actions = [
+      "elasticfilesystem:TagResource",
+      "s3files:TagResource",
+    ]
     resources = ["*"]
 
     condition {
@@ -422,7 +430,10 @@ data "aws_iam_policy_document" "efs_csi" {
   }
 
   statement {
-    actions   = ["elasticfilesystem:DeleteAccessPoint"]
+    actions = [
+      "elasticfilesystem:DeleteAccessPoint",
+      "s3files:DeleteAccessPoint",
+    ]
     resources = ["*"]
 
     condition {
