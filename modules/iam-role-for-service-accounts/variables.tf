@@ -286,9 +286,9 @@ variable "attach_fsx_lustre_csi_policy" {
 }
 
 variable "fsx_lustre_csi_service_role_arns" {
-  description = "Service role ARNs to allow FSx for Lustre CSI create and manage FSX for Lustre service linked roles"
+  description = "Service role ARNs to allow FSx for Lustre CSI create and manage FSX for Lustre service linked roles. If empty, defaults to the FSx for Lustre service linked role ARN in the current partition"
   type        = list(string)
-  default     = ["arn:aws:iam::*:role/aws-service-role/s3.data-source.lustre.fsx.amazonaws.com/*"]
+  default     = []
 }
 
 # FSx OpenZFS CSI
@@ -299,9 +299,9 @@ variable "attach_fsx_openzfs_csi_policy" {
 }
 
 variable "fsx_openzfs_csi_service_role_arns" {
-  description = "Service role ARNs to allow FSx for OpenZFS CSI create and manage FSX for openzfs service linked roles"
+  description = "Service role ARNs to allow FSx for OpenZFS CSI create and manage FSX for openzfs service linked roles. If empty, defaults to the FSx service linked role ARN in the current partition"
   type        = list(string)
-  default     = ["arn:aws:iam::*:role/aws-service-role/fsx.amazonaws.com/*"]
+  default     = []
 }
 
 # AWS Load Balancer Controller

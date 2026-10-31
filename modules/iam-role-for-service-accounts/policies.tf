@@ -595,7 +595,10 @@ data "aws_iam_policy_document" "fsx_lustre_csi" {
       "iam:AttachRolePolicy",
       "iam:PutRolePolicy",
     ]
-    resources = var.fsx_lustre_csi_service_role_arns
+    resources = coalescelist(
+      var.fsx_lustre_csi_service_role_arns,
+      ["arn:${local.partition}:iam::*:role/aws-service-role/s3.data-source.lustre.fsx.amazonaws.com/*"],
+    )
   }
 
   statement {
@@ -636,7 +639,10 @@ data "aws_iam_policy_document" "fsx_openzfs_csi" {
       "iam:AttachRolePolicy",
       "iam:PutRolePolicy",
     ]
-    resources = var.fsx_openzfs_csi_service_role_arns
+    resources = coalescelist(
+      var.fsx_openzfs_csi_service_role_arns,
+      ["arn:${local.partition}:iam::*:role/aws-service-role/fsx.amazonaws.com/*"],
+    )
   }
 
   statement {
