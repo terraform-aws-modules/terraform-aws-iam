@@ -958,6 +958,7 @@ data "aws_iam_policy_document" "load_balancer_controller_targetgroup_only" {
       "ec2:DescribeSecurityGroups",
       "ec2:DescribeInstances",
       "ec2:DescribeVpcs",
+      "ec2:DescribeVpcPeeringConnections",
       "ec2:AuthorizeSecurityGroupIngress",
       "ec2:RevokeSecurityGroupIngress",
       "elasticloadbalancing:DescribeTargetGroups",
