@@ -108,7 +108,25 @@ resource "aws_iam_role_policy_attachment" "additional" {
 ################################################################################
 
 locals {
-  create_policy = var.create && var.create_policy && (length(local.source_policy_documents) > 0 || length(var.override_policy_documents) > 0 || var.permissions != null)
+  attach_any_policy = anytrue([
+    var.attach_aws_gateway_controller_policy,
+    var.attach_cert_manager_policy,
+    var.attach_cluster_autoscaler_policy,
+    var.attach_ebs_csi_policy,
+    var.attach_efs_csi_policy,
+    var.attach_mountpoint_s3_csi_policy,
+    var.attach_external_dns_policy,
+    var.attach_external_secrets_policy,
+    var.attach_fsx_lustre_csi_policy,
+    var.attach_fsx_openzfs_csi_policy,
+    var.attach_load_balancer_controller_policy,
+    var.attach_load_balancer_controller_targetgroup_binding_only_policy,
+    var.attach_amazon_managed_service_prometheus_policy,
+    var.attach_node_termination_handler_policy,
+    var.attach_velero_policy,
+    var.attach_vpc_cni_policy,
+  ])
+  create_policy = var.create && var.create_policy && (local.attach_any_policy || length(var.source_policy_documents) > 0 || length(var.override_policy_documents) > 0 || var.permissions != null)
 
   source_policy_documents = flatten(concat(
     data.aws_iam_policy_document.aws_gateway_controller[*].json,
