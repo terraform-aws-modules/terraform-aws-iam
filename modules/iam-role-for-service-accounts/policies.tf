@@ -184,6 +184,7 @@ data "aws_iam_policy_document" "ebs_csi" {
       "ec2:DescribeTags",
       "ec2:DescribeVolumes",
       "ec2:DescribeVolumesModifications",
+      "ec2:DescribeVolumeStatus",
     ]
 
     resources = ["*"]
@@ -196,6 +197,11 @@ data "aws_iam_policy_document" "ebs_csi" {
     ]
 
     resources = ["arn:${local.partition}:ec2:*:*:volume/*"]
+  }
+
+  statement {
+    actions   = ["ec2:CopyVolumes"]
+    resources = ["arn:${local.partition}:ec2:*:*:volume/vol-*"]
   }
 
   statement {
@@ -235,6 +241,7 @@ data "aws_iam_policy_document" "ebs_csi" {
         values = [
           "CreateVolume",
           "CreateSnapshot",
+          "CopyVolumes",
         ]
       }
     }
@@ -249,7 +256,10 @@ data "aws_iam_policy_document" "ebs_csi" {
   }
 
   statement {
-    actions   = ["ec2:CreateVolume"]
+    actions = [
+      "ec2:CreateVolume",
+      "ec2:CopyVolumes",
+    ]
     resources = ["arn:${local.partition}:ec2:*:*:volume/*"]
 
     condition {
@@ -260,7 +270,10 @@ data "aws_iam_policy_document" "ebs_csi" {
   }
 
   statement {
-    actions   = ["ec2:CreateVolume"]
+    actions = [
+      "ec2:CreateVolume",
+      "ec2:CopyVolumes",
+    ]
     resources = ["arn:${local.partition}:ec2:*:*:volume/*"]
 
     condition {
@@ -326,7 +339,10 @@ data "aws_iam_policy_document" "ebs_csi" {
   }
 
   statement {
-    actions   = ["ec2:DeleteSnapshot"]
+    actions = [
+      "ec2:DeleteSnapshot",
+      "ec2:LockSnapshot",
+    ]
     resources = ["arn:${local.partition}:ec2:*:*:snapshot/*"]
 
     condition {
@@ -337,7 +353,10 @@ data "aws_iam_policy_document" "ebs_csi" {
   }
 
   statement {
-    actions   = ["ec2:DeleteSnapshot"]
+    actions = [
+      "ec2:DeleteSnapshot",
+      "ec2:LockSnapshot",
+    ]
     resources = ["arn:${local.partition}:ec2:*:*:snapshot/*"]
 
     condition {
