@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.9.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.9.1...v6.9.2) (2026-11-16)
+
+### Bug Fixes
+
+* Keep IRSA policy count known when policy documents are not read ([#671](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/671)) ([730c1e5](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/730c1e5a4b4f8ee6137a53bf8faf47c5be268c76))
+
+## [6.9.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.9.0...v6.9.1) (2026-11-16)
+
+### Bug Fixes
+
+* Use partition-aware default ARNs for FSx CSI service roles ([#667](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/667)) ([d7d1c9e](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/d7d1c9e1aaa582aaa6dfb85af62094c27bfd714d))
+
+## [6.9.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.8.2...v6.9.0) (2026-11-16)
+
+### Features
+
+* Add ebs_csi_restrict_tagging_to_create to allow EBS CSI tag modification on existing volumes ([#651](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/651)) ([4ad3d78](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/4ad3d78155b0395ea1a132d7974219aca6cc526b))
+
 ## [6.8.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.8.1...v6.8.2) (2026-09-18)
 
 ### Bug Fixes
