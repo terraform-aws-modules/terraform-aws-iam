@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.9.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.9.1...v6.9.2) (2026-11-16)
+
+### Bug Fixes
+
+* Keep IRSA policy count known when policy documents are not read ([#671](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/671)) ([730c1e5](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/730c1e5a4b4f8ee6137a53bf8faf47c5be268c76))
+
 ## [6.9.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.9.0...v6.9.1) (2026-11-16)
 
 ### Bug Fixes
