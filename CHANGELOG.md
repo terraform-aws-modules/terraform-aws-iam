@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.10.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.9.2...v6.10.0) (2026-11-16)
+
+### Features
+
+* Add missing EBS CSI driver permissions to `iam-role-for-service-accounts` ([#665](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/665)) ([c76a808](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/c76a80839deca9ee93e720cff08a6ae75fb624b9))
+
 ## [6.9.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.9.1...v6.9.2) (2026-11-16)
 
 ### Bug Fixes
