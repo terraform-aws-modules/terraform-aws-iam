@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.9.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.8.2...v6.9.0) (2026-11-16)
+
+### Features
+
+* Add ebs_csi_restrict_tagging_to_create to allow EBS CSI tag modification on existing volumes ([#651](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/651)) ([4ad3d78](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/4ad3d78155b0395ea1a132d7974219aca6cc526b))
+
 ## [6.8.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.8.1...v6.8.2) (2026-09-18)
 
 ### Bug Fixes
