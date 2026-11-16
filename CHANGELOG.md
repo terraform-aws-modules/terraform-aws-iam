@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.9.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.9.0...v6.9.1) (2026-11-16)
+
+### Bug Fixes
+
+* Use partition-aware default ARNs for FSx CSI service roles ([#667](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/667)) ([d7d1c9e](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/d7d1c9e1aaa582aaa6dfb85af62094c27bfd714d))
+
 ## [6.9.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.8.2...v6.9.0) (2026-11-16)
 
 ### Features
