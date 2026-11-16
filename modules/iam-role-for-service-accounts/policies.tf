@@ -232,14 +232,18 @@ data "aws_iam_policy_document" "ebs_csi" {
       "arn:${local.partition}:ec2:*:*:snapshot/*",
     ]
 
-    condition {
-      test     = "StringEquals"
-      variable = "ec2:CreateAction"
-      values = [
-        "CreateVolume",
-        "CreateSnapshot",
-        "CopyVolumes",
-      ]
+    dynamic "condition" {
+      for_each = var.ebs_csi_restrict_tagging_to_create ? [1] : []
+
+      content {
+        test     = "StringEquals"
+        variable = "ec2:CreateAction"
+        values = [
+          "CreateVolume",
+          "CreateSnapshot",
+          "CopyVolumes",
+        ]
+      }
     }
   }
 
@@ -614,7 +618,10 @@ data "aws_iam_policy_document" "fsx_lustre_csi" {
       "iam:AttachRolePolicy",
       "iam:PutRolePolicy",
     ]
-    resources = var.fsx_lustre_csi_service_role_arns
+    resources = coalescelist(
+      var.fsx_lustre_csi_service_role_arns,
+      ["arn:${local.partition}:iam::*:role/aws-service-role/s3.data-source.lustre.fsx.amazonaws.com/*"],
+    )
   }
 
   statement {
@@ -655,7 +662,10 @@ data "aws_iam_policy_document" "fsx_openzfs_csi" {
       "iam:AttachRolePolicy",
       "iam:PutRolePolicy",
     ]
-    resources = var.fsx_openzfs_csi_service_role_arns
+    resources = coalescelist(
+      var.fsx_openzfs_csi_service_role_arns,
+      ["arn:${local.partition}:iam::*:role/aws-service-role/fsx.amazonaws.com/*"],
+    )
   }
 
   statement {
