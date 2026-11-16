@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.11.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.10.0...v6.11.0) (2026-11-16)
+
+### Features
+
+* Add S3 Files permissions to EFS CSI policy in `iam-role-for-service-accounts` ([#664](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/664)) ([bde0f5a](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/bde0f5a7a8d1b6b233d8e0022c080ea75017e293))
+
 ## [6.10.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.9.2...v6.10.0) (2026-11-16)
 
 ### Features
