@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.11.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.11.0...v6.11.1) (2026-11-17)
+
+### Bug Fixes
+
+* Add `ec2:DescribeVpcPeeringConnections` to the LBC TargetGroupBinding only policy ([#670](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/670)) ([fd51611](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/fd516119650df6d0f473104a18cd8288e2cf28d0))
+
 ## [6.11.0](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.10.0...v6.11.0) (2026-11-16)
 
 ### Features
