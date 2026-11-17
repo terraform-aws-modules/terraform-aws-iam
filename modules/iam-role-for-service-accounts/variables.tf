@@ -202,6 +202,12 @@ variable "ebs_csi_kms_cmk_arns" {
   default     = []
 }
 
+variable "ebs_csi_restrict_tagging_to_create" {
+  description = "Determines whether to limit `ec2:CreateTags` for the EBS CSI driver to volume/snapshot creation (the `ec2:CreateAction` condition); set to `false` to allow the driver to tag existing volumes and snapshots, e.g. for `VolumeAttributesClass` tag modifications"
+  type        = bool
+  default     = true
+}
+
 # S3 CSI
 variable "attach_mountpoint_s3_csi_policy" {
   description = "Determines whether to attach the Mountpoint S3 CSI IAM policy to the role"
@@ -286,9 +292,9 @@ variable "attach_fsx_lustre_csi_policy" {
 }
 
 variable "fsx_lustre_csi_service_role_arns" {
-  description = "Service role ARNs to allow FSx for Lustre CSI create and manage FSX for Lustre service linked roles"
+  description = "Service role ARNs to allow FSx for Lustre CSI create and manage FSX for Lustre service linked roles. If empty, defaults to the FSx for Lustre service linked role ARN in the current partition"
   type        = list(string)
-  default     = ["arn:aws:iam::*:role/aws-service-role/s3.data-source.lustre.fsx.amazonaws.com/*"]
+  default     = []
 }
 
 # FSx OpenZFS CSI
@@ -299,9 +305,9 @@ variable "attach_fsx_openzfs_csi_policy" {
 }
 
 variable "fsx_openzfs_csi_service_role_arns" {
-  description = "Service role ARNs to allow FSx for OpenZFS CSI create and manage FSX for openzfs service linked roles"
+  description = "Service role ARNs to allow FSx for OpenZFS CSI create and manage FSX for openzfs service linked roles. If empty, defaults to the FSx service linked role ARN in the current partition"
   type        = list(string)
-  default     = ["arn:aws:iam::*:role/aws-service-role/fsx.amazonaws.com/*"]
+  default     = []
 }
 
 # AWS Load Balancer Controller
