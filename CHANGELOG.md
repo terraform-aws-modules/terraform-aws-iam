@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.11.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.11.1...v6.11.2) (2026-11-23)
+
+### Bug Fixes
+
+* Align EFS CSI TagResource condition with upstream policy ([#672](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/672)) ([a5e72a5](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/a5e72a50719381d6f690ef5a93ee32f69206ceab))
+
 ## [6.11.1](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.11.0...v6.11.1) (2026-11-17)
 
 ### Bug Fixes
