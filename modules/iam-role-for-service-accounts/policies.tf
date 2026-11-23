@@ -447,7 +447,7 @@ data "aws_iam_policy_document" "efs_csi" {
 
     condition {
       test     = "StringLike"
-      variable = "aws:RequestTag/efs.csi.aws.com/cluster"
+      variable = "aws:ResourceTag/efs.csi.aws.com/cluster"
       values   = ["true"]
     }
   }
