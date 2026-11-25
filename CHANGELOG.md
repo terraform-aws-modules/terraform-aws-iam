@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.11.3](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.11.2...v6.11.3) (2026-11-25)
+
+### Bug Fixes
+
+* Add `ec2:ValidateSecurityGroupQuotasForInterface` to the load balancer controller policy ([#673](https://github.com/terraform-aws-modules/terraform-aws-iam/issues/673)) ([15f7fcb](https://github.com/terraform-aws-modules/terraform-aws-iam/commit/15f7fcbfeef7296e67c600800c124aa900e583dd))
+
 ## [6.11.2](https://github.com/terraform-aws-modules/terraform-aws-iam/compare/v6.11.1...v6.11.2) (2026-11-23)
 
 ### Bug Fixes
